@@ -3,6 +3,6 @@
 #ifndef __ETHEREAL_H__
 #define __ETHEREAL_H__
 
-#include "EngineMinimal.h"
+#include "Engine.h"
 
 #endif
