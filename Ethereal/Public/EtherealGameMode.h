@@ -14,12 +14,7 @@ class AEtherealGameMode : public AGameMode
 
 public:
 	AEtherealGameMode(const FObjectInitializer& ObjectInitializer);
-
-	/** Called immediately after the game begins. */
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void PlayerLogin(AEtherealPlayerController* NewPlayer);
-
-	
+		
 };
 
 

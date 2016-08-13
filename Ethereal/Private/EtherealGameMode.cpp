@@ -8,10 +8,6 @@ AEtherealGameMode::AEtherealGameMode(const FObjectInitializer& ObjectInitializer
 {
 	// Set Default Classes
 
-	//GameInstanceClass = AEtherealGameInstance::StaticClass();
-
-	//ADefaultPawn = AEtherealGameMode::StaticClass();
-
 	PlayerControllerClass = AEtherealPlayerController::StaticClass();
 
 	PlayerStateClass = AEtherealPlayerState::StaticClass();
@@ -20,9 +16,3 @@ AEtherealGameMode::AEtherealGameMode(const FObjectInitializer& ObjectInitializer
 
 }
 
-void AEtherealGameMode::PlayerLogin(AEtherealPlayerController* NewPlayer)
-{
-	Super::PostLogin(NewPlayer);
-
-	NewPlayer->ClientPostLogin();
-}
