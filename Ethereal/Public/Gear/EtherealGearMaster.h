@@ -5,6 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "MasterGearList.h"
 #include "MasterGearTypes.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
 #include "EtherealGearMaster.generated.h"
 
 UCLASS()
@@ -64,4 +65,8 @@ public:
 	/** Small Icon */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	UTexture2D* SmallIcon;
+
+	/** Owner Reference */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
+	AEtherealPlayerMaster* OwnerReference;
 };

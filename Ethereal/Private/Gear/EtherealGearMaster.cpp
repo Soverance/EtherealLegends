@@ -9,8 +9,6 @@ AEtherealGearMaster::AEtherealGearMaster()
 	PrimaryActorTick.bCanEverTick = true;
 
 	IsBound = false;
-	Description = "None";
-
 }
 
 
