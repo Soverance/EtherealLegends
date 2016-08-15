@@ -20,6 +20,10 @@ public:
 
 	/** Determines whether or not this Gear item is bound to a slot. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
+	USceneComponent* Root;
+
+	/** Determines whether or not this Gear item is bound to a slot. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	bool IsBound;
 
 	/** Gear Item Unique Name */
