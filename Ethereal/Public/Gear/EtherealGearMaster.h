@@ -73,4 +73,32 @@ public:
 	/** Owner Reference */
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	//AEtherealPlayerMaster* OwnerReference;
+
+	FORCEINLINE void SetupSMComponentsWithCollision(UStaticMeshComponent* Comp)
+	{
+		if (!Comp) return;
+
+		Comp->bOwnerNoSee = false;
+		Comp->bCastDynamicShadow = true;
+		Comp->CastShadow = true;
+		Comp->BodyInstance.SetObjectType(ECC_WorldDynamic);
+		Comp->BodyInstance.SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Comp->BodyInstance.SetResponseToAllChannels(ECR_Ignore);
+		Comp->SetVisibility(false);
+		Comp->SetHiddenInGame(false);
+	}
+
+	FORCEINLINE void SetupSKComponentsWithCollision(USkeletalMeshComponent* Comp)
+	{
+		if (!Comp) return;
+
+		Comp->bOwnerNoSee = false;
+		Comp->bCastDynamicShadow = true;
+		Comp->CastShadow = true;
+		Comp->BodyInstance.SetObjectType(ECC_WorldDynamic);
+		Comp->BodyInstance.SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Comp->BodyInstance.SetResponseToAllChannels(ECR_Ignore);
+		Comp->SetVisibility(false);
+		Comp->SetHiddenInGame(false);
+	}
 };
