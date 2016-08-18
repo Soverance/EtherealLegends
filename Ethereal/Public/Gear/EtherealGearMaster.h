@@ -1,12 +1,27 @@
-// © 2014 - 2016 Soverance Studios. All Rights Reserved.
+// © 2014 - 2016 Soverance Studios
+// www.soverance.com
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+// http ://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #pragma once
 
 #include "GameFramework/Actor.h"
 #include "MasterGearList.h"
 #include "MasterGearTypes.h"
-//#include "Characters/Player/EtherealPlayerMaster.h"
 #include "EtherealGearMaster.generated.h"
+
+// Forward Declarations
+class AEtherealPlayerMaster;
 
 UCLASS()
 class ETHEREAL_API AEtherealGearMaster : public AActor
@@ -17,6 +32,9 @@ public:
 
 	// Sets default values for this actor's properties
 	AEtherealGearMaster();
+
+	// BeginPlay Override
+	virtual void BeginPlay() override;
 
 	/** Determines whether or not this Gear item is bound to a slot. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
@@ -70,9 +88,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	UTexture2D* SmallIcon;
 
-	/** Owner Reference */
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
-	//AEtherealPlayerMaster* OwnerReference;
+	/** Player Master Reference */
+	// Uses a forward declaration to avoid circular dependency
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
+	AEtherealPlayerMaster* OwnerReference;
 
 	FORCEINLINE void SetupSMComponentsWithCollision(UStaticMeshComponent* Comp)
 	{
