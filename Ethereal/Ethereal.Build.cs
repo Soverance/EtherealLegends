@@ -19,7 +19,7 @@ public class Ethereal : ModuleRules
 {
 	public Ethereal(TargetInfo Target)
 	{
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils", "AIModule" });
 
         PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem" });
 
