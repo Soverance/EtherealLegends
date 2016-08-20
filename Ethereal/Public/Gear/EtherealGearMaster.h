@@ -36,7 +36,7 @@ public:
 	// BeginPlay Override
 	virtual void BeginPlay() override;
 
-	/** Determines whether or not this Gear item is bound to a slot. */
+	/** The root scene component for all gear actors. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	USceneComponent* Root;
 
