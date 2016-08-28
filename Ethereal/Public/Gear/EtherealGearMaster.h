@@ -88,8 +88,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	UTexture2D* SmallIcon;
 
-	/** Player Master Reference */
-	// Uses a forward declaration to avoid circular dependency
+	// Player Master Reference 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	AEtherealPlayerMaster* OwnerReference;
 

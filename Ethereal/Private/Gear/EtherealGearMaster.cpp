@@ -14,7 +14,6 @@
 // limitations under the License.
 
 #include "Ethereal.h"
-#include "Characters/Player/EtherealPlayerMaster.h"
 #include "EtherealGearMaster.h"
 
 // Sets default values
@@ -38,6 +37,7 @@ void AEtherealGearMaster::BeginPlay()
 	// Gets the Ethereal Player Master reference
 	AActor* Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	OwnerReference = Cast<AEtherealPlayerMaster>(Player);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, "A piece of Gear spawned.");
 
 	if (OwnerReference)
 	{
