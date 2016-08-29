@@ -23,6 +23,10 @@
 // Forward Declarations
 class AEtherealPlayerMaster;
 
+// Event Dispatcher for Binding Gear
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBindGear);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRemoveGear);
+
 UCLASS()
 class ETHEREAL_API AEtherealGearMaster : public AActor
 {
@@ -34,7 +38,11 @@ public:
 	AEtherealGearMaster();
 
 	// BeginPlay Override
-	virtual void BeginPlay() override;
+	//virtual void BeginPlay() override;
+
+	// Configure This Gear Item
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void ConfigureGear(AEtherealPlayerMaster* Player);
 
 	/** The root scene component for all gear actors. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
@@ -43,6 +51,22 @@ public:
 	/** Determines whether or not this Gear item is bound to a slot. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	bool IsBound;
+
+	// Event Dispatcher BindGear
+	UPROPERTY(BlueprintAssignable, Category = "Dispatcher")
+	FBindGear OnBindGear;
+
+	// Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void Bind();
+
+	// Event Dispatcher BindGear
+	UPROPERTY(BlueprintAssignable, Category = "Dispatcher")
+	FRemoveGear OnRemoveGear;
+
+	// Removes this binding from the player
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void Unbind();
 
 	/** Gear Item Unique Name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)

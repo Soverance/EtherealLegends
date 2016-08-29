@@ -14,6 +14,7 @@
 // limitations under the License.
 
 #include "Ethereal.h"
+#include "Characters/Player/WeaponModes.h"
 #include "EtherealGearMaster.h"
 
 // Sets default values
@@ -30,18 +31,68 @@ AEtherealGearMaster::AEtherealGearMaster()
 }
 
 // Called when the game starts or when spawned
-void AEtherealGearMaster::BeginPlay()
+void AEtherealGearMaster::ConfigureGear(AEtherealPlayerMaster* Player)
 {
-	Super::BeginPlay();
-
-	// Gets the Ethereal Player Master reference
-	AActor* Player = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	OwnerReference = Cast<AEtherealPlayerMaster>(Player);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Turquoise, "A piece of Gear spawned.");
-
+	// Sets the Ethereal Player Master reference
+	OwnerReference = Player;
+	
 	if (OwnerReference)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Owner Reference in this Gear Item was successfully initialized from code.");
+	}
+}
+
+// Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
+void AEtherealGearMaster::Bind()
+{
+	IsBound = true;
+	OnBindGear.Broadcast();
+	OwnerReference->EtherealPlayerState->AddGearStats(Name);
+	
+	switch (Type)
+	{
+	case EMasterGearTypes::GT_None:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
+	case EMasterGearTypes::GT_OneHanded:
+		OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
+		break;
+	case EMasterGearTypes::GT_TwoHanded:
+		OwnerReference->WeaponMode = EWeaponModes::WM_TwoHanded;
+		break;
+	case EMasterGearTypes::GT_Ranged:
+		OwnerReference->WeaponMode = EWeaponModes::WM_Ranged;
+		break;
+	case EMasterGearTypes::GT_Casting:
+		OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
+		break;
+	}
+}
+
+// Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
+void AEtherealGearMaster::Unbind()
+{
+	IsBound = false;
+	OnRemoveGear.Broadcast();
+	OwnerReference->EtherealPlayerState->RemoveGearStats(Name);
+
+	switch (Type)
+	{
+	case EMasterGearTypes::GT_None:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
+	case EMasterGearTypes::GT_OneHanded:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
+	case EMasterGearTypes::GT_TwoHanded:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
+	case EMasterGearTypes::GT_Ranged:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
+	case EMasterGearTypes::GT_Casting:
+		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		break;
 	}
 }
 
