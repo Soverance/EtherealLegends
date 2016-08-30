@@ -38,7 +38,7 @@ void AEtherealGearMaster::ConfigureGear(AEtherealPlayerMaster* Player)
 	
 	if (OwnerReference)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Owner Reference in this Gear Item was successfully initialized from code.");
+		//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Owner Reference in this Gear Item was successfully initialized from code.");
 	}
 }
 
@@ -52,7 +52,7 @@ void AEtherealGearMaster::Bind()
 	switch (Type)
 	{
 	case EMasterGearTypes::GT_None:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
+		// Do nothing, just break
 		break;
 	case EMasterGearTypes::GT_OneHanded:
 		OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
@@ -67,6 +67,7 @@ void AEtherealGearMaster::Bind()
 		OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
 		break;
 	}
+
 }
 
 // Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
