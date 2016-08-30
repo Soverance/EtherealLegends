@@ -5,7 +5,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 
-// http ://www.apache.org/licenses/LICENSE-2.0
+// http://www.apache.org/licenses/LICENSE-2.0
 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,17 +16,17 @@
 #pragma once
 
 #include "Engine/GameInstance.h"
+#include "Management/GameStates.h"
 #include "EtherealGameInstance.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 	
-	
-	
-	
+public:
+
+	// What type of battle this enemy initiates
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	EGameStates CurrentState;
 };
