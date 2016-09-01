@@ -35,7 +35,7 @@ class ETHEREAL_API AEtherealGearMaster : public AActor
 public:	
 
 	// Sets default values for this actor's properties
-	AEtherealGearMaster();
+	AEtherealGearMaster(const FObjectInitializer& ObjectInitializer);
 
 	// BeginPlay Override
 	//virtual void BeginPlay() override;

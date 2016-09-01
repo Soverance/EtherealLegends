@@ -18,10 +18,11 @@
 #include "EtherealGearMaster.h"
 
 // Sets default values
-AEtherealGearMaster::AEtherealGearMaster()
+AEtherealGearMaster::AEtherealGearMaster(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	// Creates a scene component and sets it as the root
-	Root = NewObject<USceneComponent>(this, TEXT("Root"));
+	Root = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("Root"));
 	RootComponent = Root;
 
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
