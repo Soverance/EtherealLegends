@@ -17,6 +17,7 @@
 
 #include "Engine/GameInstance.h"
 #include "Management/GameStates.h"
+#include "Management/Realms.h"
 #include "EtherealGameInstance.generated.h"
 
 UCLASS()
@@ -26,7 +27,11 @@ class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 	
 public:
 
-	// What type of battle this enemy initiates
+	// The current state of the game
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	EGameStates CurrentState;
+
+	// The current gameplay Realm
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	ERealms CurrentRealm;
 };
