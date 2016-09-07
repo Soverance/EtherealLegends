@@ -23,6 +23,6 @@ public class Ethereal : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem" });
 
-        //DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+        DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
     }
 }
