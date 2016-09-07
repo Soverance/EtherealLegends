@@ -45,7 +45,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Controls)
 	void ConfigureGear(AEtherealPlayerMaster* Player);
 
-	/** The root scene component for all gear actors. */
+	// The root scene component for all gear actors.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	USceneComponent* Root;
 
