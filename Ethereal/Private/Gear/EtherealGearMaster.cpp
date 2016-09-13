@@ -46,56 +46,61 @@ void AEtherealGearMaster::ConfigureGear(AEtherealPlayerMaster* Player)
 // Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
 void AEtherealGearMaster::Bind()
 {
-	IsBound = true;
-	OnBindGear.Broadcast();
-	OwnerReference->EtherealPlayerState->AddGearStats(Name);
-	
-	switch (Type)
+	if (!IsBound)
 	{
-	case EMasterGearTypes::GT_None:
-		// Do nothing, just break
-		break;
-	case EMasterGearTypes::GT_OneHanded:
-		OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
-		break;
-	case EMasterGearTypes::GT_TwoHanded:
-		OwnerReference->WeaponMode = EWeaponModes::WM_TwoHanded;
-		break;
-	case EMasterGearTypes::GT_Ranged:
-		OwnerReference->WeaponMode = EWeaponModes::WM_Ranged;
-		break;
-	case EMasterGearTypes::GT_Casting:
-		OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
-		break;
-	}
+		IsBound = true;
+		OnBindGear.Broadcast();
+		OwnerReference->EtherealPlayerState->AddGearStats(Name);
 
+		switch (Type)
+		{
+		case EMasterGearTypes::GT_None:
+			// Do nothing, just break
+			break;
+		case EMasterGearTypes::GT_OneHanded:
+			OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
+			break;
+		case EMasterGearTypes::GT_TwoHanded:
+			OwnerReference->WeaponMode = EWeaponModes::WM_TwoHanded;
+			break;
+		case EMasterGearTypes::GT_Ranged:
+			OwnerReference->WeaponMode = EWeaponModes::WM_Ranged;
+			break;
+		case EMasterGearTypes::GT_Casting:
+			OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
+			break;
+		}
+	}
 }
 
 // Binds this Gear to the Player. This is an in game function, called by the player binding the Gear using the Pause Menu
 void AEtherealGearMaster::Unbind()
 {
-	IsBound = false;
-	OnRemoveGear.Broadcast();
-	OwnerReference->EtherealPlayerState->RemoveGearStats(Name);
-
-	switch (Type)
+	if (IsBound)
 	{
-	case EMasterGearTypes::GT_None:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
-		break;
-	case EMasterGearTypes::GT_OneHanded:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
-		break;
-	case EMasterGearTypes::GT_TwoHanded:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
-		break;
-	case EMasterGearTypes::GT_Ranged:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
-		break;
-	case EMasterGearTypes::GT_Casting:
-		OwnerReference->WeaponMode = EWeaponModes::WM_None;
-		break;
-	}
+		IsBound = false;
+		OnRemoveGear.Broadcast();
+		OwnerReference->EtherealPlayerState->RemoveGearStats(Name);
+
+		switch (Type)
+		{
+		case EMasterGearTypes::GT_None:
+			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			break;
+		case EMasterGearTypes::GT_OneHanded:
+			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			break;
+		case EMasterGearTypes::GT_TwoHanded:
+			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			break;
+		case EMasterGearTypes::GT_Ranged:
+			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			break;
+		case EMasterGearTypes::GT_Casting:
+			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			break;
+		}
+	}	
 }
 
 
