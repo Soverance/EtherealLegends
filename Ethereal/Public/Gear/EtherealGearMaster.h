@@ -16,13 +16,13 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
 #include "Management/CommonLibrary.h"
 #include "MasterGearList.h"
 #include "MasterGearTypes.h"
 #include "EtherealGearMaster.generated.h"
 
-// Forward Declarations
-class AEtherealPlayerMaster;
+//class AEtherealPlayerMaster;
 
 // Event Dispatcher for Binding Gear
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBindGear);
