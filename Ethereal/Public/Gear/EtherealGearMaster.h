@@ -22,8 +22,6 @@
 #include "MasterGearTypes.h"
 #include "EtherealGearMaster.generated.h"
 
-//class AEtherealPlayerMaster;
-
 // Event Dispatcher for Binding Gear
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBindGear);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRemoveGear);
