@@ -34,4 +34,7 @@ public:
 	// The current gameplay Realm
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	ERealms CurrentRealm;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
+	void LoadNewRealm(ERealms RealmToLoad);
 };

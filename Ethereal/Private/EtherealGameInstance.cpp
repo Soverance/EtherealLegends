@@ -17,5 +17,8 @@
 #include "EtherealGameInstance.h"
 
 
+// Start Rock Slide
+void UEtherealGameInstance::LoadNewRealm_Implementation(ERealms RealmToLoad)
+{
 
-
+}
