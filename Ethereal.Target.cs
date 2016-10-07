@@ -22,6 +22,7 @@ public class EtherealTarget : TargetRules
     {
         Type = TargetType.Game;
         bUsesSteam = true;
+        UEBuildConfiguration.bCompileSteamOSS = true;
     }
 
     //

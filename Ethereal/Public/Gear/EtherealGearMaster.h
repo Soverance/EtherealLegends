@@ -67,9 +67,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Controls)
 	void Unbind();
 
-	/** Gear Item Unique Name */
+	// Gear Item Unique Name
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	EMasterGearList Name;
+
+	// Gear Item Unique Name Text (For Display)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
+	FText NameText;
 
 	/** Gear Item Type */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)

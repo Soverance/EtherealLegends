@@ -23,6 +23,13 @@ public class Ethereal : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem" });
 
-        DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+        // Steam Integration
+        if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Linux))
+        {
+            if (UEBuildConfiguration.bCompileSteamOSS == true)
+            {
+                DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
+            }
+        }
     }
 }
