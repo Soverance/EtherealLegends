@@ -118,4 +118,8 @@ public:
 	// Player Master Reference 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
 	AEtherealPlayerMaster* OwnerReference;
+
+	// Adds the stats of an equipped Gear Item to the player's base stats.
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void AddGearStats();
 };

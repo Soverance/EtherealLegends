@@ -50,7 +50,7 @@ void AEtherealGearMaster::Bind()
 	{
 		IsBound = true;
 		OnBindGear.Broadcast();
-		OwnerReference->EtherealPlayerState->AddGearStats(Name);
+		AddGearStats();
 
 		switch (Type)
 		{
@@ -103,3 +103,13 @@ void AEtherealGearMaster::Unbind()
 	}	
 }
 
+// ADD GEAR STATS
+void AEtherealGearMaster::AddGearStats()
+{
+	// Add stats from gear to the player's stats
+	OwnerReference->EtherealPlayerState->ATK = (OwnerReference->EtherealPlayerState->ATK + ATK);
+	OwnerReference->EtherealPlayerState->DEF = (OwnerReference->EtherealPlayerState->DEF + DEF);
+	OwnerReference->EtherealPlayerState->SPD = (OwnerReference->EtherealPlayerState->SPD + SPD);
+	OwnerReference->EtherealPlayerState->HP_Max = (OwnerReference->EtherealPlayerState->HP_Max + HP);
+	OwnerReference->EtherealPlayerState->MP_Max = (OwnerReference->EtherealPlayerState->MP_Max + MP);
+}
