@@ -71,13 +71,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	EMasterGearList Name;
 
-	// Gear Item Unique Name Text (For Display)
+	// Gear Name Unique Text (For Display)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	FText NameText;
 
 	/** Gear Item Type */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	EMasterGearTypes Type;
+	
+	// Gear Type Unique Text (For Display)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
+	FText TypeText;
 
 	/** Gear description displayed on the Bindings screen. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
