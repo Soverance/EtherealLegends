@@ -5,8 +5,8 @@ Cast2,(Gamepad_FaceButton_Top),Cast2,Cast Slot 2,TRUE
 Cast3,(Gamepad_FaceButton_Right),Cast3,Cast Slot 3,TRUE
 Block,(Gamepad_RightTrigger),Block,Block,TRUE
 UseItem,(Gamepad_RightShoulder),UseItem,Use Item,TRUE
-LockOn,(Gamepad_LeftShoulder),LockOn,Lock On target,TRUE
-MagicTier,(Gamepad_LeftTrigger),MagicTier,Toggle Magic Tier,TRUE
+LockOn,(Gamepad_LeftShoulder),LockOn,Lock On,TRUE
+MagicTier,(Gamepad_LeftTrigger),MagicTier,Magic Tier,TRUE
 Sprint,(Gamepad_LeftThumbstick),Sprint,Sprint,TRUE
 OpenMap,(Gamepad_Special_Left),OpenMap,Open Map,TRUE
 OpenMenu,(Gamepad_Special_Right),OpenMenu,Open Menu,TRUE
