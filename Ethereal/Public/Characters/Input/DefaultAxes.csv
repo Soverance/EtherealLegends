@@ -1,0 +1,5 @@
+---,Axis,Positive,Negative,Identifier,VisualPositiveName,VisualNegativeName,ShowInMappingSettings
+MovementX,(Gamepad_LeftX),(D),(A),MovementX,Move Right,Move Left,TRUE
+MovementY,(Gamepad_LeftY),(W),(S),MovementY,Move Forward,Move Backward,TRUE
+CameraX,"(Gamepad_RightX,MouseX)",,,CameraX,Camera Right,Camera Left,TRUE
+CameraY,"(Gamepad_RightY,MouseY)",,,CameraY,Camera Up,Camera Down,TRUE
