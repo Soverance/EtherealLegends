@@ -27,9 +27,15 @@ class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 	
 public:
 
+	UEtherealGameInstance();
+
 	// The current state of the game
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	EGameStates CurrentState;
+
+	// Wether or not this is a new game. Only becomes true if the game was loaded and no save file was found.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	bool IsNewGame;
 
 	// The current gameplay Realm
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
