@@ -13,14 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.IO;
 using UnrealBuildTool;
 
 public class Ethereal : ModuleRules
 {
 	public Ethereal(TargetInfo Target)
 	{
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils", "AIModule", "GameplayTasks", "Slate", "SlateCore", "UMG" });
-
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils", "AIModule", "GameplayTasks", "Slate", "SlateCore", "UMG", "TrueSkyPlugin" });
+        
         PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem" });
 
         // Steam Integration

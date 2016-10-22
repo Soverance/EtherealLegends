@@ -25,5 +25,24 @@ UEtherealGameInstance::UEtherealGameInstance()
 // Load New Realm
 void UEtherealGameInstance::LoadNewRealm_Implementation(ERealms RealmToLoad)
 {
+	
+}
 
+// Load Management Actors
+void UEtherealGameInstance::LoadManagement()
+{
+	if (!AudioManager)
+	{
+		AudioManager = GetWorld()->SpawnActor<AEtherealAudioManager>();
+	}
+
+	if (!EnemyManager)
+	{
+		EnemyManager = GetWorld()->SpawnActor<AEtherealEnemyManager>();
+	}
+
+	if (!GearManager)
+	{
+		GearManager = GetWorld()->SpawnActor<AEtherealGearManager>();
+	}
 }

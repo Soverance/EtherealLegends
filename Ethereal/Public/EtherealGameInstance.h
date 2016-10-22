@@ -18,6 +18,11 @@
 #include "Engine/GameInstance.h"
 #include "Management/GameStates.h"
 #include "Management/Realms.h"
+#include "Management/BlackBox.h"
+#include "Management/EtherealAudioManager.h"
+#include "Management/EtherealEnemyManager.h"
+#include "Management/EtherealGearManager.h"
+#include "Management/EtherealTrueSKYManager.h"
 #include "EtherealGameInstance.generated.h"
 
 UCLASS()
@@ -43,4 +48,28 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void LoadNewRealm(ERealms RealmToLoad);
+
+	// Black Box
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	ABlackBox* BlackBox;
+
+	// Audio Manager
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	AEtherealAudioManager* AudioManager;
+
+	// Enemy Manager
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	AEtherealEnemyManager* EnemyManager;
+
+	// Gear Manager
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	AEtherealGearManager* GearManager;
+
+	// TrueSKY Manager
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	AEtherealTrueSKYManager* TrueSKYManager;
+
+	// Lodas the management actors and sets their references.
+	UFUNCTION(BlueprintCallable, Category = Managers)
+	void LoadManagement();
 };
