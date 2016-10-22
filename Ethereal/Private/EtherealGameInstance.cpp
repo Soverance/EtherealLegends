@@ -16,8 +16,13 @@
 #include "Ethereal.h"
 #include "EtherealGameInstance.h"
 
+// Construction
+UEtherealGameInstance::UEtherealGameInstance()
+{
+	IsNewGame = false;
+}
 
-// Start Rock Slide
+// Load New Realm
 void UEtherealGameInstance::LoadNewRealm_Implementation(ERealms RealmToLoad)
 {
 
