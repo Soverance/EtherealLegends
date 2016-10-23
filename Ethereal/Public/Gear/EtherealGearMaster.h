@@ -87,6 +87,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
 	FString Description;
 
+	// Price of this item, if it appears in the Shop
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	int32 Price;
+
 	/** How much MP this spell costs to cast. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 	float MPCost;
@@ -109,7 +113,7 @@ public:
 
 	/** MP added to the player's base stat by equipping this item. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
-	float MP;
+	float MP;	
 
 	/** Large Icon */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Details)
