@@ -69,7 +69,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
 	AEtherealTrueSKYManager* TrueSKYManager;
 
-	// Lodas the management actors and sets their references.
+	// Loads the management actors and sets their references.
 	UFUNCTION(BlueprintCallable, Category = Managers)
 	void LoadManagement();
 };
