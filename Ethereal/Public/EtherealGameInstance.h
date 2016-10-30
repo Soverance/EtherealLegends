@@ -21,7 +21,6 @@
 #include "Management/BlackBox.h"
 #include "Management/EtherealAudioManager.h"
 #include "Management/EtherealEnemyManager.h"
-#include "Management/EtherealGearManager.h"
 #include "Management/EtherealTrueSKYManager.h"
 #include "EtherealGameInstance.generated.h"
 
@@ -60,10 +59,6 @@ public:
 	// Enemy Manager
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
 	AEtherealEnemyManager* EnemyManager;
-
-	// Gear Manager
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
-	AEtherealGearManager* GearManager;
 
 	// TrueSKY Manager
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)

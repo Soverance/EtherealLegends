@@ -40,9 +40,4 @@ void UEtherealGameInstance::LoadManagement()
 	{
 		EnemyManager = GetWorld()->SpawnActor<AEtherealEnemyManager>();
 	}
-
-	if (!GearManager)
-	{
-		GearManager = GetWorld()->SpawnActor<AEtherealGearManager>();
-	}
 }
