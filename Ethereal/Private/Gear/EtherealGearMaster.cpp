@@ -52,6 +52,11 @@ void AEtherealGearMaster::Bind()
 		OnBindGear.Broadcast();
 		AddGearStats();
 
+		// Do additional stuff for binding all weapons
+		// In this case, binding a weapon replaces the anim state and main weapon binding variable.
+		// Usually, items are only bound through the Pause/Bindings menu. However, occasionally the AddToInventory function can be called with ShouldBind true, where this code may be necessary
+		// I believe the only time it matters is when you are first given the iron sword when beginning a new game with no previous save file
+		// We're not doing anything else for any other items at this time, though this can be further expanded for a lot of stuff
 		switch (Type)
 		{
 		case EMasterGearTypes::GT_None:
@@ -59,15 +64,19 @@ void AEtherealGearMaster::Bind()
 			break;
 		case EMasterGearTypes::GT_OneHanded:
 			OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Main = Name;
 			break;
 		case EMasterGearTypes::GT_TwoHanded:
 			OwnerReference->WeaponMode = EWeaponModes::WM_TwoHanded;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Main = Name;
 			break;
 		case EMasterGearTypes::GT_Ranged:
 			OwnerReference->WeaponMode = EWeaponModes::WM_Ranged;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Main = Name;
 			break;
 		case EMasterGearTypes::GT_Casting:
 			OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Main = Name;
 			break;
 		}
 	}
