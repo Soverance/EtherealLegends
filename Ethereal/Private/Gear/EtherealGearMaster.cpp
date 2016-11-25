@@ -52,24 +52,40 @@ void AEtherealGearMaster::Bind()
 		OnBindGear.Broadcast();
 		AddGearStats();
 
-		switch (Type)
-		{
-		case EMasterGearTypes::GT_None:
-			// Do nothing, just break
-			break;
-		case EMasterGearTypes::GT_OneHanded:
-			OwnerReference->WeaponMode = EWeaponModes::WM_OneHanded;
-			break;
-		case EMasterGearTypes::GT_TwoHanded:
-			OwnerReference->WeaponMode = EWeaponModes::WM_TwoHanded;
-			break;
-		case EMasterGearTypes::GT_Ranged:
-			OwnerReference->WeaponMode = EWeaponModes::WM_Ranged;
-			break;
-		case EMasterGearTypes::GT_Casting:
-			OwnerReference->WeaponMode = EWeaponModes::WM_Casting;
-			break;
-		}
+		//// Do additional stuff for binding all weapons
+		//// In this case, this type of functionality is not necessary here, since outside of the DefaultItems function, the following is by design always set in the pause menu 
+		//switch (Type)
+		//{
+		//case EMasterGearTypes::GT_None:
+		//	// Do nothing, just break
+		//	break;
+		//case EMasterGearTypes::GT_OneHanded:
+		//	OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_OneHanded;
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_OneHanded = Name;
+		//	break;
+		//case EMasterGearTypes::GT_Shield:
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_Shield = Name;
+		//	break;
+		//case EMasterGearTypes::GT_TwoHanded:
+		//	OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_TwoHanded;
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_TwoHanded = Name;
+		//	break;
+		//case EMasterGearTypes::GT_Ranged:
+		//	OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_Ranged;
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_Ranged = Name;
+		//	break;
+		//case EMasterGearTypes::GT_Ammo:
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_Ammo = Name;
+		//	break;
+		//case EMasterGearTypes::GT_Casting:
+		//	OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_Casting;
+		//	OwnerReference->EtherealPlayerState->Binding_Weapon_Casting = Name;
+		//	break;
+		//}
+	}
+	if (IsBound)
+	{
+		OnBindGear.Broadcast();
 	}
 }
 
@@ -85,19 +101,29 @@ void AEtherealGearMaster::Unbind()
 		switch (Type)
 		{
 		case EMasterGearTypes::GT_None:
-			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			// Do nothing, just break
 			break;
 		case EMasterGearTypes::GT_OneHanded:
-			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			//OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_None;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_OneHanded = EMasterGearList::GL_None;
+			break;
+		case EMasterGearTypes::GT_Shield:
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Shield = EMasterGearList::GL_None;
 			break;
 		case EMasterGearTypes::GT_TwoHanded:
-			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			//OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_None;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_TwoHanded = EMasterGearList::GL_None;
 			break;
 		case EMasterGearTypes::GT_Ranged:
-			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			//OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_None;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Ranged = EMasterGearList::GL_None;
+			break;
+		case EMasterGearTypes::GT_Ammo:
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Ammo = EMasterGearList::GL_None;
 			break;
 		case EMasterGearTypes::GT_Casting:
-			OwnerReference->WeaponMode = EWeaponModes::WM_None;
+			//OwnerReference->EtherealPlayerState->WeaponMode = EWeaponModes::WM_None;
+			OwnerReference->EtherealPlayerState->Binding_Weapon_Casting = EMasterGearList::GL_None;
 			break;
 		}
 	}	
