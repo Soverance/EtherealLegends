@@ -57,50 +57,50 @@ public class EtherealTarget : TargetRules
         }
     }
 
-    public override List<UnrealTargetPlatform> GUBP_GetPlatforms_MonolithicOnly(UnrealTargetPlatform HostPlatform)
-    {
-		List<UnrealTargetPlatform> Platforms = null;
+    // public override List<UnrealTargetPlatform> GUBP_GetPlatforms_MonolithicOnly(UnrealTargetPlatform HostPlatform)
+    // {
+		// List<UnrealTargetPlatform> Platforms = null;
 
-		switch (HostPlatform)
-		{
-			case UnrealTargetPlatform.Mac:
-				Platforms = new List<UnrealTargetPlatform> { HostPlatform };
-				break;
+		// switch (HostPlatform)
+		// {
+			// case UnrealTargetPlatform.Mac:
+				// Platforms = new List<UnrealTargetPlatform> { HostPlatform };
+				// break;
 
-			case UnrealTargetPlatform.Win64:
-				Platforms = new List<UnrealTargetPlatform> { HostPlatform, UnrealTargetPlatform.Win32, UnrealTargetPlatform.XboxOne, UnrealTargetPlatform.PS4 };
-				break;
+			// case UnrealTargetPlatform.Win64:
+				// Platforms = new List<UnrealTargetPlatform> { HostPlatform, UnrealTargetPlatform.Win32, UnrealTargetPlatform.XboxOne, UnrealTargetPlatform.PS4 };
+				// break;
 
-			default:
-				Platforms = new List<UnrealTargetPlatform>();
-				break;
-		}
+			// default:
+				// Platforms = new List<UnrealTargetPlatform>();
+				// break;
+		// }
 
-		return Platforms;
-    }
+		// return Platforms;
+    // }
 
-    public override List<UnrealTargetConfiguration> GUBP_GetConfigs_MonolithicOnly(UnrealTargetPlatform HostPlatform, UnrealTargetPlatform Platform)
-    {
-        return new List<UnrealTargetConfiguration> { UnrealTargetConfiguration.Development };
-    }
-    public override List<GUBPFormalBuild> GUBP_GetConfigsForFormalBuilds_MonolithicOnly(UnrealTargetPlatform HostPlatform)
-    {
-        if (HostPlatform == UnrealTargetPlatform.Win64)
-        {
-            return new List<GUBPFormalBuild> 
-            {
-                new GUBPFormalBuild(UnrealTargetPlatform.Linux, UnrealTargetConfiguration.Development),
-                new GUBPFormalBuild(UnrealTargetPlatform.Win64, UnrealTargetConfiguration.Development),
-                new GUBPFormalBuild(UnrealTargetPlatform.XboxOne, UnrealTargetConfiguration.Development),
-                new GUBPFormalBuild(UnrealTargetPlatform.PS4, UnrealTargetConfiguration.Development),
-            };
-        }
-        else
-        {
-            return new List<GUBPFormalBuild> 
-            {
-                new GUBPFormalBuild(UnrealTargetPlatform.Mac, UnrealTargetConfiguration.Development),
-            };
-        }
-    }
+    // public override List<UnrealTargetConfiguration> GUBP_GetConfigs_MonolithicOnly(UnrealTargetPlatform HostPlatform, UnrealTargetPlatform Platform)
+    // {
+        // return new List<UnrealTargetConfiguration> { UnrealTargetConfiguration.Development };
+    // }
+    // public override List<GUBPFormalBuild> GUBP_GetConfigsForFormalBuilds_MonolithicOnly(UnrealTargetPlatform HostPlatform)
+    // {
+        // if (HostPlatform == UnrealTargetPlatform.Win64)
+        // {
+            // return new List<GUBPFormalBuild> 
+            // {
+                // new GUBPFormalBuild(UnrealTargetPlatform.Linux, UnrealTargetConfiguration.Development),
+                // new GUBPFormalBuild(UnrealTargetPlatform.Win64, UnrealTargetConfiguration.Development),
+                // new GUBPFormalBuild(UnrealTargetPlatform.XboxOne, UnrealTargetConfiguration.Development),
+                // new GUBPFormalBuild(UnrealTargetPlatform.PS4, UnrealTargetConfiguration.Development),
+            // };
+        // }
+        // else
+        // {
+            // return new List<GUBPFormalBuild> 
+            // {
+                // new GUBPFormalBuild(UnrealTargetPlatform.Mac, UnrealTargetConfiguration.Development),
+            // };
+        // }
+    // }
 }
