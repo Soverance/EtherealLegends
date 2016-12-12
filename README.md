@@ -1,8 +1,8 @@
 Ethereal Legends - An Indie Action RPG built with Unreal Engine 4 for Steam, PS4, and Xbox One.
 
-Created and Programmed by Scott McCutchen
+Ethereal Legends Module for Unreal Engine 4
 
-Ethereal Legends Module for UE4
+Created and Programmed by Scott McCutchen
 
 Soverance Studios
 
