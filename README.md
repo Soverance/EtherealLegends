@@ -5,8 +5,11 @@ Created and Programmed by Scott McCutchen
 Ethereal Legends Module for UE4
 
 Soverance Studios
+
 info@soverance.com
+
 www.soverance.com
+
 www.ethereallegends.com
 
 This module is provided as is, and is not intended to be a complete, working game. Instead, this module is meant to be used as a learning resource for others looking to bring their UE4 games to C++.
