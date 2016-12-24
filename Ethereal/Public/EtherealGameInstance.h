@@ -67,4 +67,8 @@ public:
 	// Loads the management actors and sets their references.
 	UFUNCTION(BlueprintCallable, Category = Managers)
 	void LoadManagement();
+
+	// This is a hacky solution to set the audio volume in settings, since I didn't want to re-write the entire settings BP in code right now... LAZY!
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
+	void SetAudioVolume(UAudioComponent* AudioComponent, EAudioTypes AudioType);
 };
