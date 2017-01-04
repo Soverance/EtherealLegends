@@ -23,6 +23,12 @@ UEtherealGameInstance::UEtherealGameInstance()
 }
 
 // Load New Realm
+void UEtherealGameInstance::SetAudioVolume_Implementation(UAudioComponent* AudioComponent, EAudioTypes AudioType)
+{
+
+}
+
+// Load New Realm
 void UEtherealGameInstance::LoadNewRealm_Implementation(ERealms RealmToLoad)
 {
 	
