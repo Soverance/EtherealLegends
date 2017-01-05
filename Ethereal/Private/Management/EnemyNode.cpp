@@ -31,7 +31,7 @@ AEnemyNode::AEnemyNode(const FObjectInitializer& ObjectInitializer)
 	// Create the arrow component
 	Arrow = ObjectInitializer.CreateDefaultSubobject<UArrowComponent>(this, TEXT("Arrow"));
 	Arrow->SetupAttachment(Root);
-	Arrow->ArrowColor = FColor(1, 0, 0.5f, 1);
+	Arrow->ArrowColor = FColor(1, 0, 1, 1);
 }
 
 //// Called when the game starts or when spawned

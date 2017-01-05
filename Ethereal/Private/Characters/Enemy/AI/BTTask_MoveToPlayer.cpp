@@ -63,6 +63,8 @@ EBTNodeResult::Type UBTTask_MoveToPlayer::ExecuteTask(UBehaviorTreeComponent& Ow
 		//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, TEXT("FAILED FINDING PLAYER REFERENCE"));
 		return EBTNodeResult::Failed;
 	}
-	EBTNodeResult::Failed;
+	// This used to be fine, but I guess it's unused.
+	// It got called out while compiling for PS4!
+	//EBTNodeResult::Failed;
 }
 
