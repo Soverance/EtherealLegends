@@ -277,6 +277,11 @@ void AEtherealPlayerMaster::HideAllBoundWeapons()
 	}
 }
 
+void AEtherealPlayerMaster::EnemyCloseMenu_Implementation()
+{
+
+}
+
 // Interact with a NPC
 void AEtherealPlayerMaster::Interact()
 {

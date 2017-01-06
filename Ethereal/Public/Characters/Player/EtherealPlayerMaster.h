@@ -170,7 +170,11 @@ public:
 	void ToggleRunState();
 
 	//////////////////////////////////////////////////
-	// MAP CONTROL
+	// MENU / MAP CONTROL
+
+	// This is called if you have the menu open and are aggroed by an enemy
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Controls)
+	void EnemyCloseMenu();
 
 	// Map Control is true if the pause menu map is currently displayed. This allows the analog stick input to have a new context 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Map)

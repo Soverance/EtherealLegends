@@ -69,6 +69,28 @@ AReturnPortal::AReturnPortal(const FObjectInitializer& ObjectInitializer)
 void AReturnPortal::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// This usually wouldn't be necessary, since we collect this reference when the player enters the NPC's collider.
+	// However, we require the reference to draw debug lines for the map, and the player may access the map before having interacting with this actor
+	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		InteractingPlayer = *ActorItr; // get the instance of the Player
+	}
+}
+
+// Called every frame
+void AReturnPortal::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	// Draw Debug Cylinder on Map
+	if (InteractingPlayer->MapControl)
+	{
+		FVector DebugStart = GetActorLocation();
+		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
+
+		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
+	}
 }
 
 // Do a Burst effect when the portal is activated

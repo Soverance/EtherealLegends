@@ -213,14 +213,17 @@ void AZhan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
+	if (!IsDead)
 	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
+		// Draw Debug Cylinder on Map
+		if (Target->MapControl)
+		{
+			FVector DebugStart = GetActorLocation();
+			FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
 
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
+			DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
+		}
+	}	
 }
 
 void AZhan::InitAggro()
@@ -405,7 +408,8 @@ void AZhan::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Vo
 	{
 		if (!IsAggroed)
 		{
-			Aggro(PawnInstigator);
+			// This functionality is removed because Zhan does not aggro in a traditional manner
+			//Aggro(PawnInstigator);
 		}
 	}
 }
@@ -414,7 +418,8 @@ void AZhan::OnSeePawn(APawn* Pawn)
 {
 	if (!IsAggroed)
 	{
-		Aggro(Pawn);
+		// This functionality is removed because Zhan does not aggro in a traditional manner
+		//Aggro(Pawn);
 	}
 }
 

@@ -249,6 +249,12 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 				{
 					AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
 				}
+
+				// if the player is in a menu when this enemy aggros, close it
+				if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
+				{
+					Target->EnemyCloseMenu();
+				}
 			}
 		}
 	}
