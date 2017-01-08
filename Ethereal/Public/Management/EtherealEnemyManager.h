@@ -48,4 +48,10 @@ public:
 	// Spawns the enemy at a specific node.
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void SpawnNode(AEnemyNode* Node);
+
+	// Destroys all enemies found in scene - used during loading screens when unloading a Realm.
+	// I tried to get enemies to spawn inside their sublevels, so that this function would not be necessary  (see SpawnActorIntoLevel() inside CommonLibrary.cpp), however that does not seem to work correctly
+	// so instead, this function is now called during loading to destroy all remaining enemies
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void DestroyAllEnemies();
 };

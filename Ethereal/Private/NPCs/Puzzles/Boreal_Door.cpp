@@ -293,8 +293,8 @@ void ABoreal_Door::Interact()
 			{
 				OnLeftDoor.Broadcast();  // Broadcast Left Door event  (this plays the Matinee in the level BP)
 				Active_LeftDoor = false; // left door inactive
-				FlareAudio_LeftDoor->Play(); // play flare audio
 				FlareFX_LeftDoor->Activate(); // activate flare fx
+				FlareAudio_LeftDoor->Play(); // play flare audio				
 				AuraFX_LeftDoor->Deactivate(); // deactivate aura
 
 				// Spawn Door Drop, attach it to player
@@ -317,8 +317,8 @@ void ABoreal_Door::Interact()
 			{
 				OnLeftDoor.Broadcast();  // Broadcast Left Door event  (this plays the Matinee in the level BP)
 				Active_LeftDoor = true; // activate this statue
-				FlareAudio_LeftDoor->Play();  // play flare audio
 				FlareFX_LeftDoor->Activate();  // activate flare fx
+				FlareAudio_LeftDoor->Play();  // play flare audio				
 				AuraFX_LeftDoor->Activate();  // activate aura fx				
 				DoorDrop->Destroy();  // Remove door drop
 				IsCarryingDrop = false;
@@ -346,8 +346,8 @@ void ABoreal_Door::Interact()
 			{
 				OnRightDoor.Broadcast();  // Broadcast Right Door event  (this plays the Matinee in the level BP)
 				Active_RightDoor = false; // left door inactive
-				FlareAudio_RightDoor->Play(); // play flare audio
 				FlareFX_RightDoor->Activate(); // activate flare fx
+				FlareAudio_RightDoor->Play(); // play flare audio				
 				AuraFX_RightDoor->Deactivate(); // deactivate aura
 
 				// Spawn Door Drop, attach it to player
@@ -370,8 +370,8 @@ void ABoreal_Door::Interact()
 			{
 				OnRightDoor.Broadcast();  // Broadcast Right Door event  (this plays the Matinee in the level BP)
 				Active_RightDoor = true; // activate this statue
-				FlareAudio_RightDoor->Play();  // play flare audio
 				FlareFX_RightDoor->Activate();  // activate flare fx
+				FlareAudio_RightDoor->Play();  // play flare audio				
 				AuraFX_RightDoor->Activate();  // activate aura fx				
 				DoorDrop->Destroy();  // Remove door drop from player
 				IsCarryingDrop = false;
@@ -399,8 +399,8 @@ void ABoreal_Door::Interact()
 			{
 				OnSat1.Broadcast();  // Broadcast Satellite 1 event  (this plays the Matinee in the level BP)
 				Active_Satellite1 = false; // left door inactive
-				FlareAudio_Satellite1->Play(); // play flare audio
 				FlareFX_Satellite1->Activate(); // activate flare fx
+				FlareAudio_Satellite1->Play(); // play flare audio				
 				AuraFX_Satellite1->Deactivate(); // deactivate aura
 
 				// Spawn Door Drop, attach it to player
@@ -423,8 +423,8 @@ void ABoreal_Door::Interact()
 			{
 				OnSat1.Broadcast();  // Broadcast Satellite 1 event  (this plays the Matinee in the level BP)
 				Active_Satellite1 = true; // activate this statue
-				FlareAudio_Satellite1->Play();  // play flare audio
 				FlareFX_Satellite1->Activate();  // activate flare fx
+				FlareAudio_Satellite1->Play();  // play flare audio				
 				AuraFX_Satellite1->Activate();  // activate aura fx				
 				DoorDrop->Destroy();  // Remove door drop
 				IsCarryingDrop = false;
@@ -452,8 +452,8 @@ void ABoreal_Door::Interact()
 			{
 				OnSat2.Broadcast();  // Broadcast Satellite 2 event  (this plays the Matinee in the level BP)
 				Active_Satellite2 = false; // left door inactive
-				FlareAudio_Satellite2->Play(); // play flare audio
 				FlareFX_Satellite2->Activate(); // activate flare fx
+				FlareAudio_Satellite2->Play(); // play flare audio				
 				AuraFX_Satellite2->Deactivate(); // deactivate aura
 
 				// Spawn Door Drop, attach it to player
@@ -476,8 +476,8 @@ void ABoreal_Door::Interact()
 			{
 				OnSat2.Broadcast();  // Broadcast Satellite 2 event  (this plays the Matinee in the level BP)
 				Active_Satellite2 = true; // activate this statue
-				FlareAudio_Satellite2->Play();  // play flare audio
 				FlareFX_Satellite2->Activate();  // activate flare fx
+				FlareAudio_Satellite2->Play();  // play flare audio				
 				AuraFX_Satellite2->Activate();  // activate aura fx				
 				DoorDrop->Destroy();  // Remove door drop
 				IsCarryingDrop = false;

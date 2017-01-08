@@ -344,16 +344,16 @@ void AZhan::Escape()
 			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Boreal:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Boreal();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Yggdrasil:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Yggdrasil();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Empyrean:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Empyrean();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Celestial:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
 			break;
 
 	}

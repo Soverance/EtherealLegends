@@ -44,11 +44,15 @@ public:
 
 	// Roar Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoRoar;
+	bool DoLaserBlast;
 
 	// Fire Cannons Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
 	bool DoFireCannons;
+
+	// Charge Anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
+	bool DoCharge;
 
 	///////////////////////////
 	// A.I.

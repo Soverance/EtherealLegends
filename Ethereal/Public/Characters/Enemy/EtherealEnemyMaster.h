@@ -167,6 +167,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	float EnemyDealDamage(float BaseATK);
 
+	// Sets the hit animation bool to false.  Without this, an enemy could wind up locked in the Hit anim state if a player lands successive hits too quickly.
+	UFUNCTION(BlueprintCallable, Category = Stats)
+	void StopHit();
+
 	// Aggro the player. This function is called in Blueprint by the AI OnSeePawn event
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void Aggro(APawn* Pawn);
