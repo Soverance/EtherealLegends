@@ -58,7 +58,12 @@ void ASentinelBrew::Use()
 {
 	ItemAudio->Play();
 	ItemFX->Activate();
-	OwnerReference->EtherealPlayerController->ActivateStatus_Sentinel();
+
+	// This check prevents multiple uses of this item from stacking the effect
+	if (!OwnerReference->EtherealPlayerController->Active_SentinelBrew)
+	{	
+		OwnerReference->EtherealPlayerController->ActivateStatus_Sentinel();
+	}	
 }
 
 #undef LOCTEXT_NAMESPACE

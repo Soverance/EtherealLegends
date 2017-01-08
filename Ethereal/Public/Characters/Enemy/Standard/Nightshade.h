@@ -34,6 +34,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
+	// Spotlight
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Light)
+	USpotLightComponent* SpotLight;
+
 	// Power Blast collider
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	UBoxComponent* PowerBlastBox;

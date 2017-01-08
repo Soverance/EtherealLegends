@@ -193,6 +193,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Quantities)
 	int32 Save_QtySentinelBrew;
 
+	// Antidote Quantity
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Quantities)
+	int32 Save_QtyAntidote;
+
 	/////////////////////////////////////////////
 	// UNLOCKS
 

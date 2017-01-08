@@ -27,6 +27,14 @@ class ETHEREAL_API AEtherealPlayerController : public APlayerController
 public:
 	
 	AEtherealPlayerController();
+
+	// True if Sentinel Brew is active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool Active_SentinelBrew;
+
+	// True if Adrenaline is active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool Active_Adrenaline;
 		
 	// All Possible Status Effects are stored here
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
@@ -62,6 +70,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void ActivateStatus_Poison();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void RemoveStatus_Poison();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void ActivateStatus_Burn();

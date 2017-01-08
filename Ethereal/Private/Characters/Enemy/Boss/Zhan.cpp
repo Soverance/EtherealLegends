@@ -383,14 +383,14 @@ void AZhan::Explode()
 	
 	// Spawn the Arcadia Return Portal after a short delay
 	FTimerHandle EndTimer;
-	GetWorldTimerManager().SetTimer(EndTimer, this, &AZhan::DropPortal, 1.0f, false);
+	GetWorldTimerManager().SetTimer(EndTimer, this, &AZhan::DropPortal, 0.5f, false);
 }
 
 void AZhan::DropPortal()
 {
 	EscapeBurstFX->Deactivate();
-	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);
-	AudioManager->Play_SFX_LevelUp();
+	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
+	AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	// Spawn the Arcadia Return Portal wherever Zhan died
 	AReturnPortal* ReturnPortal = GetWorld()->SpawnActor<AReturnPortal>(GetActorLocation(), GetActorRotation());

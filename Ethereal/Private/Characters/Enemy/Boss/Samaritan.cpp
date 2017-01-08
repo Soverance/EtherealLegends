@@ -157,7 +157,7 @@ void ASamaritan::AttackRound()
 
 void ASamaritan::Death()
 {
-	IsDead = true;
+	IsDead = true;	
 }
 
 // A.I. Hearing

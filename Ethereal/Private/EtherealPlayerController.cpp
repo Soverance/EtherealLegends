@@ -169,6 +169,10 @@ void AEtherealPlayerController::ActivateStatus_Poison_Implementation()
 {
 }
 
+void AEtherealPlayerController::RemoveStatus_Poison_Implementation()
+{
+}
+
 void AEtherealPlayerController::ActivateStatus_Burn_Implementation()
 {
 }

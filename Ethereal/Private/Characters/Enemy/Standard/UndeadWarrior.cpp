@@ -121,7 +121,7 @@ void AUndeadWarrior::MeleeAttack()
 void AUndeadWarrior::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 	
 	if (!Target->EtherealPlayerState->HasCompletedTutorial)  // don't bother running this code if the player has completed the tutorial
 	{

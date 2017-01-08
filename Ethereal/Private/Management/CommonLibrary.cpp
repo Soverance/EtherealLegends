@@ -64,6 +64,7 @@
 #include "Gear/Items/Consumable/Elixer.h"
 #include "Gear/Items/Consumable/Adrenaline.h"
 #include "Gear/Items/Consumable/SentinelBrew.h"
+#include "Gear/Items/Consumable/Antidote.h"
 
 #include "Gear/Armor/Head/ClothCap.h"
 #include "Gear/Armor/Head/AdamanHelm.h"
@@ -365,6 +366,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_SentinelBrew:
 		GearClass = ASentinelBrew::StaticClass();
+		break;
+	case EMasterGearList::GL_Antidote:
+		GearClass = AAntidote::StaticClass();
 		break;
 
 		///////////////////////////////

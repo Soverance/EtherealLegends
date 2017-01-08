@@ -93,6 +93,7 @@
  	GL_Adrenaline UMETA(DisplayName = "Adrenaline"),
  	GL_SentinelBrew UMETA(DisplayName = "Sentinel Brew"),
  	GL_Elixer UMETA(DisplayName = "Elixer"),
+	GL_Antidote UMETA(DisplayName = "Antidote"),
 
 	//////////////////////////////////////
 	// ARMOR SETS

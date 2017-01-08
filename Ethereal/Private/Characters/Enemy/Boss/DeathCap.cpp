@@ -143,7 +143,7 @@ void ADeathCap::Tick(float DeltaTime)
 
 void ADeathCap::Death()
 {
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy	
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy	
 	IsHiding = true;
 	// FinalDeath() is called by anim notify after the death animation
 }

@@ -204,7 +204,7 @@ void AWatcher::StopBlast()
 void AWatcher::Death()
 {
 	DeathAudio->Play();
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 }
 
 void AWatcher::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume)

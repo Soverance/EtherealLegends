@@ -202,6 +202,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void Disappear();
 
+	// Disables battle music and returns to BGM, if there are no enemies in the aggro list.  Called upon deaggro.
+	UFUNCTION(BlueprintCallable, Category = Combat)
+	void DisableBattleMusic();
+
 	// Spawns Zhan after a Boss dies. Should not be called by regular enemies.
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void SpawnZhan();

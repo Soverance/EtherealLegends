@@ -115,7 +115,7 @@ void AReturnPortal::DoBurstEffect()
 			InteractingPlayer->EtherealPlayerState->Unlocked_Yggdrasil = false;
 			break;
 		case ERealms::R_Yggdrasil:
-			//InteractingPlayer->EtherealPlayerState->Unlocked_Empyrean = false;
+			InteractingPlayer->EtherealPlayerState->Unlocked_Empyrean = false;
 			break;
 		case ERealms::R_Empyrean:
 			//InteractingPlayer->EtherealPlayerState->Unlocked_Celestial = false;
