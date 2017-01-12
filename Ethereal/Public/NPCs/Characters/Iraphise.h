@@ -16,17 +16,17 @@
 #pragma once
 
 #include "NPCs/Characters/NPCCharacterMaster.h"
-#include "Gaspar.generated.h"
+#include "Iraphise.generated.h"
 
 UCLASS()
-class ETHEREAL_API AGaspar : public ANPCCharacterMaster
+class ETHEREAL_API AIraphise : public ANPCCharacterMaster
 {
 	GENERATED_BODY()
 	
 public:
 
 	// Sets default values for this actor's properties
-	AGaspar(const FObjectInitializer& ObjectInitializer);
+	AIraphise(const FObjectInitializer& ObjectInitializer);
 
 	// BeginPlay Override
 	virtual void BeginPlay() override;
@@ -51,11 +51,11 @@ public:
 
 	// Add the Shop widget to viewport
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void EnableArmorShop();
+	void EnableWeaponShop();
 
 	// Hide the Interact Widget for this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void DisableArmorShop();
+	void DisableWeaponShop();
 
 	// Spawns all items the Priest can possibly have in his inventory
 	UFUNCTION(BlueprintCallable, Category = Default)
