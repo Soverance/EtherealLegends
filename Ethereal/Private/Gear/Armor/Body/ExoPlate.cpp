@@ -45,11 +45,11 @@ AExoPlate::AExoPlate(const FObjectInitializer& ObjectInitializer)
 	Description = "Space Trooper Armor.";
 	Price = 20000;
 	MPCost = 0;
-	ATK = 4;
-	DEF = 7;
-	SPD = 4;
-	HP = 60;
-	MP = 30;
+	ATK = 12;
+	DEF = 10;
+	SPD = 12;
+	HP = 100;
+	MP = 50;
 }
 
 // Called when the game starts or when spawned

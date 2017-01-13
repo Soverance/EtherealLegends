@@ -45,11 +45,11 @@ AWarCoat::AWarCoat(const FObjectInitializer& ObjectInitializer)
 	Description = "Armor of Ethereal Rangers.";
 	Price = 20000;
 	MPCost = 0;
-	ATK = 4;
-	DEF = 7;
-	SPD = 4;
-	HP = 60;
-	MP = 30;
+	ATK = 5;
+	DEF = 5;
+	SPD = 5;
+	HP = 100;
+	MP = 50;
 }
 
 // Called when the game starts or when spawned

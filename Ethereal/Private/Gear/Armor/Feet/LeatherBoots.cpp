@@ -43,13 +43,13 @@ ALeatherBoots::ALeatherBoots(const FObjectInitializer& ObjectInitializer)
 	Type = EMasterGearTypes::GT_Feet;
 	TypeText = LOCTEXT("LeatherBootsType", "Feet");
 	Description = "Armor of Ethereal Warriors.";
-	Price = 20000;
+	Price = 5000;
 	MPCost = 0;
-	ATK = 4;
-	DEF = 7;
-	SPD = 4;
-	HP = 60;
-	MP = 30;
+	ATK = 1;
+	DEF = 2;
+	SPD = 1;
+	HP = 15;
+	MP = 5;
 }
 
 // Called when the game starts or when spawned

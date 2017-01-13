@@ -21,8 +21,8 @@
 AIraphise::AIraphise(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> NPCMesh(TEXT("SkeletalMesh'/Game/InfinityBladeWarriors/Character/Mixamo/gaspar.gaspar'"));
-	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/InfinityBladeWarriors/Character/Mixamo/AnimBP_Gaspar.AnimBP_Gaspar_C'"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> NPCMesh(TEXT("SkeletalMesh'/Game/EtherealParty/Iraphise/Iraphise.Iraphise'"));
+	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Iraphise/Anim_Iraphise.Anim_Iraphise_C'"));
 	static ConstructorHelpers::FClassFinder<UUserWidget> Widget(TEXT("/Game/Blueprints/Widgets/BP_Shop"));
 
 	// Set Default Objects
@@ -93,6 +93,7 @@ void AIraphise::Interact()
 		if (!InViewport)
 		{
 			EnableWeaponShop();  // Enable Weapon Shop
+			Yawn = true;
 		}	
 	}
 }
@@ -117,7 +118,7 @@ void AIraphise::DisableWeaponShop()
 	InteractWidget->RemoveFromViewport();
 	InteractingPlayer->EtherealGameInstance->CurrentState = EGameStates::GS_Playing;  // put game into playing state
 	IsUsable = true;
-	Yawn = true;
+	GiveObject = true;
 }
 
 void AIraphise::SpawnDefaultShopItems()

@@ -46,10 +46,10 @@ AAssassinsCuffs::AAssassinsCuffs(const FObjectInitializer& ObjectInitializer)
 	Price = 20000;
 	MPCost = 0;
 	ATK = 4;
-	DEF = 7;
-	SPD = 4;
-	HP = 60;
-	MP = 30;
+	DEF = 2;
+	SPD = 2;
+	HP = 30;
+	MP = 10;
 }
 
 // Called when the game starts or when spawned
