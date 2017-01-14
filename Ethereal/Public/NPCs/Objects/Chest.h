@@ -49,6 +49,10 @@ public:
 	UStaticMeshComponent* Base;
 	UStaticMesh* SM_Base;
 
+	// The root scene component for the lid.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	USceneComponent* LidRoot;
+
 	// Lid Mesh
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	UStaticMeshComponent* Lid;

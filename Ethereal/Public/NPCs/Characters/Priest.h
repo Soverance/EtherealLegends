@@ -15,11 +15,11 @@
 
 #pragma once
 
-#include "NPCs/EtherealNPCMaster.h"
+#include "NPCs/Characters/NPCCharacterMaster.h"
 #include "Priest.generated.h"
 
 UCLASS()
-class ETHEREAL_API APriest : public AEtherealNPCMaster
+class ETHEREAL_API APriest : public ANPCCharacterMaster
 {
 	GENERATED_BODY()
 	
@@ -49,13 +49,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	UUserWidget* InteractWidget;
 
+	// Add the Shop widget to viewport
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void EnableMagicShop();
+
 	// Hide the Interact Widget for this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void DisableInteractWidget();
-
-	// Shop Inventory Array
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory)
-	TArray<AEtherealGearMaster*> ShopInventory;
+	void DisableMagicShop();
 
 	// Spawns all items the Priest can possibly have in his inventory
 	UFUNCTION(BlueprintCallable, Category = Default)

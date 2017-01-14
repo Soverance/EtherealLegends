@@ -45,7 +45,7 @@ ANightshade::ANightshade(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("NightshadeText", "Nightshade");
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Standard;
-	CommonDrop = EMasterGearList::GL_HiEther;
+	CommonDrop = EMasterGearList::GL_Antidote;
 	UncommonDrop = EMasterGearList::GL_ExoBoots;
 	RareDrop = EMasterGearList::GL_ExoGages;
 	AttackDelay = 2.0f;
@@ -85,6 +85,13 @@ ANightshade::ANightshade(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.7f, 0.7f, 0.7f));
 
 	// Enemy-Specific Object Config
+
+	SpotLight = ObjectInitializer.CreateDefaultSubobject<USpotLightComponent>(this, TEXT("SpotLight"));
+	SpotLight->SetupAttachment(GetMesh());
+	SpotLight->SetRelativeLocation(FVector(0, 0, 500));
+	SpotLight->SetRelativeRotation(FRotator(-90, 0, 0));
+	SpotLight->Intensity = 500;
+	SpotLight->LightColor = FColorList::LimeGreen;
 
 	// Power Blast Box
 	PowerBlastBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("PowerBlastBox"));

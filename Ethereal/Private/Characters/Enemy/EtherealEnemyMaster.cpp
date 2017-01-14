@@ -69,6 +69,7 @@ void AEtherealEnemyMaster::BeginPlay()
 	Super::BeginPlay();
 
 	ToggleReticle(false);  // toggles the reticle off at start
+	StopHit();  // begin calling StopHit()
 
 	// iterate through the world for all Ethereal Player Masters. Since this is a single player game, we know the enemy's target will always be this one actor.
 	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
@@ -210,6 +211,19 @@ void AEtherealEnemyMaster::EnemyTakeDamage(float DamageTaken)
 	Target->EtherealPlayerController->RefreshTargetingInfo(); // Refresh the targeting info, as it's likely the player is targeting this enemy if it took damage.
 }
 
+// Sets the hit animation bool to false.  Without this, an enemy could wind up locked in the Hit anim state if a player lands successive hits too quickly.
+void AEtherealEnemyMaster::StopHit()
+{
+	if (IsHit)
+	{
+		IsHit = false;		
+	}
+
+	// Call again after 1 second
+	FTimerHandle CastTimer;
+	GetWorldTimerManager().SetTimer(CastTimer, this, &AEtherealEnemyMaster::StopHit, 1.0f, false);
+}
+
 // Sets RunAI to true, allowing the enemy's behavior tree to begin running
 void AEtherealEnemyMaster::RunToTarget()
 {
@@ -249,6 +263,12 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 				{
 					AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
 				}
+
+				// if the player is in a menu when this enemy aggros, close it
+				if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
+				{
+					Target->EnemyCloseMenu();
+				}
 			}
 		}
 	}
@@ -257,41 +277,24 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 // DEAGGRO
 void AEtherealEnemyMaster::Deaggro()
 {
-	bool LocalPlayerHasAggro = true;  // define a local variable, denoting the player as having aggro
-	IsAggroed = false;
-	RunAI = false;
-	Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
-
-	// Check if the player still has aggro
-	if (Target->AggroList.Num() > 0)
+	if (BattleType == EBattleTypes::BT_Standard)
 	{
-		LocalPlayerHasAggro = true; // found enemies in aggro list
-	}
-	else
-	{
-		LocalPlayerHasAggro = false; // no enemies in aggro list
+		IsAggroed = false;
+		RunAI = false;
+		Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
+		DisableBattleMusic();
 	}
 
-	if (!LocalPlayerHasAggro)
-	{			
-		if (BattleType == EBattleTypes::BT_Standard)  // only play BGM on deaggro if this is a standard enemy. 
+	if (BattleType == EBattleTypes::BT_Boss)
+	{
+		if (IsDead)
 		{
-			AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro, so play Background Music
-		}	
-		if (BattleType == EBattleTypes::BT_Boss)
-		{
-			// We want to always play Boss music, since boss battles are designed so that you can't run away and they cannot be deaggroed.
-			// I think the only time this matters is on the Frost Captain, when he leaps to the core and can get really far from the player, calling the deaggro function
-			// However, for the Skeleton King boss, we do want to stop the boss music when he dies (since he does not spawn zhan), but not when he deaggros
-			if (Name == EEnemyNames::EN_SkeletonKing)
-			{
-				if (IsDead)
-				{
-					AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro and boss is dead, so play Background Music
-				}				
-			}			
-		}
-	}
+			//IsAggroed = false;
+			RunAI = false;
+			Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list
+			DisableBattleMusic();
+		}		
+	}	
 }
 
 // End All Attack Rounds
@@ -305,9 +308,10 @@ void AEtherealEnemyMaster::EndAttackRound()
 void AEtherealEnemyMaster::Death()
 {
 	IsDead = true;
-	GetMovementComponent()->StopMovementImmediately();  // Stop Movement
 	Targetable = false;  // turn off targeting if dead.
-	Deaggro();
+	GetMovementComponent()->StopMovementImmediately();  // Stop Movement	
+	Deaggro();  // Deaggro
+	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 	OnDeath.Broadcast();  // broadcast the OnDeath event dispatcher, which will run enemy specific death code
 }
 
@@ -343,6 +347,43 @@ void AEtherealEnemyMaster::Disappear()
 	GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	//Deaggro(); // Run Deaggro code
+}
+
+// Disables battle music and returns to BGM, if there are no enemies in the aggro list.  Called upon deaggro.
+void AEtherealEnemyMaster::DisableBattleMusic()
+{
+	bool LocalPlayerHasAggro = true;  // define a local variable, denoting the player as having aggro	
+
+	// Check if the player still has aggro
+	if (Target->AggroList.Num() > 0)
+	{
+		LocalPlayerHasAggro = true; // found enemies in aggro list
+	}
+	else
+	{
+		LocalPlayerHasAggro = false; // no enemies in aggro list
+	}
+
+	if (!LocalPlayerHasAggro)
+	{
+		if (BattleType == EBattleTypes::BT_Standard)  // only play BGM on deaggro if this is a standard enemy. 
+		{
+			AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro, so play Background Music
+		}
+		if (BattleType == EBattleTypes::BT_Boss)
+		{
+			// We want to always play Boss music, since boss battles are designed so that you can't run away and they cannot be deaggroed.
+			// However, for the Skeleton King boss, we do want to stop the boss music when he dies (since he does not spawn zhan)
+			// This is an ugly solution, but it works, so whatever.
+			if (Name == EEnemyNames::EN_SkeletonKing)
+			{
+				if (IsDead)
+				{
+					AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro and boss is dead, so play Background Music
+				}
+			}
+		}
+	}
 }
 
 void AEtherealEnemyMaster::SpawnZhan()

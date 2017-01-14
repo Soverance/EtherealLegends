@@ -114,7 +114,7 @@ void ASoulEater::MeleeAttack()
 void ASoulEater::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 }
 
 void ASoulEater::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume)

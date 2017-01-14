@@ -177,7 +177,7 @@ void ASkeletonKing::AttackCycle()
 void ASkeletonKing::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 
 	if (!Target->EtherealPlayerState->HasCompletedTutorial)  // don't bother running this code if the player has already completed the tutorial
 	{

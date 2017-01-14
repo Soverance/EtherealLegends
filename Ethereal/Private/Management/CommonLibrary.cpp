@@ -20,6 +20,7 @@
 #include "Gear/Magic/Spells/Regen.h"
 #include "Gear/Magic/Spells/Refresh.h"
 #include "Gear/Magic/Spells/Blizzard.h"
+#include "Gear/Magic/Spells/Comet.h"
 #include "Gear/Magic/Spells/Thunder.h"
 #include "Gear/Magic/Spells/Fire.h"
 #include "Gear/Magic/Spells/Berserk.h"
@@ -64,6 +65,7 @@
 #include "Gear/Items/Consumable/Elixer.h"
 #include "Gear/Items/Consumable/Adrenaline.h"
 #include "Gear/Items/Consumable/SentinelBrew.h"
+#include "Gear/Items/Consumable/Antidote.h"
 
 #include "Gear/Armor/Head/ClothCap.h"
 #include "Gear/Armor/Head/AdamanHelm.h"
@@ -204,7 +206,7 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		// Do nothing, because Esuna does not yet exist
 		break;
 	case EMasterGearList::GL_Comet:
-		// Do nothing, because Comet does not yet exist
+		GearClass = AComet::StaticClass();
 		break;
 	case EMasterGearList::GL_Blizzard:
 		GearClass = ABlizzard::StaticClass();
@@ -365,6 +367,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_SentinelBrew:
 		GearClass = ASentinelBrew::StaticClass();
+		break;
+	case EMasterGearList::GL_Antidote:
+		GearClass = AAntidote::StaticClass();
 		break;
 
 		///////////////////////////////

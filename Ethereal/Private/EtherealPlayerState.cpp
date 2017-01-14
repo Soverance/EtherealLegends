@@ -501,14 +501,27 @@ void AEtherealPlayerState::LevelUp()
 			{
 				AEtherealEnemyMaster* EnemyZero = Player->AggroList[0];  // get the enemy at index 0
 
-				// if the aggro list still has enemies, you're still in battle, so continue to play the battle music
-				FTimerDelegate DelegateBattle;
-				DelegateBattle.BindUFunction(Player->AudioManager, FName("Play_BattleMusic"), EnemyZero->BattleType);
-				FTimerHandle BattleTimer;
-				GetWorldTimerManager().SetTimer(BattleTimer, DelegateBattle, 0.8f, false);
+				if (EnemyZero)
+				{
+					// if the aggro list still has enemies, you're still in battle, so continue to play the battle music
+					FTimerDelegate DelegateBattle;
+					DelegateBattle.BindUFunction(Player->AudioManager, FName("Play_BattleMusic"), EnemyZero->BattleType);
+					FTimerHandle BattleTimer;
+					GetWorldTimerManager().SetTimer(BattleTimer, DelegateBattle, 0.8f, false);
+				}
+				else
+				{
+					// THIS BLOCK RUNS IF THE EnemyZero VALIDITY CHECK FAILS
+					// the aggro list is empty, so you must be out of battle. Play the current Realm's BGM
+					FTimerDelegate DelegateBGM;
+					DelegateBGM.BindUFunction(Player->AudioManager, FName("Play_BGM"), Player->EtherealGameInstance->CurrentRealm);
+					FTimerHandle BGMTimer;
+					GetWorldTimerManager().SetTimer(BGMTimer, DelegateBGM, 0.8f, false);
+				}
 			}
 			else
 			{
+				// THIS BLOCK SHOULD RUN AS STANDARD, WHEN YOU DEFEAT THE LAST ENEMY ON THE LIST
 				// the aggro list is empty, so you must be out of battle. Play the current Realm's BGM
 				FTimerDelegate DelegateBGM;
 				DelegateBGM.BindUFunction(Player->AudioManager, FName("Play_BGM"), Player->EtherealGameInstance->CurrentRealm);
@@ -617,7 +630,7 @@ void AEtherealPlayerState::AttachGear(AEtherealGearMaster* Item)
 				Item->AttachToComponent(Item->OwnerReference->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale);
 				break;
 			case EMasterGearTypes::GT_Consumable:
-				Item->AttachToComponent(Item->OwnerReference->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale);
+				Item->AttachToComponent(Item->OwnerReference->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("PowerSocket"));
 				break;
 			case EMasterGearTypes::GT_KeyItem:
 				Item->AttachToComponent(Item->OwnerReference->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale);

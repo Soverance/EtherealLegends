@@ -44,8 +44,9 @@ ASamaritan::ASamaritan(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 500.0f;
+	AcceptanceRadius = 300.0f;
 	RunAI = false;
+	BaseEyeHeight = -100;
 
 	// Mesh Config
 	GetMesh()->SkeletalMesh = EnemyMesh.Object;
@@ -55,8 +56,8 @@ ASamaritan::ASamaritan(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
-	MeleeRadius->SetSphereRadius(100);
-	MeleeRadius->SetRelativeLocation(FVector(15, 0, 0));
+	MeleeRadius->SetSphereRadius(60);
+	MeleeRadius->SetRelativeLocation(FVector(25, 0, -85));
 
 	// Targeting Reticle config
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 750));
@@ -120,24 +121,10 @@ void ASamaritan::AttackRound()
 					{
 						Target = Player;
 
-						EnemyDealDamage(15);
-						int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
-
-						 // To make this guy harder, he'll use the Stomp attack on rare occasions
 						if (!IsDead)
 						{
-							if (RandomAtk <= 2)
-							{
-								DoRoar = true;
-							}
-							if (RandomAtk > 2 && RandomAtk < 4)
-							{
-								DoFireCannons = true;
-							}
-							if (RandomAtk > 4)
-							{
-								//DoThreeHit = true;
-							}
+							EnemyDealDamage(15);
+							DoCharge = true;
 						}
 					}
 				}
@@ -145,10 +132,19 @@ void ASamaritan::AttackRound()
 
 			if (Overlapping.Num() == 0)
 			{
+				EnemyDealDamage(15);
+				int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
+
 				if (!IsDead)
 				{
-					EnemyDealDamage(15);
-					DoFireCannons = true;
+					if (RandomAtk <= 3)
+					{
+						DoFireCannons = true;
+					}
+					if (RandomAtk > 3)
+					{
+						DoLaserBlast = true;
+					}
 				}
 			}
 
@@ -161,7 +157,7 @@ void ASamaritan::AttackRound()
 
 void ASamaritan::Death()
 {
-	IsDead = true;
+	IsDead = true;	
 }
 
 // A.I. Hearing
@@ -189,7 +185,6 @@ void ASamaritan::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
-			DoRoar = true;
 			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
 
 			// Delay Aggro so this guy can finish his aggro animation

@@ -58,7 +58,12 @@ void AAdrenaline::Use()
 {
 	ItemAudio->Play();
 	ItemFX->Activate();
-	OwnerReference->EtherealPlayerController->ActivateStatus_Adrenaline();
+
+	// This check prevents multiple uses of this item from stacking the effect
+	if (!OwnerReference->EtherealPlayerController->Active_Adrenaline)
+	{		
+		OwnerReference->EtherealPlayerController->ActivateStatus_Adrenaline();
+	}	
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -16,6 +16,7 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "NPCs/Characters/NPCCharacterMaster.h"
 #include "Shop.generated.h"
 
 UCLASS()
@@ -28,4 +29,13 @@ public:
 	// Reset To Defaults
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Widgets)
 	void ResetToDefaults();
+
+	// If this is an NPC Shop character, set the appropriate ShopIndex to display the corresponding shop widget
+	// 0: Items  -  1: Magic  -  2: Weapons  -  3: Armor
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Shop)
+	int32 ShopIndex;
+
+	// The owning NPC reference
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Shop)
+	ANPCCharacterMaster* OwnerNPC;
 };

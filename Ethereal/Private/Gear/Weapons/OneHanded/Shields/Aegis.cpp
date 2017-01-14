@@ -24,10 +24,10 @@ AAegis::AAegis(const FObjectInitializer& ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/VFX/sphere_skeletal.sphere_skeletal'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Elemental/Environment/Throne_Warspoils/Mesh/WarAspis.WarAspis'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Shields/AegisShield.AegisShield'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
-	ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_WarAspis.WeaponIcon_WarAspis'"));
-	ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_WarAspis-small.WeaponIcon_WarAspis-small'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Aegis.WeaponIcon_Aegis'"));
+	ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Aegis-small.WeaponIcon_Aegis-small'"));
 
 
 	// Set Default Objects
@@ -55,7 +55,8 @@ AAegis::AAegis(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponSkeletalMesh->SetHiddenInGame(true);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	WeaponStaticMesh->SetWorldScale3D(FVector(2, 2, 2)); // Scale correction
+	WeaponStaticMesh->SetRelativeLocation(FVector(0, 0, -15));  // location correction
+	WeaponStaticMesh->SetWorldScale3D(FVector(12, 12, 12)); // Scale correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
 

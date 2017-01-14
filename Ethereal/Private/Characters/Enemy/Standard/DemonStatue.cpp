@@ -223,7 +223,7 @@ void ADemonStatue::Death()
 {
 	DemonDoor->ApplyRadiusDamage(100, this->GetActorLocation(), 100, 100, true);  // Destroy the door
 	ToggleEyes(false);
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 	FinalDeath(true, false);
 }
 

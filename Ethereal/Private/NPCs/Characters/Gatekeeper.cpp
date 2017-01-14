@@ -21,8 +21,8 @@
 AGatekeeper::AGatekeeper(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> NPCMesh(TEXT("SkeletalMesh'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_Ram.SK_CharM_Ram'"));
-	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_Mannequin_Skeleton_AnimBlueprint.SK_Mannequin_Skeleton_AnimBlueprint_C'"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> NPCMesh(TEXT("SkeletalMesh'/Game/InfinityBladeWarriors/Character/Mixamo/prodigy.prodigy'"));
+	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/InfinityBladeWarriors/Character/Mixamo/AnimBP_Prodigy.AnimBP_Prodigy_C'"));
 	static ConstructorHelpers::FClassFinder<UUserWidget> Widget(TEXT("/Game/Blueprints/Widgets/BP_Tutorial"));
 
 	// Set Default Objects
@@ -101,9 +101,10 @@ void AGatekeeper::Interact()
 
 	if (InteractingPlayer)
 	{
+		// IF the player HAS NOT started the tutorial
 		if (!StartedTutorial)
 		{
-			// Check to see if the player has completed the tutorial
+			// redundancy check, should always return false
 			if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
 			{
 				// Check to be sure an InteractWidget exists
@@ -113,10 +114,11 @@ void AGatekeeper::Interact()
 				}
 
 				StartedTutorial = true;  // Player has started the Tutorial
-				DoHuh = true;  // animate
+				DoWarning = true;  // animate
 				ShowConversation();  // Show Conversation Widget
 			}
 		}
+		// IF the player HAS started the tutorial
 		if (StartedTutorial)
 		{
 			if (Tutorial)

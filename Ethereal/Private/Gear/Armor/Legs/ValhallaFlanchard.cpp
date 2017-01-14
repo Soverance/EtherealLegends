@@ -46,8 +46,8 @@ AValhallaFlanchard::AValhallaFlanchard(const FObjectInitializer& ObjectInitializ
 	Price = 35000;
 	MPCost = 0;
 	ATK = 10;
-	DEF = 10;
-	SPD = 5;
+	DEF = 15;
+	SPD = 8;
 	HP = 100;
 	MP = 50;
 }

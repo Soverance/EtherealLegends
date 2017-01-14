@@ -22,8 +22,8 @@
 AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BaseMesh(TEXT("StaticMesh'/Game/ExampleContent/NetworkFeatures/Meshes/SM_Chest_Bottom.SM_Chest_Bottom'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> LidMesh(TEXT("StaticMesh'/Game/ExampleContent/NetworkFeatures/Meshes/SM_Chest_Lid.SM_Chest_Lid'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BaseMesh(TEXT("StaticMesh'/Game/InfinityBladeFireLands/Environments/Forge/Env_Forge/StaticMesh/SM_Forge_Chest_Bottom.SM_Forge_Chest_Bottom'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> LidMesh(TEXT("StaticMesh'/Game/InfinityBladeFireLands/Environments/Forge/Env_Forge/StaticMesh/SM_Forge_Chest_Top.SM_Forge_Chest_Top'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> OpenAudioObject(TEXT("SoundCue'/Game/Audio/Cave/Ethereal_ChestOpen_Cue.Ethereal_ChestOpen_Cue'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> OpenParticle(TEXT("ParticleSystem'/Game/InfinityBladeGrassLands/Effects/FX_Treasure/Chest/P_TreasureChest_Open_Mesh.P_TreasureChest_Open_Mesh'"));
 	static ConstructorHelpers::FObjectFinder<UClass> OpenCamShakeObject(TEXT("Blueprint'/Game/Blueprints/CamShakes/CS_OpenChest.CS_OpenChest_C'"));
@@ -47,10 +47,14 @@ AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	Base->SetupAttachment(Root);
 	Base->SetStaticMesh(SM_Base);
 
+	LidRoot = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("LidRoot"));
+	LidRoot->SetupAttachment(Base);
+	LidRoot->SetRelativeLocation(FVector(34, 0, 50));
+
 	Lid = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Lid"));
-	Lid->SetupAttachment(Base);
+	Lid->SetupAttachment(LidRoot);
 	Lid->SetStaticMesh(SM_Lid);
-	Lid->SetRelativeLocation(FVector(34, 0, 50));
+	Lid->SetRelativeLocation(FVector(-34, 0, 0));
 	Lid->SetRelativeRotation(FRotator(0, -180, 0));
 
 	OpenAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("OpenAudio"));
@@ -225,7 +229,7 @@ void AChest::GiveItem()
 // Open Timeline
 void AChest::TimelineFloatReturn(float val)
 {
-	Lid->SetRelativeRotation(FRotator(FMath::FInterpTo(0, 180, val, 0.3f), -180, 0));
+	LidRoot->SetRelativeRotation(FRotator(FMath::FInterpTo(0, -180, val, 0.3f), 0, 0));
 }
 
 #undef LOCTEXT_NAMESPACE

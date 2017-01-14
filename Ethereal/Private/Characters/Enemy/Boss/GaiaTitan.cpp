@@ -48,7 +48,7 @@ AGaiaTitan::AGaiaTitan(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1500;
 	PawnSensing->SightRadius = 1200;
 	PawnSensing->SetPeripheralVisionAngle(50.0f);
-	AcceptanceRadius = 250.0f;
+	AcceptanceRadius = 150.0f;
 	RunAI = false;
 
 	// Mesh Config

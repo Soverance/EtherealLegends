@@ -31,6 +31,9 @@ public:
 	// BeginPlay Override
 	virtual void BeginPlay() override;
 
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
+
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Interact();

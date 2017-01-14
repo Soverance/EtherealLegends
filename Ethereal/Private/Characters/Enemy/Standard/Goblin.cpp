@@ -128,7 +128,7 @@ void AGoblin::MeleeAttack()
 void AGoblin::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
+	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 }
 
 // A.I. Hearing

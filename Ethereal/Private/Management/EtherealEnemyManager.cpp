@@ -77,6 +77,18 @@ void AEtherealEnemyManager::SpawnAllNodes()
 	}
 }
 
+// This function is called during the loading screen to destroy all enemies leftover from the previous Realm
+void AEtherealEnemyManager::DestroyAllEnemies()
+{
+	// iterate through the world for all Enemy Nodes
+	for (TActorIterator<AEtherealEnemyMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		AEtherealEnemyMaster* Enemy = *ActorItr; // get the instance of the enemy
+
+		Enemy->DestroyEnemy();  //  Destroy it
+	}
+}
+
 void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 {
 	AEtherealEnemyMaster* Enemy = nullptr;

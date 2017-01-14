@@ -21,6 +21,7 @@ enum class EGameStates : uint8
 	GS_Startup UMETA(DisplayName = "Startup"),
 	GS_MainMenu UMETA(DisplayName = "Main Menu"),
 	GS_Menu UMETA(DisplayName = "Menu"),
+	GS_Shop UMETA(DisplayName = "Shop"),
 	GS_Loading UMETA(DisplayName = "Loading Screen"),
 	GS_Playing UMETA(DisplayName = "Playing Game"),
 	GS_Error UMETA(DisplayName = "Error Dialog"),

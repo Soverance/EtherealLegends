@@ -213,14 +213,17 @@ void AZhan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
+	if (!IsDead)
 	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
+		// Draw Debug Cylinder on Map
+		if (Target->MapControl)
+		{
+			FVector DebugStart = GetActorLocation();
+			FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
 
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
+			DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
+		}
+	}	
 }
 
 void AZhan::InitAggro()
@@ -341,16 +344,16 @@ void AZhan::Escape()
 			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Boreal:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Boreal();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Yggdrasil:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Yggdrasil();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Empyrean:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Empyrean();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Celestial:
-			Target->EtherealPlayerController->Achievement_Realm_Vulcan();  // give this player the Achievement for clearing this realm
+			Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
 			break;
 
 	}
@@ -380,14 +383,14 @@ void AZhan::Explode()
 	
 	// Spawn the Arcadia Return Portal after a short delay
 	FTimerHandle EndTimer;
-	GetWorldTimerManager().SetTimer(EndTimer, this, &AZhan::DropPortal, 1.0f, false);
+	GetWorldTimerManager().SetTimer(EndTimer, this, &AZhan::DropPortal, 0.5f, false);
 }
 
 void AZhan::DropPortal()
 {
 	EscapeBurstFX->Deactivate();
-	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);
-	AudioManager->Play_SFX_LevelUp();
+	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
+	AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	// Spawn the Arcadia Return Portal wherever Zhan died
 	AReturnPortal* ReturnPortal = GetWorld()->SpawnActor<AReturnPortal>(GetActorLocation(), GetActorRotation());
@@ -405,7 +408,8 @@ void AZhan::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Vo
 	{
 		if (!IsAggroed)
 		{
-			Aggro(PawnInstigator);
+			// This functionality is removed because Zhan does not aggro in a traditional manner
+			//Aggro(PawnInstigator);
 		}
 	}
 }
@@ -414,7 +418,8 @@ void AZhan::OnSeePawn(APawn* Pawn)
 {
 	if (!IsAggroed)
 	{
-		Aggro(Pawn);
+		// This functionality is removed because Zhan does not aggro in a traditional manner
+		//Aggro(Pawn);
 	}
 }
 

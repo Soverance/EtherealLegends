@@ -47,7 +47,7 @@ AAdamanCuisses::AAdamanCuisses(const FObjectInitializer& ObjectInitializer)
 	MPCost = 0;
 	ATK = 2;
 	DEF = 4;
-	SPD = 1;
+	SPD = 2;
 	HP = 30;
 	MP = 10;
 }
