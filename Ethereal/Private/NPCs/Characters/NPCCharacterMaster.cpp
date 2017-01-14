@@ -21,15 +21,3 @@ ANPCCharacterMaster::ANPCCharacterMaster(const FObjectInitializer& ObjectInitial
 {	
 
 }
-
-// Called when the game starts or when spawned
-void ANPCCharacterMaster::BeginPlay()
-{
-	
-}
-
-// Called every frame
-void ANPCCharacterMaster::Tick(float DeltaTime)
-{
-	
-}

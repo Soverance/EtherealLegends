@@ -71,7 +71,7 @@ void ALilster::Tick(float DeltaTime)
 		FVector DebugStart = GetActorLocation();
 		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
 
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
+		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Orange, false, 0, 0);
 	}
 }
 
@@ -147,19 +147,15 @@ void ALilster::SpawnDefaultShopItems()
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{
-		// check to see if the item already exists in the player's inventory
-		AEtherealGearMaster* GearAlreadyOwned = InteractingPlayer->EtherealPlayerState->GetInventoryItem(Item);
+		// We don't bother to make an Inventory check in this class because all of the items in this shop are consumable, and thus players can carry more than one.
+		// Since we don't care if the player has these items in her inventory, go ahead and just spawn the damn things.
 
-		// if the item is not already in the player's inventory, create it, and add it to the Shop's inventory for the player to purchase.
-		if (!GearAlreadyOwned)
+		AEtherealGearMaster* Gear = UCommonLibrary::CreateGear(this, Item, FName(TEXT("Arcadia")), this->GetActorLocation(), this->GetActorRotation()); // create the new item
+
+		if (Gear)
 		{
-			AEtherealGearMaster* Gear = UCommonLibrary::CreateGear(this, Item, FName(TEXT("Arcadia")), this->GetActorLocation(), this->GetActorRotation()); // create the new item
-
-			if (Gear)
-			{
-				Gear->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("ItemSocket"));  // attach gear to NPC
-				ShopInventory.AddUnique(Gear);  // Add gear into the Priest's Shop Inventory
-			}
-		}			
+			Gear->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("ItemSocket"));  // attach gear to NPC
+			ShopInventory.AddUnique(Gear);  // Add gear into the Priest's Shop Inventory
+		}
 	}
 }

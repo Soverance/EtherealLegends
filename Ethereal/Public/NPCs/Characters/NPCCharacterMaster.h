@@ -31,12 +31,6 @@ public:
 	// Sets default values for this actor's properties
 	ANPCCharacterMaster(const FObjectInitializer& ObjectInitializer);
 
-	// BeginPlay Override
-	virtual void BeginPlay() override;
-
-	// Called every frame
-	virtual void Tick(float DeltaSeconds) override;
-
 	// Event Dispatcher DisableShop - used for child NPCs to call custom code
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Dispatcher")
 	FDisableShop DisableShop;

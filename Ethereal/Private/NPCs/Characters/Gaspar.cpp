@@ -71,7 +71,7 @@ void AGaspar::Tick(float DeltaTime)
 		FVector DebugStart = GetActorLocation();
 		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
 
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
+		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Orange, false, 0, 0);
 	}
 }
 
