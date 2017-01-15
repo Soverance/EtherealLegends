@@ -260,10 +260,21 @@ void AZhan::FallToAggro()
 void AZhan::StartAttacking()
 {
 	Targetable = true;
-	AudioManager->Play_Zhan_Battle();
+	
 	GetCharacterMovement()->GravityScale = 1.0f;
 	GetCharacterMovement()->MaxAcceleration = 30;
 	RunToTarget();
+
+	// If we're in the Celestial Nexus, we want to play the CN BGM for added emotion
+	if (Target->EtherealGameInstance->CurrentRealm == ERealms::R_Celestial)
+	{
+		AudioManager->Play_BGM_Celestial();
+	}
+	// if we're in any other realm, we play Zhan's standard battle music
+	else
+	{
+		AudioManager->Play_Zhan_Battle();
+	}
 }
 
 void AZhan::Death()
