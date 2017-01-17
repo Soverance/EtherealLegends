@@ -36,11 +36,64 @@ public:
 	
 	// Melee Attack Function
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void MeleeAttack();
+	void AttackCycle();
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
+
+	// Eternal Aura Effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* AuraFX;
+	UParticleSystem* P_AuraFX;
+
+	// Init Aggro - Called by Zhan's death while inside Celestial Nexus
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void InitAggro();
+
+	// RaiseToAggro - Handles the spawning of the Eternal enemy
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void RaiseToAggro();
+
+	// Do Raise Aggro Anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoRaiseAggro;
+
+	// Begin Attack cycle
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void StartAttacking();
+
+	// Do Attack1 anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoAttack1;
+
+	// Do Attack2 anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoAttack2;
+
+	// Do RangedAtk anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoRangedAttack;
+
+	// Do HeavyAtk anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoHeavyAttack;
+
+	// Power Blast Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void Attack1();
+
+	// Blade Spin Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void Attack2();
+
+	// Ranged Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void RangedAttack();
+
+	// Heavy Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void HeavyAttack();
 
 	///////////////////////////
 	// A.I.

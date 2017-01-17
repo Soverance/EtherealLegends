@@ -246,7 +246,7 @@ void AZhan::FallToAggro()
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), Target->LevelUpCamShake, Target->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	// TO DO : Client Play Force Feedback FF_ZhanSpawn
 
-	// earlier code sets the reticle visible, be sure to turn it off.
+	// earlier code in BeginPlay() sets the reticle visible, be sure to turn it off.
 	if (TargetingReticle->IsVisible())
 	{
 		TargetingReticle->SetVisibility(false);
@@ -289,6 +289,11 @@ void AZhan::AttackCycle()
 	{
 		if (!IsAttacking)
 		{
+			// we set all these to false at the beginning of his attack cycle, just to be certain he never gets locked in an attack anim
+			DoPowerBlast = false;
+			DoSpinAtk = false;
+			DoRadialBlast = false;
+
 			IsAttacking = true;
 			RunAI = false;
 

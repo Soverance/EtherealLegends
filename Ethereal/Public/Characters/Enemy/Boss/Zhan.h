@@ -82,7 +82,7 @@ public:
 	UParticleSystemComponent* SpinAtkFX;
 	UParticleSystem* P_SpinAtkFX;
 
-	// Do Sling anim
+	// Do Fall Aggro Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
 	bool DoFallAggro;
 
