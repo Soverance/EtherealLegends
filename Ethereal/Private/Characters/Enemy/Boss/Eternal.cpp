@@ -24,9 +24,11 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> EnemyMesh(TEXT("SkeletalMesh'/Game/EtherealParty/Genie/Genie.Genie'"));
 	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Genie/Anim_Genie.Anim_Genie_C'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> AuraParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_EternalEnergy.P_EternalEnergy'"));
+	static ConstructorHelpers::FObjectFinder<UClass> InitAggroBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Eternal_AggroDrop.Eternal_AggroDrop_C'"));
 
 	// Set Default Objects
 	P_AuraFX = AuraParticleObject.Object;
+	AggroDropBP = InitAggroBlueprintObject.Object;
 	
 	// Default Config
 	Name = EEnemyNames::EN_Eternal;
@@ -36,7 +38,7 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_Comet;
 	RareDrop = EMasterGearList::GL_Aegis;
-	AttackDelay = 2.0f;
+	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
 	GetCharacterMovement()->MaxAcceleration = 30;
@@ -117,7 +119,13 @@ void AEternal::AttackCycle()
 	{
 		if (!IsAttacking)
 		{
+			// Start Attacking
 			IsAttacking = true;
+			// Reset All Attack Animations
+			DoAttack1 = false;
+			DoAttack2 = false;
+			DoHeavyAttack = false;
+			DoRangedAttack = false;
 
 			TArray<AActor*> Overlapping;  // define a local array to store hits
 			MeleeRadius->GetOverlappingActors(Overlapping, AEtherealPlayerMaster::StaticClass()); // check for overlapping players within the stomp radius
@@ -154,7 +162,7 @@ void AEternal::AttackCycle()
 					}
 				}
 			}
-
+			// Player is not overlapping, so do a ranged attack.
 			if (Overlapping.Num() == 0)
 			{
 				if (!IsDead)
@@ -178,14 +186,13 @@ void AEternal::Death()
 
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus
 void AEternal::InitAggro()
-{
-	Aggro(Target);
-	// Spawn Zhan's Aggro Drop at current location - StartHeightOffset on Z
-	//AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, (GetActorLocation().Z - StartHeightOffset)), GetActorRotation());
-	//AudioManager->Play_Zhan_Intro();
-	// Start the fall process
+{	
+	// Spawn Eternal's Aggro Drop at current location - StartHeightOffset on Z
+	AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z), GetActorRotation());
+	AudioManager->Play_Eternal_Intro();
+	// Start the spawn process
 	FTimerHandle AggroTimer;
-	GetWorldTimerManager().SetTimer(AggroTimer, this, &AEternal::RaiseToAggro, 9.8f, false);
+	GetWorldTimerManager().SetTimer(AggroTimer, this, &AEternal::RaiseToAggro, 8.0f, false);
 }
 
 // RaiseToAggro - Handles the spawning of the Eternal enemy
@@ -205,15 +212,15 @@ void AEternal::RaiseToAggro()
 
 	// Start the attack cycle
 	FTimerHandle AttackTimer;
-	GetWorldTimerManager().SetTimer(AttackTimer, this, &AEternal::StartAttacking, 7.0f, false);
+	GetWorldTimerManager().SetTimer(AttackTimer, this, &AEternal::StartAttacking, 4.0f, false);
 }
 
 void AEternal::StartAttacking()
 {
 	Targetable = true;
+	Aggro(Target);
+	AudioManager->Play_Eternal_Battle();
 	RunToTarget();
-
-	AudioManager->Play_BGM_Celestial();
 }
 
 void AEternal::Attack1()

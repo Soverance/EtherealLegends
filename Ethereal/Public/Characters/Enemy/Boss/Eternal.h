@@ -51,6 +51,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void InitAggro();
 
+	// Aggro Drop Blueprint
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	TSubclassOf<class AActor> AggroDropBP;
+
 	// RaiseToAggro - Handles the spawning of the Eternal enemy
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void RaiseToAggro();
