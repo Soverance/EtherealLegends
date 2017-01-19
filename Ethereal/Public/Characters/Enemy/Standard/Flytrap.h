@@ -52,11 +52,6 @@ public:
 	UAudioComponent* AggroAudio;
 	USoundCue* S_AggroAudio;
 
-	// Hit Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* HitAudio;
-	USoundCue* S_HitAudio;
-
 	// Bite Audio
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* BiteAudio;

@@ -48,12 +48,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* DeathAudio;
 	USoundCue* S_DeathAudio;
-
-	// Hit Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* HitAudio;
-	USoundCue* S_HitAudio;
-	
+		
 	// Firebomb Blueprint
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	TSubclassOf<class AActor> FirebombBP;

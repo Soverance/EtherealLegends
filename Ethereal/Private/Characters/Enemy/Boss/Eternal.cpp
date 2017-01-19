@@ -24,11 +24,19 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> EnemyMesh(TEXT("SkeletalMesh'/Game/EtherealParty/Genie/Genie.Genie'"));
 	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Genie/Anim_Genie.Anim_Genie_C'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> AuraParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_EternalEnergy.P_EternalEnergy'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> RangedBuildUpParticleObject(TEXT("ParticleSystem'/Game/Vectorfields/Particles/P_Gateway.P_Gateway'"));
 	static ConstructorHelpers::FObjectFinder<UClass> InitAggroBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Eternal_AggroDrop.Eternal_AggroDrop_C'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> AggroVoiceAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/YourSoulIsMine_Cue.YourSoulIsMine_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> RangedBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_RangedBuildUp_Cue.Eternal_RangedBuildUp_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> HitAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_Hit.Eternal_Hit'"));
 
 	// Set Default Objects
 	P_AuraFX = AuraParticleObject.Object;
+	P_RangedBuildUpFX = RangedBuildUpParticleObject.Object;
 	AggroDropBP = InitAggroBlueprintObject.Object;
+	S_AggroVoiceAudio = AggroVoiceAudioObject.Object;
+	S_RangedBuildUpAudio = RangedBuildUpAudioObject.Object;
+	S_HitAudio = HitAudioObject.Object;
 	
 	// Default Config
 	Name = EEnemyNames::EN_Eternal;
@@ -77,10 +85,36 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 
 	// Enemy-Specific Object Config
 	
+	// Rune Aura Effect
 	AuraFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("AuraFX"));
 	AuraFX->SetupAttachment(GetMesh(), FName(TEXT("SummonSocket")));
 	AuraFX->Template = P_AuraFX;
 	AuraFX->bAutoActivate = true;
+
+	// Ranged Build Up Aura Effect
+	RangedBuildUpFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("RangedBuildUpFX"));
+	RangedBuildUpFX->SetupAttachment(GetMesh(), FName(TEXT("SummonSocket")));
+	RangedBuildUpFX->SetRelativeRotation(FRotator(0, 0, 180));
+	RangedBuildUpFX->Template = P_RangedBuildUpFX;
+	RangedBuildUpFX->bAutoActivate = false;
+
+	// AggroVoice audio
+	AggroVoiceAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("AggroVoiceAudio"));
+	AggroVoiceAudio->SetupAttachment(RootComponent);
+	AggroVoiceAudio->Sound = S_AggroVoiceAudio;
+	AggroVoiceAudio->bAutoActivate = false;
+
+	// RangedBuildUp audio
+	RangedBuildUpAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("RangedBuildUpAudio"));
+	RangedBuildUpAudio->SetupAttachment(RootComponent);
+	RangedBuildUpAudio->Sound = S_RangedBuildUpAudio;
+	RangedBuildUpAudio->bAutoActivate = false;
+
+	// Hit audio
+	HitAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("HitAudio"));
+	HitAudio->SetupAttachment(RootComponent);
+	HitAudio->Sound = S_HitAudio;
+	HitAudio->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -95,6 +129,14 @@ void AEternal::BeginPlay()
 	PawnSensing->OnSeePawn.AddDynamic(this, &AEternal::OnSeePawn);  // bind the OnSeePawn event
 	OnDeath.AddDynamic(this, &AEternal::Death); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AEternal::AttackCycle);  // bind the attack function to the OnReachedTarget event 
+
+	// We collected this reference in the EnemyMaster class
+	if (EtherealGameInstance)
+	{
+		// Set all Volume Controls
+		EtherealGameInstance->SetAudioVolume(AggroVoiceAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(RangedBuildUpAudio, EAudioTypes::AT_SoundEffect);
+	}
 }
 
 // Called every frame
@@ -171,10 +213,6 @@ void AEternal::AttackCycle()
 					RangedAttack();
 				}
 			}
-
-			// Restart the Attack Cycle after a short delay
-			//FTimerHandle EndTimer;
-			//GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
 		}
 	}
 }
@@ -189,7 +227,7 @@ void AEternal::InitAggro()
 {	
 	// Spawn Eternal's Aggro Drop at current location - StartHeightOffset on Z
 	AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z), GetActorRotation());
-	AudioManager->Play_Eternal_Intro();
+	AudioManager->Play_Eternal_Intro();	
 	// Start the spawn process
 	FTimerHandle AggroTimer;
 	GetWorldTimerManager().SetTimer(AggroTimer, this, &AEternal::RaiseToAggro, 8.0f, false);
@@ -200,7 +238,7 @@ void AEternal::RaiseToAggro()
 {
 	this->GetCapsuleComponent()->SetVisibility(true, true);  // this will also turn on the Targeting Reticle
 	DoRaiseAggro = true;
-
+	AggroVoiceAudio->Play();  // "YOUR SOUL IS MINE!"
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), Target->LevelUpCamShake, Target->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	// TO DO : Client Play Force Feedback FF_ZhanSpawn
 

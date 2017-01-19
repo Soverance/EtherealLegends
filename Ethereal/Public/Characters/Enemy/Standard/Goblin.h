@@ -44,11 +44,6 @@ public:
 	UAudioComponent* DeathAudio;
 	USoundCue* S_DeathAudio;
 
-	// Hit Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* HitAudio;
-	USoundCue* S_HitAudio;
-
 	// attack animation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
 	bool Attack;

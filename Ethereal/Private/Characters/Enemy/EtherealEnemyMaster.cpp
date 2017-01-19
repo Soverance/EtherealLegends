@@ -75,6 +75,17 @@ void AEtherealEnemyMaster::BeginPlay()
 	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		Target = *ActorItr; // get the instance of the Player Master
+
+		if (Target)
+		{
+			EtherealGameInstance = Target->EtherealGameInstance;  // sets the reference to the EtherealGameInstance, using the player's previously stored reference.
+
+			if (EtherealGameInstance)
+			{
+				// Set all Volume Controls
+				EtherealGameInstance->SetAudioVolume(DisappearAudio, EAudioTypes::AT_SoundEffect); 
+			}
+		}		
 	}
 }
 

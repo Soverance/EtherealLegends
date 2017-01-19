@@ -60,12 +60,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* DeathAudio;
 	USoundCue* S_DeathAudio;
-
-	// Hit Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* HitAudio;
-	USoundCue* S_HitAudio;
-
+	
 	// Build Up FX
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UParticleSystemComponent* BuildUpFX;

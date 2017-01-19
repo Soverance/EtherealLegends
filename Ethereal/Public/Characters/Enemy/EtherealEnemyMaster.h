@@ -134,6 +134,11 @@ public:
 	UParticleSystemComponent* HitFX;
 	UParticleSystem* P_HitFX;
 
+	// Hit Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* HitAudio;
+	USoundCue* S_HitAudio;
+
 	/** This emitter is active when this enemy dies. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UParticleSystemComponent* DeathFX;

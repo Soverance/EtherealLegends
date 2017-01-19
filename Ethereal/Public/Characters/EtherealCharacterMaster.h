@@ -16,6 +16,7 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "EtherealGameInstance.h"
 #include "Management/CommonLibrary.h"
 #include "Management/EtherealAudioManager.h"
 #include "CombatText/CombatTextComponent.h"
@@ -62,6 +63,10 @@ public:
 	// Reference to the instance of EtherealAudioMaster
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	AEtherealAudioManager* AudioManager;
+
+	// A Reference to the Ethereal Game Instance
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	UEtherealGameInstance* EtherealGameInstance;
 
 	// Targeting Reticle Mesh.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Targeting)

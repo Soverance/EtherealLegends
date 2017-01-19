@@ -206,6 +206,17 @@ void AZhan::BeginPlay()
 	PawnSensing->OnSeePawn.AddDynamic(this, &AZhan::OnSeePawn);  // bind the OnSeePawn event
 	OnDeath.AddDynamic(this, &AZhan::Death); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AZhan::AttackCycle);  // bind the attack function to the OnReachedTarget event
+
+	// We collected this reference in the EnemyMaster class
+	if (EtherealGameInstance)
+	{
+		// Set all Volume Controls
+		EtherealGameInstance->SetAudioVolume(LaughterAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(PowerBlastAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(SpinAtkAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(PortalExplosionAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(EscapeAudio, EAudioTypes::AT_SoundEffect);
+	}
 }
 
 // Called every frame

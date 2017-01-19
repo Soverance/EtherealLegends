@@ -47,6 +47,11 @@ public:
 	UParticleSystemComponent* AuraFX;
 	UParticleSystem* P_AuraFX;
 
+	// Rnaged Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* RangedBuildUpFX;
+	UParticleSystem* P_RangedBuildUpFX;
+
 	// Init Aggro - Called by Zhan's death while inside Celestial Nexus
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void InitAggro();
@@ -98,6 +103,19 @@ public:
 	// Heavy Attack
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void HeavyAttack();
+
+	///////////////////////////
+	// AUDIO
+
+	// Aggro Voice Audio - "YOUR SOUL IS MINE!"
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* AggroVoiceAudio;
+	USoundCue* S_AggroVoiceAudio;
+
+	// Ranged Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* RangedBuildUpAudio;
+	USoundCue* S_RangedBuildUpAudio;
 
 	///////////////////////////
 	// A.I.

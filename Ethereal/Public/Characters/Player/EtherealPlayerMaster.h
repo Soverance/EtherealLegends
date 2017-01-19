@@ -16,7 +16,6 @@
 #pragma once
 
 #include "Characters/EtherealCharacterMaster.h"
-#include "EtherealGameInstance.h"
 #include "Characters/Player/WeaponModes.h"
 #include "Gear/Magic/Magic_AnimTypes.h"
 #include "NPCs/EtherealNPCMaster.h"
@@ -56,10 +55,6 @@ public:
 	// The Magic Anim Type to play when casting a spell.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	EMagic_AnimTypes ActiveSpellAnimType;
-
-	// A Reference to the Ethereal Game Instance
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	UEtherealGameInstance* EtherealGameInstance;
 
 	// A reference to the Ethereal Player State.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
