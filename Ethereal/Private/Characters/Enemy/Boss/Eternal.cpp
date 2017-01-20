@@ -52,11 +52,11 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	GetCharacterMovement()->MaxAcceleration = 30;
 
 	// A.I. Config
-	PawnSensing->HearingThreshold = 300;
-	PawnSensing->LOSHearingThreshold = 400;
-	PawnSensing->SightRadius = 750;
-	PawnSensing->SetPeripheralVisionAngle(50.0f);
-	AcceptanceRadius = 200.0f;
+	PawnSensing->HearingThreshold = 1000;
+	PawnSensing->LOSHearingThreshold = 600;
+	PawnSensing->SightRadius = 1000;
+	PawnSensing->SetPeripheralVisionAngle(75.0f);
+	AcceptanceRadius = 300.0f;
 	RunAI = false;
 
 	Targetable = false;
@@ -69,8 +69,8 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
-	MeleeRadius->SetSphereRadius(100);
-	MeleeRadius->SetRelativeLocation(FVector(15, 0, 0));
+	MeleeRadius->SetSphereRadius(200);
+	MeleeRadius->SetRelativeLocation(FVector(50, 0, -100));
 
 	// Targeting Reticle config
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 200));
@@ -183,20 +183,20 @@ void AEternal::AttackCycle()
 						Target = Player;
 
 						EnemyDealDamage(15);
-						int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
+						int32 RandomAtk = FMath::RandRange(0, 9);  // get a random int
 
 						// To make this guy harder, he'll use the HeavyAttack on rare occasions
 						if (!IsDead)
 						{
-							if (RandomAtk <= 2)
+							if (RandomAtk <= 3)
 							{
 								Attack1();
 							}
-							if (RandomAtk > 2 && RandomAtk < 5)
+							if (RandomAtk > 3 && RandomAtk <= 8)
 							{
 								Attack2();
 							}
-							if (RandomAtk >= 5)
+							if (RandomAtk > 8)
 							{
 								HeavyAttack();
 							}
