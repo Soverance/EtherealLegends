@@ -194,7 +194,7 @@ void AEternal::AttackCycle()
 							}
 							if (RandomAtk > 3 && RandomAtk <= 8)
 							{
-								Attack2();
+								RangedAttack();
 							}
 							if (RandomAtk > 8)
 							{
@@ -207,10 +207,19 @@ void AEternal::AttackCycle()
 			// Player is not overlapping, so do a ranged attack.
 			if (Overlapping.Num() == 0)
 			{
+				EnemyDealDamage(15);
+				int32 RandomAtk = FMath::RandRange(0, 4);  // get a random int
+
 				if (!IsDead)
 				{
-					EnemyDealDamage(15);
-					RangedAttack();
+					if (RandomAtk <= 2)
+					{
+						Attack2();
+					}
+					if (RandomAtk > 2)
+					{
+						RangedAttack();
+					}
 				}
 			}
 		}
