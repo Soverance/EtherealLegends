@@ -47,10 +47,15 @@ public:
 	UParticleSystemComponent* AuraFX;
 	UParticleSystem* P_AuraFX;
 
-	// Rnaged Build Up effect
+	// Ranged Build Up effect
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UParticleSystemComponent* RangedBuildUpFX;
 	UParticleSystem* P_RangedBuildUpFX;
+
+	// Black Hole Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* BlackHoleBuildUpFX;
+	UParticleSystem* P_BlackHoleBuildUpFX;
 
 	// Init Aggro - Called by Zhan's death while inside Celestial Nexus
 	UFUNCTION(BlueprintCallable, Category = Default)
@@ -116,6 +121,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* RangedBuildUpAudio;
 	USoundCue* S_RangedBuildUpAudio;
+
+	// Black Hole Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* BlackHoleBuildUpAudio;
+	USoundCue* S_BlackHoleBuildUpAudio;
 
 	///////////////////////////
 	// A.I.

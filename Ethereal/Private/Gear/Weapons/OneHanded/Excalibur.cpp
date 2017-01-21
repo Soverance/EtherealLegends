@@ -26,9 +26,10 @@ AExcalibur::AExcalibur(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blade/Swords/Blade_HeroSword11/SK_Excalibur.SK_Excalibur'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
-	ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Excalibur.WeaponIcon_Excalibur'"));
-	ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Excalibur-small.WeaponIcon_Excalibur-small'"));
-	
+	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Excalibur.WeaponIcon_Excalibur'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Excalibur-small.WeaponIcon_Excalibur-small'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> AuraParticleObject(TEXT("ParticleSystem'/Game/ElementalSword/ParticleSystem/PS_SwordField.PS_SwordField'"));
+
 	// Set Default Objects
 	Name = EMasterGearList::GL_Excalibur;
 	NameText = LOCTEXT("ExcaliburName", "Excalibur");
@@ -48,6 +49,7 @@ AExcalibur::AExcalibur(const FObjectInitializer& ObjectInitializer)
 	SK_WeaponSkeletalMesh = SkeletalMeshObject.Object;
 	SM_WeaponStaticMesh = StaticMeshObject.Object;
 	SM_WeaponOffhandMesh = StaticMeshObject.Object;
+	P_AuraFX = AuraParticleObject.Object;
 
 	// Set Mesh
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
@@ -57,6 +59,15 @@ AExcalibur::AExcalibur(const FObjectInitializer& ObjectInitializer)
 	//WeaponSkeletalMesh->SetVisibility(true);
 	SwordCollider->SetBoxExtent(FVector(10.0f, 10.0f, 60.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 55.0f));
+
+	// Aura Effect 
+	AuraFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("AuraFX"));
+	AuraFX->SetupAttachment(WeaponSkeletalMesh);
+	AuraFX->Template = P_AuraFX;
+	AuraFX->bAutoActivate = false;
+	AuraFX->SetRelativeLocation(FVector(0, 0, 40));
+	AuraFX->SetRelativeRotation(FRotator(0, 0, 0));
+	AuraFX->SetRelativeScale3D(FVector(1, 1, 1));
 }
 
 // Called when the game starts or when spawned
@@ -66,6 +77,7 @@ void AExcalibur::BeginPlay()
 
 	// Bind this function to the event dispatcher for Bind Gear
 	OnBindGear.AddDynamic(this, &AExcalibur::BindWeapon);
+	OnRemoveGear.AddDynamic(this, &AExcalibur::RemoveWeapon);
 }
 
 // Custom code when binding
@@ -75,7 +87,16 @@ void AExcalibur::BindWeapon()
 	if (IsShown)
 	{
 		ShowWeapon(true, false, false);
+		AuraFX->Activate();
 	}
+}
+
+// Custom code when binding
+void AExcalibur::RemoveWeapon()
+{
+	Super::RemoveWeapon();
+	HideWeapon();
+	AuraFX->Deactivate();
 }
 
 #undef LOCTEXT_NAMESPACE

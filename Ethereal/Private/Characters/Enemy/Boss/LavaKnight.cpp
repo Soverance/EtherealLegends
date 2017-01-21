@@ -210,7 +210,7 @@ void ALavaKnight::OnHearNoise(APawn* PawnInstigator, const FVector& Location, fl
 		if (!IsAggroed)
 		{
 			IsAggroed = true;
-
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro 
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
@@ -228,7 +228,7 @@ void ALavaKnight::OnSeePawn(APawn* Pawn)
 		if (!IsAggroed)
 		{
 			IsAggroed = true;
-
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro 
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);

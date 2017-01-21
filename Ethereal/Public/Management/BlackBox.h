@@ -41,6 +41,11 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Dispatcher")
 	FFadeOut FadeOut;
 
+	// True once a boss has been engaged inside a realm.  We don't want the player to have to go all the way back to the start if he dies during the boss fight.
+	// Automatically set false during loading.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool HasEngagedBoss;
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Position)
 	void SetCharacterPosition_RealmStart(ERealms Realm);
 

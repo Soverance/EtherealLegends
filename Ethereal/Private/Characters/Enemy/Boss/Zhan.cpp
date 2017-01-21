@@ -239,7 +239,8 @@ void AZhan::Tick(float DeltaTime)
 
 void AZhan::InitAggro()
 {
-	Aggro(Target);
+	EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+	Aggro(Target);  // AGGRO
 	// Spawn Zhan's Aggro Drop at current location - StartHeightOffset on Z
 	AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, (GetActorLocation().Z - StartHeightOffset)), GetActorRotation());
 	AudioManager->Play_Zhan_Intro();

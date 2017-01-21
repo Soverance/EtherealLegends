@@ -25,17 +25,21 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Genie/Anim_Genie.Anim_Genie_C'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> AuraParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_EternalEnergy.P_EternalEnergy'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RangedBuildUpParticleObject(TEXT("ParticleSystem'/Game/Vectorfields/Particles/P_Gateway.P_Gateway'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> BlackHoleBuildUpParticleObject(TEXT("ParticleSystem'/Game/Vectorfields/Particles/P_Nova.P_Nova'"));
 	static ConstructorHelpers::FObjectFinder<UClass> InitAggroBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Eternal_AggroDrop.Eternal_AggroDrop_C'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> AggroVoiceAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/YourSoulIsMine_Cue.YourSoulIsMine_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> RangedBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_RangedBuildUp_Cue.Eternal_RangedBuildUp_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> BlackHoleBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_BlackHoleBuildUp_Cue.Eternal_BlackHoleBuildUp_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> HitAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_Hit.Eternal_Hit'"));
 
 	// Set Default Objects
 	P_AuraFX = AuraParticleObject.Object;
 	P_RangedBuildUpFX = RangedBuildUpParticleObject.Object;
+	P_BlackHoleBuildUpFX = BlackHoleBuildUpParticleObject.Object;
 	AggroDropBP = InitAggroBlueprintObject.Object;
 	S_AggroVoiceAudio = AggroVoiceAudioObject.Object;
 	S_RangedBuildUpAudio = RangedBuildUpAudioObject.Object;
+	S_BlackHoleBuildUpAudio = BlackHoleBuildUpAudioObject.Object;
 	S_HitAudio = HitAudioObject.Object;
 	
 	// Default Config
@@ -98,6 +102,13 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	RangedBuildUpFX->Template = P_RangedBuildUpFX;
 	RangedBuildUpFX->bAutoActivate = false;
 
+	// Black Hole Build Up Aura Effect
+	BlackHoleBuildUpFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("BlackHoleBuildUpFX"));
+	BlackHoleBuildUpFX->SetupAttachment(GetMesh(), FName(TEXT("SummonSocket")));
+	BlackHoleBuildUpFX->SetRelativeRotation(FRotator(0, 0, 180));
+	BlackHoleBuildUpFX->Template = P_BlackHoleBuildUpFX;
+	BlackHoleBuildUpFX->bAutoActivate = false;
+
 	// AggroVoice audio
 	AggroVoiceAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("AggroVoiceAudio"));
 	AggroVoiceAudio->SetupAttachment(RootComponent);
@@ -109,6 +120,12 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	RangedBuildUpAudio->SetupAttachment(RootComponent);
 	RangedBuildUpAudio->Sound = S_RangedBuildUpAudio;
 	RangedBuildUpAudio->bAutoActivate = false;
+
+	// BlackHoleBuildUp audio
+	BlackHoleBuildUpAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("BlackHoleBuildUpAudio"));
+	BlackHoleBuildUpAudio->SetupAttachment(RootComponent);
+	BlackHoleBuildUpAudio->Sound = S_BlackHoleBuildUpAudio;
+	BlackHoleBuildUpAudio->bAutoActivate = false;
 
 	// Hit audio
 	HitAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("HitAudio"));
@@ -234,6 +251,7 @@ void AEternal::Death()
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus
 void AEternal::InitAggro()
 {	
+	EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 	// Spawn Eternal's Aggro Drop at current location - StartHeightOffset on Z
 	AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z), GetActorRotation());
 	AudioManager->Play_Eternal_Intro();	
