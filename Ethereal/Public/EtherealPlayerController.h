@@ -125,6 +125,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
 	void Achievement_KillCount();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
+	void Achievement_Chickenlover();
+
 	//////////////////////////////////////////////////////
 	// WIDGETS
 

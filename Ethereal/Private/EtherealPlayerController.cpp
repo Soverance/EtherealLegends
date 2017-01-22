@@ -239,3 +239,7 @@ void AEtherealPlayerController::Achievement_GoldCount_Implementation()
 void AEtherealPlayerController::Achievement_KillCount_Implementation()
 {
 }
+
+void AEtherealPlayerController::Achievement_Chickenlover_Implementation()
+{
+}
