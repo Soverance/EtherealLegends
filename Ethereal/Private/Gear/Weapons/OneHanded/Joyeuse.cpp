@@ -28,8 +28,7 @@ AJoyeuse::AJoyeuse(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
 	ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Joyeuse.WeaponIcon_Joyeuse'"));
 	ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Joyeuse-small.WeaponIcon_Joyeuse-small'"));
-
-
+	
 	// Set Default Objects
 
 	Name = EMasterGearList::GL_Joyeuse;
@@ -56,7 +55,7 @@ AJoyeuse::AJoyeuse(const FObjectInitializer& ObjectInitializer)
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 
-	//WeaponSkeletalMesh->SetVisibility(true);
+	SwordCollider->SetupAttachment(WeaponSkeletalMesh);
 	SwordCollider->SetBoxExtent(FVector(10.0f, 10.0f, 50.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }

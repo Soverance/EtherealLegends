@@ -56,7 +56,7 @@ AHauteclaire::AHauteclaire(const FObjectInitializer& ObjectInitializer)
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 
-	//WeaponSkeletalMesh->SetVisibility(true);
+	SwordCollider->SetupAttachment(WeaponSkeletalMesh);
 	SwordCollider->SetBoxExtent(FVector(10.0f, 10.0f, 60.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 55.0f));
 }

@@ -34,6 +34,7 @@
 #include "Gear/Weapons/OneHanded/Excalibur.h"
 #include "Gear/Weapons/OneHanded/BalloonSword.h"
 #include "Gear/Weapons/OneHanded/BeamSaber.h"
+#include "Gear/Weapons/OneHanded/RubberChicken.h"
 
 #include "Gear/Weapons/OneHanded/Shields/Aegis.h"
 #include "Gear/Weapons/OneHanded/Shields/DiablosDread.h"
@@ -268,6 +269,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_BeamSaber:
 		GearClass = ABeamSaber::StaticClass();
+		break;
+	case EMasterGearList::GL_RubberChicken:
+		GearClass = ARubberChicken::StaticClass();
 		break;
 
 		///////////////////////////////

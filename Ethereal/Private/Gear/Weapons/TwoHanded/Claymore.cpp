@@ -54,9 +54,9 @@ AClaymore::AClaymore(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
+	WeaponStaticMesh->SetRelativeRotation(FRotator(180.0f, 90.0f, 0.0f));
 
-	//WeaponStaticMesh->SetVisibility(true);
-	WeaponStaticMesh->SetRelativeRotation(FRotator(180.0f, 90.0f, 0.0f));	
+	SwordCollider->SetupAttachment(WeaponStaticMesh);
 	SwordCollider->SetBoxExtent(FVector(10.0f, 15.0f, 60.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }

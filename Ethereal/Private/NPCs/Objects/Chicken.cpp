@@ -146,7 +146,7 @@ void AChicken::BlowUp()
 // Occasionally the chicken will drop a rare item
 void AChicken::DropItem()
 {
-	InteractingPlayer->EtherealPlayerState->EnemyKillReward(1, EMasterGearList::GL_None, EMasterGearList::GL_None, EMasterGearList::GL_Elixer);
+	InteractingPlayer->EtherealPlayerState->EnemyKillReward(1, EMasterGearList::GL_None, EMasterGearList::GL_None, EMasterGearList::GL_RubberChicken);
 }
 
 void AChicken::Patrol_Implementation()

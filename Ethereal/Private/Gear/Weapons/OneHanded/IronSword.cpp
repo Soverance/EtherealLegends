@@ -60,6 +60,7 @@ AIronSword::AIronSword(const FObjectInitializer& ObjectInitializer)
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
 	
+	SwordCollider->SetupAttachment(WeaponStaticMesh);
 	SwordCollider->SetBoxExtent(FVector(5.0f, 5.0f, 25.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 5.0f));
 }
