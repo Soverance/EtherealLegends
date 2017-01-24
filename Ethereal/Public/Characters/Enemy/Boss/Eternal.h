@@ -57,6 +57,11 @@ public:
 	UParticleSystemComponent* BlackHoleBuildUpFX;
 	UParticleSystem* P_BlackHoleBuildUpFX;
 
+	// Heavy Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* HeavyBuildUpFX;
+	UParticleSystem* P_HeavyBuildUpFX;
+
 	// Init Aggro - Called by Zhan's death while inside Celestial Nexus
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void InitAggro();
@@ -109,6 +114,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void HeavyAttack();
 
+	// Eternal Death
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void EternalDeath();
+
 	///////////////////////////
 	// AUDIO
 
@@ -126,6 +135,21 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* BlackHoleBuildUpAudio;
 	USoundCue* S_BlackHoleBuildUpAudio;
+
+	// Heavy Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* HeavyBuildUpAudio;
+	USoundCue* S_HeavyBuildUpAudio;
+
+	// Laughter Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* LaughterAudio;
+	USoundCue* S_LaughterAudio;
+
+	// Death Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* DeathAudio;
+	USoundCue* S_DeathAudio;
 
 	///////////////////////////
 	// A.I.

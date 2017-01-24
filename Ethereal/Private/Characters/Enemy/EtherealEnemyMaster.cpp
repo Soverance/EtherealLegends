@@ -177,7 +177,7 @@ void AEtherealEnemyMaster::EnemyTakeDamage(float DamageTaken)
 	HitFX->Activate();  // Activate the HitFX particle
 
 	float critical = FMath::FRandRange(1.0f, 1.5f);
-	float mod1 = 512 - DEF;
+	float mod1 = FMath::Abs(512 - DEF);  // Take the Absolute Value of 512 - DEF
 	float mod2 = critical * mod1 * DamageTaken;
 	float mod3 = FMath::FloorToInt(mod2 / (16 * 512));  // calculate final damage taken
 	HP_Current = HP_Current - mod3;  // Finally remove the damage taken

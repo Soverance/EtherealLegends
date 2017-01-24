@@ -26,21 +26,30 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> AuraParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_EternalEnergy.P_EternalEnergy'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RangedBuildUpParticleObject(TEXT("ParticleSystem'/Game/Vectorfields/Particles/P_Gateway.P_Gateway'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> BlackHoleBuildUpParticleObject(TEXT("ParticleSystem'/Game/Vectorfields/Particles/P_Nova.P_Nova'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> HeavyBuildUpParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_Summon_Child.P_Summon_Child'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> DisappearParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Ability/Summon/P_Summon_Child_Startup.P_Summon_Child_Startup'"));
 	static ConstructorHelpers::FObjectFinder<UClass> InitAggroBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Eternal_AggroDrop.Eternal_AggroDrop_C'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> AggroVoiceAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/YourSoulIsMine_Cue.YourSoulIsMine_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> RangedBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_RangedBuildUp_Cue.Eternal_RangedBuildUp_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> BlackHoleBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_BlackHoleBuildUp_Cue.Eternal_BlackHoleBuildUp_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> HeavyBuildUpAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_HeavyBuildUp_Cue.Eternal_HeavyBuildUp_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> HitAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_Hit.Eternal_Hit'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> LaughterAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_Laugh_Cue.Eternal_Laugh_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> DeathAudioObject(TEXT("SoundCue'/Game/EtherealParty/Genie/Audio/Eternal_FinalDeath_Cue.Eternal_FinalDeath_Cue'"));
 
 	// Set Default Objects
 	P_AuraFX = AuraParticleObject.Object;
 	P_RangedBuildUpFX = RangedBuildUpParticleObject.Object;
 	P_BlackHoleBuildUpFX = BlackHoleBuildUpParticleObject.Object;
+	P_HeavyBuildUpFX = HeavyBuildUpParticleObject.Object;
 	AggroDropBP = InitAggroBlueprintObject.Object;
 	S_AggroVoiceAudio = AggroVoiceAudioObject.Object;
 	S_RangedBuildUpAudio = RangedBuildUpAudioObject.Object;
 	S_BlackHoleBuildUpAudio = BlackHoleBuildUpAudioObject.Object;
+	S_HeavyBuildUpAudio = HeavyBuildUpAudioObject.Object;
 	S_HitAudio = HitAudioObject.Object;
+	S_LaughterAudio = LaughterAudioObject.Object;
+	S_DeathAudio = DeathAudioObject.Object;
 	
 	// Default Config
 	Name = EEnemyNames::EN_Eternal;
@@ -48,8 +57,8 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
-	UncommonDrop = EMasterGearList::GL_Comet;
-	RareDrop = EMasterGearList::GL_Aegis;
+	UncommonDrop = EMasterGearList::GL_Aegis;
+	RareDrop = EMasterGearList::GL_Comet;
 	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
@@ -85,7 +94,11 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	DeathFX->SetRelativeLocation(FVector(0, 0, -90));
 	DeathFX->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
 	HitFX->SetRelativeLocation(FVector(0, 0, -40));
-	DisappearFX->SetRelativeLocation(FVector(0, 0, -20));
+
+	P_DisappearFX = DisappearParticleObject.Object;  // override the standard disappear effect
+	DisappearFX->Template = P_DisappearFX;  // complete override
+	DisappearFX->SetupAttachment(GetMesh(), FName(TEXT("SummonSocket")));  // reattach
+	DisappearFX->bAutoActivate = false;
 
 	// Enemy-Specific Object Config
 	
@@ -109,6 +122,13 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	BlackHoleBuildUpFX->Template = P_BlackHoleBuildUpFX;
 	BlackHoleBuildUpFX->bAutoActivate = false;
 
+	// Heavy Build Up Aura Effect
+	HeavyBuildUpFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("HeavyBuildUpFX"));
+	HeavyBuildUpFX->SetupAttachment(GetMesh(), FName(TEXT("SummonSocket")));
+	HeavyBuildUpFX->SetRelativeRotation(FRotator(0, 0, 180));
+	HeavyBuildUpFX->Template = P_HeavyBuildUpFX;
+	HeavyBuildUpFX->bAutoActivate = false;
+
 	// AggroVoice audio
 	AggroVoiceAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("AggroVoiceAudio"));
 	AggroVoiceAudio->SetupAttachment(RootComponent);
@@ -127,11 +147,29 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	BlackHoleBuildUpAudio->Sound = S_BlackHoleBuildUpAudio;
 	BlackHoleBuildUpAudio->bAutoActivate = false;
 
+	// HeavyeBuildUp audio
+	HeavyBuildUpAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("HeavyBuildUpAudio"));
+	HeavyBuildUpAudio->SetupAttachment(RootComponent);
+	HeavyBuildUpAudio->Sound = S_HeavyBuildUpAudio;
+	HeavyBuildUpAudio->bAutoActivate = false;
+
+	// Laughter audio
+	LaughterAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("LaughterAudio"));
+	LaughterAudio->SetupAttachment(RootComponent);
+	LaughterAudio->Sound = S_LaughterAudio;
+	LaughterAudio->bAutoActivate = false;
+
 	// Hit audio
 	HitAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("HitAudio"));
 	HitAudio->SetupAttachment(RootComponent);
 	HitAudio->Sound = S_HitAudio;
 	HitAudio->bAutoActivate = false;
+
+	// Death audio
+	DeathAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("DeathAudio"));
+	DeathAudio->SetupAttachment(RootComponent);
+	DeathAudio->Sound = S_DeathAudio;
+	DeathAudio->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -153,6 +191,10 @@ void AEternal::BeginPlay()
 		// Set all Volume Controls
 		EtherealGameInstance->SetAudioVolume(AggroVoiceAudio, EAudioTypes::AT_SoundEffect);
 		EtherealGameInstance->SetAudioVolume(RangedBuildUpAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(HeavyBuildUpAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(LaughterAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(HitAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(DeathAudio, EAudioTypes::AT_SoundEffect);
 	}
 }
 
@@ -200,7 +242,7 @@ void AEternal::AttackCycle()
 						Target = Player;
 
 						EnemyDealDamage(15);
-						int32 RandomAtk = FMath::RandRange(0, 9);  // get a random int
+						int32 RandomAtk = FMath::RandRange(0, 10);  // get a random int
 
 						// To make this guy harder, he'll use the HeavyAttack on rare occasions
 						if (!IsDead)
@@ -209,11 +251,11 @@ void AEternal::AttackCycle()
 							{
 								Attack1();
 							}
-							if (RandomAtk > 3 && RandomAtk <= 8)
+							if (RandomAtk > 3 && RandomAtk <= 7)
 							{
 								RangedAttack();
 							}
-							if (RandomAtk > 8)
+							if (RandomAtk >= 8)
 							{
 								HeavyAttack();
 							}
@@ -246,6 +288,16 @@ void AEternal::AttackCycle()
 void AEternal::Death()
 {
 	IsDead = true;
+	DeathAudio->Play();
+	// Start the Eternal Death process
+	FTimerHandle DeathTimer;
+	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 5.0f, false);
+}
+
+void AEternal::EternalDeath()
+{
+	DisappearFX->Activate();
+	FinalDeath(true, false);
 }
 
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus
