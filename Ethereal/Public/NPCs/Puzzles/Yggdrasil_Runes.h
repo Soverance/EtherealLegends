@@ -225,5 +225,8 @@ public:
 	void Entered_Treetop(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
+	void ResetRuneInteraction();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void InteractWithRune();
 };

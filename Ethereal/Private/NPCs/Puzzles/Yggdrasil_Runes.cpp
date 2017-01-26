@@ -240,36 +240,47 @@ void AYggdrasil_Runes::Interact()
 
 void AYggdrasil_Runes::Entered_Alcove(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (Cast<AEtherealPlayerMaster>(OtherActor))
+	if (!Active_Alcove)
 	{
-		InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
-		CheckIfUsable();
-		CurrentRune = ECurrentRune::CR_Alcove;
-	}
+		if (Cast<AEtherealPlayerMaster>(OtherActor))
+		{
+			InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
+			CheckIfUsable();
+			CurrentRune = ECurrentRune::CR_Alcove;
+		}
+	}	
 }
 
 void AYggdrasil_Runes::Entered_Rotunda(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (Cast<AEtherealPlayerMaster>(OtherActor))
+	if (!Active_Rotunda)
 	{
-		InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
-		CheckIfUsable();
-		CurrentRune = ECurrentRune::CR_Rotunda;
-	}
+		if (Cast<AEtherealPlayerMaster>(OtherActor))
+		{
+			InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
+			CheckIfUsable();
+			CurrentRune = ECurrentRune::CR_Rotunda;
+		}
+	}	
 }
 
 void AYggdrasil_Runes::Entered_Treetop(UPrimitiveComponent * HitComp, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	if (Cast<AEtherealPlayerMaster>(OtherActor))
+	if (!Active_Treetop)
 	{
-		InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
-		CheckIfUsable();
-		CurrentRune = ECurrentRune::CR_Treetop;
-	}
+		if (Cast<AEtherealPlayerMaster>(OtherActor))
+		{
+			InteractingPlayer = Cast<AEtherealPlayerMaster>(OtherActor);
+			CheckIfUsable();
+			CurrentRune = ECurrentRune::CR_Treetop;
+		}
+	}	
 }
 
 void AYggdrasil_Runes::InteractWithRune_Implementation()
 {
-
 }
 
+void AYggdrasil_Runes::ResetRuneInteraction_Implementation()
+{
+}
