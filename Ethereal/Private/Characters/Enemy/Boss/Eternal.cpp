@@ -14,6 +14,7 @@
 // limitations under the License.
 
 #include "Ethereal.h"
+#include "NPCs/Objects/EndGamePortal.h"
 #include "Eternal.h"
 
 #define LOCTEXT_NAMESPACE "EtherealText"
@@ -298,6 +299,25 @@ void AEternal::EternalDeath()
 {
 	DisappearFX->Activate();
 	FinalDeath(true, false);
+
+	///////////////////////////////
+	// ACHIEVEMENTS
+	switch (Target->EtherealGameInstance->CurrentRealm)
+	{
+	case ERealms::R_Celestial:
+		Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
+		break;
+
+	}
+
+	//////////////////////////////
+	// Spawn the EndGame Portal
+
+	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
+	AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
+
+	// Spawn the EndGame Portal wherever the Eternal died.
+	AEndGamePortal* EndGamePortal = GetWorld()->SpawnActor<AEndGamePortal>(GetActorLocation(), GetActorRotation());
 }
 
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus

@@ -14,6 +14,9 @@
 // limitations under the License.
 
 #include "Ethereal.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
+#include "Gear/EtherealGearMaster.h"
+#include "Gear/Items/Item_Master.h"
 #include "EtherealPlayerController.h"
 
 AEtherealPlayerController::AEtherealPlayerController()
@@ -189,6 +192,9 @@ void AEtherealPlayerController::RemoveStatus_OnDeath_Implementation()
 {
 }
 
+///////////////////////////////////
+// SAVE / LOAD
+
 void AEtherealPlayerController::Save_Implementation()
 {
 }
@@ -197,8 +203,290 @@ void AEtherealPlayerController::Load_Implementation()
 {
 }
 
-void AEtherealPlayerController::RefreshTargetingInfo_Implementation()
+// Saves all Stats to File
+void AEtherealPlayerController::Save_Stats()
 {
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealSave->Save_PlayerLevel = EtherealPlayer->EtherealPlayerState->PlayerLevel;
+			EtherealSave->Save_CurrentGold = EtherealPlayer->EtherealPlayerState->Gold_Current;
+			EtherealSave->Save_CurrentEXP = EtherealPlayer->EtherealPlayerState->EXP_Current;
+			EtherealSave->Save_KillCount = EtherealPlayer->EtherealPlayerState->KillCount;
+			EtherealSave->Save_TotalSecondsPlayed = EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed;
+		}
+	}
+}
+
+// Loads Stats from Save File
+void AEtherealPlayerController::Load_Stats()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealPlayer->EtherealPlayerState->PlayerLevel = EtherealSave->Save_PlayerLevel;
+			EtherealPlayer->EtherealPlayerState->Gold_Current = EtherealSave->Save_CurrentGold;
+			EtherealPlayer->EtherealPlayerState->EXP_Current = EtherealSave->Save_CurrentEXP;
+			EtherealPlayer->EtherealPlayerState->KillCount = EtherealSave->Save_KillCount;
+			EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed = EtherealSave->Save_TotalSecondsPlayed;
+		}
+	}
+}
+
+// Saves all Locks to File
+void AEtherealPlayerController::Save_Locks()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealSave->Save_HasCompletedTutorial = EtherealPlayer->EtherealPlayerState->HasCompletedTutorial;
+			EtherealSave->Save_Locked_Shiitake = EtherealPlayer->EtherealPlayerState->Locked_Shiitake;
+			EtherealSave->Save_Locked_Vulcan = EtherealPlayer->EtherealPlayerState->Locked_Vulcan;
+			EtherealSave->Save_Locked_Boreal = EtherealPlayer->EtherealPlayerState->Locked_Boreal;
+			EtherealSave->Save_Locked_Yggdrasil = EtherealPlayer->EtherealPlayerState->Locked_Yggdrasil;
+			EtherealSave->Save_Locked_Empyrean = EtherealPlayer->EtherealPlayerState->Locked_Empyrean;
+			EtherealSave->Save_Locked_Celestial = EtherealPlayer->EtherealPlayerState->Locked_Celestial;
+			EtherealSave->Save_HasCompletedNexus = EtherealPlayer->EtherealPlayerState->HasCompletedNexus;
+		}		
+	}	
+}
+
+// Loads Locks from Save File
+void AEtherealPlayerController::Load_Locks()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealPlayer->EtherealPlayerState->HasCompletedTutorial = EtherealSave->Save_HasCompletedTutorial;
+			EtherealPlayer->EtherealPlayerState->Locked_Shiitake = EtherealSave->Save_Locked_Shiitake;
+			EtherealPlayer->EtherealPlayerState->Locked_Vulcan = EtherealSave->Save_Locked_Vulcan;
+			EtherealPlayer->EtherealPlayerState->Locked_Boreal = EtherealSave->Save_Locked_Boreal;
+			EtherealPlayer->EtherealPlayerState->Locked_Yggdrasil = EtherealSave->Save_Locked_Yggdrasil;
+			EtherealPlayer->EtherealPlayerState->Locked_Empyrean = EtherealSave->Save_Locked_Empyrean;
+			EtherealPlayer->EtherealPlayerState->Locked_Celestial = EtherealSave->Save_Locked_Celestial;
+			EtherealPlayer->EtherealPlayerState->HasCompletedNexus = EtherealSave->Save_HasCompletedNexus;
+		}		
+	}	
+}
+
+// Saves all Bindings to File
+void AEtherealPlayerController::Save_Bindings()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealSave->Save_WeaponMode = EtherealPlayer->EtherealPlayerState->WeaponMode;
+			EtherealSave->Save_Magic_Slot1 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot1;
+			EtherealSave->Save_Magic_Slot2 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot2;
+			EtherealSave->Save_Magic_Slot3 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot3;
+			EtherealSave->Save_Magic_Slot4 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot4;
+			EtherealSave->Save_Magic_Slot5 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot5;
+			EtherealSave->Save_Magic_Slot6 = EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot6;
+			EtherealSave->Save_Weapon_OneHanded = EtherealPlayer->EtherealPlayerState->Binding_Weapon_OneHanded;
+			EtherealSave->Save_Weapon_Shield = EtherealPlayer->EtherealPlayerState->Binding_Weapon_Shield;
+			EtherealSave->Save_Weapon_TwoHanded = EtherealPlayer->EtherealPlayerState->Binding_Weapon_TwoHanded;
+			EtherealSave->Save_Weapon_Ranged = EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ranged;
+			EtherealSave->Save_Weapon_Ammo = EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ammo;
+			EtherealSave->Save_Weapon_Casting = EtherealPlayer->EtherealPlayerState->Binding_Weapon_Casting;
+			EtherealSave->Save_Item_Current = EtherealPlayer->EtherealPlayerState->Binding_Item_Current;
+			EtherealSave->Save_Armor_Head = EtherealPlayer->EtherealPlayerState->Binding_Armor_Head;
+			EtherealSave->Save_Armor_Cape = EtherealPlayer->EtherealPlayerState->Binding_Armor_Cape;
+			EtherealSave->Save_Armor_Body = EtherealPlayer->EtherealPlayerState->Binding_Armor_Body;
+			EtherealSave->Save_Armor_Hand = EtherealPlayer->EtherealPlayerState->Binding_Armor_Hand;
+			EtherealSave->Save_Armor_Legs = EtherealPlayer->EtherealPlayerState->Binding_Armor_Legs;
+			EtherealSave->Save_Armor_Ring = EtherealPlayer->EtherealPlayerState->Binding_Armor_Ring;
+			EtherealSave->Save_Armor_Feet = EtherealPlayer->EtherealPlayerState->Binding_Armor_Feet;
+		}
+	}
+}
+
+// Loads Bindings from Save File
+void AEtherealPlayerController::Load_Bindings()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealPlayer->EtherealPlayerState->WeaponMode = EtherealSave->Save_WeaponMode;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot1 = EtherealSave->Save_Magic_Slot1;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot2 = EtherealSave->Save_Magic_Slot2;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot3 = EtherealSave->Save_Magic_Slot3;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot4 = EtherealSave->Save_Magic_Slot4;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot5 = EtherealSave->Save_Magic_Slot5;
+			EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot6 = EtherealSave->Save_Magic_Slot6;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_OneHanded = EtherealSave->Save_Weapon_OneHanded;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_Shield = EtherealSave->Save_Weapon_Shield;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_TwoHanded = EtherealSave->Save_Weapon_TwoHanded;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ranged = EtherealSave->Save_Weapon_Ranged;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ammo = EtherealSave->Save_Weapon_Ammo;
+			EtherealPlayer->EtherealPlayerState->Binding_Weapon_Casting = EtherealSave->Save_Weapon_Casting;
+			EtherealPlayer->EtherealPlayerState->Binding_Item_Current = EtherealSave->Save_Item_Current;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Head = EtherealSave->Save_Armor_Head;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Cape = EtherealSave->Save_Armor_Cape;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Body = EtherealSave->Save_Armor_Body;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Hand = EtherealSave->Save_Armor_Hand;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Legs = EtherealSave->Save_Armor_Legs;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Ring = EtherealSave->Save_Armor_Ring;
+			EtherealPlayer->EtherealPlayerState->Binding_Armor_Feet = EtherealSave->Save_Armor_Feet;
+		}
+	}
+}
+
+// Saves all Inventory items to File
+void AEtherealPlayerController::Save_Inventory()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			EtherealSave->Save_Inventory.Empty();  // clear the save game's inventory array of any previous/stale data
+
+			for (AEtherealGearMaster* Gear : EtherealPlayer->EtherealPlayerState->Inventory)
+			{
+				EtherealSave->Save_Inventory.AddUnique(Gear->Name);  // add all items in inventory to the save file
+
+				// if the item is a consumable type
+				if (Gear->Type == EMasterGearTypes::GT_Consumable)
+				{
+					AItem_Master* Item = Cast<AItem_Master>(Gear);  // Cast to it
+
+					if (Item)
+					{
+						// Save Item quantities by name
+						switch (Item->Name)
+						{
+							case EMasterGearList::GL_Reraise:
+								EtherealSave->Save_QtyReraise = Item->Quantity;
+								break;
+							case EMasterGearList::GL_Potion:
+								EtherealSave->Save_QtyPotion = Item->Quantity;
+								break;
+							case EMasterGearList::GL_HiPotion:
+								EtherealSave->Save_QtyHiPotion = Item->Quantity;
+								break;
+							case EMasterGearList::GL_Ether:
+								EtherealSave->Save_QtyEther = Item->Quantity;
+								break;
+							case EMasterGearList::GL_HiEther:
+								EtherealSave->Save_QtyHiEther = Item->Quantity;
+								break;
+							case EMasterGearList::GL_Adrenaline:
+								EtherealSave->Save_QtyAdrenaline = Item->Quantity;
+								break;
+							case EMasterGearList::GL_SentinelBrew:
+								EtherealSave->Save_QtySentinelBrew = Item->Quantity;
+								break;
+							case EMasterGearList::GL_Elixer:
+								EtherealSave->Save_QtyElixer = Item->Quantity;
+								break;
+							case EMasterGearList::GL_Antidote:
+								EtherealSave->Save_QtyAntidote = Item->Quantity;
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Loads Inventory from Save File
+void AEtherealPlayerController::Load_Inventory()
+{
+	if (EtherealPlayer)
+	{
+		if (EtherealSave)
+		{
+			for (EMasterGearList GearName : EtherealSave->Save_Inventory)
+			{
+				bool Bound = false;  // set a new bool to determine if we should bind this gear on spawn
+
+				TArray<EMasterGearList> BoundItems;  // sets a disposable array of all the currently bound items
+
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot1);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot2);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot3);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot4);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot5);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot6);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Magic_Slot6);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_OneHanded);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_Shield);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_TwoHanded);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ranged);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_Ammo);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Weapon_Casting);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Item_Current);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Head);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Cape);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Body);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Hand);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Legs);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Ring);
+				BoundItems.AddUnique(EtherealPlayer->EtherealPlayerState->Binding_Armor_Feet);
+
+				// for each bound item, check it's name against the item we're about to add
+				for (EMasterGearList BoundGearName : BoundItems)
+				{
+					// if the item is bound...
+					if (GearName == BoundGearName)
+					{
+						Bound = true;  // be sure to bind this item when adding to inventory
+					}
+				}
+
+				EtherealPlayer->EtherealPlayerState->AddToInventory(GearName, Bound, false);  // Add all items from save file into live inventory			
+			}
+
+			for (AEtherealGearMaster* Gear : EtherealPlayer->EtherealPlayerState->Inventory)
+			{
+				if (Gear->Type == EMasterGearTypes::GT_Consumable)
+				{
+					AItem_Master* Item = Cast<AItem_Master>(Gear);  // Cast to it
+
+					if (Item)
+					{
+						// Save Item quantities by name
+						switch (Item->Name)
+						{
+						case EMasterGearList::GL_Reraise:
+							Item->Quantity = EtherealSave->Save_QtyReraise;
+							break;
+						case EMasterGearList::GL_Potion:
+							Item->Quantity = EtherealSave->Save_QtyPotion;
+							break;
+						case EMasterGearList::GL_HiPotion:
+							Item->Quantity = EtherealSave->Save_QtyHiPotion;
+							break;
+						case EMasterGearList::GL_Ether:
+							Item->Quantity = EtherealSave->Save_QtyEther;
+							break;
+						case EMasterGearList::GL_HiEther:
+							Item->Quantity = EtherealSave->Save_QtyHiEther;
+							break;
+						case EMasterGearList::GL_Adrenaline:
+							Item->Quantity = EtherealSave->Save_QtyAdrenaline;
+							break;
+						case EMasterGearList::GL_SentinelBrew:
+							Item->Quantity = EtherealSave->Save_QtySentinelBrew;
+							break;
+						case EMasterGearList::GL_Elixer:
+							Item->Quantity = EtherealSave->Save_QtyElixer;
+							break;
+						case EMasterGearList::GL_Antidote:
+							Item->Quantity = EtherealSave->Save_QtyAntidote;
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 ///////////////////////////////////
@@ -241,5 +529,12 @@ void AEtherealPlayerController::Achievement_KillCount_Implementation()
 }
 
 void AEtherealPlayerController::Achievement_Chickenlover_Implementation()
+{
+}
+
+//////////////////////////////////////////////////////
+// WIDGETS
+
+void AEtherealPlayerController::RefreshTargetingInfo_Implementation()
 {
 }

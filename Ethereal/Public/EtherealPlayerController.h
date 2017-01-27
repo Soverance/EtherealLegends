@@ -17,7 +17,11 @@
 
 #include "GameFramework/PlayerController.h"
 #include "Characters/CombatText/CombatEffectStruct.h"
+#include "EtherealSaveGame.h"
 #include "EtherealPlayerController.generated.h"
+
+// Forward Declarations
+class AEtherealPlayerMaster;
 
 UCLASS()
 class ETHEREAL_API AEtherealPlayerController : public APlayerController
@@ -28,12 +32,24 @@ public:
 	
 	AEtherealPlayerController();
 
+	//////////////////////////////////////////
+	// DEFAULT VARIABLES
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	AEtherealPlayerMaster* EtherealPlayer;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	UEtherealSaveGame* EtherealSave;
+
+	//////////////////////////////////////////
+	// STATUS EFFECTS
+
 	// True if Sentinel Brew is active
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
 	bool Active_SentinelBrew;
 
 	// True if Adrenaline is active
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
 	bool Active_Adrenaline;
 		
 	// All Possible Status Effects are stored here
@@ -89,11 +105,43 @@ public:
 	///////////////////////////////////////////////////////
 	// SAVING AND LOADING
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = SaveSystem)
 	void Save();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = SaveSystem)
 	void Load();
+
+	// Save Stats
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Save_Stats();
+
+	// Load Stats
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Load_Stats();
+
+	// Save Locks
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Save_Locks();
+
+	// Load Locks
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Load_Locks();
+
+	// Save Bindings
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Save_Bindings();
+
+	// Load Bindings
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Load_Bindings();
+
+	// Save Inventory
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Save_Inventory();
+
+	// Load Inventory
+	UFUNCTION(BlueprintCallable, Category = SaveSystem)
+	void Load_Inventory();
 
 	///////////////////////////////////////////////////////
 	// ACHIEVEMENTS

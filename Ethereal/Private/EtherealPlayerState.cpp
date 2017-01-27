@@ -41,12 +41,12 @@ AEtherealPlayerState::AEtherealPlayerState(const FObjectInitializer& ObjectIniti
 	Gold_Current = 0;
 
 	HasCompletedTutorial = false;
-	Unlocked_Shiitake = true;
-	Unlocked_Vulcan = true;
-	Unlocked_Boreal = true;
-	Unlocked_Yggdrasil = true;
-	Unlocked_Empyrean = true;
-	Unlocked_Celestial = true;
+	Locked_Shiitake = true;
+	Locked_Vulcan = true;
+	Locked_Boreal = true;
+	Locked_Yggdrasil = true;
+	Locked_Empyrean = true;
+	Locked_Celestial = true;
 
 	Binding_Magic_Slot1 = EMasterGearList::GL_None;
 	Binding_Magic_Slot2 = EMasterGearList::GL_None;
@@ -103,12 +103,12 @@ void AEtherealPlayerState::ResetNewGame()
 	KillCount = 0;
 
 	HasCompletedTutorial = false;
-	Unlocked_Shiitake = true;
-	Unlocked_Vulcan = true;
-	Unlocked_Boreal = true;
-	Unlocked_Yggdrasil = true;
-	Unlocked_Empyrean = true;
-	Unlocked_Celestial = true;
+	Locked_Shiitake = true;
+	Locked_Vulcan = true;
+	Locked_Boreal = true;
+	Locked_Yggdrasil = true;
+	Locked_Empyrean = true;
+	Locked_Celestial = true;
 
 	UnbindAll();
 

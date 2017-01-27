@@ -371,9 +371,8 @@ void AZhan::Escape()
 			Target->EtherealPlayerController->Achievement_Realm_Empyrean();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Celestial:
-			Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
+			//Target->EtherealPlayerController->Achievement_Realm_Celestial();  // Zhan doesn't give this achivement inside the Nexus; the Eternal does that.
 			break;
-
 	}
 
 	//////////////////////////////

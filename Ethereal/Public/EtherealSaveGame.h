@@ -201,30 +201,34 @@ public:
 	// UNLOCKS
 
 	// Whether or not the player has completed the tutorial.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
 	bool Save_HasCompletedTutorial;
 
 	// Shiitake Temple
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_Shiitake;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Shiitake;
 
 	// Vulcan Shrine
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_Vulcan;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Vulcan;
 
 	// Boreal Core
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_Boreal;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Boreal;
 
 	// Yggdrasil
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_Yggdrasil;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Yggdrasil;
 
 	// Empyrean Gardens
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_EmpyreanGardens;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Empyrean;
 
 	// Celestial Nexus
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Unlocks)
-	bool Save_Unlocked_Celestial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_Locked_Celestial;
+
+	// Whether or not the player has completed the Celestial Nexus
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Locks)
+	bool Save_HasCompletedNexus;
 };

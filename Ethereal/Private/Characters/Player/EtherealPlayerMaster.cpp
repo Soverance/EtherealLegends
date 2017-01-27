@@ -85,6 +85,11 @@ void AEtherealPlayerMaster::BeginPlay()
 		EtherealPlayerState->Regen();  // start the regen tick
 		EtherealPlayerState->Refresh();  // start the refresh tick
 	}
+
+	if (EtherealPlayerController)
+	{
+		EtherealPlayerController->EtherealPlayer = this;  // sets a reference to itself inside the player controller
+	}
 }
 
 // Called every frame
