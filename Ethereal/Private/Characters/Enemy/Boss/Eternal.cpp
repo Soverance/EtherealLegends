@@ -289,15 +289,6 @@ void AEternal::AttackCycle()
 void AEternal::Death()
 {
 	IsDead = true;
-	// Start the Eternal Death process
-	FTimerHandle DeathTimer;
-	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 5.0f, false);
-}
-
-void AEternal::EternalDeath()
-{
-	DisappearFX->Activate();
-	FinalDeath(true, false);
 
 	///////////////////////////////
 	// ACHIEVEMENTS
@@ -309,6 +300,16 @@ void AEternal::EternalDeath()
 		break;
 
 	}
+
+	// Start the Eternal Death process
+	FTimerHandle DeathTimer;
+	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 5.0f, false);
+}
+
+void AEternal::EternalDeath()
+{
+	DisappearFX->Activate();
+	FinalDeath(true, false);	
 
 	//////////////////////////////
 	// Spawn the EndGame Portal
