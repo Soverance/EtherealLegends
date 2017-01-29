@@ -68,11 +68,20 @@ public:
 	// Zhan Intro Music
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
 	UAudioComponent* Zhan_Intro;
-	USoundCue* S_Zhan_Intro;
+	USoundCue* S_Zhan_Intro;	
 
 	// Play Zhan Intro Music
 	UFUNCTION(BlueprintCallable, Category = BattleMusic)
 	void Play_Zhan_Intro();
+
+	// Eternal Intro Music
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
+	UAudioComponent* Eternal_Intro;
+	USoundCue* S_Eternal_Intro;
+
+	// Play Eternal Intro Music
+	UFUNCTION(BlueprintCallable, Category = BattleMusic)
+	void Play_Eternal_Intro();
 
 	// Zhan Battle Music
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
@@ -82,6 +91,15 @@ public:
 	// Play Zhan Battle Music
 	UFUNCTION(BlueprintCallable, Category = BattleMusic)
 	void Play_Zhan_Battle();
+
+	// Eternal Battle Music
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
+	UAudioComponent* Eternal_Battle;
+	USoundCue* S_Eternal_Battle;
+
+	// Play Eternal Battle Music
+	UFUNCTION(BlueprintCallable, Category = BattleMusic)
+	void Play_Eternal_Battle();
 
 	// BACKGROUND MUSIC  -------------------------------------
 

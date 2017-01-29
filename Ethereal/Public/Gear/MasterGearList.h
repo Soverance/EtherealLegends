@@ -54,6 +54,7 @@
 	 // Novelty
 	GL_BalloonSword UMETA(DisplayName = "Balloon Sword"),
 	GL_BeamSaber UMETA(DisplayName = "Beam Saber"),
+	GL_RubberChicken UMETA(DisplayName = "Rubber Chicken"),
 	
 
 	// Shields

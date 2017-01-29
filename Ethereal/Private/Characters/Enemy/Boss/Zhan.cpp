@@ -15,6 +15,7 @@
 
 #include "Ethereal.h"
 #include "NPCs/Objects/ReturnPortal.h"
+#include "Eternal.h"
 #include "Zhan.h"
 
 #define LOCTEXT_NAMESPACE "EtherealText"
@@ -32,7 +33,7 @@ AZhan::AZhan(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> SpinAtkParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Skill_TeleCharge/Zhan_SpinAtkFX.Zhan_SpinAtkFX'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> PowerBlastAudioObject(TEXT("SoundCue'/Game/Audio/Party/Zhan_PowerBlast_Cue.Zhan_PowerBlast_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> SpinAtkAudioObject(TEXT("SoundCue'/Game/Audio/Party/Zhan_SpinAtk_Cue.Zhan_SpinAtk_Cue'"));
-	static ConstructorHelpers::FObjectFinder<UClass> LobBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Zhan_AggroDrop.Zhan_AggroDrop_C'"));
+	static ConstructorHelpers::FObjectFinder<UClass> InitAggroBlueprintObject(TEXT("Blueprint'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Zhan_AggroDrop.Zhan_AggroDrop_C'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> EscapePortalObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Ausar/Zhan_EscapePortal.Zhan_EscapePortal'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> EscapeBurstPortalObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Combat_Base/WeaponCombo/P_Cube_Mesh_Test.P_Cube_Mesh_Test'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> PortalExplosionAudioObject(TEXT("SoundCue'/Game/Audio/Impacts/Zhan_PortalExplosion_Cue.Zhan_PortalExplosion_Cue'"));
@@ -40,6 +41,7 @@ AZhan::AZhan(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("CurveFloat'/Game/Blueprints/Characters/Enemy/6-CelestialNexus/Curve_ZhanEscape.Curve_ZhanEscape'"));
 
 	// Set Default Objects
+	AggroDropBP = InitAggroBlueprintObject.Object;
 	S_LaughterAudio = LaughterAudioObject.Object;
 	SK_Blade = BladeMesh.Object;
 	P_EyeFX = EyeParticleObject.Object;
@@ -68,8 +70,6 @@ AZhan::AZhan(const FObjectInitializer& ObjectInitializer)
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 	GetCharacterMovement()->MaxAcceleration = 0;	
-
-	AggroDropBP = LobBlueprintObject.Object;
 
 	// A.I. Config
 	PawnSensing->HearingThreshold = 300;
@@ -206,6 +206,17 @@ void AZhan::BeginPlay()
 	PawnSensing->OnSeePawn.AddDynamic(this, &AZhan::OnSeePawn);  // bind the OnSeePawn event
 	OnDeath.AddDynamic(this, &AZhan::Death); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AZhan::AttackCycle);  // bind the attack function to the OnReachedTarget event
+
+	// We collected this reference in the EnemyMaster class
+	if (EtherealGameInstance)
+	{
+		// Set all Volume Controls
+		EtherealGameInstance->SetAudioVolume(LaughterAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(PowerBlastAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(SpinAtkAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(PortalExplosionAudio, EAudioTypes::AT_SoundEffect);
+		EtherealGameInstance->SetAudioVolume(EscapeAudio, EAudioTypes::AT_SoundEffect);
+	}
 }
 
 // Called every frame
@@ -228,7 +239,8 @@ void AZhan::Tick(float DeltaTime)
 
 void AZhan::InitAggro()
 {
-	Aggro(Target);
+	EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+	Aggro(Target);  // AGGRO
 	// Spawn Zhan's Aggro Drop at current location - StartHeightOffset on Z
 	AActor* AggroDrop = UCommonLibrary::SpawnBP(GetWorld(), AggroDropBP, FVector(GetActorLocation().X, GetActorLocation().Y, (GetActorLocation().Z - StartHeightOffset)), GetActorRotation());
 	AudioManager->Play_Zhan_Intro();
@@ -246,7 +258,7 @@ void AZhan::FallToAggro()
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), Target->LevelUpCamShake, Target->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	// TO DO : Client Play Force Feedback FF_ZhanSpawn
 
-	// earlier code sets the reticle visible, be sure to turn it off.
+	// earlier code in BeginPlay() sets the reticle visible, be sure to turn it off.
 	if (TargetingReticle->IsVisible())
 	{
 		TargetingReticle->SetVisibility(false);
@@ -260,10 +272,11 @@ void AZhan::FallToAggro()
 void AZhan::StartAttacking()
 {
 	Targetable = true;
-	AudioManager->Play_Zhan_Battle();
+	
 	GetCharacterMovement()->GravityScale = 1.0f;
 	GetCharacterMovement()->MaxAcceleration = 30;
 	RunToTarget();
+	AudioManager->Play_Zhan_Battle();
 }
 
 void AZhan::Death()
@@ -278,6 +291,11 @@ void AZhan::AttackCycle()
 	{
 		if (!IsAttacking)
 		{
+			// we set all these to false at the beginning of his attack cycle, just to be certain he never gets locked in an attack anim
+			DoPowerBlast = false;
+			DoSpinAtk = false;
+			DoRadialBlast = false;
+
 			IsAttacking = true;
 			RunAI = false;
 
@@ -353,9 +371,8 @@ void AZhan::Escape()
 			Target->EtherealPlayerController->Achievement_Realm_Empyrean();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Celestial:
-			Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
+			//Target->EtherealPlayerController->Achievement_Realm_Celestial();  // Zhan doesn't give this achivement inside the Nexus; the Eternal does that.
 			break;
-
 	}
 
 	//////////////////////////////
@@ -388,12 +405,34 @@ void AZhan::Explode()
 
 void AZhan::DropPortal()
 {
-	EscapeBurstFX->Deactivate();
-	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
-	AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
-	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
-	// Spawn the Arcadia Return Portal wherever Zhan died
-	AReturnPortal* ReturnPortal = GetWorld()->SpawnActor<AReturnPortal>(GetActorLocation(), GetActorRotation());
+	EscapeBurstFX->Deactivate();  // deactivate the EscapeBurst	
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);  // disable zhan's collision
+
+	// if Zhan dies within the Celestial Nexus...
+	if (Target->EtherealGameInstance->CurrentRealm == ERealms::R_Celestial)
+	{
+		AEternal* Eternal = NULL;  // create null reference
+
+		// Find the Eternal enemy and call Init Aggro
+		for (TActorIterator<AEternal> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+		{
+			Eternal= *ActorItr; // store the instance of The Eternal
+		}
+
+		if (Eternal)
+		{
+			Eternal->InitAggro();  // Init Aggro on Eternal
+		}		
+	}
+	else
+	{
+		AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
+		AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
+
+		// In all other realms, spawn the Arcadia Return Portal wherever Zhan died
+		AReturnPortal* ReturnPortal = GetWorld()->SpawnActor<AReturnPortal>(GetActorLocation(), GetActorRotation());
+	}
+	
 }
 
 // Jump Timeline

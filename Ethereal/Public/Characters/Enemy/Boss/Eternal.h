@@ -36,11 +36,120 @@ public:
 	
 	// Melee Attack Function
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void MeleeAttack();
+	void AttackCycle();
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
+
+	// Eternal Aura Effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* AuraFX;
+	UParticleSystem* P_AuraFX;
+
+	// Ranged Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* RangedBuildUpFX;
+	UParticleSystem* P_RangedBuildUpFX;
+
+	// Black Hole Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* BlackHoleBuildUpFX;
+	UParticleSystem* P_BlackHoleBuildUpFX;
+
+	// Heavy Build Up effect
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* HeavyBuildUpFX;
+	UParticleSystem* P_HeavyBuildUpFX;
+
+	// Init Aggro - Called by Zhan's death while inside Celestial Nexus
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void InitAggro();
+
+	// Aggro Drop Blueprint
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	TSubclassOf<class AActor> AggroDropBP;
+
+	// RaiseToAggro - Handles the spawning of the Eternal enemy
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void RaiseToAggro();
+
+	// Do Raise Aggro Anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoRaiseAggro;
+
+	// Begin Attack cycle
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void StartAttacking();
+
+	// Do Attack1 anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoAttack1;
+
+	// Do Attack2 anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoAttack2;
+
+	// Do RangedAtk anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoRangedAttack;
+
+	// Do HeavyAtk anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool DoHeavyAttack;
+
+	// Power Blast Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void Attack1();
+
+	// Blade Spin Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void Attack2();
+
+	// Ranged Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void RangedAttack();
+
+	// Heavy Attack
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void HeavyAttack();
+
+	// Eternal Death
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void EternalDeath();
+
+	///////////////////////////
+	// AUDIO
+
+	// Aggro Voice Audio - "YOUR SOUL IS MINE!"
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* AggroVoiceAudio;
+	USoundCue* S_AggroVoiceAudio;
+
+	// Ranged Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* RangedBuildUpAudio;
+	USoundCue* S_RangedBuildUpAudio;
+
+	// Black Hole Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* BlackHoleBuildUpAudio;
+	USoundCue* S_BlackHoleBuildUpAudio;
+
+	// Heavy Build Up Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* HeavyBuildUpAudio;
+	USoundCue* S_HeavyBuildUpAudio;
+
+	// Laughter Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* LaughterAudio;
+	USoundCue* S_LaughterAudio;
+
+	// Death Audio
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UAudioComponent* DeathAudio;
+	USoundCue* S_DeathAudio;
 
 	///////////////////////////
 	// A.I.

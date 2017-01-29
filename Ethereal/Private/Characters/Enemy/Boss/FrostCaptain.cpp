@@ -306,7 +306,7 @@ void AFrostCaptain::OnHearNoise(APawn* PawnInstigator, const FVector& Location, 
 		{
 			DoAggro = true;
 			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
@@ -325,7 +325,7 @@ void AFrostCaptain::OnSeePawn(APawn* Pawn)
 		{
 			DoAggro = true;
 			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);

@@ -41,12 +41,12 @@ AEtherealPlayerState::AEtherealPlayerState(const FObjectInitializer& ObjectIniti
 	Gold_Current = 0;
 
 	HasCompletedTutorial = false;
-	Unlocked_Shiitake = true;
-	Unlocked_Vulcan = true;
-	Unlocked_Boreal = true;
-	Unlocked_Yggdrasil = true;
-	Unlocked_Empyrean = true;
-	Unlocked_Celestial = true;
+	Locked_Shiitake = true;
+	Locked_Vulcan = true;
+	Locked_Boreal = true;
+	Locked_Yggdrasil = true;
+	Locked_Empyrean = true;
+	Locked_Celestial = true;
 
 	Binding_Magic_Slot1 = EMasterGearList::GL_None;
 	Binding_Magic_Slot2 = EMasterGearList::GL_None;
@@ -99,36 +99,18 @@ void AEtherealPlayerState::ResetNewGame()
 	RegenRate = 0;
 	EXP_Current = 5000;
 	Gold_Current = 0;
+	TotalSecondsPlayed = 0;
+	KillCount = 0;
 
 	HasCompletedTutorial = false;
-	Unlocked_Shiitake = true;
-	Unlocked_Vulcan = true;
-	Unlocked_Boreal = true;
-	Unlocked_Yggdrasil = true;
-	Unlocked_Empyrean = true;
-	Unlocked_Celestial = true;
+	Locked_Shiitake = true;
+	Locked_Vulcan = true;
+	Locked_Boreal = true;
+	Locked_Yggdrasil = true;
+	Locked_Empyrean = true;
+	Locked_Celestial = true;
 
-	Binding_Magic_Slot1 = EMasterGearList::GL_None;
-	Binding_Magic_Slot2 = EMasterGearList::GL_None;
-	Binding_Magic_Slot3 = EMasterGearList::GL_None;
-	Binding_Magic_Slot4 = EMasterGearList::GL_None;
-	Binding_Magic_Slot5 = EMasterGearList::GL_None;
-	Binding_Magic_Slot6 = EMasterGearList::GL_None;
-
-	Binding_Weapon_OneHanded = EMasterGearList::GL_None;
-	Binding_Weapon_Shield = EMasterGearList::GL_None;
-	Binding_Weapon_TwoHanded = EMasterGearList::GL_None;
-	Binding_Weapon_Ranged = EMasterGearList::GL_None;
-	Binding_Weapon_Ammo = EMasterGearList::GL_None;
-	Binding_Weapon_Casting = EMasterGearList::GL_None;
-
-	Binding_Armor_Head = EMasterGearList::GL_None;
-	Binding_Armor_Cape = EMasterGearList::GL_None;
-	Binding_Armor_Body = EMasterGearList::GL_None;
-	Binding_Armor_Hand = EMasterGearList::GL_None;
-	Binding_Armor_Legs = EMasterGearList::GL_None;
-	Binding_Armor_Ring = EMasterGearList::GL_None;
-	Binding_Armor_Feet = EMasterGearList::GL_None;
+	UnbindAll();
 
 	Binding_Item_Current = EMasterGearList::GL_None;
 
@@ -799,7 +781,8 @@ void AEtherealPlayerState::UnbindAll()
 	for (AEtherealGearMaster* GearItem : Inventory)  // for each item in the inventory...
 	{
 		GearItem->Unbind(); // Unbind item
-		// TO DO : these should be destroyed after they're unbound, since this function is currently only being called from the main menu, when you've chosen to start a new game (which deletes your old save file)
+		// TO DO : these should be destroyed after they're unbound
+		// this function is currently only being called from the main menu, when you've chosen to start a new game (which deletes your old save file)
 	}
 
 	// Set all Magic Bindings to None
@@ -830,4 +813,5 @@ void AEtherealPlayerState::UnbindAll()
 	Inventory.Empty();  // clear the player's inventory
 
 	AddDefaultItems();  // Give the player default items, so they're not fully useless
+	Player->SetSkinOpacityMask();  // Set the player's skin mask so she doesn't look all fucked up.
 }

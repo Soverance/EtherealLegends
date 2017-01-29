@@ -18,11 +18,51 @@ using UnrealBuildTool;
 
 public class Ethereal : ModuleRules
 {
-	public Ethereal(TargetInfo Target)
-	{
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "OnlineSubsystem", "OnlineSubsystemNull", "OnlineSubsystemUtils", "AIModule", "GameplayTasks", "Slate", "SlateCore", "UMG", "TrueSkyPlugin" });
-        
-        PrivateDependencyModuleNames.AddRange(new string[] { "OnlineSubsystem" });
+    public Ethereal(TargetInfo Target)
+    {
+        PrivateIncludePaths.AddRange(
+            new string[] {
+                "Ethereal/Private/Management",
+            }
+        );
+
+        PublicDependencyModuleNames.AddRange(
+            new string[] {
+                "Core",
+                "CoreUObject",
+                "Engine",
+                "OnlineSubsystem",
+                "OnlineSubsystemUtils",
+                "AssetRegistry",
+                "AIModule",
+                "GameplayTasks",
+                "UMG",
+                "TrueSkyPlugin"
+            }
+        );
+
+        PrivateDependencyModuleNames.AddRange(
+            new string[] {
+                "InputCore",
+                "Slate",
+                "SlateCore",
+            }
+        );
+
+        DynamicallyLoadedModuleNames.AddRange(
+            new string[] {
+                "OnlineSubsystemNull",
+                "NetworkReplayStreaming",
+                "NullNetworkReplayStreaming",
+                "HttpNetworkReplayStreaming"
+            }
+        );
+
+        PrivateIncludePathModuleNames.AddRange(
+            new string[] {
+                "NetworkReplayStreaming"
+            }
+        );
 
         // Steam Integration
         if ((Target.Platform == UnrealTargetPlatform.Win32) || (Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Linux))

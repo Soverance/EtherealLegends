@@ -116,6 +116,7 @@ void AGaiaTortoise::OnHearNoise(APawn* PawnInstigator, const FVector& Location, 
 	{
 		if (!IsAggroed)
 		{
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			Aggro(PawnInstigator);
 			RunToTarget();
 		}
@@ -129,6 +130,7 @@ void AGaiaTortoise::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			Aggro(Pawn);
 			RunToTarget();
 		}

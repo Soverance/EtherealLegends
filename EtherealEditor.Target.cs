@@ -36,10 +36,4 @@ public class EtherealEditorTarget : TargetRules
 	{
 		OutExtraModuleNames.Add("Ethereal");
 	}
-    // public override GUBPProjectOptions GUBP_IncludeProjectInPromotedBuild_EditorTypeOnly(UnrealTargetPlatform HostPlatform)
-    // {
-        // var Result = new GUBPProjectOptions();
-        // Result.bIsPromotable = true;
-        // return Result;
-    // }
 }

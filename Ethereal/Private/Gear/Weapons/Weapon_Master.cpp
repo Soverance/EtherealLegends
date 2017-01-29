@@ -58,9 +58,9 @@ void AWeapon_Master::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// this works for now because the novelty BeamSaber weapon is the only one where we currently override this function
+	// this works for now because the Excalibur and BeamSaber weapons are the only one where we currently override this function
 	// in the future, i'll probably just copy this over into the individual weapon classes, so they can bind functions specific to each weapon
-	if (Name != EMasterGearList::GL_BeamSaber)
+	if (Name != EMasterGearList::GL_Excalibur && Name != EMasterGearList::GL_BeamSaber)
 	{
 		OnRemoveGear.AddDynamic(this, &AWeapon_Master::RemoveWeapon);
 	}	

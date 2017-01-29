@@ -24,7 +24,7 @@ AEurytosBow::AEurytosBow(const FObjectInitializer& ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/VFX/sphere_skeletal.sphere_skeletal'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/EurytosBow.EurytosBow'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/Eurytos.Eurytos'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_EurytosBow.WeaponIcon_EurytosBow'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_EurytosBow-small.WeaponIcon_EurytosBow-small'"));
@@ -52,9 +52,9 @@ AEurytosBow::AEurytosBow(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponSkeletalMesh->SetHiddenInGame(true);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	WeaponStaticMesh->SetWorldScale3D(FVector(0.15f, 0.15f, 0.15f));  // scale correction
-	WeaponStaticMesh->SetRelativeLocation(FVector(20, -2, -2));  // location correction
-	WeaponStaticMesh->SetRelativeRotation(FRotator(-12, -90, -75));  // location correction
+	WeaponStaticMesh->SetWorldScale3D(FVector(0.06f, 0.06f, 0.06f));  // scale correction
+	WeaponStaticMesh->SetRelativeLocation(FVector(20, -2, 1));  // location correction
+	WeaponStaticMesh->SetRelativeRotation(FRotator(-68, 120, -1));  // location correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
 }

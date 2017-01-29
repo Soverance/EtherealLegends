@@ -106,19 +106,19 @@ void AReturnPortal::DoBurstEffect()
 	switch (InteractingPlayer->EtherealGameInstance->CurrentRealm)
 	{
 		case ERealms::R_Shiitake:
-			InteractingPlayer->EtherealPlayerState->Unlocked_Vulcan = false;
+			InteractingPlayer->EtherealPlayerState->Locked_Vulcan = false;
 			break;
 		case ERealms::R_Vulcan:
-			InteractingPlayer->EtherealPlayerState->Unlocked_Boreal = false;
+			InteractingPlayer->EtherealPlayerState->Locked_Boreal = false;
 			break;
 		case ERealms::R_Boreal:
-			InteractingPlayer->EtherealPlayerState->Unlocked_Yggdrasil = false;
+			InteractingPlayer->EtherealPlayerState->Locked_Yggdrasil = false;
 			break;
 		case ERealms::R_Yggdrasil:
-			InteractingPlayer->EtherealPlayerState->Unlocked_Empyrean = false;
+			InteractingPlayer->EtherealPlayerState->Locked_Empyrean = false;
 			break;
 		case ERealms::R_Empyrean:
-			//InteractingPlayer->EtherealPlayerState->Unlocked_Celestial = false;
+			InteractingPlayer->EtherealPlayerState->Locked_Celestial = false;
 			break;
 		case ERealms::R_Celestial:
 			// There's nothing to unlock for completing Celestial Nexus (at least not yet)

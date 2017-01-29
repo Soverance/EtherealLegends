@@ -24,7 +24,7 @@ AAnnihilator::AAnnihilator(const FObjectInitializer& ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/VFX/sphere_skeletal.sphere_skeletal'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/Annihilator.Annihilator'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/Anni.Anni'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Annihilator.WeaponIcon_Annihilator'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Annihilator-small.WeaponIcon_Annihilator-small'"));
@@ -52,9 +52,9 @@ AAnnihilator::AAnnihilator(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponSkeletalMesh->SetHiddenInGame(true);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	WeaponStaticMesh->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));  // scale correction
-	WeaponStaticMesh->SetRelativeLocation(FVector(38, 2, -12));  // location correction
-	WeaponStaticMesh->SetRelativeRotation(FRotator(-5, -102, 12));  // location correction
+	WeaponStaticMesh->SetWorldScale3D(FVector(0.15f, 0.15f, 0.15f));  // scale correction
+	WeaponStaticMesh->SetRelativeLocation(FVector(20, -2, -2));  // location correction
+	WeaponStaticMesh->SetRelativeRotation(FRotator(-12, -90, -75));  // location correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
 }

@@ -67,11 +67,6 @@ public:
 	UAudioComponent* DeathAudio;
 	USoundCue* S_DeathAudio;
 
-	// Hit Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* HitAudio;
-	USoundCue* S_HitAudio;
-
 	// Placement actor that contains the Spline the Dragon will fly on
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Placement)
 	ARedDragon_Placement* Placement;

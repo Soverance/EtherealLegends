@@ -56,7 +56,7 @@ AMarauder::AMarauder(const FObjectInitializer& ObjectInitializer)
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 
-	//WeaponSkeletalMesh->SetVisibility(true);
+	SwordCollider->SetupAttachment(WeaponSkeletalMesh);
 	SwordCollider->SetBoxExtent(FVector(10.0f, 25.0f, 50.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }

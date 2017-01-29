@@ -56,7 +56,7 @@ ATemperance::ATemperance(const FObjectInitializer& ObjectInitializer)
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 
-	//WeaponSkeletalMesh->SetVisibility(true);
+	SwordCollider->SetupAttachment(WeaponSkeletalMesh);
 	SwordCollider->SetBoxExtent(FVector(20.0f, 30.0f, 55.0f));
 	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }

@@ -299,6 +299,7 @@ void ARedDragon::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 	{
 		if (!IsAggroed)
 		{
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			Aggro(PawnInstigator);
 			RunToTarget();
 		}
@@ -312,6 +313,7 @@ void ARedDragon::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
+			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			Aggro(Pawn);
 			RunToTarget();
 		}
