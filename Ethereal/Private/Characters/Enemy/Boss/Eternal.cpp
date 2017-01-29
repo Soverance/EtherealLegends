@@ -289,7 +289,6 @@ void AEternal::AttackCycle()
 void AEternal::Death()
 {
 	IsDead = true;
-	DeathAudio->Play();
 	// Start the Eternal Death process
 	FTimerHandle DeathTimer;
 	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 5.0f, false);
@@ -302,6 +301,7 @@ void AEternal::EternalDeath()
 
 	///////////////////////////////
 	// ACHIEVEMENTS
+
 	switch (Target->EtherealGameInstance->CurrentRealm)
 	{
 	case ERealms::R_Celestial:
@@ -314,10 +314,11 @@ void AEternal::EternalDeath()
 	// Spawn the EndGame Portal
 
 	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
-	AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
+	//AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
 
 	// Spawn the EndGame Portal wherever the Eternal died.
-	AEndGamePortal* EndGamePortal = GetWorld()->SpawnActor<AEndGamePortal>(GetActorLocation(), GetActorRotation());
+	// I MOVED THIS TO SPAWN ON A FINALDEATH ANIM NOTIFY, CAUSE IT LOOKS COOLER TO GO ALONG WITH THE AUDIO!
+	//AEndGamePortal* EndGamePortal = GetWorld()->SpawnActor<AEndGamePortal>(GetActorLocation(), GetActorRotation());
 }
 
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus

@@ -43,6 +43,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	static ConstructorHelpers::FObjectFinder<USoundCue> EmpyreanAudioObject(TEXT("SoundCue'/Game/Audio/Music/Music_EmpyreanGardens.Music_EmpyreanGardens'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> CelestialAudioObject(TEXT("SoundCue'/Game/Audio/Music/Music_CelestialNexus.Music_CelestialNexus'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> ArenaAudioObject(TEXT("SoundCue'/Game/Audio/Music/Music_Arena.Music_Arena'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> CreditsAudioObject(TEXT("SoundCue'/Game/Audio/Music/Music_Credits_Final_Cue.Music_Credits_Final_Cue'"));
 
 	// Get Assets for Sound Effects
 	static ConstructorHelpers::FObjectFinder<USoundCue> LevelUpAudioObject(TEXT("SoundCue'/Game/Audio/Music/LevelUp_Fanfare.LevelUp_Fanfare'"));
@@ -75,6 +76,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	S_BGM_Empyrean = EmpyreanAudioObject.Object;
 	S_BGM_Celestial = CelestialAudioObject.Object;
 	S_BGM_Arena = ArenaAudioObject.Object;
+	S_BGM_Credits = CreditsAudioObject.Object;
 	S_SFX_LevelUp = LevelUpAudioObject.Object;
 	S_SFX_GameOver = GameOverAudioObject.Object;
 	S_SFX_StartGame = StartGameAudioObject.Object;
@@ -112,6 +114,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	BGM_Empyrean = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("BGM_Empyrean"));
 	BGM_Celestial = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("BGM_Celestial"));
 	BGM_Arena = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("BGM_Arena"));
+	BGM_Credits = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("BGM_Credits"));
 	SFX_LevelUp = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_LevelUp"));
 	SFX_GameOver = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_GameOver"));
 	SFX_StartGame = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_StartGame"));
@@ -142,6 +145,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	BGM_Empyrean->Sound = S_BGM_Empyrean;
 	BGM_Celestial->Sound = S_BGM_Celestial;
 	BGM_Arena->Sound = S_BGM_Arena;
+	BGM_Credits->Sound = S_BGM_Credits;
 	SFX_LevelUp->Sound = S_SFX_LevelUp;
 	SFX_GameOver->Sound = S_SFX_GameOver;
 	SFX_StartGame->Sound = S_SFX_StartGame;
@@ -173,6 +177,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	BGM_Empyrean->bAutoActivate = false;
 	BGM_Celestial->bAutoActivate = false;
 	BGM_Arena->bAutoActivate = false;
+	BGM_Credits->bAutoActivate = false;
 	SFX_LevelUp->bAutoActivate = false;
 	SFX_GameOver->bAutoActivate = false;
 	SFX_StartGame->bAutoActivate = false;
@@ -207,6 +212,7 @@ void AEtherealAudioManager::BeginPlay()
 		GameInstance->SetAudioVolume(BGM_Empyrean, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(BGM_Celestial, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(BGM_Arena, EAudioTypes::AT_Music);
+		GameInstance->SetAudioVolume(BGM_Credits, EAudioTypes::AT_Music);
 
 		GameInstance->SetAudioVolume(Battle_Standard, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(Battle_Boss, EAudioTypes::AT_Music);
@@ -423,7 +429,6 @@ void AEtherealAudioManager::Play_BGM_MainMenu()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_MainMenu->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_MainMenu->Play();  // Play the Music
 		CurrentAudio = BGM_MainMenu;  // Set the current audio to be this Music
 	}
 }
@@ -442,7 +447,6 @@ void AEtherealAudioManager::Play_BGM_Arcadia()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Arcadia->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Arcadia->Play();  // Play the Music
 		CurrentAudio = BGM_Arcadia;  // Set the current audio to be this Music
 	}
 }
@@ -461,7 +465,6 @@ void AEtherealAudioManager::Play_BGM_Shiitake()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Shiitake->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Shiitake->Play();  // Play the Music
 		CurrentAudio = BGM_Shiitake;  // Set the current audio to be this Music
 	}
 }
@@ -480,7 +483,6 @@ void AEtherealAudioManager::Play_BGM_Vulcan()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Vulcan->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Vulcan->Play();  // Play the Music
 		CurrentAudio = BGM_Vulcan;  // Set the current audio to be this Music
 	}
 }
@@ -499,7 +501,6 @@ void AEtherealAudioManager::Play_BGM_Boreal()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Boreal->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Boreal->Play();  // Play the Music
 		CurrentAudio = BGM_Boreal;  // Set the current audio to be this Music
 	}
 }
@@ -518,7 +519,6 @@ void AEtherealAudioManager::Play_BGM_Yggdrasil()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Yggdrasil->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Yggdrasil->Play();  // Play the Music
 		CurrentAudio = BGM_Yggdrasil;  // Set the current audio to be this Music
 	}
 }
@@ -537,7 +537,6 @@ void AEtherealAudioManager::Play_BGM_Empyrean()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Empyrean->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Empyrean->Play();  // Play the Music
 		CurrentAudio = BGM_Empyrean;  // Set the current audio to be this Music
 	}
 }
@@ -556,7 +555,6 @@ void AEtherealAudioManager::Play_BGM_Celestial()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Celestial->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Celestial->Play();  // Play the Music
 		CurrentAudio = BGM_Celestial;  // Set the current audio to be this Music
 	}
 }
@@ -575,8 +573,25 @@ void AEtherealAudioManager::Play_BGM_Arena()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		BGM_Arena->FadeIn(0.5f, 1);  // fade in the music
-		//BGM_Celestial->Play();  // Play the Music
 		CurrentAudio = BGM_Arena;  // Set the current audio to be this Music
+	}
+}
+
+// Play Credits Background Music
+void AEtherealAudioManager::Play_BGM_Credits()
+{
+	if (BGM_Credits->IsPlaying())
+	{
+		return;  // If Music is already playing, do nothing.
+	}
+	else
+	{
+		if (CurrentAudio)
+		{
+			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
+		}
+		BGM_Credits->FadeIn(0.5f, 1);  // fade in the music
+		CurrentAudio = BGM_Credits;  // Set the current audio to be this Music
 	}
 }
 

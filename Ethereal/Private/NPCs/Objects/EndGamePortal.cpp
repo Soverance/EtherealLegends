@@ -32,7 +32,7 @@ AEndGamePortal::AEndGamePortal(const FObjectInitializer& ObjectInitializer)
 	P_HoloIdleFX = HoloIdleParticle.Object;
 	P_BurstFX = BurstParticle.Object;
 	
-	InteractBox->SetBoxExtent(FVector(100, 100, 100));  // scale up the interact box
+	InteractBox->SetBoxExtent(FVector(150, 150, 150));  // scale up the interact box
 
 	// Create objects
 	PortalAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("PortalAudio"));
@@ -50,7 +50,8 @@ AEndGamePortal::AEndGamePortal(const FObjectInitializer& ObjectInitializer)
 	HoloIdleFX->SetupAttachment(RootComponent);
 	HoloIdleFX->Template = P_HoloIdleFX;
 	HoloIdleFX->bAutoActivate = true;
-	HoloIdleFX->SetRelativeLocation(FVector(0, 0, -25));
+	HoloIdleFX->SetRelativeLocation(FVector(0, 0, -200));
+	HoloIdleFX->SetRelativeRotation(FRotator(90, 0, 0));
 	HoloIdleFX->SetRelativeScale3D(FVector(4.0f, 4.0f, 4.0f));
 
 	BurstFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("BurstFX"));
@@ -101,37 +102,29 @@ void AEndGamePortal::DoBurstEffect()
 	PortalAudio->Play();
 	InteractingPlayer->DoFlight = true;
 
-	// This switch statement unlocks the NEXT Realm in the progression sequence
-	// Shiitake Temple is unlocked by completing the Tutorial
-	switch (InteractingPlayer->EtherealGameInstance->CurrentRealm)
+	// If this is your first time through the Celestial Nexus, set the Lock to true, and start the credits sequence.
+	if (!InteractingPlayer->EtherealPlayerState->HasCompletedNexus)
 	{
-		case ERealms::R_Shiitake:
-			InteractingPlayer->EtherealPlayerState->Locked_Vulcan = false;
-			break;
-		case ERealms::R_Vulcan:
-			InteractingPlayer->EtherealPlayerState->Locked_Boreal = false;
-			break;
-		case ERealms::R_Boreal:
-			InteractingPlayer->EtherealPlayerState->Locked_Yggdrasil = false;
-			break;
-		case ERealms::R_Yggdrasil:
-			InteractingPlayer->EtherealPlayerState->Locked_Empyrean = false;
-			break;
-		case ERealms::R_Empyrean:
-			//InteractingPlayer->EtherealPlayerState->Locked_Celestial = false;
-			break;
-		case ERealms::R_Celestial:
-			// There's nothing to unlock for completing Celestial Nexus (at least not yet)
-			break;
+		InteractingPlayer->EtherealPlayerState->HasCompletedNexus = true; 
+		// Load End Credits after a short delay
+		FTimerHandle LoadTimer;
+		GetWorldTimerManager().SetTimer(LoadTimer, this, &AEndGamePortal::LoadEndCredits, 3.0f, false);		
+	}
+	else
+	{
+		// Load Arcadia after a short delay
+		FTimerHandle LoadTimer;
+		GetWorldTimerManager().SetTimer(LoadTimer, this, &AEndGamePortal::LoadArcadia, 3.0f, false);
 	}
 
-	// Load Arcadia after a short delay
-	FTimerHandle LoadTimer;
-	GetWorldTimerManager().SetTimer(LoadTimer, this, &AEndGamePortal::LoadArcadia, 3.0f, false);
-
-	// Destroy Return Portal after a short delay
+	// Destroy EndGame Portal after a short delay
 	FTimerHandle DestroyTimer;
 	GetWorldTimerManager().SetTimer(DestroyTimer, this, &AEndGamePortal::DestroyPortal, 8.0f, false);
+}
+
+void AEndGamePortal::LoadEndCredits()
+{
+	InteractingPlayer->EtherealGameInstance->FadeOutEndGame.Broadcast();  // FADE TO WHITE
 }
 
 void AEndGamePortal::LoadArcadia()

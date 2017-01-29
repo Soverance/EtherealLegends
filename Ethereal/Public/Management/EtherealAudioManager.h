@@ -179,14 +179,23 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BackgroundMusic)
 	void Play_BGM_Celestial();
 
-	// Celestial Nexus Background Music
+	// Arena Background Music
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BackgroundMusic)
 	UAudioComponent* BGM_Arena;
 	USoundCue* S_BGM_Arena;
 
-	// Play Celestial Nexus Background Music
+	// Play Arena Background Music
 	UFUNCTION(BlueprintCallable, Category = BackgroundMusic)
 	void Play_BGM_Arena();
+
+	// Credits Background Music
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BackgroundMusic)
+	UAudioComponent* BGM_Credits;
+	USoundCue* S_BGM_Credits;
+
+	// Play Credits Background Music
+	UFUNCTION(BlueprintCallable, Category = BackgroundMusic)
+	void Play_BGM_Credits();
 
 	// SOUND EFFECTS  -----------------------------------------
 
