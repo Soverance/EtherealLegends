@@ -121,7 +121,7 @@ void AReturnPortal::DoBurstEffect()
 			InteractingPlayer->EtherealPlayerState->Locked_Celestial = false;
 			break;
 		case ERealms::R_Celestial:
-			// There's nothing to unlock for completing Celestial Nexus (at least not yet)
+			// RETURN PORTAL DOES NOT SPAWN INSIDE NEXUS
 			break;
 	}
 

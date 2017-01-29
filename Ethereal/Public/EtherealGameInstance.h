@@ -24,6 +24,9 @@
 #include "Management/EtherealTrueSKYManager.h"
 #include "EtherealGameInstance.generated.h"
 
+// Event Dispatchers
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFadeOutEndGame);
+
 UCLASS()
 class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 {
@@ -32,6 +35,10 @@ class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 public:
 
 	UEtherealGameInstance();
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, Category = Dispatchers)
+	FFadeOutEndGame FadeOutEndGame;
 
 	// The current state of the game
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)

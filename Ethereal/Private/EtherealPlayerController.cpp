@@ -231,6 +231,8 @@ void AEtherealPlayerController::Load_Stats()
 			EtherealPlayer->EtherealPlayerState->EXP_Current = EtherealSave->Save_CurrentEXP;
 			EtherealPlayer->EtherealPlayerState->KillCount = EtherealSave->Save_KillCount;
 			EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed = EtherealSave->Save_TotalSecondsPlayed;
+			// With the player's level loaded from the save file, we can call SetBaseStats();
+			EtherealPlayer->EtherealPlayerState->SetBaseStats();
 		}
 	}
 }

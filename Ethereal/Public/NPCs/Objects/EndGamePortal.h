@@ -62,6 +62,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void DoBurstEffect();
 
+	// Load End Credits when the EndGamePortal is used for the first time
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void LoadEndCredits();
+
 	// Do the Burst effect when activating the portal
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void LoadArcadia();
