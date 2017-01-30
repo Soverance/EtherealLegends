@@ -114,6 +114,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void HeavyAttack();
 
+	// Death Location - gathered immediately on death, stored for later use so that we know where to spawn the EndGamePortal
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	FVector DeathLocation;
+
 	// Eternal Death
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void EternalDeath();

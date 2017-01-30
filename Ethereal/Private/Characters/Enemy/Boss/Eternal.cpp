@@ -180,6 +180,7 @@ void AEternal::BeginPlay()
 
 	Targetable = false;  // make this enemy untargetable when spawned
 	GetCapsuleComponent()->SetVisibility(false, true); // hide root object and propagate to all children
+	DeathLocation = GetActorLocation();  // sets the death location as the initial spawn location; it's just a fall back in case the set during death fails, for whatever reason.
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AEternal::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AEternal::OnSeePawn);  // bind the OnSeePawn event
@@ -288,7 +289,8 @@ void AEternal::AttackCycle()
 
 void AEternal::Death()
 {
-	IsDead = true;
+	IsDead = true;  // start death anim
+	DeathLocation = GetActorLocation();  // store current location as death location
 
 	///////////////////////////////
 	// ACHIEVEMENTS
@@ -298,28 +300,23 @@ void AEternal::Death()
 	case ERealms::R_Celestial:
 		Target->EtherealPlayerController->Achievement_Realm_Celestial();  // give this player the Achievement for clearing this realm
 		break;
-
 	}
 
 	// Start the Eternal Death process
 	FTimerHandle DeathTimer;
-	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 5.0f, false);
+	GetWorldTimerManager().SetTimer(DeathTimer, this, &AEternal::EternalDeath, 6.0f, false);
 }
 
 void AEternal::EternalDeath()
 {
-	DisappearFX->Activate();
-	FinalDeath(true, false);	
+	DisappearFX->Activate();  // play disappear effect	
+	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
 
 	//////////////////////////////
 	// Spawn the EndGame Portal
+	AEndGamePortal* EndGamePortal = GetWorld()->SpawnActor<AEndGamePortal>(DeathLocation, GetActorRotation());
 
-	AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm);  // Play CurrentRealm BGM
-	//AudioManager->Play_SFX_LevelUp();  // Play LevelUp SFX to congratulate player.  It should probably be a different, distinct sound, but I haven't found a good one yet.
-
-	// Spawn the EndGame Portal wherever the Eternal died.
-	// I MOVED THIS TO SPAWN ON A FINALDEATH ANIM NOTIFY, CAUSE IT LOOKS COOLER TO GO ALONG WITH THE AUDIO!
-	//AEndGamePortal* EndGamePortal = GetWorld()->SpawnActor<AEndGamePortal>(GetActorLocation(), GetActorRotation());
+	FinalDeath(true, false);
 }
 
 // Init Aggro - Called by Zhan's death while inside Celestial Nexus
