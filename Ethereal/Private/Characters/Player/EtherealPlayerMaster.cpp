@@ -21,8 +21,8 @@
 AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	//static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/EtherealParty/Apprentice/Erika_Archer.Erika_Archer'"));
-	//static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Apprentice/Mixamo_Skeleton_Erika_Anim.Mixamo_Skeleton_Erika_Anim_C'"));
+	//static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/EtherealParty/Morgan/Morgan.Morgan'"));
+	//static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Morgan/Anim_Morgan.Anim_Morgan'_C'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ExclamationMesh(TEXT("StaticMesh'/Game/EtherealParty/Apprentice/exclamation.exclamation'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> LevelUpParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/ICE/P_levelUp_Eth.P_levelUp_Eth'"));
 	static ConstructorHelpers::FObjectFinder<UClass> LevelUpCamShakeObject(TEXT("Blueprint'/Game/Blueprints/CamShakes/CS_LevelUp.CS_LevelUp_C'"));
@@ -111,15 +111,16 @@ void AEtherealPlayerMaster::SetSkinOpacityMask_Implementation()
 
 }
 
-void AEtherealPlayerMaster::ReportFootstep(USoundBase * SoundToPlay, float Volume)
+void AEtherealPlayerMaster::ReportFootstep(UAudioComponent* SoundToPlay)
 {
 	if (SoundToPlay)
 	{
-		//Play the actual sound
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), SoundToPlay, GetActorLocation(), Volume);
+		//Play the footstep sound
+		//SoundToPlay->SetVolumeMultiplier(Volume);
+		SoundToPlay->Play();
 
 		//Report to Enemy A.I. that we've played a sound with a certain volume in a specific location
-		MakeNoise(Volume, this, GetActorLocation());
+		MakeNoise(1, this, GetActorLocation());
 	}
 }
 

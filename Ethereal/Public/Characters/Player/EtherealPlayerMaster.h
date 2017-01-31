@@ -74,12 +74,12 @@ public:
 
 	///////////////////////////////////////////////////
 	// A.I.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI)
 	UPawnNoiseEmitterComponent* PawnNoiseEmitter;
 
 	// The function that is going to play the footstep sound and report it to all enemies
 	UFUNCTION(BlueprintCallable, Category = AI)
-	void ReportFootstep(USoundBase* SoundToPlay, float Volume);
+	void ReportFootstep(UAudioComponent* SoundToPlay);
 
 	////////////////////////////////////////////////////
 	// CONTROL STATES
@@ -277,7 +277,7 @@ public:
 	TSubclassOf<UCameraShake> LevelUpCamShake;
 
 	///////////////////////////////////////////
-	// COMBAT TARGETING
+	// COMBAT LOCK ON TARGETING
 
 	// A reference for storing the Current Target.
 	// This is classed as an EtherealCharacterMaster because in an early prototype multiplayer version of Ethereal, you could also target other players.
