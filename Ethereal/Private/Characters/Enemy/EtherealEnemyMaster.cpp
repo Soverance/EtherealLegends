@@ -272,7 +272,17 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 				}
 				else if (BattleType == EBattleTypes::BT_Boss)
 				{
-					AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+					EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+
+					// play the boss battle music
+					if (Name == EEnemyNames::EN_Zhan)
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+					}
+					else
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  
+					}
 				}
 
 				// if the player is in a menu when this enemy aggros, close it
@@ -300,11 +310,27 @@ void AEtherealEnemyMaster::Deaggro()
 	{
 		if (IsDead)
 		{
+			// I totally forgot why IsAggroed is commented out here... but I'm gonna leave it for now.
 			//IsAggroed = false;
 			RunAI = false;
 			Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list
 			DisableBattleMusic();
-		}		
+		}
+		if (!IsDead)
+		{
+			if (Target)
+			{
+				// boss enemies only deaggro in this manner if the player is dead.
+				// i.e., you cannot run from bosses.
+				if (Target->IsDead)
+				{
+					IsAggroed = false;
+					RunAI = false;
+					Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
+					DisableBattleMusic();
+				}
+			}
+		}
 	}	
 }
 

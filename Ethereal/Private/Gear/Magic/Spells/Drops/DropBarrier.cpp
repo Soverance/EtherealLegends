@@ -34,6 +34,11 @@ ADropBarrier::ADropBarrier(const FObjectInitializer& ObjectInitializer)
 	S_ActiveAudio = ActiveAudioObject.Object;
 	S_RemoveAudio = RemoveAudioObject.Object;
 
+	DefenseMultiplier = 0.25f;
+	OriginalDefense = 0;
+	BonusDefense = 0;
+	BarrierActive = false;
+
 	// Creates a scene component and sets it as the root
 	Root = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("Root"));
 	RootComponent = Root;
@@ -94,14 +99,16 @@ void ADropBarrier::OnInteract(UPrimitiveComponent * HitComp, AActor * OtherActor
 
 	if (Player)
 	{
-		// this code runs when the player enters the Barrier dome's sphere of influence
-		ActiveAudio->Play();
-		BonusDefense = FMath::FloorToInt(Player->EtherealPlayerState->DEF * DefenseMultiplier);  // Determine Bonus DEF to add
-		Player->EtherealPlayerState->DEF = Player->EtherealPlayerState->DEF + BonusDefense;  // Add Bonus DEF
-		Player->EtherealPlayerController->ActivateStatus_Barrier();  // Activate Barrier Status Effect
-
-		//FString message = TEXT("Entered Barrier: ") + OtherActor->GetName() + TEXT("HitComp: ") + HitComp->GetName() + TEXT("OtherComp: ") + OtherComp->GetName();
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, message);
+		if (!BarrierActive)
+		{
+			// this code runs when the player enters the Barrier dome's sphere of influence
+			BarrierActive = true;
+			ActiveAudio->Play();
+			OriginalDefense = Player->EtherealPlayerState->DEF;  // Store original DEF for later use
+			BonusDefense = FMath::FloorToInt(Player->EtherealPlayerState->DEF * DefenseMultiplier);  // Determine Bonus DEF to add
+			Player->EtherealPlayerState->DEF = Player->EtherealPlayerState->DEF + BonusDefense;  // Add Bonus DEF
+			Player->EtherealPlayerController->ActivateStatus_Barrier();  // Activate Barrier Status Effect
+		}		
 	}
 }
 
@@ -112,8 +119,9 @@ void ADropBarrier::EndInteract(UPrimitiveComponent * HitComp, AActor * OtherActo
 	if (Player)
 	{
 		// This code runs when the player has left the Barrier dome's sphere of influence
+		BarrierActive = false;
 		RemoveAudio->Play();
-		Player->EtherealPlayerState->DEF = Player->EtherealPlayerState->DEF - BonusDefense;  // Add Bonus DEF
+		Player->EtherealPlayerState->DEF = OriginalDefense;  // Set back to Original DEF
 		Player->EtherealPlayerController->RemoveStatus_Barrier();  // Remove Barrier Status Effect
 	}
 }

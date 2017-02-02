@@ -82,6 +82,10 @@ public:
 	UParticleSystemComponent* SpinAtkFX;
 	UParticleSystem* P_SpinAtkFX;
 
+	// If HasFallen is true, then Zhan is on the ground in the Realm, and we can allow his AI senses to aggro the player
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	bool HasFallen;
+
 	// Do Fall Aggro Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
 	bool DoFallAggro;

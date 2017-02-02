@@ -50,12 +50,29 @@ AAssassinsBrais::AAssassinsBrais(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AssassinsBraisSpecialEffect", "Increases Movement Speed.");
 }
 
 // Called when the game starts or when spawned
 void AAssassinsBrais::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAssassinsBrais::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAssassinsBrais::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAssassinsBrais::DoSpecialEffect()
+{
+	OwnerReference->HasFastPants = true;
+}
+
+// Custom code for Special Effect
+void AAssassinsBrais::RemoveSpecialEffect()
+{
+	OwnerReference->HasFastPants = false;
 }
 
 #undef LOCTEXT_NAMESPACE

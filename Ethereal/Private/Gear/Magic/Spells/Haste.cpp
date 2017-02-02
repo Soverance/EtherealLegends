@@ -109,7 +109,16 @@ void AHaste::IncreaseSPD()
 {
 	StoredSPDBoost = OwnerReference->EtherealPlayerState->SPD * HasteMultiplier;  // Define the SPD Boost amount
 	OwnerReference->EtherealPlayerState->SPD = OwnerReference->EtherealPlayerState->SPD + StoredSPDBoost;  // Add the SPD Boost to the player's current SPD
-	OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 150;  // Set Player's Max Walk Speed to 150
+
+	if (OwnerReference->HasFastPants)
+	{
+		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 170;  // Set Player's Max Walk Speed to 150
+	}
+	if (!OwnerReference->HasFastPants)
+	{
+		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 150;  // Set Player's Max Walk Speed to 150
+	}
+	
 }
 
 void AHaste::DecreaseSPD()
@@ -119,12 +128,27 @@ void AHaste::DecreaseSPD()
 	// Set the player's Max Walk Speed back to normal
 	if (OwnerReference->IsRunning)
 	{
-		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 100;  // Set Player's Max Walk Speed to 100 if running is toggled on
+		if (OwnerReference->HasFastPants)
+		{
+			OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 120;  // Set Player's Max Walk Speed to 100 if running is toggled on
+		}
+		if (!OwnerReference->HasFastPants)
+		{
+			OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 100;  // Set Player's Max Walk Speed to 100 if running is toggled on
+		}
+		
 	}
-	else
+	if (!OwnerReference->IsRunning)
 	{
-		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 50;  // Set Player's Max Walk Speed to 50 if running is toggled off
-	}
+		if (OwnerReference->HasFastPants)
+		{
+			OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 70;  // Set Player's Max Walk Speed to 100 if running is toggled on
+		}
+		if (!OwnerReference->HasFastPants)
+		{
+			OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 50;  // Set Player's Max Walk Speed to 100 if running is toggled on
+		}
 
+	}
 }
 

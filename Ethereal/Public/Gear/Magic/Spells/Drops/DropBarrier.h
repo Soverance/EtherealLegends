@@ -73,6 +73,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 	float Duration;
 
+	// Only true if the player is inside the barrier
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	bool BarrierActive;
+
+	// The Player's original DEF value, before activating barrier
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	int32 OriginalDefense;
+
 	// The Bonus Defense to add to the Player's current DEF
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 	int32 BonusDefense;

@@ -217,10 +217,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
 	int32 StoredDEF = 0.0f;
 
-	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
-	bool HasShadowGear;
-
 	// This function sets the DamageOutput variable, based on the BaseAtk value of an attack. Returns the ultimate value of damage dealt to an enemy.
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void PlayerDealDamage(float BaseAtk);
@@ -303,4 +299,23 @@ public:
 	// Whether or not the player is locked on a target
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Targeting)
 	bool LockedOnTarget;
+
+	///////////////////////////////////////////
+	// EQUIPMENT SPECIAL EFFECTS
+
+	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasShadowGear;
+
+	// Whether or not the player has fast pants equipped, which are Leg Armor that increases movement speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasFastPants;
+
+	// If the player has the Null Burn effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullBurn;
+
+	// If the player has the Null Poison effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullPoison;
 };

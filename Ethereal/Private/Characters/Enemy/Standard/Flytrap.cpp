@@ -44,7 +44,7 @@ AFlytrap::AFlytrap(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("FlytrapText", "Flytrap");
 	Realm = ERealms::R_Yggdrasil;
 	BattleType = EBattleTypes::BT_Standard;
-	CommonDrop = EMasterGearList::GL_None;
+	CommonDrop = EMasterGearList::GL_Antidote;
 	UncommonDrop = EMasterGearList::GL_HiPotion;
 	RareDrop = EMasterGearList::GL_Elixer;
 	AttackDelay = 2.0f;

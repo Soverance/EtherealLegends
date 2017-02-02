@@ -50,12 +50,29 @@ ACrusaderTabard::ACrusaderTabard(const FObjectInitializer& ObjectInitializer)
 	SPD = 4;
 	HP = 60;
 	MP = 30;
+	SpecialEffectText = LOCTEXT("CrusaderTabardSpecialEffect", "Prevents Burn.");
 }
 
 // Called when the game starts or when spawned
 void ACrusaderTabard::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ACrusaderTabard::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ACrusaderTabard::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ACrusaderTabard::DoSpecialEffect()
+{
+	OwnerReference->NullBurn = true;
+}
+
+// Custom code for Special Effect
+void ACrusaderTabard::RemoveSpecialEffect()
+{
+	OwnerReference->NullBurn = false;
 }
 
 #undef LOCTEXT_NAMESPACE

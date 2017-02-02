@@ -148,12 +148,28 @@ void AEtherealPlayerMaster::ToggleRunState()
 	if (IsRunning) // player is currently running, so set to walk speed
 	{
 		IsRunning = false;
-		GetCharacterMovement()->MaxWalkSpeed = 50;
+
+		if (HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 50;
+		}
+		if (!HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 70;
+		}
+		
 	}
 	else // player is currently walking, so set to run speed
 	{
 		IsRunning = true;
-		GetCharacterMovement()->MaxWalkSpeed = 100;
+		if (HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 100;
+		}
+		if (!HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 120;
+		}
 	}
 }
 
