@@ -56,8 +56,23 @@ void AReraise::BeginPlay()
 
 void AReraise::Use()
 {
-	ItemAudio->Play();
-	OwnerReference->EtherealPlayerController->ActivateStatus_Reraise();
+	if (OwnerReference)
+	{
+		// If the player already has the reraise effect active, then using this item results in an error
+		if (OwnerReference->HasReraise)
+		{
+			FText DisplayText = LOCTEXT("ReraiseFailed", "NO EFFECT!");
+			OwnerReference->CombatTextComponent->ShowCombatText(ECombatTextTypes::TT_Text, DisplayText);  // error notify
+			OwnerReference->AudioManager->Play_SFX_Error();  // error notify
+		}
+		// if the player does not yet have reraise active, we'll make it active.
+		else
+		{			
+			OwnerReference->HasReraise = true;
+			ItemAudio->Play();
+			OwnerReference->EtherealPlayerController->ActivateStatus_Reraise();
+		}
+	}	
 }
 
 #undef LOCTEXT_NAMESPACE

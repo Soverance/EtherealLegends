@@ -17,7 +17,6 @@
 #include "Characters/Player/EtherealPlayerMaster.h"
 #include "EtherealNPCMaster.h"
 
-
 // Sets default values
 AEtherealNPCMaster::AEtherealNPCMaster(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

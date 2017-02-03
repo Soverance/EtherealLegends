@@ -674,7 +674,7 @@ void AEtherealPlayerState::AddToInventory(EMasterGearList ItemToAdd, bool Should
 					}
 					else
 					{
-						ConsumableItem->Destroy();  // You were maxed out, so destroy this item instead
+						CanAdd = false;  // Your capacity for this item was maxed out, so you can't add any more to the inventory
 					}
 				}
 			}

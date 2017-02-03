@@ -149,28 +149,59 @@ void AEtherealPlayerMaster::ToggleRunState()
 	{
 		IsRunning = false;
 
-		if (HasFastPants)
-		{
-			GetCharacterMovement()->MaxWalkSpeed = 50;
-		}
-		if (!HasFastPants)
-		{
-			GetCharacterMovement()->MaxWalkSpeed = 70;
-		}
+		SetMovementSpeed();  // set movement speed
 		
 	}
 	else // player is currently walking, so set to run speed
 	{
 		IsRunning = true;
+		
+		SetMovementSpeed();  // set movement speed
+	}
+}
+
+// Set Movement Speed
+void AEtherealPlayerMaster::SetMovementSpeed()
+{
+	// If the player is Hasted, ignore all walk modes, and set to high speed
+	if (IsHasted)
+	{
 		if (HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 100;
+			GetCharacterMovement()->MaxWalkSpeed = 170;
 		}
 		if (!HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 120;
+			GetCharacterMovement()->MaxWalkSpeed = 150;
 		}
 	}
+	// If the player is not hasted, do the regular stuff.
+	else
+	{
+		if (!IsRunning) // player is currently walking, so set to walk speed
+		{
+			if (HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 70;
+			}
+			if (!HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 50;
+			}
+
+		}
+		if (IsRunning) // player is currently running, so set to run speed
+		{
+			if (HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 120;
+			}
+			if (!HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 100;
+			}
+		}
+	}	
 }
 
 // This function sets the DamageOutput variable, based on the BaseAtk value of an attack. Returns the ultimate value of damage dealt to an enemy.

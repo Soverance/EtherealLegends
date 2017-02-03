@@ -35,7 +35,7 @@ AEtherealPlayerController::AEtherealPlayerController()
 	static ConstructorHelpers::FObjectFinder<UTexture2D> AdrenalineIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/adrenaline.adrenaline'"));
 	// PARTICLES
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> HealEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Heal.P_Heal'"));
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> RaiseEffectObject(TEXT("ParticleSystem'/Game/SenzaPeso/MASTERALL/Particles/P_AltarBurst.P_AltarBurst'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> RaiseEffectObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Cines/Ausar/P_Reraise.P_Reraise'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RegenEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Heal.P_Heal'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RefreshEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Refresh.P_Refresh'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> BarrierEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/Barrier-ProtectShield.Barrier-ProtectShield'"));

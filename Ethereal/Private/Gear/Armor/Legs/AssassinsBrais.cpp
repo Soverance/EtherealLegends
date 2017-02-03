@@ -67,12 +67,14 @@ void AAssassinsBrais::BeginPlay()
 void AAssassinsBrais::DoSpecialEffect()
 {
 	OwnerReference->HasFastPants = true;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
 }
 
 // Custom code for Special Effect
 void AAssassinsBrais::RemoveSpecialEffect()
 {
 	OwnerReference->HasFastPants = false;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
 }
 
 #undef LOCTEXT_NAMESPACE

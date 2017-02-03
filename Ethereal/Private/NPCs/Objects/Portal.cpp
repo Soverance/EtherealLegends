@@ -15,6 +15,7 @@
 
 #include "Ethereal.h"
 #include "Management/GameStates.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
 #include "Portal.h"
 
 APortal::APortal(const FObjectInitializer& ObjectInitializer)

@@ -67,11 +67,13 @@ void AValhallaFlanchard::BeginPlay()
 void AValhallaFlanchard::DoSpecialEffect()
 {
 	OwnerReference->HasFastPants = true;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
 }
 
 // Custom code for Special Effect
 void AValhallaFlanchard::RemoveSpecialEffect()
 {
 	OwnerReference->HasFastPants = false;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
 }
 #undef LOCTEXT_NAMESPACE

@@ -164,6 +164,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void ToggleRunState();
 
+	// Sets teh player's movement speed
+	UFUNCTION(BlueprintCallable, Category = Movement)
+	void SetMovementSpeed();
+
 	//////////////////////////////////////////////////
 	// MENU / MAP CONTROL
 
@@ -310,6 +314,10 @@ public:
 	// Whether or not the player has fast pants equipped, which are Leg Armor that increases movement speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool HasFastPants;
+
+	// Whether or not the player has the Reraise effect active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasReraise;
 
 	// If the player has the Null Burn effect (generally granted via armor special effect)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
