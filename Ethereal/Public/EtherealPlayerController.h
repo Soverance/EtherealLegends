@@ -168,6 +168,9 @@ public:
 	void Achievement_Realm_Celestial();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
+	void Achievement_LevelCount();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
 	void Achievement_GoldCount();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)

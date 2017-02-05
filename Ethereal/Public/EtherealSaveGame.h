@@ -144,7 +144,11 @@ public:
 
 	// Kill Count
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
-	int32 Save_KillCount;	
+	int32 Save_KillCount;
+
+	// Chicken Kill Count
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	int32 Save_ChickenKillCount;
 
 	// Total Seconds Played
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)

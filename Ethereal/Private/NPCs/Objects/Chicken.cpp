@@ -136,6 +136,7 @@ void AChicken::BlowUp()
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), InteractingPlayer->LevelUpCamShake, InteractingPlayer->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	BurstFX->Activate();
 	IsDead = true;
+	InteractingPlayer->EtherealPlayerState->ChickenKillCount++; // increment chicken kill count
 	InteractingPlayer->EtherealPlayerController->Achievement_Chickenlover();
 
 	// determine whether or not to drop an item

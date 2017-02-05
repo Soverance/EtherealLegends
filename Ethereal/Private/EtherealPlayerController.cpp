@@ -214,6 +214,7 @@ void AEtherealPlayerController::Save_Stats()
 			EtherealSave->Save_CurrentGold = EtherealPlayer->EtherealPlayerState->Gold_Current;
 			EtherealSave->Save_CurrentEXP = EtherealPlayer->EtherealPlayerState->EXP_Current;
 			EtherealSave->Save_KillCount = EtherealPlayer->EtherealPlayerState->KillCount;
+			EtherealSave->Save_ChickenKillCount = EtherealPlayer->EtherealPlayerState->ChickenKillCount;
 			EtherealSave->Save_TotalSecondsPlayed = EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed;
 		}
 	}
@@ -230,6 +231,7 @@ void AEtherealPlayerController::Load_Stats()
 			EtherealPlayer->EtherealPlayerState->Gold_Current = EtherealSave->Save_CurrentGold;
 			EtherealPlayer->EtherealPlayerState->EXP_Current = EtherealSave->Save_CurrentEXP;
 			EtherealPlayer->EtherealPlayerState->KillCount = EtherealSave->Save_KillCount;
+			EtherealPlayer->EtherealPlayerState->ChickenKillCount = EtherealSave->Save_ChickenKillCount;
 			EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed = EtherealSave->Save_TotalSecondsPlayed;
 			// With the player's level loaded from the save file, we can call SetBaseStats();
 			EtherealPlayer->EtherealPlayerState->SetBaseStats();
@@ -519,6 +521,10 @@ void AEtherealPlayerController::Achievement_Realm_Empyrean_Implementation()
 }
 
 void AEtherealPlayerController::Achievement_Realm_Celestial_Implementation()
+{
+}
+
+void AEtherealPlayerController::Achievement_LevelCount_Implementation()
 {
 }
 

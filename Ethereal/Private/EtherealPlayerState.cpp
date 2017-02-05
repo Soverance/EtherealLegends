@@ -101,6 +101,7 @@ void AEtherealPlayerState::ResetNewGame()
 	Gold_Current = 0;
 	TotalSecondsPlayed = 0;
 	KillCount = 0;
+	ChickenKillCount = 0;
 
 	HasCompletedTutorial = false;
 	Locked_Shiitake = true;
@@ -461,6 +462,7 @@ void AEtherealPlayerState::LevelUp()
 		{
 			UGameplayStatics::PlayWorldCameraShake(GetWorld(), Player->LevelUpCamShake, Player->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 			PlayerLevel++;  // player level + 1
+			Player->EtherealPlayerController->Achievement_LevelCount();  // add to Black Belt achievement
 			SetBaseStats();  // Reset the Base Stats
 			
 			// Reset the Player's currently equipped gear stat additions
