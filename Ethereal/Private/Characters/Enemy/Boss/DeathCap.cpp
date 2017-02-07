@@ -38,7 +38,7 @@ ADeathCap::ADeathCap(const FObjectInitializer& ObjectInitializer)
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_EagleEye;
 	RareDrop = EMasterGearList::GL_SpartanShield;
-	AttackDelay = 2.5f;
+	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.5f, 1.5f, 1.5f));
 	GetCharacterMovement()->MaxAcceleration = 0;

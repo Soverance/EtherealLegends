@@ -50,12 +50,29 @@ AAssassinsCuffs::AAssassinsCuffs(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AssassinsCuffsSpecialEffect", "Damage boost when using Ranged weapons.");
 }
 
 // Called when the game starts or when spawned
 void AAssassinsCuffs::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAssassinsCuffs::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAssassinsCuffs::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAssassinsCuffs::DoSpecialEffect()
+{
+	OwnerReference->BoostRanged = true;
+}
+
+// Custom code for Special Effect
+void AAssassinsCuffs::RemoveSpecialEffect()
+{
+	OwnerReference->BoostRanged = false;
 }
 
 #undef LOCTEXT_NAMESPACE

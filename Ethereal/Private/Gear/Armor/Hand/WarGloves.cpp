@@ -50,12 +50,28 @@ AWarGloves::AWarGloves(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("WarGlovesSpecialEffect", "Damage boost when using Ranged weapons.");
 }
 
 // Called when the game starts or when spawned
 void AWarGloves::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AWarGloves::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AWarGloves::RemoveSpecialEffect);
 }
 
+// Custom code for Special Effect
+void AWarGloves::DoSpecialEffect()
+{
+	OwnerReference->BoostRanged = true;
+}
+
+// Custom code for Special Effect
+void AWarGloves::RemoveSpecialEffect()
+{
+	OwnerReference->BoostRanged = false;
+}
 #undef LOCTEXT_NAMESPACE

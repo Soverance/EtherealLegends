@@ -43,7 +43,7 @@ ARestoreRing::ARestoreRing(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 0;
 	MP = 100;
-	SpecialEffectText = LOCTEXT("RestoreRingSpecialEffect", "Adds +10 to Regen and Refresh");
+	SpecialEffectText = LOCTEXT("RestoreRingSpecialEffect", "Adds +1 to Regen and Refresh for each level gained.");
 }
 
 // Called when the game starts or when spawned
@@ -60,15 +60,15 @@ void ARestoreRing::BeginPlay()
 // Custom code for Special Effect
 void ARestoreRing::DoSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RegenRate = (OwnerReference->EtherealPlayerState->RegenRate + 10);
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate + 10);
+	OwnerReference->EtherealPlayerState->RegenRate = (OwnerReference->EtherealPlayerState->RegenRate + OwnerReference->EtherealPlayerState->PlayerLevel);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate + OwnerReference->EtherealPlayerState->PlayerLevel);
 }
 
 // Custom code for Special Effect
 void ARestoreRing::RemoveSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RegenRate = (OwnerReference->EtherealPlayerState->RegenRate - 10);
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate - 10);
+	OwnerReference->EtherealPlayerState->RegenRate = (OwnerReference->EtherealPlayerState->RegenRate - OwnerReference->EtherealPlayerState->PlayerLevel);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate - OwnerReference->EtherealPlayerState->PlayerLevel);
 }
 
 #undef LOCTEXT_NAMESPACE

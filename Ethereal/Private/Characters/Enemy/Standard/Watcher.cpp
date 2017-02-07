@@ -75,7 +75,7 @@ AWatcher::AWatcher(const FObjectInitializer& ObjectInitializer)
 	TargetingReticle->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 
 	// Hit & Death Effect Config
-	HitFX->SetRelativeLocation(FVector(0, 0, -60));
+	HitFX->SetRelativeLocation(FVector(0, 0, 60));
 	DeathFX->SetRelativeLocation(FVector(0, 0, -85));
 	DeathFX->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
 	DisappearFX->SetRelativeLocation(FVector(0, 0, -20));

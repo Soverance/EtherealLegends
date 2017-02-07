@@ -50,12 +50,29 @@ AAdamanGauntlets::AAdamanGauntlets(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AdamanGauntletsSpecialEffect", "Damage boost when using One-Handed weapons.");
 }
 
 // Called when the game starts or when spawned
 void AAdamanGauntlets::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAdamanGauntlets::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAdamanGauntlets::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAdamanGauntlets::DoSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = true;
+}
+
+// Custom code for Special Effect
+void AAdamanGauntlets::RemoveSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = false;
 }
 
 #undef LOCTEXT_NAMESPACE

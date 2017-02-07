@@ -69,7 +69,7 @@ ASoulEater::ASoulEater(const FObjectInitializer& ObjectInitializer)
 	// Death FX Config
 	DeathFX->SetRelativeLocation(FVector(0, 0, -90));
 	DeathFX->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
-	
+	HitFX->SetRelativeLocation(FVector(0, 0, 40));
 	DisappearFX->SetRelativeLocation(FVector(0, 0, -20));
 
 	// Enemy-Specific Object Config

@@ -326,4 +326,16 @@ public:
 	// If the player has the Null Poison effect (generally granted via armor special effect)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool NullPoison;
+
+	// If the player has One-Handed Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostOneHanded;
+
+	// If the player has Two-Handed Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostTwoHanded;
+
+	// If the player has Ranged Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostRanged;
 };

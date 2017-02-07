@@ -50,8 +50,8 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 	Exclamation->SetRelativeScale3D(FVector(0.09f, 0.09f, 0.09f));
 	UCommonLibrary::SetupSMComponentsWithCollision(Exclamation);
 
-	MeleeRadius->SetRelativeLocation(FVector(100, 0, 0));
-	MeleeRadius->SetSphereRadius(150);
+	MeleeRadius->SetRelativeLocation(FVector(100, 0, -90));
+	MeleeRadius->SetSphereRadius(200);
 
 	// configure the targeting reticle
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 200.0f));
@@ -211,7 +211,27 @@ void AEtherealPlayerMaster::PlayerDealDamage(float BaseAtk)
 	float mod1 = ((BaseAtk + EtherealPlayerState->ATK) / 32);
 	float mod2 = ((BaseAtk * EtherealPlayerState->ATK) / 32);
 	float mod3 = (((mod1 * mod2) + EtherealPlayerState->ATK) * 40);
-	DamageOutput = mod3;  // Set Damage Output
+	float adjusted = mod3;  // set adjusted to base value of mod3
+
+	// if the player is in the One-Handed weapon mode and is wearing a One-Handed Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_OneHanded && BoostOneHanded)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	// if the player is in the Two-Handed weapon mode and is wearing a Two-Handed Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_TwoHanded && BoostTwoHanded)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	// if the player is in the Ranged weapon mode and is wearing a Ranged Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_Ranged && BoostRanged)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	DamageOutput = adjusted;  // Set Damage Output
 }
 
 // This function deals damage to the player, based on a DamageTaken value supplied by an enemy. This function is usually called by the enemy itself.
