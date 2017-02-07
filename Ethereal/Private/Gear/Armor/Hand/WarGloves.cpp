@@ -74,4 +74,5 @@ void AWarGloves::RemoveSpecialEffect()
 {
 	OwnerReference->BoostRanged = false;
 }
+
 #undef LOCTEXT_NAMESPACE
