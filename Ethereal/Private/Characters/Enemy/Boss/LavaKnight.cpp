@@ -39,7 +39,7 @@ ALavaKnight::ALavaKnight(const FObjectInitializer& ObjectInitializer)
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_Claymore;
-	RareDrop = EMasterGearList::GL_EagleEye;
+	RareDrop = EMasterGearList::GL_Joyeuse;
 	AttackDelay = 6.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));

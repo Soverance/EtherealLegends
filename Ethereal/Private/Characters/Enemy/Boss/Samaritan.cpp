@@ -33,7 +33,7 @@ ASamaritan::ASamaritan(const FObjectInitializer& ObjectInitializer)
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_ExoPlate;
-	RareDrop = EMasterGearList::GL_ExoPlate;
+	RareDrop = EMasterGearList::GL_Annihilator;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));

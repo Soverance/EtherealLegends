@@ -115,12 +115,16 @@ void AEtherealPlayerMaster::ReportFootstep(UAudioComponent* SoundToPlay)
 {
 	if (SoundToPlay)
 	{
-		//Play the footstep sound
-		//SoundToPlay->SetVolumeMultiplier(Volume);
-		SoundToPlay->Play();
+		// make no footstep noise if wearing sneak shoes
+		if (!HasSneak)
+		{
+			//Play the footstep sound
+			//SoundToPlay->SetVolumeMultiplier(Volume);
+			SoundToPlay->Play();
 
-		//Report to Enemy A.I. that we've played a sound with a certain volume in a specific location
-		MakeNoise(1, this, GetActorLocation());
+			//Report to Enemy A.I. that we've played a sound with a certain volume in a specific location
+			MakeNoise(1, this, GetActorLocation());
+		}		
 	}
 }
 

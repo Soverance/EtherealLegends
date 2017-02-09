@@ -177,7 +177,6 @@ void ASkeletonKing::AttackCycle()
 void ASkeletonKing::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 
 	if (!Target->EtherealPlayerState->HasCompletedTutorial)  // don't bother running this code if the player has already completed the tutorial
 	{
@@ -185,6 +184,8 @@ void ASkeletonKing::Death()
 		{
 			if (Gatekeeper->Tutorial)  // be sure the Tutorial widget isn't NULL
 			{
+				Gatekeeper->Tutorial->TutorialIndex = 3;  // when this enemy dies, force tutorial index to 3.  We don't care if you somehow skipped the other tutorial screens.
+
 				if (Gatekeeper->Tutorial->TutorialIndex == 3)  // you killed this enemy while on the proper TutorialIndex, so we progress the Tutorial
 				{
 					FTimerHandle ConvoTimer;

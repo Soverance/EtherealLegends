@@ -49,8 +49,8 @@ AFrostCaptain::AFrostCaptain(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Boreal;
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
-	UncommonDrop = EMasterGearList::GL_Joyeuse;
-	RareDrop = EMasterGearList::GL_Marauder;
+	UncommonDrop = EMasterGearList::GL_Marauder;
+	RareDrop = EMasterGearList::GL_Hauteclaire;
 	AttackDelay = 5.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));

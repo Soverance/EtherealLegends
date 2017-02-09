@@ -50,7 +50,7 @@ AValhallaGauntlets::AValhallaGauntlets(const FObjectInitializer& ObjectInitializ
 	SPD = 8;
 	HP = 100;
 	MP = 50;
-	SpecialEffectText = LOCTEXT("ValhallaGauntletsSpecialEffect", "Damage boost when using One-Handed weapons.");
+	SpecialEffectText = LOCTEXT("ValhallaGauntletsSpecialEffect", "One Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned

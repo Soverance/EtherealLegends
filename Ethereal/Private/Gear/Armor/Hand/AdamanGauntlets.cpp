@@ -50,7 +50,7 @@ AAdamanGauntlets::AAdamanGauntlets(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
-	SpecialEffectText = LOCTEXT("AdamanGauntletsSpecialEffect", "Damage boost when using One-Handed weapons.");
+	SpecialEffectText = LOCTEXT("AdamanGauntletsSpecialEffect", "One Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned

@@ -50,7 +50,7 @@ ALeatherGloves::ALeatherGloves(const FObjectInitializer& ObjectInitializer)
 	SPD = 1;
 	HP = 15;
 	MP = 5;
-	SpecialEffectText = LOCTEXT("LeatherGlovesSpecialEffect", "Damage boost when using Two-Handed weapons.");
+	SpecialEffectText = LOCTEXT("LeatherGlovesSpecialEffect", "Two Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned

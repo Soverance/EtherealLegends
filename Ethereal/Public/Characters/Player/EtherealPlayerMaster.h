@@ -311,6 +311,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool HasShadowGear;
 
+	// Whether or not the player has sneak, which mask the sound of footsteps
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasSneak;
+
 	// Whether or not the player has fast pants equipped, which are Leg Armor that increases movement speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool HasFastPants;

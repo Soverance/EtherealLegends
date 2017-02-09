@@ -50,7 +50,7 @@ ACrusaderMitts::ACrusaderMitts(const FObjectInitializer& ObjectInitializer)
 	SPD = 4;
 	HP = 60;
 	MP = 30;
-	SpecialEffectText = LOCTEXT("CrusaderMittsSpecialEffect", "Damage boost when using Two-Handed weapons.");
+	SpecialEffectText = LOCTEXT("CrusaderMittsSpecialEffect", "Two Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned

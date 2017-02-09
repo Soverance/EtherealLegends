@@ -50,7 +50,7 @@ AWarGloves::AWarGloves(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 100;
 	MP = 50;
-	SpecialEffectText = LOCTEXT("WarGlovesSpecialEffect", "Damage boost when using Ranged weapons.");
+	SpecialEffectText = LOCTEXT("WarGlovesSpecialEffect", "Ranged Damage +25%.");
 }
 
 // Called when the game starts or when spawned

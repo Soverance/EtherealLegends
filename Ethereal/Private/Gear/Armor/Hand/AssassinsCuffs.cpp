@@ -50,7 +50,7 @@ AAssassinsCuffs::AAssassinsCuffs(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
-	SpecialEffectText = LOCTEXT("AssassinsCuffsSpecialEffect", "Damage boost when using Ranged weapons.");
+	SpecialEffectText = LOCTEXT("AssassinsCuffsSpecialEffect", "Ranged Damage +25%.");
 }
 
 // Called when the game starts or when spawned

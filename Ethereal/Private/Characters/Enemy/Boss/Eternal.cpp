@@ -57,9 +57,9 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("EternalText", "Eternal");
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_Comet;
 	UncommonDrop = EMasterGearList::GL_Aegis;
-	RareDrop = EMasterGearList::GL_Comet;
+	RareDrop = EMasterGearList::GL_BeamSaber;
 	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
