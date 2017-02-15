@@ -50,12 +50,29 @@ ACrusaderHelm::ACrusaderHelm(const FObjectInitializer& ObjectInitializer)
 	SPD = 4;
 	HP = 60;
 	MP = 30;
+	SpecialEffectText = LOCTEXT("CrusaderHelmSpecialEffect", "Cure Potency +10%.");
 }
 
 // Called when the game starts or when spawned
 void ACrusaderHelm::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ACrusaderHelm::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ACrusaderHelm::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ACrusaderHelm::DoSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0.1f;  // Cure Potency +10%
+}
+
+// Custom code for Special Effect
+void ACrusaderHelm::RemoveSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0;
 }
 
 #undef LOCTEXT_NAMESPACE

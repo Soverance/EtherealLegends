@@ -45,6 +45,8 @@ ASkeletonKing::ASkeletonKing(const FObjectInitializer& ObjectInitializer)
 	GetCharacterMovement()->MaxAcceleration = 30;
 	GetCharacterMovement()->RotationRate = FRotator(0, 5, 0);  // seems to do nothing?
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	// Pawn A.I. config
 	PawnSensing->HearingThreshold = 400;
 	PawnSensing->LOSHearingThreshold = 500;
@@ -111,15 +113,6 @@ void ASkeletonKing::BeginPlay()
 void ASkeletonKing::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 void ASkeletonKing::AttackCycle()

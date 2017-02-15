@@ -50,12 +50,29 @@ AWarCoat::AWarCoat(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("WarCoatSpecialEffect", "Prevents Confuse.");
 }
 
 // Called when the game starts or when spawned
 void AWarCoat::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AWarCoat::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AWarCoat::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AWarCoat::DoSpecialEffect()
+{
+	OwnerReference->NullConfuse = true;
+}
+
+// Custom code for Special Effect
+void AWarCoat::RemoveSpecialEffect()
+{
+	OwnerReference->NullConfuse = false;
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -23,12 +23,23 @@ AEtherealNPCMaster::AEtherealNPCMaster(const FObjectInitializer& ObjectInitializ
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> MapMarkerParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/ICE/P_MapMarker.P_MapMarker'"));
 	
+	P_MapMarkerFX = MapMarkerParticleObject.Object;
+
 	Root = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("Root"));
 	InteractBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("InteractBox"));
 
 	RootComponent = Root;
 	InteractBox->SetupAttachment(Root);
+
+	// Map Marker Component
+	MapMarkerFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MapMarkerFX"));
+	MapMarkerFX->SetupAttachment(RootComponent);
+	MapMarkerFX->Template = P_MapMarkerFX;
+	MapMarkerFX->bAutoActivate = false;
+	MapMarkerFX->SetRelativeRotation(FRotator(90, 0, 0));
 
 	InteractBox->OnComponentBeginOverlap.AddDynamic(this, &AEtherealNPCMaster::OnInteract);
 	InteractBox->OnComponentEndOverlap.AddDynamic(this, &AEtherealNPCMaster::EndInteract);
@@ -39,6 +50,29 @@ void AEtherealNPCMaster::BeginPlay()
 {
 	Super::BeginPlay();
 
+	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		InteractingPlayer = *ActorItr; // get the instance of the Player Master
+
+		if (InteractingPlayer)
+		{
+			// Bind the Map Marker functions
+			InteractingPlayer->MapOpened.AddDynamic(this, &AEtherealNPCMaster::ShowMapMarker);
+			InteractingPlayer->MapClosed.AddDynamic(this, &AEtherealNPCMaster::HideMapMarker);
+		}
+	}
+}
+
+// Activates the Map Marker effect
+void AEtherealNPCMaster::ShowMapMarker()
+{
+	MapMarkerFX->Activate();
+}
+
+// Deactivates the Map Marker
+void AEtherealNPCMaster::HideMapMarker()
+{
+	MapMarkerFX->Deactivate();
 }
 
 // Function called when the player enters the InteractBox

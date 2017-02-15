@@ -50,12 +50,29 @@ AAdamanSabatons::AAdamanSabatons(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("ValhallaGreavesSpecialEffect", "Regen +5.");
 }
 
 // Called when the game starts or when spawned
 void AAdamanSabatons::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAdamanSabatons::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAdamanSabatons::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAdamanSabatons::DoSpecialEffect()
+{
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate + 5);
+}
+
+// Custom code for Special Effect
+void AAdamanSabatons::RemoveSpecialEffect()
+{
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate - 5);
 }
 
 #undef LOCTEXT_NAMESPACE

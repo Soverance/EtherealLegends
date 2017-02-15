@@ -50,12 +50,35 @@ AExoGages::AExoGages(const FObjectInitializer& ObjectInitializer)
 	SPD = 12;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ExoGagesSpecialEffect", "Prevents all negative status effects.");
 }
 
 // Called when the game starts or when spawned
 void AExoGages::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AExoGages::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AExoGages::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AExoGages::DoSpecialEffect()
+{
+	OwnerReference->NullPoison = true;
+	OwnerReference->NullBurn = true;
+	OwnerReference->NullConfuse = true;
+	OwnerReference->NullSilence = true;
+}
+
+// Custom code for Special Effect
+void AExoGages::RemoveSpecialEffect()
+{
+	OwnerReference->NullPoison = false;
+	OwnerReference->NullBurn = false;
+	OwnerReference->NullConfuse = false;
+	OwnerReference->NullSilence = false;
 }
 
 #undef LOCTEXT_NAMESPACE

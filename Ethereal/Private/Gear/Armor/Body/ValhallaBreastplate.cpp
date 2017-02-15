@@ -50,12 +50,31 @@ AValhallaBreastplate::AValhallaBreastplate(const FObjectInitializer& ObjectIniti
 	SPD = 8;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ValhallaBreastplateSpecialEffect", "+ Reraise Effect");
 }
 
 // Called when the game starts or when spawned
 void AValhallaBreastplate::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AValhallaBreastplate::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AValhallaBreastplate::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AValhallaBreastplate::DoSpecialEffect()
+{
+	OwnerReference->HasReraise = true;
+	OwnerReference->EtherealPlayerController->ActivateStatus_Reraise();
+}
+
+// Custom code for Special Effect
+void AValhallaBreastplate::RemoveSpecialEffect()
+{
+	OwnerReference->HasReraise = true;
+	OwnerReference->EtherealPlayerController->RemoveStatus_Reraise();
 }
 
 #undef LOCTEXT_NAMESPACE

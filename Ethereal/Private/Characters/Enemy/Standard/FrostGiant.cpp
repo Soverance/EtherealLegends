@@ -43,7 +43,7 @@ AFrostGiant::AFrostGiant(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("FrostGiantText", "Frost Giant");
 	Realm = ERealms::R_Boreal;
 	BattleType = EBattleTypes::BT_Standard;
-	CommonDrop = EMasterGearList::GL_None;
+	CommonDrop = EMasterGearList::GL_EchoHerb;
 	UncommonDrop = EMasterGearList::GL_Potion;
 	RareDrop = EMasterGearList::GL_Elixer;
 	AttackDelay = 2.0f;
@@ -135,15 +135,6 @@ void AFrostGiant::BeginPlay()
 void AFrostGiant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Red, false, 0, 0);
-	}
 }
 
 // Melee Attack function

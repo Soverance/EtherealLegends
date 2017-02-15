@@ -29,4 +29,12 @@ public:
 
 	// BeginPlay Override
 	virtual void BeginPlay() override;
+
+	// This applies any special effect associated with the item
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void DoSpecialEffect();
+
+	// This removes any special effect associated with the item
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void RemoveSpecialEffect();
 };

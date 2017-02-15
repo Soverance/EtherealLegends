@@ -80,6 +80,9 @@ AShiitake_Door::AShiitake_Door(const FObjectInitializer& ObjectInitializer)
 
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Open;
+
+	MapMarkerFX->SetRelativeLocation(InteractBox->GetComponentLocation());
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
 
 // Called when the game starts or when spawned
@@ -110,15 +113,6 @@ void AShiitake_Door::BeginPlay()
 void AShiitake_Door::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		FVector DebugStart = InteractBox->GetComponentLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
-	}
 }
 
 // Interact with this NPC

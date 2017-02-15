@@ -50,12 +50,30 @@ AExoHelmet::AExoHelmet(const FObjectInitializer& ObjectInitializer)
 	SPD = 12;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ExoHelmetSpecialEffect", "Occasionally annulls all damage taken.");
 }
 
 // Called when the game starts or when spawned
 void AExoHelmet::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AExoHelmet::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AExoHelmet::RemoveSpecialEffect);
+}
+
+
+// Custom code for Special Effect
+void AExoHelmet::DoSpecialEffect()
+{
+	OwnerReference->HasShadowGear = true;
+}
+
+// Custom code for Special Effect
+void AExoHelmet::RemoveSpecialEffect()
+{
+	OwnerReference->HasShadowGear = false;
 }
 
 #undef LOCTEXT_NAMESPACE

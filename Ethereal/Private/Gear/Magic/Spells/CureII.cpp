@@ -112,6 +112,13 @@ void ACureII::DoCastEffect()
 		float MaxMultiplier = OwnerReference->EtherealPlayerState->HP_Max * DefenseMultiplier;  // Define Max multiplier for this spell.
 		float Crit = FMath::FRandRange(1.0f, CritMultiplier);  // Define max critical rate
 		float CureAmount = MaxMultiplier * Crit;  // Define total cure amount
+
+		if (OwnerReference->BoostCurePotency > 0)
+		{
+			float BoostedPotency = CureAmount * OwnerReference->BoostCurePotency;
+			CureAmount = CureAmount + BoostedPotency;  // Cure Potency +
+		}
+
 		OwnerReference->EtherealPlayerState->HP_Current = OwnerReference->EtherealPlayerState->HP_Current + CureAmount;  // Add Cure amount to Current HP
 		OwnerReference->EtherealPlayerState->ForceHPCaps();  // Force HP Caps
 		OwnerReference->EtherealPlayerController->ActivateStatus_Heal();

@@ -50,12 +50,33 @@ AExoPlate::AExoPlate(const FObjectInitializer& ObjectInitializer)
 	SPD = 12;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ExoPlateSpecialEffect", "Weapon Damage +25%.");
 }
 
 // Called when the game starts or when spawned
 void AExoPlate::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AExoPlate::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AExoPlate::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AExoPlate::DoSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = true;
+	OwnerReference->BoostTwoHanded = true;
+	OwnerReference->BoostRanged = true;
+}
+
+// Custom code for Special Effect
+void AExoPlate::RemoveSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = false;
+	OwnerReference->BoostTwoHanded = false;
+	OwnerReference->BoostRanged = false;
 }
 
 #undef LOCTEXT_NAMESPACE

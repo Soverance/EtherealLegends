@@ -37,7 +37,7 @@ AMugbear::AMugbear(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("MugbearText", "Mugbear");
 	Realm = ERealms::R_Yggdrasil;
 	BattleType = EBattleTypes::BT_Standard;
-	CommonDrop = EMasterGearList::GL_None;
+	CommonDrop = EMasterGearList::GL_EchoHerb;
 	UncommonDrop = EMasterGearList::GL_HiEther;
 	RareDrop = EMasterGearList::GL_Adrenaline;
 	AttackDelay = 2.0f;
@@ -115,15 +115,6 @@ void AMugbear::BeginPlay()
 void AMugbear::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Red, false, 0, 0);
-	}
 }
 
 // Melee Attack function

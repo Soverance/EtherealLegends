@@ -50,17 +50,20 @@ AEtherealEnemyMaster::AEtherealEnemyMaster(const FObjectInitializer& ObjectIniti
 	DisappearFX->SetupAttachment(RootComponent);
 	DisappearAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("DisappearAudio"));
 	DisappearAudio->SetupAttachment(RootComponent);
-
+	
 	// Assignment
 	HitFX->Template = P_HitFX;
 	DeathFX->Template = P_DeathFX;
 	DisappearFX->Template = P_DisappearFX;
 	DisappearAudio->Sound = S_DisappearAudio;
+	
 
 	HitFX->bAutoActivate = false;
 	DeathFX->bAutoActivate = false;
 	DisappearFX->bAutoActivate = false;
 	DisappearAudio->bAutoActivate = false;
+	
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Red);
 }
 
 // Called when the game starts or when spawned
@@ -85,6 +88,10 @@ void AEtherealEnemyMaster::BeginPlay()
 				// Set all Volume Controls
 				EtherealGameInstance->SetAudioVolume(DisappearAudio, EAudioTypes::AT_SoundEffect); 
 			}
+
+			// Bind the Map Marker functions
+			Target->MapOpened.AddDynamic(this, &AEtherealCharacterMaster::ShowMapMarker);
+			Target->MapClosed.AddDynamic(this, &AEtherealCharacterMaster::HideMapMarker);
 		}		
 	}
 }
@@ -110,6 +117,8 @@ void AEtherealEnemyMaster::Tick(float DeltaTime)
 		}
 	}
 }
+
+
 
 // Sets the Enemy's default stats
 void AEtherealEnemyMaster::SetBaseStats()

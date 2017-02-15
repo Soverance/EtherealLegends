@@ -50,7 +50,7 @@ AValhallaGreaves::AValhallaGreaves(const FObjectInitializer& ObjectInitializer)
 	SPD = 8;
 	HP = 100;
 	MP = 50;
-	SpecialEffectText = LOCTEXT("ValhallaGreavesSpecialEffect", "Regen +5.");
+	SpecialEffectText = LOCTEXT("ValhallaGreavesSpecialEffect", "Regen +10.");
 }
 
 // Called when the game starts or when spawned
@@ -66,13 +66,13 @@ void AValhallaGreaves::BeginPlay()
 // Custom code for Special Effect
 void AValhallaGreaves::DoSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate + 5);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate + 10);
 }
 
 // Custom code for Special Effect
 void AValhallaGreaves::RemoveSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate - 5);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate - 10);
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -64,6 +64,8 @@ AGatekeeper::AGatekeeper(const FObjectInitializer& ObjectInitializer)
 
 	StartedTutorial = false;
 	CompletedTutorial = false;
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
 
 // Called when the game starts or when spawned
@@ -83,15 +85,6 @@ void AGatekeeper::BeginPlay()
 void AGatekeeper::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
-	}
 }
 
 // Interact with this NPC

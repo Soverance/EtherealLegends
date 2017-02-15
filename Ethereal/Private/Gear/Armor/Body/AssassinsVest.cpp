@@ -50,7 +50,7 @@ AAssassinsVest::AAssassinsVest(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
-	SpecialEffectText = LOCTEXT("AssassinsVestSpecialEffect", "Prevents Poison.");
+	SpecialEffectText = LOCTEXT("AssassinsVestSpecialEffect", "Prevents all negative status effects.");
 }
 
 // Called when the game starts or when spawned
@@ -67,12 +67,18 @@ void AAssassinsVest::BeginPlay()
 void AAssassinsVest::DoSpecialEffect()
 {
 	OwnerReference->NullPoison = true;
+	OwnerReference->NullBurn = true;
+	OwnerReference->NullConfuse = true;
+	OwnerReference->NullSilence = true;
 }
 
 // Custom code for Special Effect
 void AAssassinsVest::RemoveSpecialEffect()
 {
 	OwnerReference->NullPoison = false;
+	OwnerReference->NullBurn = false;
+	OwnerReference->NullConfuse = false;
+	OwnerReference->NullSilence = false;
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -80,4 +80,20 @@ public:
 	// Show Combat Damage Text
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void ShowCombatDamageText(bool IsCritical, float Damage);
+
+	////////////////////////////
+	// MAP MARKER
+
+	// Map Marker Particle
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* MapMarkerFX;
+	UParticleSystem* P_MapMarkerFX;
+
+	// Activates the Map Marker
+	UFUNCTION(BlueprintCallable, Category = Map)
+	void ShowMapMarker();
+
+	// Deactivates the Map Marker
+	UFUNCTION(BlueprintCallable, Category = Map)
+	void HideMapMarker();
 };

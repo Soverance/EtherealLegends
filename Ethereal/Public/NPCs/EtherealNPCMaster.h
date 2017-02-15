@@ -90,4 +90,20 @@ public:
 	// Interact with this NPC. This function can only be called by the player pressing the "A" button while inside the InteractBox
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Interact();
+
+	////////////////////////////
+	// MAP MARKER
+
+	// Map Marker Particle
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	UParticleSystemComponent* MapMarkerFX;
+	UParticleSystem* P_MapMarkerFX;
+
+	// Activates the Map Marker
+	UFUNCTION(BlueprintCallable, Category = Map)
+	void ShowMapMarker();
+
+	// Deactivates the Map Marker
+	UFUNCTION(BlueprintCallable, Category = Map)
+	void HideMapMarker();
 };

@@ -29,8 +29,6 @@ AEtherealTrueSKYManager::AEtherealTrueSKYManager()
 void AEtherealTrueSKYManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	ClockSpeed = 0.00005;
 }
 
 // Called every frame

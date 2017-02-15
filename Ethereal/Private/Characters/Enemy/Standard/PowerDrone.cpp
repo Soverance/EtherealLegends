@@ -42,7 +42,7 @@ APowerDrone::APowerDrone(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("PowerDroneText", "Power Drone");
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Standard;
-	CommonDrop = EMasterGearList::GL_Potion;
+	CommonDrop = EMasterGearList::GL_EchoHerb;
 	UncommonDrop = EMasterGearList::GL_Reraise;
 	RareDrop = EMasterGearList::GL_ExoHelmet;
 	AttackDelay = 2.0f;
@@ -127,15 +127,6 @@ void APowerDrone::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	LookAtTarget();
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Red, false, 0, 0);
-	}
 }
 
 // Melee Attack function

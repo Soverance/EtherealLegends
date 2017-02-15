@@ -102,17 +102,6 @@ void AChicken::BeginPlay()
 void AChicken::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// I see no need to draw the map markers for the chickens... so that code has been removed below
-	
-	//// Draw Debug Cylinder on Map
-	//if (InteractingPlayer->MapControl)
-	//{
-	//	FVector DebugStart = GetActorLocation();
-	//	FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-	//	DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Orange, false, 0, 0);
-	//}
 }
 
 // Interact with this NPC

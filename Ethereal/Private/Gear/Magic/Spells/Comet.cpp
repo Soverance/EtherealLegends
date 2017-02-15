@@ -37,7 +37,7 @@ AComet::AComet(const FObjectInitializer& ObjectInitializer)
 	Type = EMasterGearTypes::GT_Black;
 	TypeText = LOCTEXT("CometType", "Black Magic");
 	Description = "Send a fireball from the heavens to devastate your enemies.";
-	Price = 20000;
+	Price = 50000;
 	MPCost = 75;
 	ATK = 10;
 	DEF = 5;

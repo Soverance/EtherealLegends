@@ -45,6 +45,8 @@ ALavaKnight::ALavaKnight(const FObjectInitializer& ObjectInitializer)
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));
 	GetCharacterMovement()->MaxAcceleration = 40;
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	// Pawn A.I. config
 	PawnSensing->HearingThreshold = 400;
 	PawnSensing->LOSHearingThreshold = 550;
@@ -115,15 +117,6 @@ void ALavaKnight::BeginPlay()
 void ALavaKnight::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 // Melee Attack function

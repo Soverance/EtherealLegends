@@ -13,11 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "Ethereal.h"
-#include "NPCCharacterMaster.h"
+#pragma once
 
-ANPCCharacterMaster::ANPCCharacterMaster(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
-{	
-	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Orange);
-}
+#include "Gear/Items/Item_Master.h"
+#include "EchoHerb.generated.h"
+
+UCLASS()
+class ETHEREAL_API AEchoHerb : public AItem_Master
+{
+	GENERATED_BODY()
+
+public:
+	
+	AEchoHerb(const FObjectInitializer& ObjectInitializer);
+
+	// BeginPlay Override
+	virtual void BeginPlay() override;
+
+	/** Uses the item. */
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void Use();	
+};

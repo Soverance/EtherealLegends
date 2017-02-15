@@ -65,6 +65,8 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
 	GetCharacterMovement()->MaxAcceleration = 30;
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	// A.I. Config
 	PawnSensing->HearingThreshold = 1000;
 	PawnSensing->LOSHearingThreshold = 600;
@@ -204,15 +206,6 @@ void AEternal::BeginPlay()
 void AEternal::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 // Melee Attack function

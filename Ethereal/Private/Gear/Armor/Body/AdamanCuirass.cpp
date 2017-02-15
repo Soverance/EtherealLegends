@@ -50,12 +50,29 @@ AAdamanCuirass::AAdamanCuirass(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AdamanCuirassSpecialEffect", "Prevents Poison.");
 }
 
 // Called when the game starts or when spawned
 void AAdamanCuirass::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAdamanCuirass::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAdamanCuirass::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAdamanCuirass::DoSpecialEffect()
+{
+	OwnerReference->NullPoison = true;
+}
+
+// Custom code for Special Effect
+void AAdamanCuirass::RemoveSpecialEffect()
+{
+	OwnerReference->NullPoison = false;
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -32,6 +32,8 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 
 	LevelUpCamShake = LevelUpCamShakeObject.Object->GetClass()->StaticClass(); 
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Cyan);
+
 	// For whatever reason, uncommenting this Mesh code prevents the editor from loading past 73%... 
 	// The same code works for all Enemies, so I can only assume there is an issue with the character's Anim BP.
 	//GetMesh()->SkeletalMesh = SkeletalMeshObject.Object;
@@ -90,20 +92,16 @@ void AEtherealPlayerMaster::BeginPlay()
 	{
 		EtherealPlayerController->EtherealPlayer = this;  // sets a reference to itself inside the player controller
 	}
+
+	// Bind the Map Marker functions
+	MapOpened.AddDynamic(this, &AEtherealCharacterMaster::ShowMapMarker);
+	MapClosed.AddDynamic(this, &AEtherealCharacterMaster::HideMapMarker);
 }
 
 // Called every frame
 void AEtherealPlayerMaster::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Cyan, false, 0, 0);
-	}
 }
 
 void AEtherealPlayerMaster::SetSkinOpacityMask_Implementation()

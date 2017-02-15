@@ -44,6 +44,8 @@ ADeathCap::ADeathCap(const FObjectInitializer& ObjectInitializer)
 	GetCharacterMovement()->MaxAcceleration = 0;
 	GetCharacterMovement()->RotationRate = FRotator(0, 90, 0); 
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	IsHiding = true;  // puts the mushroom in the ground, so he can pop up when the player aggros him
 	IsAttacking = false;
 
@@ -130,15 +132,6 @@ void ADeathCap::BeginPlay()
 void ADeathCap::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 void ADeathCap::Death()
@@ -245,7 +238,7 @@ void ADeathCap::OnHearNoise(APawn* PawnInstigator, const FVector& Location, floa
 		{
 			IsHiding = false;
 
-			// wait a bit before adding EXP (delays the UI display for readability).
+			// wait a bit
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
@@ -253,7 +246,11 @@ void ADeathCap::OnHearNoise(APawn* PawnInstigator, const FVector& Location, floa
 		}
 		else
 		{
-			Aggro(PawnInstigator);
+			// wait a bit
+			FTimerDelegate DelegateAggro;
+			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
+			FTimerHandle AggroTimer;
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 5.0f, false);
 		}
 	}
 }
@@ -267,7 +264,7 @@ void ADeathCap::OnSeePawn(APawn* Pawn)
 			IsHiding = false;
 			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 
-			// wait a bit before adding EXP (delays the UI display for readability).
+			// wait a bit before aggroing 
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
@@ -275,7 +272,11 @@ void ADeathCap::OnSeePawn(APawn* Pawn)
 		}
 		else
 		{
-			Aggro(Pawn);
+			// wait a bit before aggroing 
+			FTimerDelegate DelegateAggro;
+			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
+			FTimerHandle AggroTimer;
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 5.0f, false);
 		}
 	}
 }

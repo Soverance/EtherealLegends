@@ -26,6 +26,10 @@
 // Forward Declarations
 class AEtherealEnemyMaster;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeadPlayer);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMapOpened);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMapClosed);
+
 UCLASS()
 class ETHEREAL_API AEtherealPlayerMaster : public AEtherealCharacterMaster
 {
@@ -40,6 +44,10 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FDeadPlayer DeadPlayer;
 
 	//////////////////////////////////////////////////
 	// OBJECTS
@@ -178,6 +186,14 @@ public:
 	// Map Control is true if the pause menu map is currently displayed. This allows the analog stick input to have a new context 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Map)
 	bool MapControl;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FMapOpened MapOpened;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FMapClosed MapClosed;
 
 	// Map Zoom Minimum Distance.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Map)
@@ -331,6 +347,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool NullPoison;
 
+	// If the player has the Null Confuse effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullConfuse;
+
+	// If the player has the Null Silence effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullSilence;
+	
 	// If the player has One-Handed Boost active
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool BoostOneHanded;
@@ -342,4 +366,8 @@ public:
 	// If the player has Ranged Boost active
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool BoostRanged;
+
+	// If the player has Cure Potency Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	float BoostCurePotency;
 };
