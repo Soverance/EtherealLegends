@@ -348,7 +348,7 @@ void AZhan::Escape()
 	// ACHIEVEMENTS
 	switch (Target->EtherealGameInstance->CurrentRealm)
 	{
-		case ERealms::R_Arcadia:
+		case ERealms::R_Shiitake:
 			Target->EtherealPlayerController->Achievement_Realm_Shiitake();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Vulcan:

@@ -66,7 +66,10 @@ void AEtherealNPCMaster::BeginPlay()
 // Activates the Map Marker effect
 void AEtherealNPCMaster::ShowMapMarker()
 {
-	MapMarkerFX->Activate();
+	if (IsUsable)
+	{
+		MapMarkerFX->Activate();
+	}	
 }
 
 // Deactivates the Map Marker

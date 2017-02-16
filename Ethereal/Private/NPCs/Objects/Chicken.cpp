@@ -50,6 +50,9 @@ AChicken::AChicken(const FObjectInitializer& ObjectInitializer)
 	Mesh->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
 	Mesh->bCastCapsuleIndirectShadow = true;
 
+	MapMarkerFX->SetupAttachment(Mesh);
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
+
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Kick;
 

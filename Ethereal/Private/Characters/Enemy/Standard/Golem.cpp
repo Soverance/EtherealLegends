@@ -242,7 +242,7 @@ void AGolem::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float V
 		if (!IsAggroed)
 		{
 			Aggro(PawnInstigator);
-			RunToTarget();
+			GolemAggro();
 		}
 	}
 }

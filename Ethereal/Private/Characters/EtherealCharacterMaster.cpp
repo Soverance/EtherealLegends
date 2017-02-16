@@ -82,7 +82,10 @@ void AEtherealCharacterMaster::Tick( float DeltaTime )
 // Activates the Map Marker effect
 void AEtherealCharacterMaster::ShowMapMarker()
 {
-	MapMarkerFX->Activate();
+	if (!IsDead)
+	{
+		MapMarkerFX->Activate();
+	}	
 }
 
 // Deactivates the Map Marker
