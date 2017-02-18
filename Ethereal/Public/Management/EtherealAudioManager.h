@@ -197,6 +197,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BackgroundMusic)
 	void Play_BGM_Credits();
 
+	//////////////////////////////////////////////////////
 	// SOUND EFFECTS  -----------------------------------------
 
 	// Level Up Fanfare Music
@@ -208,6 +209,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = SoundEffects)
 	void Play_SFX_LevelUp();
 
+	// InventoryPickup SFX
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SoundEffects)
+	UAudioComponent* SFX_InventoryPickup;
+	USoundCue* S_SFX_InventoryPickup;
+
+	// Play InventoryPickup SFX - only played if the item name gets displayed on screen!
+	UFUNCTION(BlueprintCallable, Category = SoundEffects)
+	void Play_SFX_InventoryPickup();
+
 	// Game Over Notify Music
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SoundEffects)
 	UAudioComponent* SFX_GameOver;
@@ -216,6 +226,9 @@ public:
 	// Game Over music
 	UFUNCTION(BlueprintCallable, Category = SoundEffects)
 	void Play_SFX_GameOver();
+
+	/////////////////////////////////////////////////////
+	// MENU SOUND EFFECTS
 
 	// Menu Start Game SFX
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SoundEffects)
@@ -301,16 +314,7 @@ public:
 	// Play ShopBuy SFX
 	UFUNCTION(BlueprintCallable, Category = SoundEffects)
 	void Play_SFX_ShopBuy();
-
-	// InventoryPickup SFX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SoundEffects)
-	UAudioComponent* SFX_InventoryPickup;
-	USoundCue* S_SFX_InventoryPickup;
-
-	// Play InventoryPickup SFX - only played if the item name gets displayed on screen!
-	UFUNCTION(BlueprintCallable, Category = SoundEffects)
-	void Play_SFX_InventoryPickup();
-
+	
 	// Armor Equip SFX
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SoundEffects)
 	UAudioComponent* SFX_ArmorEquip;
@@ -319,4 +323,115 @@ public:
 	// Play Armor Equip SFX
 	UFUNCTION(BlueprintCallable, Category = SoundEffects)
 	void Play_SFX_ArmorEquip();
+
+	///////////////////////////////////////////
+	// FOOTSTEP SOUND EFFECTS
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_DefaultFootstep;
+	USoundCue* S_SFX_DefaultFootstep;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Dust;
+	USoundCue* S_SFX_Dust;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Dirt;
+	USoundCue* S_SFX_Dirt;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Mud;
+	USoundCue* S_SFX_Mud;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Grass;
+	USoundCue* S_SFX_Grass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_LightGrass;
+	USoundCue* S_SFX_LightGrass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_SnowLight;
+	USoundCue* S_SFX_SnowLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_SnowHeavy;
+	USoundCue* S_SFX_SnowHeavy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Embers;
+	USoundCue* S_SFX_Embers;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Fire;
+	USoundCue* S_SFX_Fire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Leaves;
+	USoundCue* S_SFX_Leaves;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Sparks;
+	USoundCue* S_SFX_Sparks;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Shock;
+	USoundCue* S_SFX_Shock;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_WaterSmall;
+	USoundCue* S_SFX_WaterSmall;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent*SFX_WaterLarge;
+	USoundCue* S_SFX_WaterLarge;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Light;
+	USoundCue* S_SFX_Light;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Dark;
+	USoundCue* S_SFX_Dark;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Ring;
+	USoundCue* S_SFX_Ring;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Energy;
+	USoundCue* S_SFX_Energy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Electric;
+	USoundCue* S_SFX_Electric;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_Static;
+	USoundCue* S_SFX_Static;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_WoodLight;
+	USoundCue* S_SFX_WoodLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_WoodHeavy;
+	USoundCue* S_SFX_WoodHeavy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_MetalLight;
+	USoundCue* S_SFX_MetalLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_MetalHeavy;
+	USoundCue* S_SFX_MetalHeavy;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_ConcreteLight;
+	USoundCue* S_SFX_ConcreteLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = FootstepSounds)
+	UAudioComponent* SFX_ConcreteHeavy;
+	USoundCue* S_SFX_ConcreteHeavy;
 };

@@ -26,6 +26,10 @@
 // Forward Declarations
 class AEtherealEnemyMaster;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeadPlayer);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMapOpened);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMapClosed);
+
 UCLASS()
 class ETHEREAL_API AEtherealPlayerMaster : public AEtherealCharacterMaster
 {
@@ -40,6 +44,10 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FDeadPlayer DeadPlayer;
 
 	//////////////////////////////////////////////////
 	// OBJECTS
@@ -74,12 +82,12 @@ public:
 
 	///////////////////////////////////////////////////
 	// A.I.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI)
 	UPawnNoiseEmitterComponent* PawnNoiseEmitter;
 
 	// The function that is going to play the footstep sound and report it to all enemies
 	UFUNCTION(BlueprintCallable, Category = AI)
-	void ReportFootstep(USoundBase* SoundToPlay, float Volume);
+	void ReportFootstep(UAudioComponent* SoundToPlay);
 
 	////////////////////////////////////////////////////
 	// CONTROL STATES
@@ -164,6 +172,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Movement)
 	void ToggleRunState();
 
+	// Sets teh player's movement speed
+	UFUNCTION(BlueprintCallable, Category = Movement)
+	void SetMovementSpeed();
+
 	//////////////////////////////////////////////////
 	// MENU / MAP CONTROL
 
@@ -174,6 +186,14 @@ public:
 	// Map Control is true if the pause menu map is currently displayed. This allows the analog stick input to have a new context 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Map)
 	bool MapControl;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FMapOpened MapOpened;
+
+	// Event Dispatcher for FadeOutEndGame
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FMapClosed MapClosed;
 
 	// Map Zoom Minimum Distance.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Map)
@@ -216,10 +236,6 @@ public:
 	// Amount of DEF stored when blocking
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
 	int32 StoredDEF = 0.0f;
-
-	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
-	bool HasShadowGear;
 
 	// This function sets the DamageOutput variable, based on the BaseAtk value of an attack. Returns the ultimate value of damage dealt to an enemy.
 	UFUNCTION(BlueprintCallable, Category = Combat)
@@ -277,7 +293,7 @@ public:
 	TSubclassOf<UCameraShake> LevelUpCamShake;
 
 	///////////////////////////////////////////
-	// COMBAT TARGETING
+	// COMBAT LOCK ON TARGETING
 
 	// A reference for storing the Current Target.
 	// This is classed as an EtherealCharacterMaster because in an early prototype multiplayer version of Ethereal, you could also target other players.
@@ -303,4 +319,55 @@ public:
 	// Whether or not the player is locked on a target
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Targeting)
 	bool LockedOnTarget;
+
+	///////////////////////////////////////////
+	// EQUIPMENT SPECIAL EFFECTS
+
+	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasShadowGear;
+
+	// Whether or not the player has sneak, which mask the sound of footsteps
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasSneak;
+
+	// Whether or not the player has fast pants equipped, which are Leg Armor that increases movement speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasFastPants;
+
+	// Whether or not the player has the Reraise effect active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasReraise;
+
+	// If the player has the Null Burn effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullBurn;
+
+	// If the player has the Null Poison effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullPoison;
+
+	// If the player has the Null Confuse effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullConfuse;
+
+	// If the player has the Null Silence effect (generally granted via armor special effect)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool NullSilence;
+	
+	// If the player has One-Handed Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostOneHanded;
+
+	// If the player has Two-Handed Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostTwoHanded;
+
+	// If the player has Ranged Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool BoostRanged;
+
+	// If the player has Cure Potency Boost active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	float BoostCurePotency;
 };

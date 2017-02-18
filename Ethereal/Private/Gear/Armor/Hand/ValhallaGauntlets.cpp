@@ -50,12 +50,29 @@ AValhallaGauntlets::AValhallaGauntlets(const FObjectInitializer& ObjectInitializ
 	SPD = 8;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ValhallaGauntletsSpecialEffect", "One Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned
 void AValhallaGauntlets::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AValhallaGauntlets::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AValhallaGauntlets::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AValhallaGauntlets::DoSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = true;
+}
+
+// Custom code for Special Effect
+void AValhallaGauntlets::RemoveSpecialEffect()
+{
+	OwnerReference->BoostOneHanded = false;
 }
 
 #undef LOCTEXT_NAMESPACE

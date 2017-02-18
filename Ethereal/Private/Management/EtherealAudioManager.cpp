@@ -60,6 +60,35 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	static ConstructorHelpers::FObjectFinder<USoundCue> InventoryPickupAudioObject(TEXT("SoundCue'/Game/Sounds/Interactive_Objects/GearDrop_Audio.GearDrop_Audio'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> ArmorEquipAudioObject(TEXT("SoundCue'/Game/Sounds/Weapon_AssaultRifle/Mono/EquipArmor_Cue.EquipArmor_Cue'"));
 
+	// Get Assets for Footstep Effects
+	static ConstructorHelpers::FObjectFinder<USoundCue> DefaultFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> DustFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_dirt_Light_Cue.footsteps_shoe_dirt_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> DirtFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_dirt_Heavy_Cue.footsteps_shoe_dirt_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> MudFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/Footstep_Mud_Cue.Footstep_Mud_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> GrassFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_grass_Heavy_Cue.footsteps_shoe_grass_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> LightGrassFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_grass_Light_Cue.footsteps_shoe_grass_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> SnowLightFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_snow_Light_Cue.footsteps_shoe_snow_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> SnowHeavyFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_snow_Heavy_Cue.footsteps_shoe_snow_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> EmbersFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_metal_Heavy_Cue.footsteps_shoe_metal_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> FireFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> LeavesFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> SparksFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> ShockFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> WaterSmallFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/Footstep_Water_Cue.Footstep_Water_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> WaterLargeFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/Footstep_Water_Cue.Footstep_Water_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> LightFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> DarkFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> RingFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/Footstep_Ring_Cue.Footstep_Ring_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> EnergyFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> ElectricFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> StaticFootstepAudioObject(TEXT("SoundCue'/Game/EtherealParty/OldWizard/Audio/Absolut_Footstep_Cue.Absolut_Footstep_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> WoodLightFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_wood_Light_Cue.footsteps_shoe_wood_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> WoodHeavyFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_wood_Heavy_Cue.footsteps_shoe_wood_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> MetalLightFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_metal_Light_Cue.footsteps_shoe_metal_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> MetalHeavyFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_metal_Heavy_Cue.footsteps_shoe_metal_Heavy_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> ConcreteLightFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_concrete_Light_Cue.footsteps_shoe_concrete_Light_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> ConcreteHeavyFootstepAudioObject(TEXT("SoundCue'/Game/Audio/Footsteps/footsteps_shoe_concrete_Heavy_Cue.footsteps_shoe_concrete_Heavy_Cue'"));
+
 	// Store audio objects
 	S_Battle_Standard = StandardAudioObject.Object;
 	S_Battle_Boss = BossAudioObject.Object;
@@ -79,6 +108,8 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	S_BGM_Credits = CreditsAudioObject.Object;
 	S_SFX_LevelUp = LevelUpAudioObject.Object;
 	S_SFX_GameOver = GameOverAudioObject.Object;
+	//////////////////////////////////////////////
+	// Menu effects
 	S_SFX_StartGame = StartGameAudioObject.Object;
 	S_SFX_Select = SelectAudioObject.Object;
 	S_SFX_Switch = SwitchAudioObject.Object;
@@ -90,6 +121,35 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	S_SFX_ShopBuy = ShopBuyAudioObject.Object;
 	S_SFX_InventoryPickup = InventoryPickupAudioObject.Object;
 	S_SFX_ArmorEquip = ArmorEquipAudioObject.Object;
+	//////////////////////////////////////////////
+	// Footstep effects
+	S_SFX_DefaultFootstep = DefaultFootstepAudioObject.Object;
+	S_SFX_Dust = DustFootstepAudioObject.Object;
+	S_SFX_Dirt = DirtFootstepAudioObject.Object;
+	S_SFX_Mud = MudFootstepAudioObject.Object;
+	S_SFX_Grass = GrassFootstepAudioObject.Object;
+	S_SFX_LightGrass = LightGrassFootstepAudioObject.Object;
+	S_SFX_SnowLight = SnowLightFootstepAudioObject.Object;
+	S_SFX_SnowHeavy = SnowHeavyFootstepAudioObject.Object;
+	S_SFX_Embers = EmbersFootstepAudioObject.Object;
+	S_SFX_Fire = FireFootstepAudioObject.Object;
+	S_SFX_Leaves = LeavesFootstepAudioObject.Object;
+	S_SFX_Sparks = SparksFootstepAudioObject.Object;
+	S_SFX_Shock = ShockFootstepAudioObject.Object;
+	S_SFX_WaterSmall = WaterSmallFootstepAudioObject.Object;
+	S_SFX_WaterLarge = WaterLargeFootstepAudioObject.Object;
+	S_SFX_Light = LightFootstepAudioObject.Object;
+	S_SFX_Dark = DarkFootstepAudioObject.Object;
+	S_SFX_Ring = RingFootstepAudioObject.Object;
+	S_SFX_Energy = EnergyFootstepAudioObject.Object;
+	S_SFX_Electric = ElectricFootstepAudioObject.Object;
+	S_SFX_Static = StaticFootstepAudioObject.Object;
+	S_SFX_WoodLight = WoodLightFootstepAudioObject.Object;
+	S_SFX_WoodHeavy = WoodHeavyFootstepAudioObject.Object;
+	S_SFX_MetalLight = MetalLightFootstepAudioObject.Object;
+	S_SFX_MetalHeavy = MetalHeavyFootstepAudioObject.Object;
+	S_SFX_ConcreteLight = ConcreteLightFootstepAudioObject.Object;
+	S_SFX_ConcreteHeavy = ConcreteHeavyFootstepAudioObject.Object;
 
 	// Creates a scene component and sets it as the root
 	Root = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("Root"));
@@ -128,6 +188,35 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	SFX_ShopBuy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_ShopBuy"));
 	SFX_InventoryPickup = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_InventoryPickup"));
 	SFX_ArmorEquip = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_ArmorEquip"));
+	//////////////////////////
+	// Footstep audio components
+	SFX_DefaultFootstep = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_DefaultFootstep"));
+	SFX_Dust = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Dust"));
+	SFX_Dirt = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Dirt"));
+	SFX_Mud = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Mud"));
+	SFX_Grass = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Grass"));
+	SFX_LightGrass = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_LightGrass"));
+	SFX_SnowLight = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_SnowLight"));
+	SFX_SnowHeavy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_SnowHeavy"));
+	SFX_Embers = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Embers"));
+	SFX_Fire = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Fire"));
+	SFX_Leaves = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Leaves"));
+	SFX_Sparks = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Sparks"));
+	SFX_Shock = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Shock"));
+	SFX_WaterSmall = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_WaterSmall"));
+	SFX_WaterLarge = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_WaterLarge"));
+	SFX_Light = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Light"));
+	SFX_Dark = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Dark"));
+	SFX_Ring = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Ring"));
+	SFX_Energy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Energy"));
+	SFX_Electric = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Electric"));
+	SFX_Static = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_Static"));
+	SFX_WoodLight = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_WoodLight"));
+	SFX_WoodHeavy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_WoodHeavy"));
+	SFX_MetalLight = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_MetalLight"));
+	SFX_MetalHeavy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_MetalHeavy"));
+	SFX_ConcreteLight = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_ConcreteLight"));
+	SFX_ConcreteHeavy = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("SFX_ConcreteHeavy"));
 
 	// Set Audio Objects to use their sound assets
 	Battle_Standard->Sound = S_Battle_Standard;
@@ -159,6 +248,36 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	SFX_ShopBuy->Sound = S_SFX_ShopBuy;
 	SFX_InventoryPickup->Sound = S_SFX_InventoryPickup;
 	SFX_ArmorEquip->Sound = S_SFX_ArmorEquip;
+	//////////////////////////////////////////////////////
+	// Footstep effects
+	SFX_DefaultFootstep->Sound = S_SFX_DefaultFootstep;
+	SFX_Dust->Sound = S_SFX_Dust;
+	SFX_Dirt->Sound = S_SFX_Dirt;
+	SFX_Mud->Sound = S_SFX_Mud;
+	SFX_Grass->Sound = S_SFX_Grass;
+	SFX_LightGrass->Sound = S_SFX_LightGrass;
+	SFX_SnowLight->Sound = S_SFX_SnowLight;
+	SFX_SnowHeavy->Sound = S_SFX_SnowHeavy;
+	SFX_Embers->Sound = S_SFX_Embers;
+	SFX_Fire->Sound = S_SFX_Fire;
+	SFX_Leaves->Sound = S_SFX_Leaves;
+	SFX_Sparks->Sound = S_SFX_Sparks;
+	SFX_Shock->Sound = S_SFX_Shock;
+	SFX_WaterSmall->Sound = S_SFX_WaterSmall;
+	SFX_WaterLarge->Sound = S_SFX_WaterLarge;
+	SFX_Light->Sound = S_SFX_Light;
+	SFX_Dark->Sound = S_SFX_Dark;
+	SFX_Ring->Sound = S_SFX_Ring;
+	SFX_Energy->Sound = S_SFX_Energy;
+	SFX_Electric->Sound = S_SFX_Electric;
+	SFX_Static->Sound = S_SFX_Static;
+	SFX_WoodLight->Sound = S_SFX_WoodLight;
+	SFX_WoodHeavy->Sound = S_SFX_WoodHeavy;
+	SFX_MetalLight->Sound = S_SFX_MetalLight;
+	SFX_MetalHeavy->Sound = S_SFX_MetalHeavy;
+	SFX_ConcreteLight->Sound = S_SFX_ConcreteLight;
+	SFX_ConcreteHeavy->Sound = S_SFX_ConcreteHeavy;
+
 
 	// Deactivate all audio on construction
 	CurrentAudio->bAutoActivate = false;
@@ -191,6 +310,34 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	SFX_ShopBuy->bAutoActivate = false;
 	SFX_InventoryPickup->bAutoActivate = false;
 	SFX_ArmorEquip->bAutoActivate = false;
+
+	SFX_DefaultFootstep->bAutoActivate = false;
+	SFX_Dust->bAutoActivate = false;
+	SFX_Dirt->bAutoActivate = false;
+	SFX_Mud->bAutoActivate = false;
+	SFX_Grass->bAutoActivate = false;
+	SFX_LightGrass->bAutoActivate = false;
+	SFX_SnowLight->bAutoActivate = false;
+	SFX_SnowHeavy->bAutoActivate = false;
+	SFX_Embers->bAutoActivate = false;
+	SFX_Fire->bAutoActivate = false;
+	SFX_Leaves->bAutoActivate = false;
+	SFX_Sparks->bAutoActivate = false;
+	SFX_Shock->bAutoActivate = false;
+	SFX_WaterSmall->bAutoActivate = false;
+	SFX_WaterLarge->bAutoActivate = false;
+	SFX_Light->bAutoActivate = false;
+	SFX_Dark->bAutoActivate = false;
+	SFX_Ring->bAutoActivate = false;
+	SFX_Energy->bAutoActivate = false;
+	SFX_Electric->bAutoActivate = false;
+	SFX_Static->bAutoActivate = false;
+	SFX_WoodLight->bAutoActivate = false;
+	SFX_WoodHeavy->bAutoActivate = false;
+	SFX_MetalLight->bAutoActivate = false;
+	SFX_MetalHeavy->bAutoActivate = false;
+	SFX_ConcreteLight->bAutoActivate = false;
+	SFX_ConcreteHeavy->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -234,7 +381,35 @@ void AEtherealAudioManager::BeginPlay()
 		GameInstance->SetAudioVolume(SFX_ShopBuy, EAudioTypes::AT_SoundEffect);
 		GameInstance->SetAudioVolume(SFX_InventoryPickup, EAudioTypes::AT_SoundEffect);
 		GameInstance->SetAudioVolume(SFX_ArmorEquip, EAudioTypes::AT_SoundEffect);
-	}		
+
+		GameInstance->SetAudioVolume(SFX_DefaultFootstep, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Dust, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Dirt, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Mud, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Grass, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_LightGrass, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_SnowLight, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_SnowHeavy, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Embers, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Fire, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Leaves, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Sparks, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Shock, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_WaterSmall, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_WaterLarge, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Light, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Dark, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Energy, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Electric, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_Static, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_WoodLight, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_WoodHeavy, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_MetalLight, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_MetalHeavy, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_ConcreteLight, EAudioTypes::AT_SoundEffect);
+		GameInstance->SetAudioVolume(SFX_ConcreteHeavy, EAudioTypes::AT_SoundEffect);
+
+	}
 }
 
 // BATTLE MUSIC FUNCTIONS

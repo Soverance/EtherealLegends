@@ -68,4 +68,5 @@ void AShadowRing::RemoveSpecialEffect()
 {
 	OwnerReference->HasShadowGear = false;
 }
+
 #undef LOCTEXT_NAMESPACE

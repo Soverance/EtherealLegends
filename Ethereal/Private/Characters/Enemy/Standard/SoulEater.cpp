@@ -69,7 +69,7 @@ ASoulEater::ASoulEater(const FObjectInitializer& ObjectInitializer)
 	// Death FX Config
 	DeathFX->SetRelativeLocation(FVector(0, 0, -90));
 	DeathFX->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
-	
+	HitFX->SetRelativeLocation(FVector(0, 0, 40));
 	DisappearFX->SetRelativeLocation(FVector(0, 0, -20));
 
 	// Enemy-Specific Object Config
@@ -94,15 +94,6 @@ void ASoulEater::BeginPlay()
 void ASoulEater::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Red, false, 0, 0);
-	}
 }
 
 void ASoulEater::MeleeAttack()

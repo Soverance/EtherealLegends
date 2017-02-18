@@ -51,6 +51,14 @@ public:
 	// True if Adrenaline is active
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
 	bool Active_Adrenaline;
+
+	// True if Confuse is active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
+	bool Active_Confuse;
+
+	// True if Silence is active
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
+	bool Active_Silence;
 		
 	// All Possible Status Effects are stored here
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = StatusEffects)
@@ -65,6 +73,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void ActivateStatus_Reraise();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void RemoveStatus_Reraise();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void ActivateStatus_Regen();
@@ -99,6 +110,19 @@ public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void ActivateStatus_Adrenaline();
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void ActivateStatus_Confuse();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void RemoveStatus_Confuse();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void ActivateStatus_Silence();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
+	void RemoveStatus_Silence();
+
+	// Removes All Status Effects On Death
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = StatusEffects)
 	void RemoveStatus_OnDeath();
 
@@ -166,6 +190,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
 	void Achievement_Realm_Celestial();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
+	void Achievement_LevelCount();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Achievements)
 	void Achievement_GoldCount();

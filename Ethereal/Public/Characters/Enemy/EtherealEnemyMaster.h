@@ -128,7 +128,7 @@ public:
 	float DamageOutput;
 
 	// COMPONENTS
-
+	
 	/** This emitter is active when the enemy is hit. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UParticleSystemComponent* HitFX;
@@ -187,7 +187,7 @@ public:
 	// Ends All Attack Rounds, allowing the enemy A.I. to once again begin searching for the player
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void EndAttackRound();
-
+	
 	// DEATH FUNCTIONS
 
 	// Event Dispatcher OnDeath

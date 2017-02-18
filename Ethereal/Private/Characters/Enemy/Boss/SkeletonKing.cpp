@@ -45,6 +45,8 @@ ASkeletonKing::ASkeletonKing(const FObjectInitializer& ObjectInitializer)
 	GetCharacterMovement()->MaxAcceleration = 30;
 	GetCharacterMovement()->RotationRate = FRotator(0, 5, 0);  // seems to do nothing?
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	// Pawn A.I. config
 	PawnSensing->HearingThreshold = 400;
 	PawnSensing->LOSHearingThreshold = 500;
@@ -111,15 +113,6 @@ void ASkeletonKing::BeginPlay()
 void ASkeletonKing::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 void ASkeletonKing::AttackCycle()
@@ -177,7 +170,6 @@ void ASkeletonKing::AttackCycle()
 void ASkeletonKing::Death()
 {
 	DeathAudio->Play();  // Play death audio
-	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 
 	if (!Target->EtherealPlayerState->HasCompletedTutorial)  // don't bother running this code if the player has already completed the tutorial
 	{
@@ -185,6 +177,8 @@ void ASkeletonKing::Death()
 		{
 			if (Gatekeeper->Tutorial)  // be sure the Tutorial widget isn't NULL
 			{
+				Gatekeeper->Tutorial->TutorialIndex = 3;  // when this enemy dies, force tutorial index to 3.  We don't care if you somehow skipped the other tutorial screens.
+
 				if (Gatekeeper->Tutorial->TutorialIndex == 3)  // you killed this enemy while on the proper TutorialIndex, so we progress the Tutorial
 				{
 					FTimerHandle ConvoTimer;

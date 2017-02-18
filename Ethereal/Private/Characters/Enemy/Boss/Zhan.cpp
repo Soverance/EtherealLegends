@@ -79,7 +79,10 @@ AZhan::AZhan(const FObjectInitializer& ObjectInitializer)
 	AcceptanceRadius = 50.0f;
 	RunAI = false;
 
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
+
 	Targetable = false;
+	HasFallen = false;
 
 	// Mesh Config
 	GetMesh()->SkeletalMesh = EnemyMesh.Object;
@@ -200,6 +203,7 @@ void AZhan::BeginPlay()
 	Super::BeginPlay();
 
 	Targetable = false;
+	HasFallen = false;
 	GetCapsuleComponent()->SetVisibility(false, true); // hide root object and propagate to all children
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AZhan::OnHearNoise);  // bind the OnHearNoise event
@@ -223,18 +227,6 @@ void AZhan::BeginPlay()
 void AZhan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (!IsDead)
-	{
-		// Draw Debug Cylinder on Map
-		if (Target->MapControl)
-		{
-			FVector DebugStart = GetActorLocation();
-			FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-			DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-		}
-	}	
 }
 
 void AZhan::InitAggro()
@@ -254,6 +246,7 @@ void AZhan::FallToAggro()
 	this->GetCharacterMovement()->GravityScale = 0.1f;  // make him fall in slow motion
 	this->GetCapsuleComponent()->SetVisibility(true, true);  // this will also turn on the Targeting Reticle
 	DoFallAggro = true;
+	HasFallen = true;
 
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), Target->LevelUpCamShake, Target->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	// TO DO : Client Play Force Feedback FF_ZhanSpawn
@@ -355,7 +348,7 @@ void AZhan::Escape()
 	// ACHIEVEMENTS
 	switch (Target->EtherealGameInstance->CurrentRealm)
 	{
-		case ERealms::R_Arcadia:
+		case ERealms::R_Shiitake:
 			Target->EtherealPlayerController->Achievement_Realm_Shiitake();  // give this player the Achievement for clearing this realm
 			break;
 		case ERealms::R_Vulcan:
@@ -447,19 +440,28 @@ void AZhan::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Vo
 	{
 		if (!IsAggroed)
 		{
-			// This functionality is removed because Zhan does not aggro in a traditional manner
-			//Aggro(PawnInstigator);
+			// Zhan only aggros using senses if he's already fallen to the Realm
+			if (HasFallen)
+			{
+				Aggro(PawnInstigator);
+			}
 		}
 	}
 }
 
 void AZhan::OnSeePawn(APawn* Pawn)
 {
-	if (!IsAggroed)
+	if (!IsDead)
 	{
-		// This functionality is removed because Zhan does not aggro in a traditional manner
-		//Aggro(Pawn);
-	}
+		if (!IsAggroed)
+		{
+			// Zhan only aggros using senses if he's already fallen to the Realm
+			if (HasFallen)
+			{
+				Aggro(Pawn);
+			}
+		}
+	}	
 }
 
 #undef LOCTEXT_NAMESPACE

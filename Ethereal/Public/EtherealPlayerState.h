@@ -137,6 +137,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = EXP)
 	int32 KillCount;
 
+	// Total number of chickens killed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = EXP)
+	int32 ChickenKillCount;
+
 	// Sets the "To Next Level" value after gaining a new level
 	UFUNCTION(BlueprintCallable, Category = EXP)
 	void SetTNL();

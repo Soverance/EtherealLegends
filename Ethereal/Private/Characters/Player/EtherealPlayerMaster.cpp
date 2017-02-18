@@ -21,8 +21,8 @@
 AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	//static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/EtherealParty/Apprentice/Erika_Archer.Erika_Archer'"));
-	//static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Apprentice/Mixamo_Skeleton_Erika_Anim.Mixamo_Skeleton_Erika_Anim_C'"));
+	//static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/EtherealParty/Morgan/Morgan.Morgan'"));
+	//static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/Morgan/Anim_Morgan.Anim_Morgan'_C'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ExclamationMesh(TEXT("StaticMesh'/Game/EtherealParty/Apprentice/exclamation.exclamation'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> LevelUpParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/ICE/P_levelUp_Eth.P_levelUp_Eth'"));
 	static ConstructorHelpers::FObjectFinder<UClass> LevelUpCamShakeObject(TEXT("Blueprint'/Game/Blueprints/CamShakes/CS_LevelUp.CS_LevelUp_C'"));
@@ -31,6 +31,8 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 	P_LevelUpFX = LevelUpParticleObject.Object;
 
 	LevelUpCamShake = LevelUpCamShakeObject.Object->GetClass()->StaticClass(); 
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Cyan);
 
 	// For whatever reason, uncommenting this Mesh code prevents the editor from loading past 73%... 
 	// The same code works for all Enemies, so I can only assume there is an issue with the character's Anim BP.
@@ -50,8 +52,8 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 	Exclamation->SetRelativeScale3D(FVector(0.09f, 0.09f, 0.09f));
 	UCommonLibrary::SetupSMComponentsWithCollision(Exclamation);
 
-	MeleeRadius->SetRelativeLocation(FVector(100, 0, 0));
-	MeleeRadius->SetSphereRadius(150);
+	MeleeRadius->SetRelativeLocation(FVector(100, 0, -90));
+	MeleeRadius->SetSphereRadius(200);
 
 	// configure the targeting reticle
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 200.0f));
@@ -90,20 +92,16 @@ void AEtherealPlayerMaster::BeginPlay()
 	{
 		EtherealPlayerController->EtherealPlayer = this;  // sets a reference to itself inside the player controller
 	}
+
+	// Bind the Map Marker functions
+	MapOpened.AddDynamic(this, &AEtherealCharacterMaster::ShowMapMarker);
+	MapClosed.AddDynamic(this, &AEtherealCharacterMaster::HideMapMarker);
 }
 
 // Called every frame
 void AEtherealPlayerMaster::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Cyan, false, 0, 0);
-	}	
 }
 
 void AEtherealPlayerMaster::SetSkinOpacityMask_Implementation()
@@ -111,15 +109,20 @@ void AEtherealPlayerMaster::SetSkinOpacityMask_Implementation()
 
 }
 
-void AEtherealPlayerMaster::ReportFootstep(USoundBase * SoundToPlay, float Volume)
+void AEtherealPlayerMaster::ReportFootstep(UAudioComponent* SoundToPlay)
 {
 	if (SoundToPlay)
 	{
-		//Play the actual sound
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), SoundToPlay, GetActorLocation(), Volume);
+		// make no footstep noise if wearing sneak shoes
+		if (!HasSneak)
+		{
+			//Play the footstep sound
+			//SoundToPlay->SetVolumeMultiplier(Volume);
+			SoundToPlay->Play();
 
-		//Report to Enemy A.I. that we've played a sound with a certain volume in a specific location
-		MakeNoise(Volume, this, GetActorLocation());
+			//Report to Enemy A.I. that we've played a sound with a certain volume in a specific location
+			MakeNoise(1, this, GetActorLocation());
+		}		
 	}
 }
 
@@ -147,13 +150,60 @@ void AEtherealPlayerMaster::ToggleRunState()
 	if (IsRunning) // player is currently running, so set to walk speed
 	{
 		IsRunning = false;
-		GetCharacterMovement()->MaxWalkSpeed = 50;
+
+		SetMovementSpeed();  // set movement speed
+		
 	}
 	else // player is currently walking, so set to run speed
 	{
 		IsRunning = true;
-		GetCharacterMovement()->MaxWalkSpeed = 100;
+		
+		SetMovementSpeed();  // set movement speed
 	}
+}
+
+// Set Movement Speed
+void AEtherealPlayerMaster::SetMovementSpeed()
+{
+	// If the player is Hasted, ignore all walk modes, and set to high speed
+	if (IsHasted)
+	{
+		if (HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 170;
+		}
+		if (!HasFastPants)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 150;
+		}
+	}
+	// If the player is not hasted, do the regular stuff.
+	else
+	{
+		if (!IsRunning) // player is currently walking, so set to walk speed
+		{
+			if (HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 70;
+			}
+			if (!HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 50;
+			}
+
+		}
+		if (IsRunning) // player is currently running, so set to run speed
+		{
+			if (HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 120;
+			}
+			if (!HasFastPants)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = 100;
+			}
+		}
+	}	
 }
 
 // This function sets the DamageOutput variable, based on the BaseAtk value of an attack. Returns the ultimate value of damage dealt to an enemy.
@@ -163,7 +213,27 @@ void AEtherealPlayerMaster::PlayerDealDamage(float BaseAtk)
 	float mod1 = ((BaseAtk + EtherealPlayerState->ATK) / 32);
 	float mod2 = ((BaseAtk * EtherealPlayerState->ATK) / 32);
 	float mod3 = (((mod1 * mod2) + EtherealPlayerState->ATK) * 40);
-	DamageOutput = mod3;  // Set Damage Output
+	float adjusted = mod3;  // set adjusted to base value of mod3
+
+	// if the player is in the One-Handed weapon mode and is wearing a One-Handed Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_OneHanded && BoostOneHanded)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	// if the player is in the Two-Handed weapon mode and is wearing a Two-Handed Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_TwoHanded && BoostTwoHanded)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	// if the player is in the Ranged weapon mode and is wearing a Ranged Boost armor item
+	if (EtherealPlayerState->WeaponMode == EWeaponModes::WM_Ranged && BoostRanged)
+	{
+		adjusted = mod3 * 1.25f;  // increase output by 25%
+	}
+
+	DamageOutput = adjusted;  // Set Damage Output
 }
 
 // This function deals damage to the player, based on a DamageTaken value supplied by an enemy. This function is usually called by the enemy itself.

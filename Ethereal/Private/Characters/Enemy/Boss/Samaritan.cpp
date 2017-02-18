@@ -33,11 +33,13 @@ ASamaritan::ASamaritan(const FObjectInitializer& ObjectInitializer)
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_ExoPlate;
-	RareDrop = EMasterGearList::GL_ExoPlate;
+	RareDrop = EMasterGearList::GL_Annihilator;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));
 	GetCharacterMovement()->MaxAcceleration = 30;
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
 
 	// Pawn A.I. config
 	PawnSensing->HearingThreshold = 600;
@@ -88,15 +90,6 @@ void ASamaritan::BeginPlay()
 void ASamaritan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 // Melee Attack function

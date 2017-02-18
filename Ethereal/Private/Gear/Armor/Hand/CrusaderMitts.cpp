@@ -50,12 +50,29 @@ ACrusaderMitts::ACrusaderMitts(const FObjectInitializer& ObjectInitializer)
 	SPD = 4;
 	HP = 60;
 	MP = 30;
+	SpecialEffectText = LOCTEXT("CrusaderMittsSpecialEffect", "Two Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned
 void ACrusaderMitts::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ACrusaderMitts::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ACrusaderMitts::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ACrusaderMitts::DoSpecialEffect()
+{
+	OwnerReference->BoostTwoHanded = true;
+}
+
+// Custom code for Special Effect
+void ACrusaderMitts::RemoveSpecialEffect()
+{
+	OwnerReference->BoostTwoHanded = false;
 }
 
 #undef LOCTEXT_NAMESPACE

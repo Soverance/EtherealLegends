@@ -75,7 +75,7 @@ AWatcher::AWatcher(const FObjectInitializer& ObjectInitializer)
 	TargetingReticle->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 
 	// Hit & Death Effect Config
-	HitFX->SetRelativeLocation(FVector(0, 0, -60));
+	HitFX->SetRelativeLocation(FVector(0, 0, 60));
 	DeathFX->SetRelativeLocation(FVector(0, 0, -85));
 	DeathFX->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
 	DisappearFX->SetRelativeLocation(FVector(0, 0, -20));
@@ -134,15 +134,6 @@ void AWatcher::BeginPlay()
 void AWatcher::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Red, false, 0, 0);
-	}
 }
 
 // Eye Beam Attack

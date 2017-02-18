@@ -43,12 +43,29 @@ ADarksteelRing::ADarksteelRing(const FObjectInitializer& ObjectInitializer)
 	SPD = 0;
 	HP = 0;
 	MP = 25;
+	SpecialEffectText = LOCTEXT("DarksteelRingSpecialEffect", "Prevents Silence.");
 }
 
 // Called when the game starts or when spawned
 void ADarksteelRing::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ADarksteelRing::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ADarksteelRing::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ADarksteelRing::DoSpecialEffect()
+{
+	OwnerReference->NullSilence = true;
+}
+
+// Custom code for Special Effect
+void ADarksteelRing::RemoveSpecialEffect()
+{
+	OwnerReference->NullSilence = false;
 }
 
 #undef LOCTEXT_NAMESPACE

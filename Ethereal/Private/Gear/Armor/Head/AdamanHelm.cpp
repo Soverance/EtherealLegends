@@ -50,12 +50,29 @@ AAdamanHelm::AAdamanHelm(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("ValhallaHelmSpecialEffect", "Refresh +5.");
 }
 
 // Called when the game starts or when spawned
 void AAdamanHelm::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAdamanHelm::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAdamanHelm::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAdamanHelm::DoSpecialEffect()
+{
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate + 5);
+}
+
+// Custom code for Special Effect
+void AAdamanHelm::RemoveSpecialEffect()
+{
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RefreshRate - 5);
 }
 
 #undef LOCTEXT_NAMESPACE

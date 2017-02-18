@@ -64,6 +64,8 @@ AGatekeeper::AGatekeeper(const FObjectInitializer& ObjectInitializer)
 
 	StartedTutorial = false;
 	CompletedTutorial = false;
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
 
 // Called when the game starts or when spawned
@@ -83,15 +85,6 @@ void AGatekeeper::BeginPlay()
 void AGatekeeper::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
-	}
 }
 
 // Interact with this NPC
@@ -101,29 +94,17 @@ void AGatekeeper::Interact()
 
 	if (InteractingPlayer)
 	{
-		// IF the player HAS NOT started the tutorial
-		if (!StartedTutorial)
-		{
-			// redundancy check, should always return false
-			if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
-			{
-				// Check to be sure an InteractWidget exists
-				if (!InteractWidget)
-				{
-					SpawnTutorialWidget();  // Spawn tutorial widget				
-				}
-
-				StartedTutorial = true;  // Player has started the Tutorial
-				DoWarning = true;  // animate
-				ShowConversation();  // Show Conversation Widget
-			}
-		}
 		// IF the player HAS started the tutorial
 		if (StartedTutorial)
 		{
 			if (Tutorial)
 			{
 				DoHuh = true;  // animate
+
+				if (Tutorial->TutorialIndex >= 1 && Tutorial->TutorialIndex < 4)
+				{
+					Tutorial->SkipTo_Conversation03();  // skip to Convo 03
+				}
 
 				// The tutorial index will only be 4 if you've defeated the Skeleton King
 				if (Tutorial->TutorialIndex == 4)
@@ -133,6 +114,69 @@ void AGatekeeper::Interact()
 				}
 			}
 		}
+		// IF the player HAS NOT started the tutorial
+		if (!StartedTutorial)
+		{
+			// Check if this is a New Game or not
+			if (InteractingPlayer->EtherealGameInstance->IsNewGame)
+			{
+				// redundancy check, should always return false since you haven't started the tutorial
+				if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
+				{
+					// Check to be sure an InteractWidget exists
+					if (!InteractWidget)
+					{
+						SpawnTutorialWidget();  // Spawn tutorial widget				
+					}
+
+					StartedTutorial = true;  // Player has started the Tutorial
+					DoWarning = true;  // animate
+					ShowConversation();  // Show Conversation Widget
+				}
+			}
+			else // If this IS NOT a New Game...
+			{
+				// If the player hasn't actually started the tutorial
+				if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
+				{
+					// if this block runs, this means the player died after starting the tutorial (probably death by Skeleton King), and then GAVE UP LIKE A BITCH, quitting the application.
+					// Luckily, they restarted, which loaded their save file, but not their tutorial progress.
+					// Since we don't actually save tutorial progress, this is a crappy way to force the player to start a bit further into the process
+					// otherwise, they'd have to go speak with Prodigy again, who would give them items they already owned, which looks weird because nothing actually happens.
+					// In this case, the player has restarted the game and decided to speak with Prodigy again, so we'll remind them to go beat up the Skeleton King
+
+					// Check to be sure an InteractWidget exists
+					if (!InteractWidget)
+					{
+						SpawnTutorialWidget();  // Spawn tutorial widget				
+					}
+
+					if (Tutorial)  // error checking
+					{
+						Tutorial->TutorialIndex = 1;  // hard set the tutorial index, bypassing the need to speak with Prodigy
+						StartedTutorial = true;  // Player has started the Tutorial
+						Tutorial->SkipTo_Conversation03();  // skip to Convo 03
+					}					
+				}
+				// If the player has completed the tutorial...
+				if (InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
+				{
+					// if this block runs, this means the player has finished the tutorial and come back to Prod for a simple conversation later in the game
+
+					// Check to be sure an InteractWidget exists
+					if (!InteractWidget)
+					{
+						SpawnTutorialWidget();  // Spawn tutorial widget				
+					}
+
+					if (Tutorial)  // error checking
+					{
+						DoExplain = true;
+						Tutorial->SkipTo_Conversation07();  // Show the Congratulatory conversation, but skip the rewards
+					}
+				}
+			}
+		}		
 	}
 }
 
@@ -204,16 +248,52 @@ void AGatekeeper::EnterCombatTutorialZone(class UPrimitiveComponent* HitComp, cl
 
 		if (InteractingPlayer)
 		{
-			// Check to see if the player has completed the tutorial
-			if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
+			// If this is a new game...
+			if (InteractingPlayer->EtherealGameInstance->IsNewGame)
 			{
-				// Check to be sure an InteractWidget exists
-				if (!InteractWidget)
+				// Check to see if the player has completed the tutorial
+				if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
 				{
-					SpawnTutorialWidget();  // Spawn tutorial widget				
+					// Check to be sure an InteractWidget exists
+					if (!InteractWidget)
+					{
+						SpawnTutorialWidget();  // Spawn tutorial widget				
+					}
+					// This conversation tells the player to go speak with Prodigy before entering the graveyard
+					ShowConversation();  // Show Conversation Widget
 				}
+			}
+			else  // if this is not a new game
+			{
+				// if this block runs, this means the player died after starting the tutorial (probably death by Skeleton King), and then GAVE UP, quitting the application.
+				// Then they restarted, which loaded their save file, but not their tutorial progress.
+				// Since we don't actually save tutorial progress, this is a crappy way to force the player to start a bit further into the process
+				// otherwise, they'd have to go speak with Prodigy again, who would give them items they already owned.
+				// In this case, the player has restarted the game and decided to head straight to the graveyard, so we'll start them directly on the Basic Combat tutorial
 
-				ShowConversation();  // Show Conversation Widget
+				// if the player has not completed the tutorial
+				if (!InteractingPlayer->EtherealPlayerState->HasCompletedTutorial)
+				{
+					// Check to be sure an InteractWidget exists
+					if (!InteractWidget)
+					{
+						SpawnTutorialWidget();  // Spawn tutorial widget				
+					}
+
+					if (Tutorial)  // error checking
+					{
+						// If the tutorial index is less than 1 (should only be possible if this widget was just created during the above process)
+						// if the tutorial index is equal to 1, it means the player spoke with Prodigy before heading for the Graveyard
+						// If the index is greater than 1, it means the player has already made progress on the tutorial during this play session
+						if (Tutorial->TutorialIndex <= 1)
+						{
+							StartedTutorial = true;  // start the tutorial
+							Tutorial->TutorialIndex = 1;  // hard set the tutorial index back to 1, so that the tutorial progresses in the correct manner
+							Tutorial->ShowConversation_04();  // Show the Combat Tutorial
+							IsUsable = true;
+						}
+					}									
+				}
 			}
 		}			
 	}

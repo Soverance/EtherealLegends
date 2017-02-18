@@ -50,12 +50,30 @@ AValhallaFlanchard::AValhallaFlanchard(const FObjectInitializer& ObjectInitializ
 	SPD = 8;
 	HP = 100;
 	MP = 50;
+	SpecialEffectText = LOCTEXT("ValhallaFlanchardSpecialEffect", "Increases Movement Speed.");
 }
 
 // Called when the game starts or when spawned
 void AValhallaFlanchard::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AValhallaFlanchard::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AValhallaFlanchard::RemoveSpecialEffect);
 }
 
+// Custom code for Special Effect
+void AValhallaFlanchard::DoSpecialEffect()
+{
+	OwnerReference->HasFastPants = true;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
+}
+
+// Custom code for Special Effect
+void AValhallaFlanchard::RemoveSpecialEffect()
+{
+	OwnerReference->HasFastPants = false;
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
+}
 #undef LOCTEXT_NAMESPACE

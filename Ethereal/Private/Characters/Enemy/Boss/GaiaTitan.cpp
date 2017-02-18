@@ -28,8 +28,6 @@ AGaiaTitan::AGaiaTitan(const FObjectInitializer& ObjectInitializer)
 
 	// Set Default Objects
 	
-
-
 	// Default Config
 	Name = EEnemyNames::EN_GaiaTitan;
 	NameText = LOCTEXT("GaiaTitanText", "Gaia Titan");
@@ -37,11 +35,13 @@ AGaiaTitan::AGaiaTitan(const FObjectInitializer& ObjectInitializer)
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
 	UncommonDrop = EMasterGearList::GL_EurytosBow;
-	RareDrop = EMasterGearList::GL_Hauteclaire;
+	RareDrop = EMasterGearList::GL_Temperance;
 	AttackDelay = 4.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));
 	GetCharacterMovement()->MaxAcceleration = 30;
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
 
 	// Pawn A.I. config
 	PawnSensing->HearingThreshold = 1200;
@@ -98,15 +98,6 @@ void AGaiaTitan::BeginPlay()
 void AGaiaTitan::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (Target->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Yellow, false, 0, 0);
-	}
 }
 
 // Melee Attack function
@@ -182,6 +173,7 @@ void AGaiaTitan::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 	{
 		if (!IsAggroed)
 		{
+			IsAggroed = true;
 			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
 			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
@@ -200,6 +192,7 @@ void AGaiaTitan::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
+			IsAggroed = true;
 			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
 			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation

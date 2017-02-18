@@ -25,8 +25,10 @@ AEtherealCharacterMaster::AEtherealCharacterMaster(const FObjectInitializer& Obj
 		
 	// Get Assets, References Obtained Via Right Click in Editor
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Shapes/SM_TargetingReticle.SM_TargetingReticle'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> MapMarkerParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/ICE/P_MapMarker.P_MapMarker'"));
 	
 	SM_TargetingReticle = StaticMeshObject.Object;
+	P_MapMarkerFX = MapMarkerParticleObject.Object;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore); // sets capsule to ignore camera collision
 	GetMesh()->bReceivesDecals = false;  // make this mesh ignore all decals
@@ -35,6 +37,13 @@ AEtherealCharacterMaster::AEtherealCharacterMaster(const FObjectInitializer& Obj
 
 	// Create Combat Text Component
 	CombatTextComponent = ObjectInitializer.CreateDefaultSubobject<UCombatTextComponent>(this, TEXT("Combat Text Component"));
+
+	// Map Marker Component
+	MapMarkerFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MapMarkerFX"));
+	MapMarkerFX->SetupAttachment(RootComponent);
+	MapMarkerFX->Template = P_MapMarkerFX;
+	MapMarkerFX->bAutoActivate = false;
+	MapMarkerFX->SetRelativeRotation(FRotator(90, 0, 0));
 
 	// configure Melee Radius
 	MeleeRadius = CreateDefaultSubobject<USphereComponent>(TEXT("MeleeRadius"));
@@ -68,6 +77,21 @@ void AEtherealCharacterMaster::BeginPlay()
 void AEtherealCharacterMaster::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+}
+
+// Activates the Map Marker effect
+void AEtherealCharacterMaster::ShowMapMarker()
+{
+	if (!IsDead)
+	{
+		MapMarkerFX->Activate();
+	}	
+}
+
+// Deactivates the Map Marker
+void AEtherealCharacterMaster::HideMapMarker()
+{
+	MapMarkerFX->Deactivate();
 }
 
 // Called to bind functionality to input

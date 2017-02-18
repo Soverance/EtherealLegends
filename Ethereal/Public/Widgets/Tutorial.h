@@ -74,6 +74,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Tutorial)
 	void GiveItem2();
 
+	// Skips to Prodigy's "Call to Action"... which tells the player to defeat the skeleton king before Prod will open the gate.
+	// this only gets called if the player quit the application without completing the tutorial
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Tutorial)
+	void SkipTo_Conversation03();
+
+	// Skips to Prodigy's "Congratulations" speech, but skips the part where he awards you anything.
+	// this only happens if the player has already completed the tutorial when speaking with prodigy
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Tutorial)
+	void SkipTo_Conversation07();
+
 	///////////////////////////
 	// TUTORIAL SECTION 2
 	// 

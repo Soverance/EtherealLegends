@@ -109,7 +109,7 @@ void AHaste::IncreaseSPD()
 {
 	StoredSPDBoost = OwnerReference->EtherealPlayerState->SPD * HasteMultiplier;  // Define the SPD Boost amount
 	OwnerReference->EtherealPlayerState->SPD = OwnerReference->EtherealPlayerState->SPD + StoredSPDBoost;  // Add the SPD Boost to the player's current SPD
-	OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 150;  // Set Player's Max Walk Speed to 150
+	OwnerReference->SetMovementSpeed();  // set the player's movement speed	
 }
 
 void AHaste::DecreaseSPD()
@@ -117,14 +117,6 @@ void AHaste::DecreaseSPD()
 	OwnerReference->IsHasted = false;
 	OwnerReference->EtherealPlayerState->SPD = OwnerReference->EtherealPlayerState->SPD - StoredSPDBoost;  // Remove the SPD Boost from the player's current SPD
 	// Set the player's Max Walk Speed back to normal
-	if (OwnerReference->IsRunning)
-	{
-		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 100;  // Set Player's Max Walk Speed to 100 if running is toggled on
-	}
-	else
-	{
-		OwnerReference->GetCharacterMovement()->MaxWalkSpeed = 50;  // Set Player's Max Walk Speed to 50 if running is toggled off
-	}
-
+	OwnerReference->SetMovementSpeed();
 }
 

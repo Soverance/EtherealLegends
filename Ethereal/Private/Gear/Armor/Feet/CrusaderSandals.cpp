@@ -50,12 +50,29 @@ ACrusaderSandals::ACrusaderSandals(const FObjectInitializer& ObjectInitializer)
 	SPD = 4;
 	HP = 60;
 	MP = 30;
+	SpecialEffectText = LOCTEXT("CrusaderSandalsSpecialEffect", "Prevents Confuse.");
 }
 
 // Called when the game starts or when spawned
 void ACrusaderSandals::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ACrusaderSandals::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ACrusaderSandals::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ACrusaderSandals::DoSpecialEffect()
+{
+	OwnerReference->NullConfuse = true;
+}
+
+// Custom code for Special Effect
+void ACrusaderSandals::RemoveSpecialEffect()
+{
+	OwnerReference->NullConfuse = false;
 }
 
 #undef LOCTEXT_NAMESPACE

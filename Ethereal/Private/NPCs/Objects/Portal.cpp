@@ -15,6 +15,7 @@
 
 #include "Ethereal.h"
 #include "Management/GameStates.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
 #include "Portal.h"
 
 APortal::APortal(const FObjectInitializer& ObjectInitializer)
@@ -69,6 +70,8 @@ APortal::APortal(const FObjectInitializer& ObjectInitializer)
 	InteractAnimType = EInteractAnims::IA_Open;
 
 	DoInteract.AddDynamic(this, &APortal::Interact); // bind interact
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
 
 // Called when the game starts or when spawned
@@ -88,15 +91,6 @@ void APortal::BeginPlay()
 void APortal::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Purple, false, 0, 0);
-	}
 }
 
 // Do a Burst effect when the portal is activated

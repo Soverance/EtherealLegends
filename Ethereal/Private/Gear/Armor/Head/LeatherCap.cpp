@@ -50,12 +50,29 @@ ALeatherCap::ALeatherCap(const FObjectInitializer& ObjectInitializer)
 	SPD = 1;
 	HP = 15;
 	MP = 5;
+	SpecialEffectText = LOCTEXT("LeatherCapSpecialEffect", "Cure Potency +5%.");
 }
 
 // Called when the game starts or when spawned
 void ALeatherCap::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ALeatherCap::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ALeatherCap::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ALeatherCap::DoSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0.05f;  // Cure Potency +10%
+}
+
+// Custom code for Special Effect
+void ALeatherCap::RemoveSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0;
 }
 
 #undef LOCTEXT_NAMESPACE

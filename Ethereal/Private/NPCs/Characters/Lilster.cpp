@@ -64,15 +64,6 @@ void ALilster::BeginPlay()
 void ALilster::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		FVector DebugStart = GetActorLocation();
-		FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-		DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Orange, false, 0, 0);
-	}
 }
 
 // Interact with this NPC
@@ -142,8 +133,10 @@ void ALilster::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Consumable6);
 	EMasterGearList Consumable7 = EMasterGearList::GL_Antidote;
 	DefaultShopList.AddUnique(Consumable7);
-	EMasterGearList Consumable8 = EMasterGearList::GL_Reraise;
+	EMasterGearList Consumable8 = EMasterGearList::GL_EchoHerb;
 	DefaultShopList.AddUnique(Consumable8);
+	EMasterGearList Consumable9 = EMasterGearList::GL_Reraise;
+	DefaultShopList.AddUnique(Consumable9);
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{

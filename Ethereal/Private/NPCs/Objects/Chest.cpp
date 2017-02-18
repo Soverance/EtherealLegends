@@ -78,6 +78,8 @@ AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	GoldInChest = 0;  // variable gets set randomly, below
 
 	DoInteract.AddDynamic(this, &AChest::Interact);
+
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Emerald);
 }
 
 // Called when the game starts or when spawned
@@ -97,18 +99,6 @@ void AChest::BeginPlay()
 void AChest::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// Draw Debug Cylinder on Map
-	if (InteractingPlayer->MapControl)
-	{
-		if (IsUsable)
-		{
-			FVector DebugStart = GetActorLocation();
-			FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-			DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Emerald, false, 0, 0);
-		}		
-	}
 }
 
 // Interact with this NPC

@@ -33,18 +33,22 @@ AEtherealPlayerController::AEtherealPlayerController()
 	static ConstructorHelpers::FObjectFinder<UTexture2D> BurnIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/T_Status_Fire.T_Status_Fire'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> SentinelIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/sentinel.sentinel'"));
 	static ConstructorHelpers::FObjectFinder<UTexture2D> AdrenalineIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/adrenaline.adrenaline'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> ConfuseIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/T_Status_Confuse.T_Status_Confuse'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> SilenceIconObject(TEXT("Texture2D'/Game/CombatText/UI/Textures/T_Status_Silence.T_Status_Silence'"));
 	// PARTICLES
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> HealEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Heal.P_Heal'"));
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> RaiseEffectObject(TEXT("ParticleSystem'/Game/SenzaPeso/MASTERALL/Particles/P_AltarBurst.P_AltarBurst'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> RaiseEffectObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Cines/Ausar/P_Reraise.P_Reraise'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RegenEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Heal.P_Heal'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RefreshEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Refresh.P_Refresh'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> BarrierEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/Barrier-ProtectShield.Barrier-ProtectShield'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> BerserkEffectObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/Fire/combat/P_YoYo_Fire_Charge_00.P_YoYo_Fire_Charge_00'"));
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> HasteEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Haste1.P_Haste1'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> HasteEffectObject(TEXT("ParticleSystem'/Game/Elemental/Effects/Fx_Magic/Effects/FX_Sigil_08.FX_Sigil_08'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> PoisonEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Poison.P_Poison'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> BurnEffectObject(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> SentinelEffectObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Elemental/ICE/P_IceElementalSplit_Small.P_IceElementalSplit_Small'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> AdrenalineEffectObject(TEXT("ParticleSystem'/Game/Elemental/Effects/Fx_Magic/Effects/FX_Knight_Hammer_Prefire.FX_Knight_Hammer_Prefire'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> ConfuseEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Stun.P_Stun'"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> SilenceEffectObject(TEXT("ParticleSystem'/Game/CombatText/Effects/P_Silence.P_Silence'"));
 
 	// 0
 	FCombatEffectStruct HealStatus;
@@ -108,7 +112,7 @@ AEtherealPlayerController::AEtherealPlayerController()
 	PoisonStatus.Text = FText::FromString(FString(TEXT("POISON")));
 	PoisonStatus.Icon = PoisonIconObject.Object;
 	PoisonStatus.Effect = PoisonEffectObject.Object;
-	PoisonStatus.Duration = 10.0f;
+	PoisonStatus.Duration = 15.0f;
 	StatusEffects.Add(PoisonStatus);  // Add
 	// 8
 	FCombatEffectStruct BurnStatus;
@@ -116,7 +120,7 @@ AEtherealPlayerController::AEtherealPlayerController()
 	BurnStatus.Text = FText::FromString(FString(TEXT("BURN")));
 	BurnStatus.Icon = BurnIconObject.Object;
 	BurnStatus.Effect = BurnEffectObject.Object;
-	BurnStatus.Duration = 10.0f;
+	BurnStatus.Duration = 15.0f;
 	StatusEffects.Add(BurnStatus);  // Add
 	// 9
 	FCombatEffectStruct SentinelStatus;
@@ -134,6 +138,22 @@ AEtherealPlayerController::AEtherealPlayerController()
 	AdrenalineStatus.Effect = AdrenalineEffectObject.Object;
 	AdrenalineStatus.Duration = 120.0f;
 	StatusEffects.Add(AdrenalineStatus);  // Add
+	// 11
+	FCombatEffectStruct ConfuseStatus;
+	ConfuseStatus.Name = FName(TEXT("CONFUSE"));
+	ConfuseStatus.Text = FText::FromString(FString(TEXT("CONFUSE")));
+	ConfuseStatus.Icon = ConfuseIconObject.Object;
+	ConfuseStatus.Effect = ConfuseEffectObject.Object;
+	ConfuseStatus.Duration = 15.0f;
+	StatusEffects.Add(ConfuseStatus);  // Add
+	// 12
+	FCombatEffectStruct SilenceStatus;
+	SilenceStatus.Name = FName(TEXT("SILENCE"));
+	SilenceStatus.Text = FText::FromString(FString(TEXT("SILENCE")));
+	SilenceStatus.Icon = SilenceIconObject.Object;
+	SilenceStatus.Effect = SilenceEffectObject.Object;
+	SilenceStatus.Duration = 15.0f;
+	StatusEffects.Add(SilenceStatus);  // Add
 }
 
 void AEtherealPlayerController::ActivateStatus_Heal_Implementation()
@@ -141,6 +161,10 @@ void AEtherealPlayerController::ActivateStatus_Heal_Implementation()
 }
 
 void AEtherealPlayerController::ActivateStatus_Reraise_Implementation()
+{
+}
+
+void AEtherealPlayerController::RemoveStatus_Reraise_Implementation()
 {
 }
 
@@ -188,6 +212,22 @@ void AEtherealPlayerController::ActivateStatus_Adrenaline_Implementation()
 {
 }
 
+void AEtherealPlayerController::ActivateStatus_Confuse_Implementation()
+{
+}
+
+void AEtherealPlayerController::RemoveStatus_Confuse_Implementation()
+{
+}
+
+void AEtherealPlayerController::ActivateStatus_Silence_Implementation()
+{
+}
+
+void AEtherealPlayerController::RemoveStatus_Silence_Implementation()
+{
+}
+
 void AEtherealPlayerController::RemoveStatus_OnDeath_Implementation()
 {
 }
@@ -214,6 +254,7 @@ void AEtherealPlayerController::Save_Stats()
 			EtherealSave->Save_CurrentGold = EtherealPlayer->EtherealPlayerState->Gold_Current;
 			EtherealSave->Save_CurrentEXP = EtherealPlayer->EtherealPlayerState->EXP_Current;
 			EtherealSave->Save_KillCount = EtherealPlayer->EtherealPlayerState->KillCount;
+			EtherealSave->Save_ChickenKillCount = EtherealPlayer->EtherealPlayerState->ChickenKillCount;
 			EtherealSave->Save_TotalSecondsPlayed = EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed;
 		}
 	}
@@ -230,6 +271,7 @@ void AEtherealPlayerController::Load_Stats()
 			EtherealPlayer->EtherealPlayerState->Gold_Current = EtherealSave->Save_CurrentGold;
 			EtherealPlayer->EtherealPlayerState->EXP_Current = EtherealSave->Save_CurrentEXP;
 			EtherealPlayer->EtherealPlayerState->KillCount = EtherealSave->Save_KillCount;
+			EtherealPlayer->EtherealPlayerState->ChickenKillCount = EtherealSave->Save_ChickenKillCount;
 			EtherealPlayer->EtherealPlayerState->TotalSecondsPlayed = EtherealSave->Save_TotalSecondsPlayed;
 			// With the player's level loaded from the save file, we can call SetBaseStats();
 			EtherealPlayer->EtherealPlayerState->SetBaseStats();
@@ -519,6 +561,10 @@ void AEtherealPlayerController::Achievement_Realm_Empyrean_Implementation()
 }
 
 void AEtherealPlayerController::Achievement_Realm_Celestial_Implementation()
+{
+}
+
+void AEtherealPlayerController::Achievement_LevelCount_Implementation()
 {
 }
 

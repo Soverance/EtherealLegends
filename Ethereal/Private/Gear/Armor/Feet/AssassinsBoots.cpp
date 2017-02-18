@@ -50,12 +50,29 @@ AAssassinsBoots::AAssassinsBoots(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AssassinsBootsSpecialEffect", "Sneak");
 }
 
 // Called when the game starts or when spawned
 void AAssassinsBoots::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAssassinsBoots::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAssassinsBoots::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAssassinsBoots::DoSpecialEffect()
+{
+	OwnerReference->HasSneak = true;
+}
+
+// Custom code for Special Effect
+void AAssassinsBoots::RemoveSpecialEffect()
+{
+	OwnerReference->HasSneak = false;
 }
 
 #undef LOCTEXT_NAMESPACE

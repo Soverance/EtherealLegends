@@ -50,6 +50,9 @@ AChicken::AChicken(const FObjectInitializer& ObjectInitializer)
 	Mesh->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
 	Mesh->bCastCapsuleIndirectShadow = true;
 
+	MapMarkerFX->SetupAttachment(Mesh);
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
+
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Kick;
 
@@ -102,17 +105,6 @@ void AChicken::BeginPlay()
 void AChicken::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	// I see no need to draw the map markers for the chickens... so that code has been removed below
-	
-	//// Draw Debug Cylinder on Map
-	//if (InteractingPlayer->MapControl)
-	//{
-	//	FVector DebugStart = GetActorLocation();
-	//	FVector DebugEnd = FVector(DebugStart.X, DebugStart.Y, (DebugStart.Z + 1500));
-
-	//	DrawDebugCylinder(GetWorld(), DebugStart, DebugEnd, 10, 12, FColor::Orange, false, 0, 0);
-	//}
 }
 
 // Interact with this NPC
@@ -136,6 +128,7 @@ void AChicken::BlowUp()
 	UGameplayStatics::PlayWorldCameraShake(GetWorld(), InteractingPlayer->LevelUpCamShake, InteractingPlayer->GetActorLocation(), 0, 10000, 1, false);  // level up cam shake 
 	BurstFX->Activate();
 	IsDead = true;
+	InteractingPlayer->EtherealPlayerState->ChickenKillCount++; // increment chicken kill count
 	InteractingPlayer->EtherealPlayerController->Achievement_Chickenlover();
 
 	// determine whether or not to drop an item

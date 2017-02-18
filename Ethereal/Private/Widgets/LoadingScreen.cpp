@@ -38,27 +38,32 @@ void ULoadingScreen::HintConfig()
 	HintList.Add(Hint8);
 	FText Hint9 = LOCTEXT("Hint9", "Find  and  equip  better  gear  to  unlock  new  and  more  powerful  abilities.");
 	HintList.Add(Hint9);
-
 	FText Hint10 = LOCTEXT("Hint10", "Only  one  consumable  item  may  be  active  at  a  time .");
-	HintList.Add(Hint9);
+	HintList.Add(Hint10);
 	FText Hint11 = LOCTEXT("Hint11", "You  may  carry  up  to  99  of  each  consumable  item .");
-	HintList.Add(Hint1);
+	HintList.Add(Hint11);
 	FText Hint12 = LOCTEXT("Hint12", "You  must  equip  spells  before  you  can  cast  them .");
-	HintList.Add(Hint2);
-	FText Hint13 = LOCTEXT("Hint13", "You  must  equip  spells  before  you  can  cast  them .  You  may  equip  up  to  six  spells  at  a  time .");
-	HintList.Add(Hint3);
+	HintList.Add(Hint12);
+	FText Hint13 = LOCTEXT("Hint13", "You  may  equip  up  to  six  spells  at  a  time .");
+	HintList.Add(Hint13);
 	FText Hint14 = LOCTEXT("Hint14", "Become  more  powerful  by  gaining  levels ,  binding  new  gear ,  and  finding  new  spells .");
-	HintList.Add(Hint4);
-	FText Hint15 = LOCTEXT("Hint15", "There  are  three  available  weapon  modes :  One - Handed ,  Two - Handed ,  and  Ranged .");
-	HintList.Add(Hint5);
-	FText Hint16 = LOCTEXT("Hint16", "You  may  equip  only  one  weapon  of  each  type .");
-	HintList.Add(Hint6);
-	FText Hint17 = LOCTEXT("Hint17", "Swap  between  equipped  weapons  using  the  ' CYCLE '  button .");
-	HintList.Add(Hint7);
+	HintList.Add(Hint14);
+	FText Hint15 = LOCTEXT("Hint15", "There  are  three  available  weapon  types :  One - Handed ,  Two - Handed ,  and  Ranged .");
+	HintList.Add(Hint15);
+	FText Hint16 = LOCTEXT("Hint16", "You  may  equip  one  weapon  of  each  type .");
+	HintList.Add(Hint16);
+	FText Hint17 = LOCTEXT("Hint17", "Swap  between  equipped  weapons  using  the  ' CYCLE '  buttons .");
+	HintList.Add(Hint17);
 	FText Hint18 = LOCTEXT("Hint18", "One - Handed  users  may  also  equip  a  shield .  Ranged  users  must  also  equip  Ammo .");
-	HintList.Add(Hint8);
+	HintList.Add(Hint18);
 	FText Hint19 = LOCTEXT("Hint19", "Use  the  Map  to  indicate  various  points  of  interest  within  an  area .");
-	HintList.Add(Hint9);
+	HintList.Add(Hint19);
+	FText Hint20 = LOCTEXT("Hint20", "Reraise  allows  you  to  get  up  in  the  same  spot  you  died ,  and  also  prevents  enemies  from  regenerating  health .");
+	HintList.Add(Hint20);
+	FText Hint21 = LOCTEXT("Hint21", "Many  armors  have  special  effects  that  activate  when  equipped .");
+	HintList.Add(Hint21);
+	FText Hint22 = LOCTEXT("Hint22", "Some  items  are  only  available  in  shops .  Others  can  only  be  found  out  in  the  world .");
+	HintList.Add(Hint22);
 }
 
 #undef LOCTEXT_NAMESPACE

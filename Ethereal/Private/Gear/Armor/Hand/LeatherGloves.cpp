@@ -50,12 +50,29 @@ ALeatherGloves::ALeatherGloves(const FObjectInitializer& ObjectInitializer)
 	SPD = 1;
 	HP = 15;
 	MP = 5;
+	SpecialEffectText = LOCTEXT("LeatherGlovesSpecialEffect", "Two Handed Damage +25%.");
 }
 
 // Called when the game starts or when spawned
 void ALeatherGloves::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ALeatherGloves::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &ALeatherGloves::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void ALeatherGloves::DoSpecialEffect()
+{
+	OwnerReference->BoostTwoHanded = true;
+}
+
+// Custom code for Special Effect
+void ALeatherGloves::RemoveSpecialEffect()
+{
+	OwnerReference->BoostTwoHanded = false;
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -50,17 +50,20 @@ AEtherealEnemyMaster::AEtherealEnemyMaster(const FObjectInitializer& ObjectIniti
 	DisappearFX->SetupAttachment(RootComponent);
 	DisappearAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("DisappearAudio"));
 	DisappearAudio->SetupAttachment(RootComponent);
-
+	
 	// Assignment
 	HitFX->Template = P_HitFX;
 	DeathFX->Template = P_DeathFX;
 	DisappearFX->Template = P_DisappearFX;
 	DisappearAudio->Sound = S_DisappearAudio;
+	
 
 	HitFX->bAutoActivate = false;
 	DeathFX->bAutoActivate = false;
 	DisappearFX->bAutoActivate = false;
 	DisappearAudio->bAutoActivate = false;
+	
+	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Red);
 }
 
 // Called when the game starts or when spawned
@@ -85,6 +88,10 @@ void AEtherealEnemyMaster::BeginPlay()
 				// Set all Volume Controls
 				EtherealGameInstance->SetAudioVolume(DisappearAudio, EAudioTypes::AT_SoundEffect); 
 			}
+
+			// Bind the Map Marker functions
+			Target->MapOpened.AddDynamic(this, &AEtherealCharacterMaster::ShowMapMarker);
+			Target->MapClosed.AddDynamic(this, &AEtherealCharacterMaster::HideMapMarker);
 		}		
 	}
 }
@@ -110,6 +117,8 @@ void AEtherealEnemyMaster::Tick(float DeltaTime)
 		}
 	}
 }
+
+
 
 // Sets the Enemy's default stats
 void AEtherealEnemyMaster::SetBaseStats()
@@ -272,7 +281,17 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 				}
 				else if (BattleType == EBattleTypes::BT_Boss)
 				{
-					AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+					EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+
+					// play the boss battle music
+					if (Name == EEnemyNames::EN_Zhan)
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+					}
+					else
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  
+					}
 				}
 
 				// if the player is in a menu when this enemy aggros, close it
@@ -300,11 +319,27 @@ void AEtherealEnemyMaster::Deaggro()
 	{
 		if (IsDead)
 		{
+			// I totally forgot why IsAggroed is commented out here... but I'm gonna leave it for now.
 			//IsAggroed = false;
 			RunAI = false;
 			Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list
 			DisableBattleMusic();
-		}		
+		}
+		if (!IsDead)
+		{
+			if (Target)
+			{
+				// boss enemies only deaggro in this manner if the player is dead.
+				// i.e., you cannot run from bosses.
+				if (Target->IsDead)
+				{
+					IsAggroed = false;
+					RunAI = false;
+					Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
+					DisableBattleMusic();
+				}
+			}
+		}
 	}	
 }
 

@@ -50,12 +50,35 @@ AAssassinsVest::AAssassinsVest(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
+	SpecialEffectText = LOCTEXT("AssassinsVestSpecialEffect", "Prevents all negative status effects.");
 }
 
 // Called when the game starts or when spawned
 void AAssassinsVest::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AAssassinsVest::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AAssassinsVest::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AAssassinsVest::DoSpecialEffect()
+{
+	OwnerReference->NullPoison = true;
+	OwnerReference->NullBurn = true;
+	OwnerReference->NullConfuse = true;
+	OwnerReference->NullSilence = true;
+}
+
+// Custom code for Special Effect
+void AAssassinsVest::RemoveSpecialEffect()
+{
+	OwnerReference->NullPoison = false;
+	OwnerReference->NullBurn = false;
+	OwnerReference->NullConfuse = false;
+	OwnerReference->NullSilence = false;
 }
 
 #undef LOCTEXT_NAMESPACE
