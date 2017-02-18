@@ -103,6 +103,8 @@ void AEtherealPlayerState::ResetNewGame()
 	KillCount = 0;
 	ChickenKillCount = 0;
 
+	Player->EtherealGameInstance->IsNewGame = true;
+
 	HasCompletedTutorial = false;
 	Locked_Shiitake = true;
 	Locked_Vulcan = true;

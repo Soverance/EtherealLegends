@@ -57,6 +57,14 @@ void UTutorial::BindActions_Implementation()
 {
 }
 
+void UTutorial::SkipTo_Conversation03_Implementation()
+{
+}
+
+void UTutorial::SkipTo_Conversation07_Implementation()
+{
+}
+
 void UTutorial::ShowConversation_00_Implementation()
 {
 }

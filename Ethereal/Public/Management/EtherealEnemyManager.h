@@ -41,6 +41,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	TArray<AEnemyNode*> EnemyNodes;
 
+	// By default, enemies are spawned at the level specified on their Node.  Calling this function will adjust their level based on the player's level.
+	// This function is generally used for New Game +, but it's also useful for enemies in Arcadia, since you return to that map often.
+	UFUNCTION(BlueprintCallable, Category = Default)
+	int32 GetAdjustedLevel();
+
 	// Searches the world for EnemyNode instances, and spawns the enemies associated with them.
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void SpawnAllNodes();	

@@ -66,6 +66,18 @@ void AEtherealEnemyManager::BeginPlay()
 	}
 }
 
+// By default, enemies are spawned at the level specified on their Node.  Calling this function will adjust their level based on the player's level.
+int32 AEtherealEnemyManager::GetAdjustedLevel()
+{
+	int32 AdjustedLevel;  // declare return value
+
+	int32 RandomOverLevel = FMath::RandRange(0, 9);  // Enemies can spawn at least 10 levels greater than the player.
+
+	AdjustedLevel = Player->EtherealPlayerState->PlayerLevel + RandomOverLevel;  // Enemy Level is equal to Player's Level + Random Over Level
+
+	return AdjustedLevel;
+}
+
 void AEtherealEnemyManager::SpawnAllNodes()
 {
 	// iterate through the world for all Enemy Nodes
@@ -93,10 +105,9 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 {
 	AEtherealEnemyMaster* Enemy = nullptr;
 
-	FTransform transform = Node->GetActorTransform();
-	int level = Node->EnemyLevel;
+	//FTransform transform = Node->GetActorTransform();  // Set Spawn Location
+	int32 level = Node->EnemyLevel;  // Set Enemy Level
 
-	// TO DO : Spawn AI from class based on name, set it's level based on Node, and then call SetDefaultStats() on the enemy
 	switch (Node->EnemyName)
 	{
 		case EEnemyNames::EN_None:
@@ -106,9 +117,19 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 		// ARCADIA
 
 		case EEnemyNames::EN_UndeadWarrior:
+			// Undead Warriors will adjust their level automatically, since they spawn in Arcadia.
+			if (Player->EtherealPlayerState->HasCompletedTutorial)
+			{
+				level = GetAdjustedLevel();  // OVERRIDE LEVEL
+			}
 			Enemy = GetWorld()->SpawnActor<AUndeadWarrior>(Node->GetActorLocation(), Node->GetActorRotation());
 			break;
 		case EEnemyNames::EN_SkeletonKing:
+			// Skeleton King will adjust his level automatically, since he spawns in Arcadia
+			if (Player->EtherealPlayerState->HasCompletedTutorial)
+			{
+				level = GetAdjustedLevel();  // OVERRIDE LEVEL
+			}			
 			Enemy = GetWorld()->SpawnActor<ASkeletonKing>(Node->GetActorLocation(), Node->GetActorRotation());
 			break;
 
@@ -205,7 +226,7 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 	if (Enemy)
 	{
 		Enemy->SpawnDefaultController();  // Spawns the Enemy's A.I. Controller
-		Enemy->Level = Node->EnemyLevel; // Sets the Enemy's Level
+		Enemy->Level = level; // Sets the Enemy's Level
 		Enemy->SetBaseStats(); // Sets the Enemy's base stats.
 		Enemy->Target = Player;  // Sets the Player as this enemy's target. this is a single player game, so we can do dumb shit like this
 	}
