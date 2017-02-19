@@ -23,8 +23,8 @@ ASneakRing::ASneakRing(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
-	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/ArmorIcon_ShadowRing.ArmorIcon_ShadowRing'"));
-	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/ArmorIcon_ShadowRing-small.ArmorIcon_ShadowRing-small'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/ArmorIcon_SneakRing.ArmorIcon_SneakRing'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/ArmorIcon_SneakRing-small.ArmorIcon_SneakRing-small'"));
 
 	// Set Default Objects
 	LargeIcon = LargeIconObject.Object;
@@ -41,9 +41,9 @@ ASneakRing::ASneakRing(const FObjectInitializer& ObjectInitializer)
 	ATK = 10;
 	DEF = 10;
 	SPD = 10;
-	HP = -1000;
+	HP = -999;
 	MP = -500;
-	SpecialEffectText = LOCTEXT("SneakRingSpecialEffect", "Muffles the sounds of your footsteps, preventing enemy aggro.");
+	SpecialEffectText = LOCTEXT("SneakRingSpecialEffect", "+ Sneak");
 }
 
 // Called when the game starts or when spawned
