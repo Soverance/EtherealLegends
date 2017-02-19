@@ -66,13 +66,13 @@ void ALeatherCap::BeginPlay()
 // Custom code for Special Effect
 void ALeatherCap::DoSpecialEffect()
 {
-	OwnerReference->BoostCurePotency = 0.05f;  // Cure Potency +10%
+	OwnerReference->BoostCurePotency = 0.05f;  // Cure Potency +5%
 }
 
 // Custom code for Special Effect
 void ALeatherCap::RemoveSpecialEffect()
 {
-	OwnerReference->BoostCurePotency = 0;
+	OwnerReference->BoostCurePotency = 0.0f;
 }
 
 #undef LOCTEXT_NAMESPACE

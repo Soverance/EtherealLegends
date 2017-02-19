@@ -18,13 +18,15 @@
 #include "Characters/EtherealCharacterMaster.h"
 #include "Characters/Player/WeaponModes.h"
 #include "Gear/Magic/Magic_AnimTypes.h"
-#include "NPCs/EtherealNPCMaster.h"
+//#include "NPCs/EtherealNPCMaster.h"
+#include "NPCs/InteractAnims.h"
 #include "EtherealPlayerState.h"
 #include "EtherealPlayerController.h"
 #include "EtherealPlayerMaster.generated.h"
 
 // Forward Declarations
 class AEtherealEnemyMaster;
+class AEtherealNPCMaster;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeadPlayer);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMapOpened);

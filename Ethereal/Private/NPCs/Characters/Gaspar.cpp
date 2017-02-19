@@ -158,8 +158,8 @@ void AGaspar::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Armor17);
 	EMasterGearList Armor18 = EMasterGearList::GL_WarBoots;
 	DefaultShopList.AddUnique(Armor18);
-	//EMasterGearList Armor19 = EMasterGearList::GL_ThiefsShroud;
-	//DefaultShopList.AddUnique(Armor19);
+	EMasterGearList Armor19 = EMasterGearList::GL_SneakRing;
+	DefaultShopList.AddUnique(Armor19);
 	EMasterGearList Armor20 = EMasterGearList::GL_ShadowRing;
 	DefaultShopList.AddUnique(Armor20);
 	// Novelty

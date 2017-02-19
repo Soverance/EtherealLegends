@@ -152,6 +152,7 @@
 	GL_DarksteelRing UMETA(DisplayName = "Darksteel Ring"),
 	GL_ShadowRing UMETA(DisplayName = "Shadow Ring"),
 	GL_RestoreRing UMETA(DisplayName = "Restore Ring"),
+	GL_SneakRing UMETA(DisplayName = "Sneak Ring"),
 
 	// Feet
 	GL_ClothShoes UMETA(DisplayName = "Cloth Shoes"),

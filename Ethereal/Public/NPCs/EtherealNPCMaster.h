@@ -17,12 +17,13 @@
 
 #include "GameFramework/Actor.h"
 #include "Management/CommonLibrary.h"
+#include "Characters/Player/EtherealPlayerMaster.h"
 #include "NPCs/InteractAnims.h"
 #include "UMG.h"
 #include "EtherealNPCMaster.generated.h"
 
 // Forward Declarations
-class AEtherealPlayerMaster;
+//class AEtherealPlayerMaster;
 
 // Event Dispatcher for Interaction
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInteract);

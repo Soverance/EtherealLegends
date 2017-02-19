@@ -50,7 +50,7 @@ AAssassinsBoots::AAssassinsBoots(const FObjectInitializer& ObjectInitializer)
 	SPD = 2;
 	HP = 30;
 	MP = 10;
-	SpecialEffectText = LOCTEXT("AssassinsBootsSpecialEffect", "Sneak");
+	SpecialEffectText = LOCTEXT("AssassinsBootsSpecialEffect", "Cure Potency +10%");
 }
 
 // Called when the game starts or when spawned
@@ -66,13 +66,13 @@ void AAssassinsBoots::BeginPlay()
 // Custom code for Special Effect
 void AAssassinsBoots::DoSpecialEffect()
 {
-	OwnerReference->HasSneak = true;
+	OwnerReference->BoostCurePotency = 0.10f;  // Cure Potency +10%
 }
 
 // Custom code for Special Effect
 void AAssassinsBoots::RemoveSpecialEffect()
 {
-	OwnerReference->HasSneak = false;
+	OwnerReference->BoostCurePotency = 0.0f;
 }
 
 #undef LOCTEXT_NAMESPACE

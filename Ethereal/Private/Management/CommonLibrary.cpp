@@ -115,6 +115,7 @@
 #include "Gear/Armor/Ring/DarksteelRing.h"
 #include "Gear/Armor/Ring/ShadowRing.h"
 #include "Gear/Armor/Ring/RestoreRing.h"
+#include "Gear/Armor/Ring/SneakRing.h"
 
 #include "Gear/Armor/Feet/ClothShoes.h"
 #include "Gear/Armor/Feet/AdamanSabatons.h"
@@ -519,6 +520,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_RestoreRing:
 		GearClass = ARestoreRing::StaticClass();
+		break;
+	case EMasterGearList::GL_SneakRing:
+		GearClass = ASneakRing::StaticClass();
 		break;
 
 		///////////////////////////////
