@@ -26,7 +26,7 @@
 	// MAGIC
  	GL_Cure UMETA(DisplayName = "Cure"),
  	GL_Cure2 UMETA(DisplayName = "Cure II"),
- 	GL_Raise UMETA(DisplayName = "Raise"),
+ 	GL_Return UMETA(DisplayName = "Return"),
  	GL_Regen UMETA(DisplayName = "Regen"),
  	GL_Refresh UMETA(DisplayName = "Refresh"),
  	GL_Esuna UMETA(DisplayName = "Esuna"),
@@ -153,6 +153,7 @@
 	GL_ShadowRing UMETA(DisplayName = "Shadow Ring"),
 	GL_RestoreRing UMETA(DisplayName = "Restore Ring"),
 	GL_SneakRing UMETA(DisplayName = "Sneak Ring"),
+	GL_FeralBand UMETA(DisplayName = "Feral Band"),
 
 	// Feet
 	GL_ClothShoes UMETA(DisplayName = "Cloth Shoes"),

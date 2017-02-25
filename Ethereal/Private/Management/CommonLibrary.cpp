@@ -17,6 +17,7 @@
 
 #include "Gear/Magic/Spells/Cure.h"
 #include "Gear/Magic/Spells/CureII.h"
+#include "Gear/Magic/Spells/Return.h"
 #include "Gear/Magic/Spells/Regen.h"
 #include "Gear/Magic/Spells/Refresh.h"
 #include "Gear/Magic/Spells/Blizzard.h"
@@ -116,6 +117,7 @@
 #include "Gear/Armor/Ring/ShadowRing.h"
 #include "Gear/Armor/Ring/RestoreRing.h"
 #include "Gear/Armor/Ring/SneakRing.h"
+#include "Gear/Armor/Ring/FeralBand.h"
 
 #include "Gear/Armor/Feet/ClothShoes.h"
 #include "Gear/Armor/Feet/AdamanSabatons.h"
@@ -196,8 +198,8 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Cure2:
 		GearClass = ACureII::StaticClass();
 		break;
-	case EMasterGearList::GL_Raise:
-		// Do nothing, because Raise does not yet exist
+	case EMasterGearList::GL_Return:
+		GearClass = AReturn::StaticClass();
 		break;
 	case EMasterGearList::GL_Regen:
 		GearClass = ARegen::StaticClass();
@@ -523,6 +525,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_SneakRing:
 		GearClass = ASneakRing::StaticClass();
+		break;
+	case EMasterGearList::GL_FeralBand:
+		GearClass = AFeralBand::StaticClass();
 		break;
 
 		///////////////////////////////

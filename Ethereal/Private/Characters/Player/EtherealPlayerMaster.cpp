@@ -288,6 +288,11 @@ void AEtherealPlayerMaster::PlayerTakeDamage(float DamageTaken)
 	}
 }
 
+void AEtherealPlayerMaster::TeleportReturn_Implementation(bool ShouldRaise)
+{
+
+}
+
 void AEtherealPlayerMaster::StartDeathCycle_Implementation()
 {
 

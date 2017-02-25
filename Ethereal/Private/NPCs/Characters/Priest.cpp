@@ -138,6 +138,8 @@ void APriest::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Magic8);
 	EMasterGearList Magic9 = EMasterGearList::GL_Dash;
 	DefaultShopList.AddUnique(Magic9);
+	EMasterGearList Magic10 = EMasterGearList::GL_Return;
+	DefaultShopList.AddUnique(Magic10);
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{

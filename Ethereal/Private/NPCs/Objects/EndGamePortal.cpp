@@ -78,6 +78,7 @@ void AEndGamePortal::BeginPlay()
 	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 	{
 		InteractingPlayer = *ActorItr; // get the instance of the Player
+		InteractingPlayer->EtherealGameInstance->LoadingCleanup.AddDynamic(this, &AEndGamePortal::DestroyPortal);  // bind the cleanup function
 	}
 }
 
@@ -109,10 +110,6 @@ void AEndGamePortal::DoBurstEffect()
 		FTimerHandle LoadTimer;
 		GetWorldTimerManager().SetTimer(LoadTimer, this, &AEndGamePortal::LoadArcadia, 3.0f, false);
 	}
-
-	// Destroy EndGame Portal after a short delay
-	FTimerHandle DestroyTimer;
-	GetWorldTimerManager().SetTimer(DestroyTimer, this, &AEndGamePortal::DestroyPortal, 8.0f, false);
 }
 
 void AEndGamePortal::LoadEndCredits()

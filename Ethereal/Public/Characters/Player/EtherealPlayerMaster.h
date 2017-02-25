@@ -24,6 +24,20 @@
 #include "EtherealPlayerController.h"
 #include "EtherealPlayerMaster.generated.h"
 
+#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
+
+//static void ConsoleGiveAllItems()
+//{
+//	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Do some bullshit here!");
+//}
+//
+//FAutoConsoleCommand ConsoleAllItems(
+//	TEXT("EtherealConsole.GiveAllItems"),
+//	TEXT("Fills the player's inventory with all items available in the game."),
+//	FConsoleCommandDelegate::CreateStatic(ConsoleGiveAllItems)
+//);
+#endif
+
 // Forward Declarations
 class AEtherealEnemyMaster;
 class AEtherealNPCMaster;
@@ -158,6 +172,10 @@ public:
 	// The current charge rate of a spell. When it matches the TimeToCast, the spell is fully charged and ready to be cast.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Spellcast)
 	float TimeToCast = 0;
+
+	// This function returns the player to a certain location within the current realm.
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Default)
+	void TeleportReturn(bool ShouldRaise);
 
 	/////////////////////////////////////////////////
 	// MOVEMENT
@@ -336,6 +354,10 @@ public:
 	// Whether or not the player has fast pants equipped, which are Leg Armor that increases movement speed
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool HasFastPants;
+
+	// Whether or not the player is lightfooted, which prevents fall damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasLightfoot;
 
 	// Whether or not the player has the Reraise effect active
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
