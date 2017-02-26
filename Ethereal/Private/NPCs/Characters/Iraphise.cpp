@@ -119,38 +119,40 @@ void AIraphise::SpawnDefaultShopItems()
 	// WEAPONS
 
 	// One-Handed
-	EMasterGearList Weapon0 = EMasterGearList::GL_Joyeuse;
+	EMasterGearList Weapon0 = EMasterGearList::GL_RuneBlade;
 	DefaultShopList.AddUnique(Weapon0);
-	EMasterGearList Weapon1 = EMasterGearList::GL_Hauteclaire;
+	EMasterGearList Weapon1 = EMasterGearList::GL_Joyeuse;
 	DefaultShopList.AddUnique(Weapon1);
-	EMasterGearList Weapon2 = EMasterGearList::GL_BalloonSword;
+	EMasterGearList Weapon2 = EMasterGearList::GL_Hauteclaire;
 	DefaultShopList.AddUnique(Weapon2);
-	// Shields
-	EMasterGearList Weapon3 = EMasterGearList::GL_SpartanShield;
+	EMasterGearList Weapon3 = EMasterGearList::GL_BalloonSword;
 	DefaultShopList.AddUnique(Weapon3);
-	EMasterGearList Weapon4 = EMasterGearList::GL_DiablosDread;
+	// Shields
+	EMasterGearList Weapon4 = EMasterGearList::GL_SpartanShield;
 	DefaultShopList.AddUnique(Weapon4);
-	// Two-Handed
-	EMasterGearList Weapon5 = EMasterGearList::GL_Juggernaut;
+	EMasterGearList Weapon5 = EMasterGearList::GL_DiablosDread;
 	DefaultShopList.AddUnique(Weapon5);
-	EMasterGearList Weapon6 = EMasterGearList::GL_Claymore;
+	// Two-Handed
+	EMasterGearList Weapon6 = EMasterGearList::GL_Juggernaut;
 	DefaultShopList.AddUnique(Weapon6);
-	EMasterGearList Weapon7 = EMasterGearList::GL_Marauder;
+	EMasterGearList Weapon7 = EMasterGearList::GL_Claymore;
 	DefaultShopList.AddUnique(Weapon7);
-	// Ranged
-	EMasterGearList Weapon8 = EMasterGearList::GL_ShortBow;
+	EMasterGearList Weapon8 = EMasterGearList::GL_Marauder;
 	DefaultShopList.AddUnique(Weapon8);
-	EMasterGearList Weapon9 = EMasterGearList::GL_EagleEye;
+	// Ranged
+	EMasterGearList Weapon9 = EMasterGearList::GL_ShortBow;
 	DefaultShopList.AddUnique(Weapon9);
-	EMasterGearList Weapon10 = EMasterGearList::GL_EurytosBow;
+	EMasterGearList Weapon10 = EMasterGearList::GL_EagleEye;
 	DefaultShopList.AddUnique(Weapon10);
-	// Ammunition
-	EMasterGearList Weapon11 = EMasterGearList::GL_WoodenArrow;
+	EMasterGearList Weapon11 = EMasterGearList::GL_EurytosBow;
 	DefaultShopList.AddUnique(Weapon11);
-	EMasterGearList Weapon12 = EMasterGearList::GL_IronArrow;
+	// Ammunition
+	EMasterGearList Weapon12 = EMasterGearList::GL_WoodenArrow;
 	DefaultShopList.AddUnique(Weapon12);
-	EMasterGearList Weapon13 = EMasterGearList::GL_FlameArrow;
+	EMasterGearList Weapon13 = EMasterGearList::GL_IronArrow;
 	DefaultShopList.AddUnique(Weapon13);
+	EMasterGearList Weapon14 = EMasterGearList::GL_FlameArrow;
+	DefaultShopList.AddUnique(Weapon14);
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{

@@ -47,6 +47,7 @@
 
 	// One Handed
  	GL_IronSword UMETA(DisplayName = "Iron Sword"),
+	GL_RuneBlade UMETA(DisplayName = "Rune Blade"),
 	GL_Joyeuse UMETA(DisplayName = "Joyeuse"),
  	GL_Hauteclaire UMETA(DisplayName = "Hauteclaire"),
 	GL_Excalibur UMETA(DisplayName = "Excalibur"),

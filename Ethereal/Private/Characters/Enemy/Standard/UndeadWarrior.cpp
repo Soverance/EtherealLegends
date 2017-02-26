@@ -37,7 +37,7 @@ AUndeadWarrior::AUndeadWarrior(const FObjectInitializer& ObjectInitializer)
 	CommonDrop = EMasterGearList::GL_None;
 	UncommonDrop = EMasterGearList::GL_Potion;
 	RareDrop = EMasterGearList::GL_Ether;
-	AttackDelay = 2.0f;
+	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 	GetCharacterMovement()->MaxAcceleration = 30;

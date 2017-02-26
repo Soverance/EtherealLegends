@@ -760,6 +760,9 @@ void AEtherealPlayerState::AddDefaultItems()
 	// then we give you the Return spell, so that you have an easy way back if you get lost
 	AddToInventory(EMasterGearList::GL_Return, true, false);
 	Binding_Magic_Slot2 = EMasterGearList::GL_Return;
+	// And we're going to give you the Dash spell... because apparently a lot of players are terrible, never defeat the first boss, and therefore never realize this spell exists (probably assuming it should be a standard ability, like in Dark Souls)
+	AddToInventory(EMasterGearList::GL_Dash, true, false);
+	Binding_Magic_Slot3 = EMasterGearList::GL_Dash;
 	// and we give you the full Cloth armor set, so that you're not naked
 	AddToInventory(EMasterGearList::GL_ClothCap, true, false);
 	Binding_Armor_Head = EMasterGearList::GL_ClothCap;

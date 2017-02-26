@@ -262,7 +262,6 @@ void ADeathCap::OnSeePawn(APawn* Pawn)
 		if (IsHiding)
 		{
 			IsHiding = false;
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 
 			// wait a bit before aggroing 
 			FTimerDelegate DelegateAggro;

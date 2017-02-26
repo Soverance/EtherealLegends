@@ -30,6 +30,7 @@
 #include "Gear/Magic/Spells/Dash.h"
 
 #include "Gear/Weapons/OneHanded/IronSword.h"
+#include "Gear/Weapons/OneHanded/RuneBlade.h"
 #include "Gear/Weapons/OneHanded/Joyeuse.h"
 #include "Gear/Weapons/OneHanded/Hauteclaire.h"
 #include "Gear/Weapons/OneHanded/Excalibur.h"
@@ -258,6 +259,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 
 	case EMasterGearList::GL_IronSword:
 		GearClass = AIronSword::StaticClass();
+		break;
+	case EMasterGearList::GL_RuneBlade:
+		GearClass = ARuneBlade::StaticClass();
 		break;
 	case EMasterGearList::GL_Joyeuse:
 		GearClass = AJoyeuse::StaticClass();

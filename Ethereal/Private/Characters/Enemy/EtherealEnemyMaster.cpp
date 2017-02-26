@@ -356,6 +356,7 @@ void AEtherealEnemyMaster::Death()
 	IsDead = true;
 	Targetable = false;  // turn off targeting if dead.
 	GetMovementComponent()->StopMovementImmediately();  // Stop Movement	
+	EtherealGameInstance->BlackBox->HasEngagedBoss = false;  // Disengage Boss
 	Deaggro();  // Deaggro
 	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 	OnDeath.Broadcast();  // broadcast the OnDeath event dispatcher, which will run enemy specific death code
