@@ -754,9 +754,12 @@ void AEtherealPlayerState::AddDefaultItems()
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
+	// we also give you the Cure spell, since apparently the tutorial sequence is too difficult for most players without it...
+	AddToInventory(EMasterGearList::GL_Cure, true, false);
+	Binding_Magic_Slot1 = EMasterGearList::GL_Cure;
 	// then we give you the Return spell, so that you have an easy way back if you get lost
 	AddToInventory(EMasterGearList::GL_Return, true, false);
-	Binding_Magic_Slot3 = EMasterGearList::GL_Return;
+	Binding_Magic_Slot2 = EMasterGearList::GL_Return;
 	// and we give you the full Cloth armor set, so that you're not naked
 	AddToInventory(EMasterGearList::GL_ClothCap, true, false);
 	Binding_Armor_Head = EMasterGearList::GL_ClothCap;

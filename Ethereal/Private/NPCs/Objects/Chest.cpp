@@ -46,6 +46,7 @@ AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	Base = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Base"));
 	Base->SetupAttachment(Root);
 	Base->SetStaticMesh(SM_Base);
+	Base->bReceivesDecals = false;
 
 	LidRoot = ObjectInitializer.CreateDefaultSubobject<USceneComponent>(this, TEXT("LidRoot"));
 	LidRoot->SetupAttachment(Base);
@@ -56,6 +57,7 @@ AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	Lid->SetStaticMesh(SM_Lid);
 	Lid->SetRelativeLocation(FVector(-34, 0, 0));
 	Lid->SetRelativeRotation(FRotator(0, -180, 0));
+	Lid->bReceivesDecals = false;
 
 	OpenAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("OpenAudio"));
 	OpenAudio->SetupAttachment(Root);

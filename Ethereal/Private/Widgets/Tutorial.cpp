@@ -35,8 +35,8 @@ void UTutorial::FirstContact()
 	Paragraph7 = LOCTEXT("Tutorial_Paragraph7", "Hold down the 'ACTION' button to continuously attack.");
 	Paragraph8 = LOCTEXT("Tutorial_Paragraph8", "Lock on to enemies to improve accuracy.");
 	Paragraph9 = LOCTEXT("Tutorial_Paragraph9", "Increase your Defense by holding the 'BLOCK' button.");
-	Paragraph10 = LOCTEXT("Tutorial_Paragraph10", "The Undead rise from the graveyard over there.");
-	Paragraph11 = LOCTEXT("Tutorial_Paragraph11", "Defeat the Skeleton King and I will open the gate for you.");
+	Paragraph10 = LOCTEXT("Tutorial_Paragraph10", "The path behind me leads into the graveyard, where the undead rise.");
+	Paragraph11 = LOCTEXT("Tutorial_Paragraph11", "Defeat the Skeleton King and I will open the gate to the Portal.");
 	Paragraph12 = LOCTEXT("Tutorial_Paragraph12", "Use consumable items, such as Potions, by pressing the 'USE ITEM' button.");
 	Paragraph13 = LOCTEXT("Tutorial_Paragraph13", "Only one consumable item may be active at a time.");
 	Paragraph14 = LOCTEXT("Tutorial_Paragraph14", "Swap between usable items with the 'CYCLE' button.");

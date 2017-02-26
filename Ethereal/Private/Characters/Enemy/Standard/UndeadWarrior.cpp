@@ -105,7 +105,7 @@ void AUndeadWarrior::Tick(float DeltaTime)
 
 void AUndeadWarrior::MeleeAttack()
 {
-	EnemyDealDamage(15);
+	EnemyDealDamage(10);
 	Attack = true;
 }
 
