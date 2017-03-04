@@ -31,7 +31,7 @@ ASamaritan::ASamaritan(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("SamaritanText", "Samaritan");
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_SkySignet;
 	UncommonDrop = EMasterGearList::GL_ExoPlate;
 	RareDrop = EMasterGearList::GL_Annihilator;
 	AttackDelay = 2.0f;

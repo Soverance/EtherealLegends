@@ -35,7 +35,7 @@ ADeathCap::ADeathCap(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("DeathCapText", "Death Cap");
 	Realm = ERealms::R_Shiitake;
 	BattleType = EBattleTypes::BT_Boss;	
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_AquaSignet;
 	UncommonDrop = EMasterGearList::GL_EagleEye;
 	RareDrop = EMasterGearList::GL_SpartanShield;
 	AttackDelay = 3.0f;

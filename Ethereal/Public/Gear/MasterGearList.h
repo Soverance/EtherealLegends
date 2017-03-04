@@ -156,6 +156,14 @@
 	GL_SneakRing UMETA(DisplayName = "Sneak Ring"),
 	GL_FeralBand UMETA(DisplayName = "Feral Band"),
 
+	// SIGNET RINGS
+	GL_AquaSignet UMETA(DisplayName = "Aqua Signet"),
+	GL_FlameSignet UMETA(DisplayName = "Flame Signet"),
+	GL_IceSignet UMETA(DisplayName = "Ice Signet"),
+	GL_EarthSignet UMETA(DisplayName = "Earth Signet"),
+	GL_SkySignet UMETA(DisplayName = "Sky Signet"),
+	GL_StarSignet UMETA(DisplayName = "Star Signet"),
+
 	// Feet
 	GL_ClothShoes UMETA(DisplayName = "Cloth Shoes"),
 	GL_AdamanSabatons UMETA(DisplayName = "Adaman Sabatons"),

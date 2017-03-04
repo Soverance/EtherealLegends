@@ -47,7 +47,7 @@ AFrostCaptain::AFrostCaptain(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("FrostCaptainText", "Frost Captain");
 	Realm = ERealms::R_Boreal;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_IceSignet;
 	UncommonDrop = EMasterGearList::GL_Marauder;
 	RareDrop = EMasterGearList::GL_Hauteclaire;
 	AttackDelay = 5.0f;
