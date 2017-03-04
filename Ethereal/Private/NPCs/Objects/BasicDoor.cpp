@@ -21,7 +21,7 @@
 ABasicDoor::ABasicDoor(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<USoundCue> OpenAudioObject(TEXT("SoundCue'/Game/Audio/Cave/Ethereal_ChestOpen_Cue.Ethereal_ChestOpen_Cue'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> OpenAudioObject(TEXT("SoundCue'/Game/Audio/Environment/Door_Open_Basic.Door_Open_Basic'"));
 
 	// Set Default Objects
 	S_OpenAudio = OpenAudioObject.Object;
@@ -67,6 +67,7 @@ void ABasicDoor::Interact()
 	if (IsUsable)
 	{
 		IsUsable = false;
+		OpenAudio->Play();
 	}
 }
 

@@ -34,8 +34,6 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Cyan);
 
-	// For whatever reason, uncommenting this Mesh code prevents the editor from loading past 73%... 
-	// The same code works for all Enemies, so I can only assume there is an issue with the character's Anim BP.
 	//GetMesh()->SkeletalMesh = SkeletalMeshObject.Object;
 	//GetMesh()->SetAnimInstanceClass(AnimBP.Object);
 	
@@ -170,11 +168,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 	{
 		if (HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 170;
+			GetCharacterMovement()->MaxWalkSpeed = 190;
 		}
 		if (!HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 150;
+			GetCharacterMovement()->MaxWalkSpeed = 170;
 		}
 	}
 	// If the player is not hasted, do the regular stuff.
@@ -184,11 +182,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 		{
 			if (HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 70;
+				GetCharacterMovement()->MaxWalkSpeed = 80;
 			}
 			if (!HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 50;
+				GetCharacterMovement()->MaxWalkSpeed = 60;
 			}
 
 		}
@@ -196,11 +194,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 		{
 			if (HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 120;
+				GetCharacterMovement()->MaxWalkSpeed = 140;
 			}
 			if (!HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 100;
+				GetCharacterMovement()->MaxWalkSpeed = 120;
 			}
 		}
 	}	
