@@ -121,6 +121,11 @@ void AEtherealGearMaster::Unbind()
 		case EMasterGearTypes::GT_Casting:
 			OwnerReference->EtherealPlayerState->Binding_Weapon_Casting = EMasterGearList::GL_None;
 			break;
+
+		// I should probably put the rest of the armor in here, but for now, it's handled in the pause widget
+		case EMasterGearTypes::GT_Ring:
+			OwnerReference->EtherealPlayerState->Binding_Armor_Ring = EMasterGearList::GL_None;
+			break;
 		}
 	}	
 }
