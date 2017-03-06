@@ -35,7 +35,7 @@ ASignetGate::ASignetGate(const FObjectInitializer& ObjectInitializer)
 	// Create objects
 	IsUsable = true;
 	GateIsOpen = false;
-	InteractAnimType = EInteractAnims::IA_Talk;
+	InteractAnimType = EInteractAnims::IA_Open;
 
 	DoInteract.AddDynamic(this, &ASignetGate::Interact); // bind interact
 
