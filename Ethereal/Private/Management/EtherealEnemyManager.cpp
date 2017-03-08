@@ -16,32 +16,47 @@
 #include "Ethereal.h"
 
 #include "Characters/Enemy/EtherealEnemyMaster.h"
+
+// Arcadia
 #include "Characters/Enemy/Standard/UndeadWarrior.h"
 #include "Characters/Enemy/Boss/SkeletonKing.h"
+// Shiitake
 #include "Characters/Enemy/Standard/SoulEater.h"
 #include "Characters/Enemy/Standard/DemonStatue.h"
 #include "Characters/Enemy/Standard/Watcher.h"
 #include "Characters/Enemy/Boss/DeathCap.h"
+// Vulcan
 #include "Characters/Enemy/Standard/Goblin.h"
 #include "Characters/Enemy/Standard/Gruntling.h"
 #include "Characters/Enemy/Standard/DragonWorm.h"
 #include "Characters/Enemy/Boss/RedDragon.h"
 #include "Characters/Enemy/Boss/LavaKnight.h"
+// Boreal
 #include "Characters/Enemy/Standard/FrostGiant.h"
 #include "Characters/Enemy/Standard/Spider.h"
 #include "Characters/Enemy/Standard/GiantSpider.h"
 #include "Characters/Enemy/Boss/FrostCaptain.h"
+// Yggdrasil
 #include "Characters/Enemy/Standard/Flytrap.h"
 #include "Characters/Enemy/Standard/Mugbear.h"
 #include "Characters/Enemy/Standard/EarthTroll.h"
 #include "Characters/Enemy/Boss/GaiaTortoise.h"
 #include "Characters/Enemy/Boss/GaiaTitan.h"
+// Empyrean
 #include "Characters/Enemy/Standard/PowerDrone.h"
 #include "Characters/Enemy/Standard/Golem.h"
 #include "Characters/Enemy/Boss/Samaritan.h"
 #include "Characters/Enemy/Standard/Nightshade.h"
+// Celestial
 #include "Characters/Enemy/Boss/Zhan.h"
 #include "Characters/Enemy/Boss/Eternal.h"
+// SIGNET
+#include "Characters/Enemy/Signet/Daemon.h"
+#include "Characters/Enemy/Signet/EarthGolem.h"
+#include "Characters/Enemy/Signet/Ghost.h"
+#include "Characters/Enemy/Signet/IceKnight.h"
+#include "Characters/Enemy/Signet/SkyDragon.h"
+#include "Characters/Enemy/Signet/ProtoZhan.h"
 
 #include "EtherealEnemyManager.h"
 
@@ -220,6 +235,26 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 			break;
 		case EEnemyNames::EN_Zhan:
 			Enemy = GetWorld()->SpawnActor<AZhan>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+
+		// SIGNET NOTORIOUS MONSTERS
+		case EEnemyNames::EN_Daemon:
+			Enemy = GetWorld()->SpawnActor<ADaemon>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+		case EEnemyNames::EN_EarthGolem:
+			Enemy = GetWorld()->SpawnActor<AEarthGolem>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+		case EEnemyNames::EN_Ghost:
+			Enemy = GetWorld()->SpawnActor<AGhost>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+		case EEnemyNames::EN_IceKnight:
+			Enemy = GetWorld()->SpawnActor<AIceKnight>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+		case EEnemyNames::EN_ProtoZhan:
+			Enemy = GetWorld()->SpawnActor<AProtoZhan>(Node->GetActorLocation(), Node->GetActorRotation());
+			break;
+		case EEnemyNames::EN_SkyDragon:
+			Enemy = GetWorld()->SpawnActor<ASkyDragon>(Node->GetActorLocation(), Node->GetActorRotation());
 			break;
 	}
 

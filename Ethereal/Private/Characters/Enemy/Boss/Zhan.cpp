@@ -63,8 +63,8 @@ AZhan::AZhan(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("ZhanText", "Zhan");
 	Realm = ERealms::R_Celestial;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
-	UncommonDrop = EMasterGearList::GL_Haste;
+	CommonDrop = EMasterGearList::GL_Haste;
+	UncommonDrop = EMasterGearList::GL_Aegis;
 	RareDrop = EMasterGearList::GL_Excalibur;
 	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;

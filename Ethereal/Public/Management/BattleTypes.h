@@ -22,6 +22,7 @@ enum class EBattleTypes : uint8
 {
 	BT_Standard UMETA(DisplayName = "Standard"),
 	BT_Boss UMETA(DisplayName = "Boss"),
+	BT_Signet UMETA(DisplayName = "Signet"),
 	BT_ZhanIntro UMETA(DisplayName = "Zhan Into"),
 	BT_ZhanBattle UMETA(DisplayName = "Zhan Battle"),
 };
