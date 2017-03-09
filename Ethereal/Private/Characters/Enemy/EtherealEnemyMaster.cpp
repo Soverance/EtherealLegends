@@ -126,12 +126,17 @@ void AEtherealEnemyMaster::SetBaseStats()
 	float HPMod = 2000;
 	float StatMod = 7.5f;
 
-	if (BattleType == EBattleTypes::BT_Boss) // Higher stats for bosses
+	if (BattleType == EBattleTypes::BT_Signet) // High stats for SNMs
+	{
+		HPMod = 3000;
+		StatMod = 8.0f;
+	}
+	if (BattleType == EBattleTypes::BT_Boss) // High stats for bosses
 	{
 		HPMod = 2000;
 		StatMod = 7.5f;
 	}
-	else  // lower stats for regular enemies
+	if (BattleType == EBattleTypes::BT_Standard) // lower stats for regular enemies
 	{
 		HPMod = 200;
 		StatMod = 5.1f;	

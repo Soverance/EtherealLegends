@@ -35,7 +35,7 @@ ASignetGate::ASignetGate(const FObjectInitializer& ObjectInitializer)
 	// Create objects
 	IsUsable = true;
 	GateIsOpen = false;
-	InteractAnimType = EInteractAnims::IA_Open;
+	InteractAnimType = EInteractAnims::IA_Talk;
 
 	DoInteract.AddDynamic(this, &ASignetGate::Interact); // bind interact
 
@@ -149,6 +149,7 @@ void ASignetGate::ShowPanel(int32 PanelIndex)
 		SignetSystem->SignetName = SignetRingName;  // Set the Signet Ring Name in the widget for easy and instanced access
 		SignetSystem->AddToViewport();  // add the Signet System widget to the viewport
 		InteractingPlayer->EtherealGameInstance->CurrentState = EGameStates::GS_Menu;  // put the player into the Menu state
+		InteractingPlayer->StopActions();  // stop all actions when showing a signet panel
 
 		switch (PanelIndex)
 		{

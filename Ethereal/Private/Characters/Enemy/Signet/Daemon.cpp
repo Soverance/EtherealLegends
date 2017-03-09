@@ -46,7 +46,7 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 300.0f;
+	AcceptanceRadius = 50.0f;
 	RunAI = false;
 	BaseEyeHeight = 0;
 
@@ -58,8 +58,8 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
-	MeleeRadius->SetSphereRadius(60);
-	MeleeRadius->SetRelativeLocation(FVector(25, 0, -85));
+	MeleeRadius->SetSphereRadius(25);
+	MeleeRadius->SetRelativeLocation(FVector(15, 0, -85));
 
 	// Targeting Reticle config
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 250));
@@ -73,6 +73,8 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -95,6 +97,12 @@ void ADaemon::Tick(float DeltaTime)
 // Melee Attack function
 void ADaemon::AttackRound()
 {
+	// Reset all attack anims when starting a new round...
+	DoAtk1 = false;
+	DoAtk2 = false;
+	DoAtk3 = false;
+	DoJump = false;
+
 	if (!Target->IsDead)
 	{
 		if (!IsAttacking)
@@ -114,10 +122,23 @@ void ADaemon::AttackRound()
 					{
 						Target = Player;
 
+						EnemyDealDamage(15);
+						int32 RandomAtk = FMath::RandRange(0, 8);  // get a random int
+
 						if (!IsDead)
 						{
-							EnemyDealDamage(15);
-							DoCharge = true;
+							if (RandomAtk <= 2)
+							{
+								DoAtk1 = true;
+							}
+							if (RandomAtk > 2 && RandomAtk <= 5)
+							{
+								DoAtk2 = true;
+							}
+							if (RandomAtk > 5)
+							{
+								DoAtk3 = true;
+							}
 						}
 					}
 				}
@@ -125,19 +146,10 @@ void ADaemon::AttackRound()
 
 			if (Overlapping.Num() == 0)
 			{
-				EnemyDealDamage(15);
-				int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
-
 				if (!IsDead)
 				{
-					if (RandomAtk <= 3)
-					{
-						DoFireCannons = true;
-					}
-					if (RandomAtk > 3)
-					{
-						DoLaserBlast = true;
-					}
+					EnemyDealDamage(15);
+					DoJump = true;
 				}
 			}
 
@@ -166,7 +178,7 @@ void ADaemon::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float 
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 7.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 3.5f, false);
 		}
 	}
 }

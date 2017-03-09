@@ -260,6 +260,12 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 
 	if (Enemy)
 	{
+		// All Signet Notorious Monsters will receive an adjusted level on spawn
+		if (Enemy->BattleType == EBattleTypes::BT_Signet)
+		{
+			level = GetAdjustedLevel();  // OVERRIDE LEVEL
+		}
+
 		Enemy->SpawnDefaultController();  // Spawns the Enemy's A.I. Controller
 		Enemy->Level = level; // Sets the Enemy's Level
 		Enemy->SetBaseStats(); // Sets the Enemy's base stats.

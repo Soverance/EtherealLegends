@@ -42,17 +42,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
 
-	// Roar Anim
+	// Atk1 Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoLaserBlast;
+	bool DoAtk1;
 
-	// Fire Cannons Anim
+	// Atk2 Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoFireCannons;
+	bool DoAtk2;
 
-	// Charge Anim
+	// Atk3 Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoCharge;
+	bool DoAtk3;
+
+	// Jump Anim
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
+	bool DoJump;
 
 	///////////////////////////
 	// A.I.

@@ -34,7 +34,7 @@ ALilster::ALilster(const FObjectInitializer& ObjectInitializer)
 	Mesh->SetupAttachment(RootComponent);
 	Mesh->SetAnimInstanceClass(AnimBP.Object);
 	Mesh->SkeletalMesh = SM_Mesh;
-	Mesh->SetRelativeScale3D(FVector(0.15f, 0.15f, 0.15f));
+	Mesh->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 	Mesh->bCastCapsuleIndirectShadow = true;
 
 	ShopIndex = 0;  // CONSUMABLE ITEM SHOP
