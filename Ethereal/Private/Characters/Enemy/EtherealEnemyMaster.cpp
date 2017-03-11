@@ -271,40 +271,51 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 		AEtherealPlayerMaster* Player = Cast<AEtherealPlayerMaster>(Pawn); // Check if the pawn seen by enemy AI was indeed the player
 		if (Player)
 		{
-			if (!Player->IsDead)  // Make sure the player isn't dead before going further
+			// Make sure the enemy actually has Line of Sight to the player
+			if (Controller->LineOfSightTo(Player, FVector(0, 0, 0), false))
 			{
-				Target = Player; // Set the seen player as the new Target	
-				Target->AggroList.AddUnique(this); // Add this enemy to the player's aggro list array
-				InRange = true; // the enemy is now in range
-				IsAggroed = true; // the enemy is now aggroed
-				Targetable = true;  // turn on targeting, in case it was previously disabled
-				RunAI = true;  // set A.I. active				
-
-				if (BattleType == EBattleTypes::BT_Standard)
+				if (!Player->IsDead)  // Make sure the player isn't dead before going further
 				{
-					AudioManager->Play_BattleMusic(EBattleTypes::BT_Standard);  // play the standard battle music
-				}
-				else if (BattleType == EBattleTypes::BT_Boss)
-				{
-					EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+					Target = Player; // Set the seen player as the new Target	
+					Target->AggroList.AddUnique(this); // Add this enemy to the player's aggro list array
+					InRange = true; // the enemy is now in range
+					IsAggroed = true; // the enemy is now aggroed
+					Targetable = true;  // turn on targeting, in case it was previously disabled
+					RunAI = true;  // set A.I. active				
 
-					// play the boss battle music
-					if (Name == EEnemyNames::EN_Zhan)
+					// IF STANDARD ENEMY
+					if (BattleType == EBattleTypes::BT_Standard)
 					{
-						AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Standard);  // play the standard battle music
 					}
-					else
+					// IF BOSS ENEMY
+					if (BattleType == EBattleTypes::BT_Boss)
 					{
-						AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  
+						EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+
+						// play the boss battle music
+						if (Name == EEnemyNames::EN_Zhan)
+						{
+							AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+						}
+						else
+						{
+							AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);
+						}
+					}
+					// IF SIGNET ENEMY
+					if (BattleType == EBattleTypes::BT_Signet)
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Signet);
+					}
+
+					// if the player is in a menu when this enemy aggros, close it
+					if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
+					{
+						Target->EnemyCloseMenu();
 					}
 				}
-
-				// if the player is in a menu when this enemy aggros, close it
-				if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
-				{
-					Target->EnemyCloseMenu();
-				}
-			}
+			}			
 		}
 	}
 }

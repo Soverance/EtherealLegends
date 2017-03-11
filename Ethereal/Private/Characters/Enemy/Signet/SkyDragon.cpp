@@ -160,8 +160,8 @@ void ASkyDragon::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
@@ -178,8 +178,8 @@ void ASkyDragon::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);

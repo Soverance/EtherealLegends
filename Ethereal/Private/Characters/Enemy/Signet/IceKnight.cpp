@@ -23,8 +23,13 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 {
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> EnemyMesh(TEXT("SkeletalMesh'/Game/EtherealParty/IceKnight/Mixamo/IceKnight.IceKnight'"));
 	static ConstructorHelpers::FObjectFinder<UClass> AnimBP(TEXT("AnimBlueprint'/Game/EtherealParty/IceKnight/Mixamo/Anim_IceKnight.Anim_IceKnight_C'"));
-
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> HammerMesh(TEXT("SkeletalMesh'/Game/EtherealParty/LavaKnight/Mesh/GDC2012_IceKnightHammer.GDC2012_IceKnightHammer'"));
+	//static ConstructorHelpers::FObjectFinder<UParticleSystem> EyeParticleObject(TEXT("ParticleSystem'/Game/EtherealParty/IceKnight/FX/P_FrostGiant_EyeFlare.P_FrostGiant_EyeFlare'"));
+	
 	// Set Default Objects
+	SK_Hammer = HammerMesh.Object;
+	//P_Eye1FX = EyeParticleObject.Object;
+	//P_Eye2FX = EyeParticleObject.Object;
 	
 	// Default Config
 	Name = EEnemyNames::EN_IceKnight;
@@ -36,7 +41,7 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	RareDrop = EMasterGearList::GL_Potion;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
-	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
+	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));
 	GetCharacterMovement()->MaxAcceleration = 30;
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FLinearColor::Yellow);
@@ -46,15 +51,15 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 300.0f;
+	AcceptanceRadius = 50.0f;
 	RunAI = false;
 	BaseEyeHeight = 50;
 
 	// Mesh Config
 	GetMesh()->SkeletalMesh = EnemyMesh.Object;
 	GetMesh()->SetAnimInstanceClass(AnimBP.Object);
-	GetMesh()->SetRelativeScale3D(FVector(0.25f, 0.25f, 0.25f));
-	GetMesh()->SetRelativeLocation(FVector(0, 0, -90));
+	GetMesh()->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
+	GetMesh()->SetRelativeLocation(FVector(0, 0, -89));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
@@ -73,6 +78,27 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+
+	// Blade skeletal mesh
+	Hammer = ObjectInitializer.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("Hammer"));
+	Hammer->SetupAttachment(GetMesh(), FName(TEXT("RightHand")));
+	Hammer->SkeletalMesh = SK_Hammer;
+	Hammer->SetRelativeScale3D(FVector(2, 2, 2));
+	Hammer->SetRelativeRotation(FRotator(90, 0, 0));
+
+	// Glowing Eye Particle Effect
+	//Eye1FX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("Eye1FX"));
+	//Eye1FX->SetupAttachment(GetMesh(), FName(TEXT("LeftEye")));
+	//Eye1FX->Template = P_Eye1FX;
+	//Eye1FX->bAutoActivate = true;
+	//Eye1FX->SetRelativeScale3D(FVector(0.15f, 0.15f, 0.15f));
+
+	// Glowing Eye Particle Effect
+	//Eye2FX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("Eye2FX"));
+	//Eye2FX->SetupAttachment(GetMesh(), FName(TEXT("RightEye")));
+	//Eye2FX->Template = P_Eye2FX;
+	//Eye2FX->bAutoActivate = true;
+	//Eye2FX->SetRelativeScale3D(FVector(0.15f, 0.15f, 0.15f));
 }
 
 // Called when the game starts or when spawned
@@ -117,7 +143,7 @@ void AIceKnight::AttackRound()
 						if (!IsDead)
 						{
 							EnemyDealDamage(15);
-							DoCharge = true;
+							DoAtk = true;
 						}
 					}
 				}
@@ -132,11 +158,11 @@ void AIceKnight::AttackRound()
 				{
 					if (RandomAtk <= 3)
 					{
-						DoFireCannons = true;
+						DoIceBlast = true;
 					}
 					if (RandomAtk > 3)
 					{
-						DoLaserBlast = true;
+						DoFrostSpike = true;
 					}
 				}
 			}
@@ -160,13 +186,13 @@ void AIceKnight::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 7.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 2.5f, false);
 		}
 	}
 }
@@ -178,13 +204,13 @@ void AIceKnight::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 3.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 2.5f, false);
 		}
 	}
 }

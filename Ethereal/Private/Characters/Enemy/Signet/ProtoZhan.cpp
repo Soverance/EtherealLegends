@@ -127,7 +127,7 @@ AProtoZhan::AProtoZhan(const FObjectInitializer& ObjectInitializer)
 	// Blade skeletal mesh
 	Blade = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Blade"));
 	Blade->SetupAttachment(GetMesh(), FName(TEXT("SwordSocket")));
-	Blade->StaticMesh = SK_Blade;
+	Blade->SetStaticMesh(SK_Blade);
 
 	// Glowing Eye Particle Effect
 	EyeFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("EyeFX"));

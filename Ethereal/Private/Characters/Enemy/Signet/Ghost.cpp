@@ -46,7 +46,7 @@ AGhost::AGhost(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 300.0f;
+	AcceptanceRadius = 50.0f;
 	RunAI = false;
 	BaseEyeHeight = 0;
 
@@ -160,8 +160,8 @@ void AGhost::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float V
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
@@ -178,8 +178,8 @@ void AGhost::OnSeePawn(APawn* Pawn)
 	{
 		if (!IsAggroed)
 		{
-			AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
-			EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+			//AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  // play the boss battle music
+			//EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
 			// Delay Aggro so this guy can finish his aggro animation
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);

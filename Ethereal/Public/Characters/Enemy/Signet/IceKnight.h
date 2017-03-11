@@ -33,6 +33,21 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Eye1 FX
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	//UParticleSystemComponent* Eye1FX;
+	//UParticleSystem* P_Eye1FX;
+
+	// Eye2 FX
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	//UParticleSystemComponent* Eye2FX;
+	//UParticleSystem* P_Eye2FX;
+
+	// Blade Weapon
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	USkeletalMeshComponent* Hammer;
+	USkeletalMesh* SK_Hammer;
 	
 	// Melee Attack Function
 	UFUNCTION(BlueprintCallable, Category = Default)
@@ -42,17 +57,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
 
-	// Roar Anim
+	// Ice Blast Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoLaserBlast;
+	bool DoIceBlast;
 
-	// Fire Cannons Anim
+	// Frost Spike Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoFireCannons;
+	bool DoFrostSpike;
 
-	// Charge Anim
+	// Atk Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoCharge;
+	bool DoAtk;
 
 	///////////////////////////
 	// A.I.
