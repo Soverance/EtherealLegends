@@ -51,7 +51,7 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 50.0f;
+	AcceptanceRadius = 250.0f;
 	RunAI = false;
 	BaseEyeHeight = 50;
 
@@ -63,8 +63,8 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
-	MeleeRadius->SetSphereRadius(60);
-	MeleeRadius->SetRelativeLocation(FVector(25, 0, -85));
+	MeleeRadius->SetSphereRadius(80);
+	MeleeRadius->SetRelativeLocation(FVector(60, 0, -85));
 
 	// Targeting Reticle config
 	TargetingReticle->SetRelativeLocation(FVector(0, 0, 750));
@@ -143,7 +143,7 @@ void AIceKnight::AttackRound()
 						if (!IsDead)
 						{
 							EnemyDealDamage(15);
-							DoAtk = true;
+							DoFrostHammer = true;
 						}
 					}
 				}

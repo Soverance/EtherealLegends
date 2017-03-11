@@ -323,6 +323,7 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 // DEAGGRO
 void AEtherealEnemyMaster::Deaggro()
 {
+	// Standard enemies can be deaggroed by escaping their AI sensing range
 	if (BattleType == EBattleTypes::BT_Standard)
 	{
 		IsAggroed = false;
@@ -330,8 +331,8 @@ void AEtherealEnemyMaster::Deaggro()
 		Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
 		DisableBattleMusic();
 	}
-
-	if (BattleType == EBattleTypes::BT_Boss)
+	// Boss and Signet enemies cannot be deaggroed in the traditional manner.
+	if (BattleType == EBattleTypes::BT_Boss || BattleType == EBattleTypes::BT_Signet)
 	{
 		if (IsDead)
 		{
@@ -429,7 +430,7 @@ void AEtherealEnemyMaster::DisableBattleMusic()
 
 	if (!LocalPlayerHasAggro)
 	{
-		if (BattleType == EBattleTypes::BT_Standard)  // only play BGM on deaggro if this is a standard enemy. 
+		if (BattleType == EBattleTypes::BT_Standard || BattleType == EBattleTypes::BT_Signet)  // only play BGM on deaggro if this is a Standard or Signet enemy. 
 		{
 			AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro, so play Background Music
 		}

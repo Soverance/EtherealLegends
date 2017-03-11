@@ -67,7 +67,7 @@ public:
 
 	// Atk Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoAtk;
+	bool DoFrostHammer;
 
 	///////////////////////////
 	// A.I.
