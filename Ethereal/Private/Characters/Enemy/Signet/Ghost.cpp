@@ -73,6 +73,7 @@ AGhost::AGhost(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+	
 	// Twirl Box
 	TwirlBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("TwirlBox"));
 	TwirlBox->SetupAttachment(RootComponent);
@@ -197,7 +198,7 @@ void AGhost::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float V
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 7.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }
@@ -215,7 +216,7 @@ void AGhost::OnSeePawn(APawn* Pawn)
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 3.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }

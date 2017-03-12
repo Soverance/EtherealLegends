@@ -85,6 +85,7 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	Hammer->SkeletalMesh = SK_Hammer;
 	Hammer->SetRelativeScale3D(FVector(2, 2, 2));
 	Hammer->SetRelativeRotation(FRotator(90, 0, 0));
+	Hammer->bReceivesDecals = false;
 
 	// Glowing Eye Particle Effect
 	//Eye1FX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("Eye1FX"));
@@ -196,7 +197,7 @@ void AIceKnight::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 2.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }
@@ -214,7 +215,7 @@ void AIceKnight::OnSeePawn(APawn* Pawn)
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 2.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }

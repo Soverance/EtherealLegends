@@ -46,15 +46,15 @@ AEarthGolem::AEarthGolem(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 50.0f;
+	AcceptanceRadius = 200.0f;
 	RunAI = false;
 	BaseEyeHeight = 0;
 
 	// Mesh Config
 	GetMesh()->SkeletalMesh = EnemyMesh.Object;
 	GetMesh()->SetAnimInstanceClass(AnimBP.Object);
-	GetMesh()->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));
-	GetMesh()->SetRelativeLocation(FVector(0, 0, -90));
+	GetMesh()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));
+	GetMesh()->SetRelativeLocation(FVector(0, 0, -125));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
@@ -62,9 +62,9 @@ AEarthGolem::AEarthGolem(const FObjectInitializer& ObjectInitializer)
 	MeleeRadius->SetRelativeLocation(FVector(25, 0, -85));
 
 	// Targeting Reticle config
-	TargetingReticle->SetRelativeLocation(FVector(0, 0, 225));
+	TargetingReticle->SetRelativeLocation(FVector(0, 0, 85));
 	TargetingReticle->SetRelativeRotation(FRotator(0, 0, 180));
-	TargetingReticle->SetRelativeScale3D(FVector(0.25f, 0.25f, 0.25f));
+	TargetingReticle->SetRelativeScale3D(FVector(0.1f, 0.1f, 0.1f));
 	
 	HitFX->SetRelativeLocation(FVector(0, 0, -50));
 	DeathFX->SetRelativeLocation(FVector(0, 0, -88));
@@ -73,6 +73,12 @@ AEarthGolem::AEarthGolem(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+
+	// Twirl Box
+	TwirlBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("TwirlBox"));
+	TwirlBox->SetupAttachment(RootComponent);
+	TwirlBox->SetRelativeLocation(FVector(100, 0, 0));
+	TwirlBox->SetBoxExtent(FVector(120, 50, 150));
 }
 
 // Called when the game starts or when spawned
@@ -99,6 +105,10 @@ void AEarthGolem::AttackRound()
 	{
 		if (!IsAttacking)
 		{
+			DoSwing = false;
+			DoTwirl = false;
+			DoPunch = false;
+
 			IsAttacking = true;
 
 			TArray<AActor*> Overlapping;  // define a local array to store hits
@@ -117,7 +127,7 @@ void AEarthGolem::AttackRound()
 						if (!IsDead)
 						{
 							EnemyDealDamage(15);
-							DoCharge = true;
+							DoSwing = true;
 						}
 					}
 				}
@@ -132,11 +142,11 @@ void AEarthGolem::AttackRound()
 				{
 					if (RandomAtk <= 3)
 					{
-						DoFireCannons = true;
+						DoTwirl = true;
 					}
 					if (RandomAtk > 3)
 					{
-						DoLaserBlast = true;
+						DoPunch = true;
 					}
 				}
 			}
@@ -144,6 +154,27 @@ void AEarthGolem::AttackRound()
 			// Restart the Attack Cycle after a short delay
 			FTimerHandle EndTimer;
 			GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
+		}
+	}
+}
+
+void AEarthGolem::TwirlHitCheck()
+{
+	DoSwing = false;
+	DoTwirl = false;
+	DoPunch = false;
+
+	TArray<AActor*> Overlapping;  // define a local array to store hits
+	TwirlBox->GetOverlappingActors(Overlapping, AEtherealPlayerMaster::StaticClass()); // check for overlapping players within the blast radius
+
+	for (AActor* Actor : Overlapping) // for each actor found overlapping
+	{
+		AEtherealPlayerMaster* Player = Cast<AEtherealPlayerMaster>(Actor);  // cast to Player Master
+
+		if (Player) // if succeeded
+		{
+			Player->PlayerTakeDamage(DamageOutput);  // have the player take damage
+			Player->EtherealPlayerController->ActivateStatus_Confuse();  // CONFUSE STATUS
 		}
 	}
 }
@@ -166,7 +197,7 @@ void AEarthGolem::OnHearNoise(APawn* PawnInstigator, const FVector& Location, fl
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 7.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }
@@ -184,7 +215,7 @@ void AEarthGolem::OnSeePawn(APawn* Pawn)
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 3.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }

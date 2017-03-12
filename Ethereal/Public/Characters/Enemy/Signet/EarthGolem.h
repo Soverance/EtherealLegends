@@ -33,6 +33,10 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Interact Box - Player must be within this volume in order to interact with this NPC
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
+	UBoxComponent* TwirlBox;
 	
 	// Melee Attack Function
 	UFUNCTION(BlueprintCallable, Category = Default)
@@ -42,17 +46,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
 
-	// Roar Anim
+	// Swing Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoLaserBlast;
+	bool DoSwing;
 
-	// Fire Cannons Anim
+	// Twirl Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoFireCannons;
+	bool DoTwirl;
 
-	// Charge Anim
+	// Punch Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)
-	bool DoCharge;
+	bool DoPunch;
+
+	// Twirl Hit Check
+	UFUNCTION(BlueprintCallable, Category = Default)
+	void TwirlHitCheck();
 
 	///////////////////////////
 	// A.I.
