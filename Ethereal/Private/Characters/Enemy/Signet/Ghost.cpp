@@ -46,7 +46,7 @@ AGhost::AGhost(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 50.0f;
+	AcceptanceRadius = 250.0f;
 	RunAI = false;
 	BaseEyeHeight = 0;
 
@@ -54,7 +54,7 @@ AGhost::AGhost(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SkeletalMesh = EnemyMesh.Object;
 	GetMesh()->SetAnimInstanceClass(AnimBP.Object);
 	GetMesh()->SetRelativeScale3D(FVector(100.0f, 100.0f, 100.0f));
-	GetMesh()->SetRelativeLocation(FVector(0, 0, -90));
+	GetMesh()->SetRelativeLocation(FVector(0, 0, -100));
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
@@ -73,6 +73,11 @@ AGhost::AGhost(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+	// Twirl Box
+	TwirlBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("TwirlBox"));
+	TwirlBox->SetupAttachment(RootComponent);
+	TwirlBox->SetRelativeLocation(FVector(100, 0, 0));
+	TwirlBox->SetBoxExtent(FVector(120, 50, 150));
 }
 
 // Called when the game starts or when spawned
@@ -99,6 +104,11 @@ void AGhost::AttackRound()
 	{
 		if (!IsAttacking)
 		{
+			DoSwing = false;
+			DoTwirl = false;
+			DoPulse = false;
+			DoBounce = false;
+
 			IsAttacking = true;
 
 			TArray<AActor*> Overlapping;  // define a local array to store hits
@@ -117,7 +127,7 @@ void AGhost::AttackRound()
 						if (!IsDead)
 						{
 							EnemyDealDamage(15);
-							DoCharge = true;
+							DoSwing = true;
 						}
 					}
 				}
@@ -125,18 +135,22 @@ void AGhost::AttackRound()
 
 			if (Overlapping.Num() == 0)
 			{
-				EnemyDealDamage(15);
-				int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
+				EnemyDealDamage(20);
+				int32 RandomAtk = FMath::RandRange(0, 9);  // get a random int
 
 				if (!IsDead)
 				{
 					if (RandomAtk <= 3)
 					{
-						DoFireCannons = true;
+						DoTwirl = true;
 					}
-					if (RandomAtk > 3)
+					if (RandomAtk > 3 && RandomAtk <= 7)
 					{
-						DoLaserBlast = true;
+						DoPulse = true;
+					}
+					if (RandomAtk > 7)
+					{
+						DoBounce = true;
 					}
 				}
 			}
@@ -144,6 +158,23 @@ void AGhost::AttackRound()
 			// Restart the Attack Cycle after a short delay
 			FTimerHandle EndTimer;
 			GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
+		}
+	}
+}
+
+void AGhost::TwirlHitCheck()
+{
+	TArray<AActor*> Overlapping;  // define a local array to store hits
+	TwirlBox->GetOverlappingActors(Overlapping, AEtherealPlayerMaster::StaticClass()); // check for overlapping players within the blast radius
+
+	for (AActor* Actor : Overlapping) // for each actor found overlapping
+	{
+		AEtherealPlayerMaster* Player = Cast<AEtherealPlayerMaster>(Actor);  // cast to Player Master
+
+		if (Player) // if succeeded
+		{
+			Player->PlayerTakeDamage(DamageOutput);  // have the player take damage
+			Player->EtherealPlayerController->ActivateStatus_Burn();  // BURN STATUS
 		}
 	}
 }

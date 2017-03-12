@@ -125,6 +125,10 @@ void AIceKnight::AttackRound()
 	{
 		if (!IsAttacking)
 		{
+			DoFrostHammer = false;
+			DoIceBlast = false;
+			DoFrostSpike = false;
+
 			IsAttacking = true;
 
 			TArray<AActor*> Overlapping;  // define a local array to store hits
