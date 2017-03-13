@@ -46,7 +46,7 @@ ASkyDragon::ASkyDragon(const FObjectInitializer& ObjectInitializer)
 	PawnSensing->LOSHearingThreshold = 1200;
 	PawnSensing->SightRadius = 1000;
 	PawnSensing->SetPeripheralVisionAngle(40.0f);
-	AcceptanceRadius = 300.0f;
+	AcceptanceRadius = 150.0f;
 	RunAI = false;
 	BaseEyeHeight = -100;
 
@@ -58,13 +58,13 @@ ASkyDragon::ASkyDragon(const FObjectInitializer& ObjectInitializer)
 	GetMesh()->SetRelativeRotation(FRotator(0, -90, 0));
 	
 	// Melee Radius Config
-	MeleeRadius->SetSphereRadius(60);
+	MeleeRadius->SetSphereRadius(30);
 	MeleeRadius->SetRelativeLocation(FVector(25, 0, -85));
 
 	// Targeting Reticle config
-	TargetingReticle->SetRelativeLocation(FVector(0, 0, 750));
+	TargetingReticle->SetRelativeLocation(FVector(0, 0, 300));
 	TargetingReticle->SetRelativeRotation(FRotator(0, 0, 180));
-	TargetingReticle->SetRelativeScale3D(FVector(0.8f, 0.8f, 0.8f));
+	TargetingReticle->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 	
 	HitFX->SetRelativeLocation(FVector(0, 0, -50));
 	DeathFX->SetRelativeLocation(FVector(0, 0, -88));
@@ -73,6 +73,12 @@ ASkyDragon::ASkyDragon(const FObjectInitializer& ObjectInitializer)
 	DisappearFX->SetRelativeScale3D(FVector(0.4f, 0.4f, 0.4f));
 
 	// Enemy-Specific Object Config
+
+	// Twirl Box
+	TwirlBox = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("TwirlBox"));
+	TwirlBox->SetupAttachment(RootComponent);
+	TwirlBox->SetRelativeLocation(FVector(75, 0, 0));
+	TwirlBox->SetBoxExtent(FVector(60, 50, 100));
 }
 
 // Called when the game starts or when spawned
@@ -99,6 +105,13 @@ void ASkyDragon::AttackRound()
 	{
 		if (!IsAttacking)
 		{
+			// Reset all anims
+			DoRightPaw = false;
+			DoLeftPaw = false;
+			DoBite = false;
+			DoFlamethrower = false;
+			DoCombo = false;
+
 			IsAttacking = true;
 
 			TArray<AActor*> Overlapping;  // define a local array to store hits
@@ -117,7 +130,20 @@ void ASkyDragon::AttackRound()
 						if (!IsDead)
 						{
 							EnemyDealDamage(15);
-							DoCharge = true;
+							int32 RandomAtk = FMath::RandRange(0, 8);  // get a random int
+
+							if (RandomAtk <= 2)
+							{
+								DoRightPaw = true;
+							}
+							if (RandomAtk > 2 && RandomAtk <= 5)
+							{
+								DoLeftPaw = true;
+							}
+							if (RandomAtk > 5)
+							{
+								DoBite = true;
+							}
 						}
 					}
 				}
@@ -125,18 +151,18 @@ void ASkyDragon::AttackRound()
 
 			if (Overlapping.Num() == 0)
 			{
-				EnemyDealDamage(15);
-				int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
-
 				if (!IsDead)
 				{
+					EnemyDealDamage(15);
+					int32 RandomAtk = FMath::RandRange(0, 5);  // get a random int
+
 					if (RandomAtk <= 3)
 					{
-						DoFireCannons = true;
+						DoFlamethrower= true;
 					}
 					if (RandomAtk > 3)
 					{
-						DoLaserBlast = true;
+						DoCombo = true;
 					}
 				}
 			}
@@ -144,6 +170,36 @@ void ASkyDragon::AttackRound()
 			// Restart the Attack Cycle after a short delay
 			FTimerHandle EndTimer;
 			GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
+		}
+	}
+}
+
+void ASkyDragon::TwirlHitCheck(bool DoConfuse, bool DoBurn)
+{
+	DoRightPaw = false;
+	DoLeftPaw = false;
+	DoBite = false;
+	DoFlamethrower = false;
+	DoCombo = false;
+
+	TArray<AActor*> Overlapping;  // define a local array to store hits
+	TwirlBox->GetOverlappingActors(Overlapping, AEtherealPlayerMaster::StaticClass()); // check for overlapping players within the blast radius
+
+	for (AActor* Actor : Overlapping) // for each actor found overlapping
+	{
+		AEtherealPlayerMaster* Player = Cast<AEtherealPlayerMaster>(Actor);  // cast to Player Master
+
+		if (Player) // if succeeded
+		{
+			Player->PlayerTakeDamage(DamageOutput);  // have the player take damage
+			if (DoConfuse)
+			{
+				Player->EtherealPlayerController->ActivateStatus_Confuse();  // CONFUSE STATUS
+			}
+			if (DoBurn)
+			{
+				Player->EtherealPlayerController->ActivateStatus_Burn();  // BURN STATUS
+			}			
 		}
 	}
 }
@@ -166,7 +222,7 @@ void ASkyDragon::OnHearNoise(APawn* PawnInstigator, const FVector& Location, flo
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), PawnInstigator);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 7.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }
@@ -184,7 +240,7 @@ void ASkyDragon::OnSeePawn(APawn* Pawn)
 			FTimerDelegate DelegateAggro;
 			DelegateAggro.BindUFunction(this, FName("Aggro"), Pawn);
 			FTimerHandle AggroTimer;
-			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 3.5f, false);
+			GetWorldTimerManager().SetTimer(AggroTimer, DelegateAggro, 1.5f, false);
 		}
 	}
 }
