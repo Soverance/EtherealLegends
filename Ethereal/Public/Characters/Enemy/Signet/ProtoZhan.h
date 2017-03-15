@@ -38,155 +38,39 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UAudioComponent* LaughterAudio;
 	USoundCue* S_LaughterAudio;
-
-	// Power Blast collider
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	UBoxComponent* PowerBlastBox;
-
-	// Spin Atk collider
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	UBoxComponent* SpinAtkBox;
 	
 	// Blade Weapon
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
 	UStaticMeshComponent* Blade;
 	UStaticMesh* SK_Blade;
 
-	// Power Blast Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* PowerBlastAudio;
-	USoundCue* S_PowerBlastAudio;
-
-	// Spin Atk Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* SpinAtkAudio;
-	USoundCue* S_SpinAtkAudio;
-
-	// Eye FX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* EyeFX;
-	UParticleSystem* P_EyeFX;
-
-	// Build Up FX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* BuildUpFX;
-	UParticleSystem* P_BuildUpFX;
-
-	// Power Blast FX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* PowerBlastFX;
-	UParticleSystem* P_PowerBlastFX;
-
-	// Spin Atk FX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* SpinAtkFX;
-	UParticleSystem* P_SpinAtkFX;
-
-	// If HasFallen is true, then Zhan is on the ground in the Realm, and we can allow his AI senses to aggro the player
+	// Do Atk1 anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	bool HasFallen;
+	bool DoAtk1;
 
-	// Do Fall Aggro Anim
+	// Do Atk2 anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	bool DoFallAggro;
+	bool DoAtk2;
 
-	// Do Power Blast anim
+	// Do Atk3 anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	bool DoPowerBlast;
+	bool DoAtk3;
 
-	// Do Spin Atk anim
+	// Do Atk4 anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	bool DoSpinAtk;
+	bool DoAtk4;
 
-	// Do Radial Blast anim
+	// Do Burst anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	bool DoRadialBlast;
-
-	// Starting Height Offset
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Controls)
-	float StartHeightOffset;
+	bool DoBurst;
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Death();
 
-	// Escape FX
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* EscapeFX;
-	UParticleSystem* P_EscapeFX;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UParticleSystemComponent* EscapeBurstFX;
-	UParticleSystem* P_EscapeBurstFX;
-
-	// Portal Explosion Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* PortalExplosionAudio;
-	USoundCue* S_PortalExplosionAudio;
-
-	// Escape Audio
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	UAudioComponent* EscapeAudio;
-	USoundCue* S_EscapeAudio;
-
-	// Init Aggro - Called by a Realm Boss when it dies
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void InitAggro();
-
-	// Aggro Drop Blueprint
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	TSubclassOf<class AActor> AggroDropBP;
-
-	// Fall To Aggro - handles effects of Zhan enemy pops
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void FallToAggro();
-
-	// Begin Attack cycle
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void StartAttacking();
-
 	//  Attack Cycle
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void AttackCycle();
-
-	// Power Blast Attack
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void PowerBlast();
-
-	// Blade Spin Attack
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void SpinAttack();
-
-	// Radial Blast Attack
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void RadialBlast();
-
-	// Zhan Escape Realm - called on death
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void Escape();
-
-	// Zhan Escape Explode to nothing
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void Explode();
-
-	// Zhan Escape Drop Arcadia Return Portal
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void DropPortal();
-
-	// Jump Timeline.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	UTimelineComponent* JumpTimeline;
-
-	// Jump Curve.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	UCurveFloat* JumpCurve;
-
-	// Timeline Interp Function
-	FOnTimelineFloat InterpFunction{};
-
-	// Timeline Float Return
-	UFUNCTION(BlueprintCallable, Category = Default)
-	void TimelineFloatReturn(float val);
 
 	///////////////////////////
 	// A.I.
