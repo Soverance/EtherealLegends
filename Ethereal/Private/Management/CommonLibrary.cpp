@@ -42,11 +42,14 @@
 #include "Gear/Weapons/OneHanded/Shields/DiablosDread.h"
 #include "Gear/Weapons/OneHanded/Shields/SpartanShield.h"
 #include "Gear/Weapons/OneHanded/Shields/WarAspis.h"
+#include "Gear/Weapons/OneHanded/Shields/DragonShield.h"
+#include "Gear/Weapons/OneHanded/Shields/DeathsVoid.h"
 // RANGED
 #include "Gear/Weapons/Ranged/ShortBow.h"
 #include "Gear/Weapons/Ranged/EagleEye.h"
 #include "Gear/Weapons/Ranged/EurytosBow.h"
 #include "Gear/Weapons/Ranged/Annihilator.h"
+#include "Gear/Weapons/Ranged/RuneBow.h"
 // AMMO
 #include "Gear/Weapons/Ranged/Ammo/PulseArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/DemonArrow.h"
@@ -58,6 +61,7 @@
 #include "Gear/Weapons/TwoHanded/Juggernaut.h"
 #include "Gear/Weapons/TwoHanded/Claymore.h"
 #include "Gear/Weapons/TwoHanded/Temperance.h"
+#include "Gear/Weapons/TwoHanded/Apocalypse.h"
 // MAGIC ORBS
 #include "Gear/Weapons/Casting/MagicOrbs.h"
 // CONSUMABLE ITEMS
@@ -316,6 +320,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Aegis:
 		GearClass = AAegis::StaticClass();
 		break;
+	case EMasterGearList::GL_DragonShield:
+		GearClass = ADragonShield::StaticClass();
+		break;
+	case EMasterGearList::GL_DeathsVoid:
+		GearClass = ADeathsVoid::StaticClass();
+		break;
 
 		///////////////////////////////
 		// RANGED
@@ -331,6 +341,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_Annihilator:
 		GearClass = AAnnihilator::StaticClass();
+		break;
+	case EMasterGearList::GL_RuneBow:
+		GearClass = ARuneBow::StaticClass();
 		break;
 
 		///////////////////////////////
@@ -365,6 +378,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_Temperance:
 		GearClass = ATemperance::StaticClass();
+		break;
+	case EMasterGearList::GL_Apocalypse:
+		GearClass = AApocalypse::StaticClass();
 		break;
 
 		///////////////////////////////

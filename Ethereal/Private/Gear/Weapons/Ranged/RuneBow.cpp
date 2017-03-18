@@ -12,34 +12,35 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 #include "Ethereal.h"
-#include "PulseArrow.h"
+#include "RuneBow.h"
 
 #define LOCTEXT_NAMESPACE "EtherealText"
 
 // Sets default values
-APulseArrow::APulseArrow(const FObjectInitializer& ObjectInitializer)
+ARuneBow::ARuneBow(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/VFX/sphere_skeletal.sphere_skeletal'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/Ammo/DemonArrow.DemonArrow'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/Ranged/RuneBow.RuneBow'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
-	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_PulseArrows.WeaponIcon_PulseArrows'"));
-	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_PulseArrows-small.WeaponIcon_PulseArrows-small'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_RuneBow.WeaponIcon_RuneBow'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_RuneBow-small.WeaponIcon_RuneBow-small'"));
 
-	Name = EMasterGearList::GL_PulseArrow;
-	NameText = LOCTEXT("PulseArrowName", "Pulse Arrow");
-	Type = EMasterGearTypes::GT_Ammo;
-	TypeText = LOCTEXT("PulseArrowType", "Ammunition");
-	Description = "Arrows powered by pure Ethereal Light.";
-	Price = 150000;
+	Name = EMasterGearList::GL_RuneBow;
+	NameText = LOCTEXT("RuneBowName", "RuneBow");
+	Type = EMasterGearTypes::GT_Ranged;
+	TypeText = LOCTEXT("RuneBowType", "Ranged");
+	Description = "An embodiment of the Ethereal Virtue: Wrath.";
+	Price = 40000;
 	MPCost = 0.0f;
-	ATK = 40.0f;
-	DEF = 25.0f;
-	SPD = 15.0f;
-	HP = 250.0f;
-	MP = 50.0f;
+	ATK = 50.0f;
+	DEF = 40.0f;
+	SPD = 20.0f;
+	HP = 500.0f;
+	MP = 250.0f;
 	LargeIcon = LargeIconObject.Object;
 	SmallIcon = SmallIconObject.Object;
 
@@ -51,17 +52,30 @@ APulseArrow::APulseArrow(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponSkeletalMesh->SetHiddenInGame(true);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	//WeaponStaticMesh->SetWorldScale3D(FVector(30, 30, 30));  // scale correction
-	//WeaponStaticMesh->SetRelativeLocation(FVector(20, -2, -2));  // location correction
-	//WeaponStaticMesh->SetRelativeRotation(FRotator(-80, 180, 0));  // location correction
+	WeaponStaticMesh->SetWorldScale3D(FVector(0.4f, 0.4f, 0.4f));  // scale correction
+	WeaponStaticMesh->SetRelativeLocation(FVector(20, 0, -5));  // location correction
+	WeaponStaticMesh->SetRelativeRotation(FRotator(15, 90, 0));  // rotation correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
-void APulseArrow::BeginPlay()
+void ARuneBow::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &ARuneBow::BindWeapon);
+}
+
+// Custom code when binding
+void ARuneBow::BindWeapon()
+{
+	// If this weapon was bound while IsShown is true, set the weapon visible
+	if (IsShown)
+	{
+		ShowWeapon(false, true, false);
+	}
 }
 
 #undef LOCTEXT_NAMESPACE

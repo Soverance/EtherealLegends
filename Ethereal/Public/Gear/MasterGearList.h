@@ -63,12 +63,15 @@
  	GL_SpartanShield UMETA(DisplayName = "Spartan Shield"),
 	GL_DiablosDread UMETA(DisplayName = "Diablo's Dread"),
 	GL_Aegis UMETA(DisplayName = "Aegis"),
+	GL_DragonShield UMETA(DisplayName = "Dragon Shield"),
+	GL_DeathsVoid UMETA(DisplayName = "Deaths Void"),
 
 	// Ranged
 	GL_ShortBow UMETA(DisplayName = "ShortBow"),
 	GL_EagleEye UMETA(DisplayName = "EagleEye"),
 	GL_EurytosBow UMETA(DisplayName = "Eurytos' Bow"),
  	GL_Annihilator UMETA(DisplayName = "Annihilator"),
+	GL_RuneBow UMETA(DisplayName = "Rune Bow"),
 
 	// Ammo
 	GL_PulseArrow UMETA(DisplayName = "Pulse Arrow"),
@@ -82,6 +85,7 @@
 	GL_Claymore UMETA(DisplayName = "Claymore"),
  	GL_Marauder UMETA(DisplayName = "Marauder"),
  	GL_Temperance UMETA(DisplayName = "Temperance"),
+	GL_Apocalypse UMETA(DisplayName = "Apocalypse"),
 
 	// Casting Orbs
  	GL_MagicOrbs UMETA(DisplayName = "Magic Orbs"),
