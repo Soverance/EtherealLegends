@@ -37,8 +37,8 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
 	CommonDrop = EMasterGearList::GL_Potion;
-	UncommonDrop = EMasterGearList::GL_Potion;
-	RareDrop = EMasterGearList::GL_Potion;
+	UncommonDrop = EMasterGearList::GL_HuntersGloves;
+	RareDrop = EMasterGearList::GL_CrimsonGauntlets;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.5f, 0.5f, 0.5f));

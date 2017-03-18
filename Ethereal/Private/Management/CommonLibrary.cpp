@@ -48,6 +48,7 @@
 #include "Gear/Weapons/Ranged/EurytosBow.h"
 #include "Gear/Weapons/Ranged/Annihilator.h"
 // AMMO
+#include "Gear/Weapons/Ranged/Ammo/PulseArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/DemonArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/FlameArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/IronArrow.h"
@@ -334,7 +335,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 
 		///////////////////////////////
 		// AMMUNITION
-
+	case EMasterGearList::GL_PulseArrow:
+		GearClass = APulseArrow::StaticClass();
+		break;
 	case EMasterGearList::GL_DemonArrow:
 		GearClass = ADemonArrow::StaticClass();
 		break;

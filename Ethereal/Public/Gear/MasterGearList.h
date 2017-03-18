@@ -71,6 +71,7 @@
  	GL_Annihilator UMETA(DisplayName = "Annihilator"),
 
 	// Ammo
+	GL_PulseArrow UMETA(DisplayName = "Pulse Arrow"),
 	GL_DemonArrow UMETA(DisplayName = "Demon Arrow"),
 	GL_FlameArrow UMETA(DisplayName = "Flame Arrow"),
 	GL_IronArrow UMETA(DisplayName = "Iron Arrow"),

@@ -32,8 +32,8 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
 	CommonDrop = EMasterGearList::GL_Potion;
-	UncommonDrop = EMasterGearList::GL_Potion;
-	RareDrop = EMasterGearList::GL_Potion;
+	UncommonDrop = EMasterGearList::GL_HuntersPants;
+	RareDrop = EMasterGearList::GL_CrimsonSlacks;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));

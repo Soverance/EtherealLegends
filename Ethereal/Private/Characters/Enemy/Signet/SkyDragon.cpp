@@ -32,8 +32,8 @@ ASkyDragon::ASkyDragon(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
 	CommonDrop = EMasterGearList::GL_Potion;
-	UncommonDrop = EMasterGearList::GL_Potion;
-	RareDrop = EMasterGearList::GL_Potion;
+	UncommonDrop = EMasterGearList::GL_HuntersCoat;
+	RareDrop = EMasterGearList::GL_CrimsonBreastplate;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(2.0f, 2.0f, 2.0f));
