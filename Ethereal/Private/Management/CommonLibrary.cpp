@@ -80,6 +80,8 @@
 #include "Gear/Armor/Head/LeatherCap.h"
 #include "Gear/Armor/Head/CrusaderHelm.h"
 #include "Gear/Armor/Head/AssassinsHood.h"
+#include "Gear/Armor/Head/CrimsonHelm.h"
+#include "Gear/Armor/Head/HuntersHood.h"
 // CAPE
 #include "Gear/Armor/Cape/ClothCape.h"
 #include "Gear/Armor/Cape/KnightsCape.h"
@@ -94,6 +96,8 @@
 #include "Gear/Armor/Body/LeatherVest.h"
 #include "Gear/Armor/Body/CrusaderTabard.h"
 #include "Gear/Armor/Body/AssassinsVest.h"
+#include "Gear/Armor/Body/CrimsonBreastplate.h"
+#include "Gear/Armor/Body/HuntersCoat.h"
 // HANDS
 #include "Gear/Armor/Hand/ClothGloves.h"
 #include "Gear/Armor/Hand/AdamanGauntlets.h"
@@ -103,6 +107,8 @@
 #include "Gear/Armor/Hand/LeatherGloves.h"
 #include "Gear/Armor/Hand/CrusaderMitts.h"
 #include "Gear/Armor/Hand/AssassinsCuffs.h"
+#include "Gear/Armor/Hand/CrimsonGauntlets.h"
+#include "Gear/Armor/Hand/HuntersGloves.h"
 // LEGS
 #include "Gear/Armor/Legs/ClothPants.h"
 #include "Gear/Armor/Legs/AdamanCuisses.h"
@@ -112,6 +118,20 @@
 #include "Gear/Armor/Legs/LeatherChaps.h"
 #include "Gear/Armor/Legs/CrusaderChain.h"
 #include "Gear/Armor/Legs/AssassinsBrais.h"
+#include "Gear/Armor/Legs/CrimsonSlacks.h"
+#include "Gear/Armor/Legs/HuntersPants.h"
+// FEET
+#include "Gear/Armor/Feet/ClothShoes.h"
+#include "Gear/Armor/Feet/AdamanSabatons.h"
+#include "Gear/Armor/Feet/WarBoots.h"
+#include "Gear/Armor/Feet/ValhallaGreaves.h"
+#include "Gear/Armor/Feet/ExoBoots.h"
+#include "Gear/Armor/Feet/LeatherBoots.h"
+#include "Gear/Armor/Feet/CrusaderSandals.h"
+#include "Gear/Armor/Feet/AssassinsBoots.h"
+#include "Gear/Armor/Feet/CrimsonGreaves.h"
+#include "Gear/Armor/Feet/HuntersBoots.h"
+
 // RINGS
 #include "Gear/Armor/Ring/SilverRing.h"
 #include "Gear/Armor/Ring/DarksteelRing.h"
@@ -126,15 +146,6 @@
 #include "Gear/Armor/Ring/EarthSignet.h"
 #include "Gear/Armor/Ring/SkySignet.h"
 #include "Gear/Armor/Ring/StarSignet.h"
-// FEET
-#include "Gear/Armor/Feet/ClothShoes.h"
-#include "Gear/Armor/Feet/AdamanSabatons.h"
-#include "Gear/Armor/Feet/WarBoots.h"
-#include "Gear/Armor/Feet/ValhallaGreaves.h"
-#include "Gear/Armor/Feet/ExoBoots.h"
-#include "Gear/Armor/Feet/LeatherBoots.h"
-#include "Gear/Armor/Feet/CrusaderSandals.h"
-#include "Gear/Armor/Feet/AssassinsBoots.h"
 
 #include "CommonLibrary.h"
 
@@ -423,6 +434,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsHood:
 		GearClass = AAssassinsHood::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonHelm:
+		GearClass = ACrimsonHelm::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersHood:
+		GearClass = AHuntersHood::StaticClass();
+		break;
 
 		///////////////////////////////
 		// ARMOR - CAPE
@@ -465,6 +482,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsVest:
 		GearClass = AAssassinsVest::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonBreastplate:
+		GearClass = ACrimsonBreastplate::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersCoat:
+		GearClass = AHuntersCoat::StaticClass();
+		break;
 
 		//////////////////////////////
 		// ARMOR - HANDS
@@ -492,6 +515,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsCuffs:
 		GearClass = AAssassinsCuffs::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonGauntlets:
+		GearClass = ACrimsonGauntlets::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersGloves:
+		GearClass = AHuntersGloves::StaticClass();
+		break;
 
 		///////////////////////////////
 		// ARMOR - LEGS
@@ -518,6 +547,45 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_AssassinsBrais:
 		GearClass = AAssassinsBrais::StaticClass();
+		break;
+	case EMasterGearList::GL_CrimsonSlacks:
+		GearClass = ACrimsonSlacks::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersPants:
+		GearClass = AHuntersPants::StaticClass();
+		break;
+
+		///////////////////////////////
+		// ARMOR - FEET
+	case EMasterGearList::GL_ClothShoes:
+		GearClass = AClothShoes::StaticClass();
+		break;
+	case EMasterGearList::GL_AdamanSabatons:
+		GearClass = AAdamanSabatons::StaticClass();
+		break;
+	case EMasterGearList::GL_WarBoots:
+		GearClass = AWarBoots::StaticClass();
+		break;
+	case EMasterGearList::GL_ValhallaGreaves:
+		GearClass = AValhallaGreaves::StaticClass();
+		break;
+	case EMasterGearList::GL_ExoBoots:
+		GearClass = AExoBoots::StaticClass();
+		break;
+	case EMasterGearList::GL_LeatherBoots:
+		GearClass = ALeatherBoots::StaticClass();
+		break;
+	case EMasterGearList::GL_CrusaderSandals:
+		GearClass = ACrusaderSandals::StaticClass();
+		break;
+	case EMasterGearList::GL_AssassinsBoots:
+		GearClass = AAssassinsBoots::StaticClass();
+		break;
+	case EMasterGearList::GL_CrimsonGreaves:
+		GearClass = ACrimsonGreaves::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersBoots:
+		GearClass = AHuntersBoots::StaticClass();
 		break;
 
 		///////////////////////////////
@@ -560,34 +628,7 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_StarSignet:
 		GearClass = AStarSignet::StaticClass();
-		break;
-
-		///////////////////////////////
-		// ARMOR - FEET
-	case EMasterGearList::GL_ClothShoes:
-		GearClass = AClothShoes::StaticClass();
-		break;
-	case EMasterGearList::GL_AdamanSabatons:
-		GearClass = AAdamanSabatons::StaticClass();
-		break;
-	case EMasterGearList::GL_WarBoots:
-		GearClass = AWarBoots::StaticClass();
-		break;
-	case EMasterGearList::GL_ValhallaGreaves:
-		GearClass = AValhallaGreaves::StaticClass();
-		break;
-	case EMasterGearList::GL_ExoBoots:
-		GearClass = AExoBoots::StaticClass();
-		break;
-	case EMasterGearList::GL_LeatherBoots:
-		GearClass = ALeatherBoots::StaticClass();
-		break;
-	case EMasterGearList::GL_CrusaderSandals:
-		GearClass = ACrusaderSandals::StaticClass();
-		break;
-	case EMasterGearList::GL_AssassinsBoots:
-		GearClass = AAssassinsBoots::StaticClass();
-		break;
+		break;		
 	}
 
 	// Spawn the AActor item

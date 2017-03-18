@@ -90,6 +90,7 @@ AProtoZhan::AProtoZhan(const FObjectInitializer& ObjectInitializer)
 	Blade->SetupAttachment(GetMesh(), FName(TEXT("SwordSocket")));
 	Blade->SetStaticMesh(SK_Blade);
 	Blade->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	Blade->bReceivesDecals = false;
 }
 
 // Called when the game starts or when spawned

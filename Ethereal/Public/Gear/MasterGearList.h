@@ -70,7 +70,7 @@
 	GL_EurytosBow UMETA(DisplayName = "Eurytos' Bow"),
  	GL_Annihilator UMETA(DisplayName = "Annihilator"),
 
-	// AMMUNITION
+	// Ammo
 	GL_DemonArrow UMETA(DisplayName = "Demon Arrow"),
 	GL_FlameArrow UMETA(DisplayName = "Flame Arrow"),
 	GL_IronArrow UMETA(DisplayName = "Iron Arrow"),
@@ -111,6 +111,8 @@
 	GL_LeatherCap UMETA(DisplayName = "Leather Cap"),
 	GL_CrusaderHelm UMETA(DisplayName = "Crusader Helm"),
 	GL_AssassinsHood UMETA(DisplayName = "Assassins Hood"),
+	GL_CrimsonHelm UMETA(DisplayName = "Crimson Helm"),
+	GL_HuntersHood UMETA(DisplayName = "Hunters Hood"),
 
 	// Cape
 	GL_ClothCape UMETA(DisplayName = "Cloth Cape"),
@@ -127,6 +129,8 @@
 	GL_LeatherVest UMETA(DisplayName = "Leather Vest"),
 	GL_CrusaderTabard UMETA(DisplayName = "Crusader Tabard"),
 	GL_AssassinsVest UMETA(DisplayName = "Assassins Vest"),
+	GL_CrimsonBreastplate UMETA(DisplayName = "Crimson Breastplate"),
+	GL_HuntersCoat UMETA(DisplayName = "Hunters Coat"),
 
 	// Hands
 	GL_ClothGloves UMETA(DisplayName = "Cloth Gloves"),
@@ -137,6 +141,8 @@
 	GL_LeatherGloves UMETA(DisplayName = "Leather Gloves"),
 	GL_CrusaderMitts UMETA(DisplayName = "Crusader Mitts"),
 	GL_AssassinsCuffs UMETA(DisplayName = "Assassins Cuffs"),
+	GL_CrimsonGauntlets UMETA(DisplayName = "Crimson Gauntlets"),
+	GL_HuntersGloves UMETA(DisplayName = "Hunters Gloves"),
 
 	// Legs
 	GL_ClothPants UMETA(DisplayName = "Cloth Pants"),
@@ -147,6 +153,20 @@
 	GL_LeatherChaps UMETA(DisplayName = "Leather Chaps"),
 	GL_CrusaderChain UMETA(DisplayName = "Crusader Chain"),
 	GL_AssassinsBrais UMETA(DisplayName = "Assassins Brais"),
+	GL_CrimsonSlacks UMETA(DisplayName = "Crimson Slacks"),
+	GL_HuntersPants UMETA(DisplayName = "Hunters Pants"),
+
+	// Feet
+	GL_ClothShoes UMETA(DisplayName = "Cloth Shoes"),
+	GL_AdamanSabatons UMETA(DisplayName = "Adaman Sabatons"),
+	GL_WarBoots UMETA(DisplayName = "War Boots"),
+	GL_ValhallaGreaves UMETA(DisplayName = "Valhalla Greaves"),
+	GL_ExoBoots UMETA(DisplayName = "Exo Boots"),
+	GL_LeatherBoots UMETA(DisplayName = "Leather Boots"),
+	GL_CrusaderSandals UMETA(DisplayName = "Crusader Sandals"),
+	GL_AssassinsBoots UMETA(DisplayName = "Assassins Boots"),
+	GL_CrimsonGreaves UMETA(DisplayName = "Crimson Greaves"),
+	GL_HuntersBoots UMETA(DisplayName = "Hunters Boots"),
 
 	// Rings
 	GL_SilverRing UMETA(DisplayName = "Silver Ring"),
@@ -162,15 +182,5 @@
 	GL_IceSignet UMETA(DisplayName = "Ice Signet"),
 	GL_EarthSignet UMETA(DisplayName = "Earth Signet"),
 	GL_SkySignet UMETA(DisplayName = "Sky Signet"),
-	GL_StarSignet UMETA(DisplayName = "Star Signet"),
-
-	// Feet
-	GL_ClothShoes UMETA(DisplayName = "Cloth Shoes"),
-	GL_AdamanSabatons UMETA(DisplayName = "Adaman Sabatons"),
- 	GL_WarBoots UMETA(DisplayName = "War Boots"),
- 	GL_ValhallaGreaves UMETA(DisplayName = "Valhalla Greaves"),
-	GL_ExoBoots UMETA(DisplayName = "Exo Boots"),
-	GL_LeatherBoots UMETA(DisplayName = "Leather Boots"),
-	GL_CrusaderSandals UMETA(DisplayName = "Crusader Sandals"),
-	GL_AssassinsBoots UMETA(DisplayName = "Assassins Boots"),
+	GL_StarSignet UMETA(DisplayName = "Star Signet"),	
  };
