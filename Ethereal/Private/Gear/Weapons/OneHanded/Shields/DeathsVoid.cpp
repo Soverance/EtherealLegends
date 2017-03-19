@@ -53,8 +53,8 @@ ADeathsVoid::ADeathsVoid(const FObjectInitializer& ObjectInitializer)
 
 	// Set Mesh
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
-	WeaponSkeletalMesh->SetRelativeLocation(FVector(0, 35, -42));  // location correction
-	WeaponSkeletalMesh->SetWorldScale3D(FVector(28, 20, 20)); // Scale correction
+	WeaponSkeletalMesh->SetRelativeLocation(FVector(0, 75, -42));  // location correction
+	WeaponSkeletalMesh->SetWorldScale3D(FVector(28, 40, 20)); // Scale correction
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
 	WeaponStaticMesh->SetHiddenInGame(true);
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);

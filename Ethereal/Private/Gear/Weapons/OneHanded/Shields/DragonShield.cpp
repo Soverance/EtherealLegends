@@ -55,8 +55,8 @@ ADragonShield::ADragonShield(const FObjectInitializer& ObjectInitializer)
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponSkeletalMesh->SetHiddenInGame(true);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	WeaponStaticMesh->SetWorldScale3D(FVector(50.0f, 50.0f, 50.0f));  // scale correction
-	WeaponStaticMesh->SetRelativeLocation(FVector(0, 74, -15));  // location correction
+	WeaponStaticMesh->SetWorldScale3D(FVector(50.0f, 120.0f, 50.0f));  // scale correction
+	WeaponStaticMesh->SetRelativeLocation(FVector(5, 0, -18));  // location correction
 	WeaponStaticMesh->SetRelativeRotation(FRotator(0, 0, 0));  // rotation correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 	WeaponOffhandMesh->SetHiddenInGame(true);
