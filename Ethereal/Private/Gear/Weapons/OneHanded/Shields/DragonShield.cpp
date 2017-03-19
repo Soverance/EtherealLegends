@@ -40,10 +40,10 @@ ADragonShield::ADragonShield(const FObjectInitializer& ObjectInitializer)
 	Price = 40000;
 	MPCost = 0.0f;
 	ATK = 20.0f;
-	DEF = 20.0f;
-	SPD = 10.0f;
-	HP = 300.0f;
-	MP = 150.0f;
+	DEF = 15.0f;
+	SPD = 0.0f;
+	HP = 250.0f;
+	MP = 50.0f;
 	LargeIcon = LargeIconObject.Object;
 	SmallIcon = SmallIconObject.Object;
 

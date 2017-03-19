@@ -43,13 +43,13 @@ AHuntersPants::AHuntersPants(const FObjectInitializer& ObjectInitializer)
 	Type = EMasterGearTypes::GT_Legs;
 	TypeText = LOCTEXT("HuntersPantsType", "Legs");
 	Description = "Armor of Ethereal Hunters.";
-	Price = 1500;
+	Price = 45000;
 	MPCost = 0;
-	ATK = 0;
-	DEF = 1;
-	SPD = 0;
-	HP = 10;
-	MP = 0;
+	ATK = 17;
+	DEF = 5;
+	SPD = 5;
+	HP = 50;
+	MP = 25;
 }
 
 // Called when the game starts or when spawned

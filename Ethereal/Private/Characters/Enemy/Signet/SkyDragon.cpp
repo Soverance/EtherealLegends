@@ -31,7 +31,7 @@ ASkyDragon::ASkyDragon(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("SkyDragonText", "Sky Dragon");
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
-	CommonDrop = EMasterGearList::GL_Potion;
+	CommonDrop = EMasterGearList::GL_DragonShield;
 	UncommonDrop = EMasterGearList::GL_HuntersCoat;
 	RareDrop = EMasterGearList::GL_CrimsonBreastplate;
 	AttackDelay = 2.0f;

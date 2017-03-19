@@ -14,36 +14,36 @@
 // limitations under the License.
 
 #include "Ethereal.h"
-#include "Apocalypse.h"
+#include "Conquerer.h"
 
 #define LOCTEXT_NAMESPACE "EtherealText"
 
 // Sets default values
-AApocalypse::AApocalypse(const FObjectInitializer& ObjectInitializer)
+AConquerer::AConquerer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Get Assets, References Obtained Via Right Click in Editor
-	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/VFX/sphere_skeletal.sphere_skeletal'"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/Weapons/TwoHanded/Apocalypse/Apocalypse.Apocalypse'"));
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMeshObject(TEXT("SkeletalMesh'/Game/InfinityBladeWeapons/Weapons/Blunt/Blunt_Hellhammer_Cine/SK_Conquerer.SK_Conquerer'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> OffhandMeshObject(TEXT("StaticMesh'/Game/VFX/sphere.sphere'"));
-	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Apocalypse.WeaponIcon_Apocalypse'"));
-	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Apocalypse-small.WeaponIcon_Apocalypse-small'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> LargeIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Conquerer.WeaponIcon_Conquerer'"));
+	static ConstructorHelpers::FObjectFinder<UTexture2D> SmallIconObject(TEXT("Texture2D'/Game/Blueprints/Widgets/UI-Images/Icons_Gear/WeaponIcon_Conquerer-small.WeaponIcon_Conquerer-small'"));
 
 
 	// Set Default Objects
 
-	Name = EMasterGearList::GL_Apocalypse;
-	NameText = LOCTEXT("ApocalypseName", "Apocalypse");
+	Name = EMasterGearList::GL_Conquerer;
+	NameText = LOCTEXT("ConquererName", "Conquerer");
 	Type = EMasterGearTypes::GT_TwoHanded;
-	TypeText = LOCTEXT("ApocalypseType", "Two-Handed");
-	Description = "Everything they've built will fall, and a new world born from the ashes.";
+	TypeText = LOCTEXT("ConquererType", "Two-Handed");
+	Description = "Every field watered in warrior's blood is sacred ground.";
 	Price = 40000;
 	MPCost = 0.0f;
-	ATK = 65.0f;
-	DEF = 30.0f;
-	SPD = 30.0f;
-	HP = 450.0f;
-	MP = 200.0f;
+	ATK = 40.0f;
+	DEF = 40.0f;
+	SPD = 10.0f;
+	HP = 400.0f;
+	MP = 150.0f;
 	LargeIcon = LargeIconObject.Object;
 	SmallIcon = SmallIconObject.Object;
 
@@ -54,32 +54,29 @@ AApocalypse::AApocalypse(const FObjectInitializer& ObjectInitializer)
 	// Set Mesh
 	WeaponSkeletalMesh->SetSkeletalMesh(SK_WeaponSkeletalMesh);
 	WeaponStaticMesh->SetStaticMesh(SM_WeaponStaticMesh);
-	WeaponStaticMesh->SetWorldScale3D(FVector(1.5f, 1.5f, 1.8f));  // scale correction
-	WeaponStaticMesh->SetRelativeLocation(FVector(-15, 0, -40));  // location correction
-	WeaponStaticMesh->SetRelativeRotation(FRotator(0, -70, 0));  // rotation correction
 	WeaponOffhandMesh->SetStaticMesh(SM_WeaponOffhandMesh);
 
-	SwordCollider->SetupAttachment(WeaponStaticMesh);
-	SwordCollider->SetBoxExtent(FVector(10.0f, 10.0f, 50.0f));
-	SwordCollider->SetRelativeLocation(FVector(0.0f, 10.0f, 60.0f));
+	SwordCollider->SetupAttachment(WeaponSkeletalMesh);
+	SwordCollider->SetBoxExtent(FVector(20.0f, 30.0f, 55.0f));
+	SwordCollider->SetRelativeLocation(FVector(0.0f, 0.0f, 60.0f));
 }
 
 // Called when the game starts or when spawned
-void AApocalypse::BeginPlay()
+void AConquerer::BeginPlay()
 {
 	Super::BeginPlay();
 
 	// Bind this function to the event dispatcher for Bind Gear
-	OnBindGear.AddDynamic(this, &AApocalypse::BindWeapon);
+	OnBindGear.AddDynamic(this, &AConquerer::BindWeapon);
 }
 
 // Custom code when binding
-void AApocalypse::BindWeapon()
+void AConquerer::BindWeapon()
 {
 	// If this weapon was bound while IsShown is true, set the weapon visible
 	if (IsShown)
 	{
-		ShowWeapon(false, true, false);
+		ShowWeapon(true, false, false);
 	}
 }
 

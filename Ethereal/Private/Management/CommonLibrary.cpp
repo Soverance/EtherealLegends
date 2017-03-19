@@ -34,6 +34,7 @@
 #include "Gear/Weapons/OneHanded/Joyeuse.h"
 #include "Gear/Weapons/OneHanded/Hauteclaire.h"
 #include "Gear/Weapons/OneHanded/Excalibur.h"
+#include "Gear/Weapons/OneHanded/Valkyrie.h"
 #include "Gear/Weapons/OneHanded/BalloonSword.h"
 #include "Gear/Weapons/OneHanded/BeamSaber.h"
 #include "Gear/Weapons/OneHanded/RubberChicken.h"
@@ -60,6 +61,7 @@
 #include "Gear/Weapons/TwoHanded/Marauder.h"
 #include "Gear/Weapons/TwoHanded/Juggernaut.h"
 #include "Gear/Weapons/TwoHanded/Claymore.h"
+#include "Gear/Weapons/TwoHanded/Conquerer.h"
 #include "Gear/Weapons/TwoHanded/Temperance.h"
 #include "Gear/Weapons/TwoHanded/Apocalypse.h"
 // MAGIC ORBS
@@ -136,7 +138,6 @@
 #include "Gear/Armor/Feet/AssassinsBoots.h"
 #include "Gear/Armor/Feet/CrimsonGreaves.h"
 #include "Gear/Armor/Feet/HuntersBoots.h"
-
 // RINGS
 #include "Gear/Armor/Ring/SilverRing.h"
 #include "Gear/Armor/Ring/DarksteelRing.h"
@@ -144,6 +145,7 @@
 #include "Gear/Armor/Ring/RestoreRing.h"
 #include "Gear/Armor/Ring/SneakRing.h"
 #include "Gear/Armor/Ring/FeralBand.h"
+#include "Gear/Armor/Ring/DefendingRing.h"
 // SIGNET RINGS
 #include "Gear/Armor/Ring/AquaSignet.h"
 #include "Gear/Armor/Ring/FlameSignet.h"
@@ -295,6 +297,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Excalibur:
 		GearClass = AExcalibur::StaticClass();
 		break;
+	case EMasterGearList::GL_Valkyrie:
+		GearClass = AValkyrie::StaticClass();
+		break;
 	case EMasterGearList::GL_BalloonSword:
 		GearClass = ABalloonSword::StaticClass();
 		break;
@@ -375,6 +380,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_Marauder:
 		GearClass = AMarauder::StaticClass();
+		break;
+	case EMasterGearList::GL_Conquerer:
+		GearClass = AConquerer::StaticClass();
 		break;
 	case EMasterGearList::GL_Temperance:
 		GearClass = ATemperance::StaticClass();
@@ -626,6 +634,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_FeralBand:
 		GearClass = AFeralBand::StaticClass();
+		break;
+	case EMasterGearList::GL_DefendingRing:
+		GearClass = ADefendingRing::StaticClass();
 		break;
 
 		///////////////////////////////

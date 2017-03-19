@@ -43,13 +43,13 @@ AHuntersGloves::AHuntersGloves(const FObjectInitializer& ObjectInitializer)
 	Type = EMasterGearTypes::GT_Hand;
 	TypeText = LOCTEXT("HuntersGlovesType", "Hands");
 	Description = "Armor of Ethereal Hunters.";
-	Price = 20000;
+	Price = 45000;
 	MPCost = 0;
-	ATK = 5;
+	ATK = 17;
 	DEF = 5;
 	SPD = 5;
-	HP = 100;
-	MP = 50;
+	HP = 50;
+	MP = 25;
 	SpecialEffectText = LOCTEXT("HuntersGlovesSpecialEffect", "Ranged Damage +25%.");
 }
 

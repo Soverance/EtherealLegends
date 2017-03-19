@@ -39,11 +39,11 @@ ADeathsVoid::ADeathsVoid(const FObjectInitializer& ObjectInitializer)
 	Description = "A shield forged from pure darkness, signed by Death himself.";
 	Price = 40000;
 	MPCost = 0.0f;
-	ATK = 20.0f;
-	DEF = 20.0f;
-	SPD = 10.0f;
-	HP = 300.0f;
-	MP = 150.0f;
+	ATK = 30.0f;
+	DEF = 30.0f;
+	SPD = 30.0f;
+	HP = 500.0f;
+	MP = 250.0f;
 	LargeIcon = LargeIconObject.Object;
 	SmallIcon = SmallIconObject.Object;
 

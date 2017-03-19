@@ -43,13 +43,13 @@ ACrimsonHelm::ACrimsonHelm(const FObjectInitializer& ObjectInitializer)
 	Type = EMasterGearTypes::GT_Head;
 	TypeText = LOCTEXT("CrimsonHelmType", "Head");
 	Description = "Armor of Ethereal Regents.";
-	Price = 35000;
+	Price = 50000;
 	MPCost = 0;
-	ATK = 10;
-	DEF = 15;
-	SPD = 8;
-	HP = 100;
-	MP = 50;
+	ATK = 15;
+	DEF = 10;
+	SPD = 15;
+	HP = 150;
+	MP = 75;
 	SpecialEffectText = LOCTEXT("CrimsonHelmSpecialEffect", "Refresh +10.");
 }
 

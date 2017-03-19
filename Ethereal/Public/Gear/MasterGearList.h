@@ -51,13 +51,13 @@
 	GL_Joyeuse UMETA(DisplayName = "Joyeuse"),
  	GL_Hauteclaire UMETA(DisplayName = "Hauteclaire"),
 	GL_Excalibur UMETA(DisplayName = "Excalibur"),
+	GL_Valkyrie UMETA(DisplayName = "Valkyrie"),
 
 	 // Novelty
 	GL_BalloonSword UMETA(DisplayName = "Balloon Sword"),
 	GL_BeamSaber UMETA(DisplayName = "Beam Saber"),
 	GL_RubberChicken UMETA(DisplayName = "Rubber Chicken"),
 	
-
 	// Shields
 	GL_WarAspis UMETA(DisplayName = "War Aspis"),
  	GL_SpartanShield UMETA(DisplayName = "Spartan Shield"),
@@ -84,6 +84,7 @@
 	GL_Juggernaut UMETA(DisplayName = "Juggernaut"),
 	GL_Claymore UMETA(DisplayName = "Claymore"),
  	GL_Marauder UMETA(DisplayName = "Marauder"),
+	GL_Conquerer UMETA(DisplayName = "Conquerer"),
  	GL_Temperance UMETA(DisplayName = "Temperance"),
 	GL_Apocalypse UMETA(DisplayName = "Apocalypse"),
 
@@ -180,6 +181,7 @@
 	GL_RestoreRing UMETA(DisplayName = "Restore Ring"),
 	GL_SneakRing UMETA(DisplayName = "Sneak Ring"),
 	GL_FeralBand UMETA(DisplayName = "Feral Band"),
+	GL_DefendingRing UMETA(DisplayName = "Defending Ring"),
 
 	// SIGNET RINGS
 	GL_AquaSignet UMETA(DisplayName = "Aqua Signet"),

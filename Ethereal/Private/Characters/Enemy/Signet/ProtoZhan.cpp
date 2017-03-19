@@ -39,8 +39,8 @@ AProtoZhan::AProtoZhan(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("ProtoZhanText", "Proto Zhan");
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
-	CommonDrop = EMasterGearList::GL_Potion;
-	UncommonDrop = EMasterGearList::GL_Potion;
+	CommonDrop = EMasterGearList::GL_DeathsVoid;
+	UncommonDrop = EMasterGearList::GL_Apocalypse;
 	RareDrop = EMasterGearList::GL_Potion;
 	AttackDelay = 1.0f;
 	BaseEyeHeight = 16;

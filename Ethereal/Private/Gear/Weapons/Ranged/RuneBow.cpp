@@ -33,14 +33,14 @@ ARuneBow::ARuneBow(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("RuneBowName", "RuneBow");
 	Type = EMasterGearTypes::GT_Ranged;
 	TypeText = LOCTEXT("RuneBowType", "Ranged");
-	Description = "An embodiment of the Ethereal Virtue: Wrath.";
-	Price = 40000;
+	Description = "An ancient bow carved with glowing runes.";
+	Price = 45000;
 	MPCost = 0.0f;
-	ATK = 50.0f;
-	DEF = 40.0f;
-	SPD = 20.0f;
-	HP = 500.0f;
-	MP = 250.0f;
+	ATK = 45.0f;
+	DEF = 55.0f;
+	SPD = 25.0f;
+	HP = 300.0f;
+	MP = 100.0f;
 	LargeIcon = LargeIconObject.Object;
 	SmallIcon = SmallIconObject.Object;
 

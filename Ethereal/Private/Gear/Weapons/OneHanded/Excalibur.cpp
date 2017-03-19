@@ -94,7 +94,7 @@ void AExcalibur::BindWeapon()
 // Custom code when binding
 void AExcalibur::RemoveWeapon()
 {
-	Super::RemoveWeapon();
+	//Super::RemoveWeapon();
 	HideWeapon();
 	AuraFX->Deactivate();
 }
