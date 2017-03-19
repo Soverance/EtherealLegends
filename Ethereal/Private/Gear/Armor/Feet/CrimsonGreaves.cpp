@@ -66,13 +66,13 @@ void ACrimsonGreaves::BeginPlay()
 // Custom code for Special Effect
 void ACrimsonGreaves::DoSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate + 10);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate + 15);
 }
 
 // Custom code for Special Effect
 void ACrimsonGreaves::RemoveSpecialEffect()
 {
-	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate - 10);
+	OwnerReference->EtherealPlayerState->RefreshRate = (OwnerReference->EtherealPlayerState->RegenRate - 15);
 }
 
 #undef LOCTEXT_NAMESPACE

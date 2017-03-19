@@ -50,7 +50,7 @@ ACrimsonGauntlets::ACrimsonGauntlets(const FObjectInitializer& ObjectInitializer
 	SPD = 15;
 	HP = 150;
 	MP = 75;
-	SpecialEffectText = LOCTEXT("CrimsonGauntletsSpecialEffect", "One Handed Damage +25%.");
+	SpecialEffectText = LOCTEXT("CrimsonGauntletsSpecialEffect", "Prevents all negative status effects.");
 }
 
 // Called when the game starts or when spawned
@@ -66,13 +66,19 @@ void ACrimsonGauntlets::BeginPlay()
 // Custom code for Special Effect
 void ACrimsonGauntlets::DoSpecialEffect()
 {
-	OwnerReference->BoostOneHanded = true;
+	OwnerReference->NullPoison = true;
+	OwnerReference->NullBurn = true;
+	OwnerReference->NullConfuse = true;
+	OwnerReference->NullSilence = true;
 }
 
 // Custom code for Special Effect
 void ACrimsonGauntlets::RemoveSpecialEffect()
 {
-	OwnerReference->BoostOneHanded = false;
+	OwnerReference->NullPoison = false;
+	OwnerReference->NullBurn = false;
+	OwnerReference->NullConfuse = false;
+	OwnerReference->NullSilence = false;
 }
 
 #undef LOCTEXT_NAMESPACE

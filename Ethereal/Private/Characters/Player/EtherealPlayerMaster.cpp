@@ -246,18 +246,21 @@ void AEtherealPlayerMaster::PlayerTakeDamage(float DamageTaken)
 		float mod1 = (critical * (EtherealPlayerState->DEF - 512) * DamageTaken); 
 		float mod2 = (mod1 / (16 * 512));
 		float mod3 = FMath::Abs(mod2);
-		float FinalDamage = 0;
+		float FinalDamage = mod3;
 
+		// DAMAGE WALL REDUCTION
+		if (HasDefenseWall)
+		{
+			FinalDamage = (mod3 * 0.5f);  // reduce damage by 50%
+		}
+
+		// BLOCKING REDUCTION
 		if (IsBlocking)
 		{
 			FinalDamage = (mod3 * 0.25f);  // if you're blocking, reduce damage by 75%
 		}
-		else
-		{
-			FinalDamage = mod3;  // not blocking, take full damage
-		}
 
-		// Code snippet for Shadow Gear
+		// SHADOW GEAR REDUCTION
 		if (HasShadowGear)
 		{
 			int32 RandomShadow = FMath::RandRange(0, 3);  // get a random int

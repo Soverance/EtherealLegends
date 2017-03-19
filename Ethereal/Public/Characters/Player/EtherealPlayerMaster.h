@@ -345,6 +345,10 @@ public:
 
 	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
+	bool HasDefenseWall;
+
+	// Whether or not the player has Shadow Gear equipped, which occasionally nullifies damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SpecialEquipmentEffect)
 	bool HasShadowGear;
 
 	// Whether or not the player has sneak, which mask the sound of footsteps

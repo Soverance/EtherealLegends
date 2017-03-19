@@ -50,7 +50,7 @@ AHuntersCoat::AHuntersCoat(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 50;
 	MP = 25;
-	SpecialEffectText = LOCTEXT("HuntersCoatSpecialEffect", "Prevents Confuse.");
+	SpecialEffectText = LOCTEXT("HuntersCoatSpecialEffect", "Occasionally annulls all damage taken.");
 }
 
 // Called when the game starts or when spawned
@@ -66,13 +66,13 @@ void AHuntersCoat::BeginPlay()
 // Custom code for Special Effect
 void AHuntersCoat::DoSpecialEffect()
 {
-	OwnerReference->NullConfuse = true;
+	OwnerReference->HasShadowGear = true;
 }
 
 // Custom code for Special Effect
 void AHuntersCoat::RemoveSpecialEffect()
 {
-	OwnerReference->NullConfuse = false;
+	OwnerReference->HasShadowGear = false;
 }
 
 #undef LOCTEXT_NAMESPACE

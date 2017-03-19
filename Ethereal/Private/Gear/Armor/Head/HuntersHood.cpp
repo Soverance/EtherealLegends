@@ -56,6 +56,21 @@ AHuntersHood::AHuntersHood(const FObjectInitializer& ObjectInitializer)
 void AHuntersHood::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AHuntersHood::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AHuntersHood::RemoveSpecialEffect);
 }
 
+// Custom code for Special Effect
+void AHuntersHood::DoSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0.15f;  // Cure Potency +15%
+}
+
+// Custom code for Special Effect
+void AHuntersHood::RemoveSpecialEffect()
+{
+	OwnerReference->BoostCurePotency = 0.0f;
+}
 #undef LOCTEXT_NAMESPACE

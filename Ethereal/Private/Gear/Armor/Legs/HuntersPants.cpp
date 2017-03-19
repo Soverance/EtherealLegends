@@ -50,12 +50,28 @@ AHuntersPants::AHuntersPants(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 50;
 	MP = 25;
+	SpecialEffectText = LOCTEXT("HuntersPantsSpecialEffect", "Prevents Confuse.");
 }
 
 // Called when the game starts or when spawned
 void AHuntersPants::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AHuntersPants::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AHuntersPants::RemoveSpecialEffect);
 }
 
+// Custom code for Special Effect
+void AHuntersPants::DoSpecialEffect()
+{
+	OwnerReference->NullConfuse = true;
+}
+
+// Custom code for Special Effect
+void AHuntersPants::RemoveSpecialEffect()
+{
+	OwnerReference->NullConfuse = false;
+}
 #undef LOCTEXT_NAMESPACE

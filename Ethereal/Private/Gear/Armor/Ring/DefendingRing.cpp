@@ -43,7 +43,7 @@ ADefendingRing::ADefendingRing(const FObjectInitializer& ObjectInitializer)
 	SPD = 0;
 	HP = 999;
 	MP = 0;
-	SpecialEffectText = LOCTEXT("DefendingRingSpecialEffect", "Perfect Defense.");
+	SpecialEffectText = LOCTEXT("DefendingRingSpecialEffect", "Reduces damage taken by 50 %.");
 }
 
 // Called when the game starts or when spawned
@@ -60,13 +60,13 @@ void ADefendingRing::BeginPlay()
 // Custom code for Special Effect
 void ADefendingRing::DoSpecialEffect()
 {
-	OwnerReference->HasShadowGear = true;
+	OwnerReference->HasDefenseWall = true;
 }
 
 // Custom code for Special Effect
 void ADefendingRing::RemoveSpecialEffect()
 {
-	OwnerReference->HasShadowGear = false;
+	OwnerReference->HasDefenseWall = false;
 }
 
 #undef LOCTEXT_NAMESPACE

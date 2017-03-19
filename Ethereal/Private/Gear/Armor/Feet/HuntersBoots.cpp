@@ -50,12 +50,29 @@ AHuntersBoots::AHuntersBoots(const FObjectInitializer& ObjectInitializer)
 	SPD = 5;
 	HP = 50;
 	MP = 25;
+	SpecialEffectText = LOCTEXT("HuntersBootsSpecialEffect", "+ Lightfooted");
 }
 
 // Called when the game starts or when spawned
 void AHuntersBoots::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Bind this function to the event dispatcher for Bind Gear
+	OnBindGear.AddDynamic(this, &AHuntersBoots::DoSpecialEffect);
+	OnRemoveGear.AddDynamic(this, &AHuntersBoots::RemoveSpecialEffect);
+}
+
+// Custom code for Special Effect
+void AHuntersBoots::DoSpecialEffect()
+{
+	OwnerReference->HasLightfoot = true;
+}
+
+// Custom code for Special Effect
+void AHuntersBoots::RemoveSpecialEffect()
+{
+	OwnerReference->HasLightfoot = false;
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -50,7 +50,7 @@ ACrimsonBreastplate::ACrimsonBreastplate(const FObjectInitializer& ObjectInitial
 	SPD = 15;
 	HP = 150;
 	MP = 75;
-	SpecialEffectText = LOCTEXT("CrimsonBreastplateSpecialEffect", "+ Reraise Effect");
+	SpecialEffectText = LOCTEXT("CrimsonBreastplateSpecialEffect", "Weapon Damage +25%.");
 }
 
 // Called when the game starts or when spawned
@@ -66,15 +66,17 @@ void ACrimsonBreastplate::BeginPlay()
 // Custom code for Special Effect
 void ACrimsonBreastplate::DoSpecialEffect()
 {
-	OwnerReference->HasReraise = true;
-	OwnerReference->EtherealPlayerController->ActivateStatus_Reraise();
+	OwnerReference->BoostOneHanded = true;
+	OwnerReference->BoostTwoHanded = true;
+	OwnerReference->BoostRanged = true;
 }
 
 // Custom code for Special Effect
 void ACrimsonBreastplate::RemoveSpecialEffect()
 {
-	OwnerReference->HasReraise = true;
-	OwnerReference->EtherealPlayerController->RemoveStatus_Reraise();
+	OwnerReference->BoostOneHanded = false;
+	OwnerReference->BoostTwoHanded = false;
+	OwnerReference->BoostRanged = false;
 }
 
 #undef LOCTEXT_NAMESPACE
