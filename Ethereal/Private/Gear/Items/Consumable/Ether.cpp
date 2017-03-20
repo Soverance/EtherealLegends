@@ -41,7 +41,7 @@ AEther::AEther(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("EtherType", "Consumable");
 	Effect = "+ 35% of Max MP.";
 	Description = "Restores a small amount of MP.";
-	Price = 1000;
+	Price = 500;
 	Quantity = 1;
 }
 

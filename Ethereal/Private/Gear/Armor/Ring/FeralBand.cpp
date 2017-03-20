@@ -35,7 +35,7 @@ AFeralBand::AFeralBand(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("FeralBandName", "Feral Band");
 	Type = EMasterGearTypes::GT_Ring;
 	TypeText = LOCTEXT("FeralBandType", "Ring");
-	Description = "Ring of an Ethereal Hunter.";
+	Description = "They say cats always land on their feet... why can't you?";
 	Price = 50000;
 	MPCost = 0;
 	ATK = 5;

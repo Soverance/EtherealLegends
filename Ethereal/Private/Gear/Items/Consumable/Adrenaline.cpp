@@ -41,7 +41,7 @@ AAdrenaline::AAdrenaline(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("AdrenalineType", "Consumable");
 	Effect = "+ 20% ATK for 120 Seconds";
 	Description = "Grants an attack boost for a limited time.";
-	Price = 2500;
+	Price = 1500;
 	Quantity = 1;
 }
 

@@ -37,8 +37,8 @@ ASkeletonKing::ASkeletonKing(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Boss;
 	CommonDrop = EMasterGearList::GL_Elixer;
-	UncommonDrop = EMasterGearList::GL_RuneBlade;
-	RareDrop = EMasterGearList::GL_RuneBlade;
+	UncommonDrop = EMasterGearList::GL_Blizzard;
+	RareDrop = EMasterGearList::GL_Barrier;
 	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.3f, 0.3f, 0.3f));

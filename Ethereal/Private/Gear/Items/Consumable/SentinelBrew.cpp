@@ -41,7 +41,7 @@ ASentinelBrew::ASentinelBrew(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("SentinelBrewType", "Consumable");
 	Effect = "+ 20% DEF for 120 Seconds";
 	Description = "Grants a defensive boost for a limited time.";
-	Price = 2500;
+	Price = 1500;
 	Quantity = 1;
 }
 

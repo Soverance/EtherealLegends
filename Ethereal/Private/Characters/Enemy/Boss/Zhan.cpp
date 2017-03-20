@@ -221,6 +221,41 @@ void AZhan::BeginPlay()
 		EtherealGameInstance->SetAudioVolume(PortalExplosionAudio, EAudioTypes::AT_SoundEffect);
 		EtherealGameInstance->SetAudioVolume(EscapeAudio, EAudioTypes::AT_SoundEffect);
 	}
+
+	// SET REALM-DYNAMIC DROPS
+	switch (Target->EtherealGameInstance->CurrentRealm)
+	{
+	case ERealms::R_Shiitake:
+		CommonDrop = EMasterGearList::GL_RuneBlade;
+		UncommonDrop = EMasterGearList::GL_Haste;
+		RareDrop = EMasterGearList::GL_DiablosDread;
+		break;
+	case ERealms::R_Vulcan:
+		CommonDrop = EMasterGearList::GL_RuneBlade;
+		UncommonDrop = EMasterGearList::GL_Haste;
+		RareDrop = EMasterGearList::GL_Hauteclaire;
+		break;
+	case ERealms::R_Boreal:
+		CommonDrop = EMasterGearList::GL_Haste;
+		UncommonDrop = EMasterGearList::GL_EurytosBow;
+		RareDrop = EMasterGearList::GL_Annihilator;
+		break;
+	case ERealms::R_Yggdrasil:
+		CommonDrop = EMasterGearList::GL_Berserk;
+		UncommonDrop = EMasterGearList::GL_Marauder;
+		RareDrop = EMasterGearList::GL_Temperance;
+		break;
+	case ERealms::R_Empyrean:
+		CommonDrop = EMasterGearList::GL_Refresh;
+		UncommonDrop = EMasterGearList::GL_Aegis;
+		RareDrop = EMasterGearList::GL_Excalibur;
+		break;
+	case ERealms::R_Celestial:
+		CommonDrop = EMasterGearList::GL_SneakRing;
+		UncommonDrop = EMasterGearList::GL_Aegis;
+		RareDrop = EMasterGearList::GL_Excalibur;
+		break;
+	}
 }
 
 // Called every frame

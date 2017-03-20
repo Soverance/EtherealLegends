@@ -260,11 +260,13 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 
 	if (Enemy)
 	{
+		// THIS WAS REMOVED TO MAKE SIGNET NMs AS DIFFICULT AS POSSIBLE FOR EARLY-GAME PLAYERS
+		// I guess I'll adjust their levels again if people complain... but these guys were designed to pretty much be End Game content
 		// All Signet Notorious Monsters will receive an adjusted level on spawn
-		if (Enemy->BattleType == EBattleTypes::BT_Signet)
-		{
-			level = GetAdjustedLevel();  // OVERRIDE LEVEL
-		}
+		//if (Enemy->BattleType == EBattleTypes::BT_Signet)
+		//{
+		//	level = GetAdjustedLevel();  // OVERRIDE LEVEL
+		//}
 
 		Enemy->SpawnDefaultController();  // Spawns the Enemy's A.I. Controller
 		Enemy->Level = level; // Sets the Enemy's Level
