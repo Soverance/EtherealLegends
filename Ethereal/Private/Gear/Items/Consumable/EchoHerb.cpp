@@ -41,7 +41,7 @@ AEchoHerb::AEchoHerb(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("EchoHerbType", "Consumable");
 	Effect = "- Silence";
 	Description = "Negates the effects of Silence.";
-	Price = 500;
+	Price = 50;
 	Quantity = 1;
 }
 

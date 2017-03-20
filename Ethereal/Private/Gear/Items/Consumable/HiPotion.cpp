@@ -41,7 +41,7 @@ AHiPotion::AHiPotion(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("HiPotionType", "Consumable");
 	Effect = "+ 65% of Max HP";
 	Description = "Restores a moderate portion of HP.";
-	Price = 1500;
+	Price = 500;
 	Quantity = 1;
 }
 

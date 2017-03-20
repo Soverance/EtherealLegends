@@ -41,7 +41,7 @@ AAntidote::AAntidote(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("AntidoteType", "Consumable");
 	Effect = "- Poison";
 	Description = "Negates the effects of Poison.";
-	Price = 500;
+	Price = 50;
 	Quantity = 1;
 }
 

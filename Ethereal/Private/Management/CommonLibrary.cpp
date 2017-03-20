@@ -14,9 +14,10 @@
 // limitations under the License.
 
 #include "Ethereal.h"
-
+// MAGIC
 #include "Gear/Magic/Spells/Cure.h"
 #include "Gear/Magic/Spells/CureII.h"
+#include "Gear/Magic/Spells/Return.h"
 #include "Gear/Magic/Spells/Regen.h"
 #include "Gear/Magic/Spells/Refresh.h"
 #include "Gear/Magic/Spells/Blizzard.h"
@@ -27,37 +28,45 @@
 #include "Gear/Magic/Spells/Barrier.h"
 #include "Gear/Magic/Spells/Haste.h"
 #include "Gear/Magic/Spells/Dash.h"
-
+// ONE HANDED
 #include "Gear/Weapons/OneHanded/IronSword.h"
+#include "Gear/Weapons/OneHanded/RuneBlade.h"
 #include "Gear/Weapons/OneHanded/Joyeuse.h"
 #include "Gear/Weapons/OneHanded/Hauteclaire.h"
 #include "Gear/Weapons/OneHanded/Excalibur.h"
+#include "Gear/Weapons/OneHanded/Valkyrie.h"
 #include "Gear/Weapons/OneHanded/BalloonSword.h"
 #include "Gear/Weapons/OneHanded/BeamSaber.h"
 #include "Gear/Weapons/OneHanded/RubberChicken.h"
-
+// SHIELD
 #include "Gear/Weapons/OneHanded/Shields/Aegis.h"
 #include "Gear/Weapons/OneHanded/Shields/DiablosDread.h"
 #include "Gear/Weapons/OneHanded/Shields/SpartanShield.h"
 #include "Gear/Weapons/OneHanded/Shields/WarAspis.h"
-
+#include "Gear/Weapons/OneHanded/Shields/DragonShield.h"
+#include "Gear/Weapons/OneHanded/Shields/DeathsVoid.h"
+// RANGED
 #include "Gear/Weapons/Ranged/ShortBow.h"
 #include "Gear/Weapons/Ranged/EagleEye.h"
 #include "Gear/Weapons/Ranged/EurytosBow.h"
 #include "Gear/Weapons/Ranged/Annihilator.h"
-
+#include "Gear/Weapons/Ranged/RuneBow.h"
+// AMMO
+#include "Gear/Weapons/Ranged/Ammo/PulseArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/DemonArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/FlameArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/IronArrow.h"
 #include "Gear/Weapons/Ranged/Ammo/WoodenArrow.h"
-
+// TWO HANDED
 #include "Gear/Weapons/TwoHanded/Marauder.h"
 #include "Gear/Weapons/TwoHanded/Juggernaut.h"
 #include "Gear/Weapons/TwoHanded/Claymore.h"
+#include "Gear/Weapons/TwoHanded/Conquerer.h"
 #include "Gear/Weapons/TwoHanded/Temperance.h"
-
+#include "Gear/Weapons/TwoHanded/Apocalypse.h"
+// MAGIC ORBS
 #include "Gear/Weapons/Casting/MagicOrbs.h"
-
+// CONSUMABLE ITEMS
 #include "Gear/Items/Consumable/Potion.h"
 #include "Gear/Items/Consumable/HiPotion.h"
 #include "Gear/Items/Consumable/Ether.h"
@@ -68,7 +77,7 @@
 #include "Gear/Items/Consumable/SentinelBrew.h"
 #include "Gear/Items/Consumable/Antidote.h"
 #include "Gear/Items/Consumable/EchoHerb.h"
-
+// HEAD
 #include "Gear/Armor/Head/ClothCap.h"
 #include "Gear/Armor/Head/AdamanHelm.h"
 #include "Gear/Armor/Head/WarHelm.h"
@@ -78,12 +87,14 @@
 #include "Gear/Armor/Head/LeatherCap.h"
 #include "Gear/Armor/Head/CrusaderHelm.h"
 #include "Gear/Armor/Head/AssassinsHood.h"
-
+#include "Gear/Armor/Head/CrimsonHelm.h"
+#include "Gear/Armor/Head/HuntersHood.h"
+// CAPE
 #include "Gear/Armor/Cape/ClothCape.h"
 #include "Gear/Armor/Cape/KnightsCape.h"
 #include "Gear/Armor/Cape/ThiefsShroud.h"
 #include "Gear/Armor/Cape/RestoreCloak.h"
-
+// BODY
 #include "Gear/Armor/Body/ClothTunic.h"
 #include "Gear/Armor/Body/AdamanCuirass.h"
 #include "Gear/Armor/Body/WarCoat.h"
@@ -92,7 +103,9 @@
 #include "Gear/Armor/Body/LeatherVest.h"
 #include "Gear/Armor/Body/CrusaderTabard.h"
 #include "Gear/Armor/Body/AssassinsVest.h"
-
+#include "Gear/Armor/Body/CrimsonBreastplate.h"
+#include "Gear/Armor/Body/HuntersCoat.h"
+// HANDS
 #include "Gear/Armor/Hand/ClothGloves.h"
 #include "Gear/Armor/Hand/AdamanGauntlets.h"
 #include "Gear/Armor/Hand/WarGloves.h"
@@ -101,7 +114,9 @@
 #include "Gear/Armor/Hand/LeatherGloves.h"
 #include "Gear/Armor/Hand/CrusaderMitts.h"
 #include "Gear/Armor/Hand/AssassinsCuffs.h"
-
+#include "Gear/Armor/Hand/CrimsonGauntlets.h"
+#include "Gear/Armor/Hand/HuntersGloves.h"
+// LEGS
 #include "Gear/Armor/Legs/ClothPants.h"
 #include "Gear/Armor/Legs/AdamanCuisses.h"
 #include "Gear/Armor/Legs/WarBrais.h"
@@ -110,12 +125,9 @@
 #include "Gear/Armor/Legs/LeatherChaps.h"
 #include "Gear/Armor/Legs/CrusaderChain.h"
 #include "Gear/Armor/Legs/AssassinsBrais.h"
-
-#include "Gear/Armor/Ring/SilverRing.h"
-#include "Gear/Armor/Ring/DarksteelRing.h"
-#include "Gear/Armor/Ring/ShadowRing.h"
-#include "Gear/Armor/Ring/RestoreRing.h"
-
+#include "Gear/Armor/Legs/CrimsonSlacks.h"
+#include "Gear/Armor/Legs/HuntersPants.h"
+// FEET
 #include "Gear/Armor/Feet/ClothShoes.h"
 #include "Gear/Armor/Feet/AdamanSabatons.h"
 #include "Gear/Armor/Feet/WarBoots.h"
@@ -124,6 +136,23 @@
 #include "Gear/Armor/Feet/LeatherBoots.h"
 #include "Gear/Armor/Feet/CrusaderSandals.h"
 #include "Gear/Armor/Feet/AssassinsBoots.h"
+#include "Gear/Armor/Feet/CrimsonGreaves.h"
+#include "Gear/Armor/Feet/HuntersBoots.h"
+// RINGS
+#include "Gear/Armor/Ring/SilverRing.h"
+#include "Gear/Armor/Ring/DarksteelRing.h"
+#include "Gear/Armor/Ring/ShadowRing.h"
+#include "Gear/Armor/Ring/RestoreRing.h"
+#include "Gear/Armor/Ring/SneakRing.h"
+#include "Gear/Armor/Ring/FeralBand.h"
+#include "Gear/Armor/Ring/DefendingRing.h"
+// SIGNET RINGS
+#include "Gear/Armor/Ring/AquaSignet.h"
+#include "Gear/Armor/Ring/FlameSignet.h"
+#include "Gear/Armor/Ring/IceSignet.h"
+#include "Gear/Armor/Ring/EarthSignet.h"
+#include "Gear/Armor/Ring/SkySignet.h"
+#include "Gear/Armor/Ring/StarSignet.h"
 
 #include "CommonLibrary.h"
 
@@ -195,8 +224,8 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Cure2:
 		GearClass = ACureII::StaticClass();
 		break;
-	case EMasterGearList::GL_Raise:
-		// Do nothing, because Raise does not yet exist
+	case EMasterGearList::GL_Return:
+		GearClass = AReturn::StaticClass();
 		break;
 	case EMasterGearList::GL_Regen:
 		GearClass = ARegen::StaticClass();
@@ -256,6 +285,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_IronSword:
 		GearClass = AIronSword::StaticClass();
 		break;
+	case EMasterGearList::GL_RuneBlade:
+		GearClass = ARuneBlade::StaticClass();
+		break;
 	case EMasterGearList::GL_Joyeuse:
 		GearClass = AJoyeuse::StaticClass();
 		break;
@@ -264,6 +296,9 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_Excalibur:
 		GearClass = AExcalibur::StaticClass();
+		break;
+	case EMasterGearList::GL_Valkyrie:
+		GearClass = AValkyrie::StaticClass();
 		break;
 	case EMasterGearList::GL_BalloonSword:
 		GearClass = ABalloonSword::StaticClass();
@@ -290,6 +325,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Aegis:
 		GearClass = AAegis::StaticClass();
 		break;
+	case EMasterGearList::GL_DragonShield:
+		GearClass = ADragonShield::StaticClass();
+		break;
+	case EMasterGearList::GL_DeathsVoid:
+		GearClass = ADeathsVoid::StaticClass();
+		break;
 
 		///////////////////////////////
 		// RANGED
@@ -306,10 +347,15 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Annihilator:
 		GearClass = AAnnihilator::StaticClass();
 		break;
+	case EMasterGearList::GL_RuneBow:
+		GearClass = ARuneBow::StaticClass();
+		break;
 
 		///////////////////////////////
 		// AMMUNITION
-
+	case EMasterGearList::GL_PulseArrow:
+		GearClass = APulseArrow::StaticClass();
+		break;
 	case EMasterGearList::GL_DemonArrow:
 		GearClass = ADemonArrow::StaticClass();
 		break;
@@ -335,8 +381,14 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_Marauder:
 		GearClass = AMarauder::StaticClass();
 		break;
+	case EMasterGearList::GL_Conquerer:
+		GearClass = AConquerer::StaticClass();
+		break;
 	case EMasterGearList::GL_Temperance:
 		GearClass = ATemperance::StaticClass();
+		break;
+	case EMasterGearList::GL_Apocalypse:
+		GearClass = AApocalypse::StaticClass();
 		break;
 
 		///////////////////////////////
@@ -409,6 +461,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsHood:
 		GearClass = AAssassinsHood::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonHelm:
+		GearClass = ACrimsonHelm::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersHood:
+		GearClass = AHuntersHood::StaticClass();
+		break;
 
 		///////////////////////////////
 		// ARMOR - CAPE
@@ -451,6 +509,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsVest:
 		GearClass = AAssassinsVest::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonBreastplate:
+		GearClass = ACrimsonBreastplate::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersCoat:
+		GearClass = AHuntersCoat::StaticClass();
+		break;
 
 		//////////////////////////////
 		// ARMOR - HANDS
@@ -477,6 +541,12 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 		break;
 	case EMasterGearList::GL_AssassinsCuffs:
 		GearClass = AAssassinsCuffs::StaticClass();
+		break;
+	case EMasterGearList::GL_CrimsonGauntlets:
+		GearClass = ACrimsonGauntlets::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersGloves:
+		GearClass = AHuntersGloves::StaticClass();
 		break;
 
 		///////////////////////////////
@@ -505,20 +575,11 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsBrais:
 		GearClass = AAssassinsBrais::StaticClass();
 		break;
-
-		///////////////////////////////
-		// ARMOR - RING
-	case EMasterGearList::GL_SilverRing:
-		GearClass = ASilverRing::StaticClass();
+	case EMasterGearList::GL_CrimsonSlacks:
+		GearClass = ACrimsonSlacks::StaticClass();
 		break;
-	case EMasterGearList::GL_DarksteelRing:
-		GearClass = ADarksteelRing::StaticClass();
-		break;
-	case EMasterGearList::GL_ShadowRing:
-		GearClass = AShadowRing::StaticClass();
-		break;
-	case EMasterGearList::GL_RestoreRing:
-		GearClass = ARestoreRing::StaticClass();
+	case EMasterGearList::GL_HuntersPants:
+		GearClass = AHuntersPants::StaticClass();
 		break;
 
 		///////////////////////////////
@@ -547,6 +608,57 @@ AEtherealGearMaster* UCommonLibrary::CreateGear(UObject* GearOwner, EMasterGearL
 	case EMasterGearList::GL_AssassinsBoots:
 		GearClass = AAssassinsBoots::StaticClass();
 		break;
+	case EMasterGearList::GL_CrimsonGreaves:
+		GearClass = ACrimsonGreaves::StaticClass();
+		break;
+	case EMasterGearList::GL_HuntersBoots:
+		GearClass = AHuntersBoots::StaticClass();
+		break;
+
+		///////////////////////////////
+		// ARMOR - RING
+	case EMasterGearList::GL_SilverRing:
+		GearClass = ASilverRing::StaticClass();
+		break;
+	case EMasterGearList::GL_DarksteelRing:
+		GearClass = ADarksteelRing::StaticClass();
+		break;
+	case EMasterGearList::GL_ShadowRing:
+		GearClass = AShadowRing::StaticClass();
+		break;
+	case EMasterGearList::GL_RestoreRing:
+		GearClass = ARestoreRing::StaticClass();
+		break;
+	case EMasterGearList::GL_SneakRing:
+		GearClass = ASneakRing::StaticClass();
+		break;
+	case EMasterGearList::GL_FeralBand:
+		GearClass = AFeralBand::StaticClass();
+		break;
+	case EMasterGearList::GL_DefendingRing:
+		GearClass = ADefendingRing::StaticClass();
+		break;
+
+		///////////////////////////////
+		// ARMOR - SIGNET RINGS
+	case EMasterGearList::GL_AquaSignet:
+		GearClass = AAquaSignet::StaticClass();
+		break;
+	case EMasterGearList::GL_FlameSignet:
+		GearClass = AFlameSignet::StaticClass();
+		break;
+	case EMasterGearList::GL_IceSignet:
+		GearClass = AIceSignet::StaticClass();
+		break;
+	case EMasterGearList::GL_EarthSignet:
+		GearClass = AEarthSignet::StaticClass();
+		break;
+	case EMasterGearList::GL_SkySignet:
+		GearClass = ASkySignet::StaticClass();
+		break;
+	case EMasterGearList::GL_StarSignet:
+		GearClass = AStarSignet::StaticClass();
+		break;		
 	}
 
 	// Spawn the AActor item

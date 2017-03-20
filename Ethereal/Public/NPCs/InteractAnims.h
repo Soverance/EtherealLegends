@@ -23,4 +23,5 @@ enum class EInteractAnims : uint8
 	IA_Drink UMETA(DisplayName = "Drink"),
 	IA_Talk UMETA(DisplayName = "Talk"),
 	IA_Open UMETA(DisplayName = "Open"),
+	IA_Pet UMETA(DisplayName = "Pet"),
 };

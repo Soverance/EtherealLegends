@@ -57,8 +57,8 @@ AEternal::AEternal(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("EternalText", "Eternal");
 	Realm = ERealms::R_Empyrean;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Comet;
-	UncommonDrop = EMasterGearList::GL_Aegis;
+	CommonDrop = EMasterGearList::GL_StarSignet;
+	UncommonDrop = EMasterGearList::GL_Comet;
 	RareDrop = EMasterGearList::GL_BeamSaber;
 	AttackDelay = 3.0f;
 	BaseEyeHeight = 16;

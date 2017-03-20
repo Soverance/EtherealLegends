@@ -61,4 +61,12 @@ enum class EEnemyNames : uint8
 	// Celestial Nexus	
 	EN_Eternal UMETA(DisplayName = "The Eternal"),
 	EN_Zhan UMETA(DisplayName = "Zhan"),
+
+	// Signet Notorious Monsters
+	EN_Daemon UMETA(DisplayName = "Daemon"),
+	EN_EarthGolem UMETA(DisplayName = "Earth Golem"),
+	EN_Ghost UMETA(DisplayName = "Ghost"),
+	EN_IceKnight UMETA(DisplayName = "Ice Knight"),
+	EN_SkyDragon UMETA(DisplayName = "Sky Dragon"),
+	EN_ProtoZhan UMETA(DisplayName = "Proto Zhan"),
 };

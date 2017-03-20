@@ -28,6 +28,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	// Get Assets for Battle Music
 	static ConstructorHelpers::FObjectFinder<USoundCue> StandardAudioObject(TEXT("SoundCue'/Game/Audio/Music/Battle_Standard.Battle_Standard'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> BossAudioObject(TEXT("SoundCue'/Game/Audio/Music/Battle_Boss.Battle_Boss'"));
+	static ConstructorHelpers::FObjectFinder<USoundCue> SignetAudioObject(TEXT("SoundCue'/Game/Audio/Music/Music_SignetNM_Cue.Music_SignetNM_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> ZhanIntroAudioObject(TEXT("SoundCue'/Game/Audio/Party/Zhan_Intro_Cue.Zhan_Intro_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> EternalIntroAudioObject(TEXT("SoundCue'/Game/Elemental/Sound/shrt_music_02_Cue.shrt_music_02_Cue'"));
 	static ConstructorHelpers::FObjectFinder<USoundCue> ZhanBattleAudioObject(TEXT("SoundCue'/Game/Audio/Music/Battle_Zhan.Battle_Zhan'"));
@@ -92,6 +93,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	// Store audio objects
 	S_Battle_Standard = StandardAudioObject.Object;
 	S_Battle_Boss = BossAudioObject.Object;
+	S_Battle_Signet = SignetAudioObject.Object;
 	S_Zhan_Intro = ZhanIntroAudioObject.Object;
 	S_Eternal_Intro = EternalIntroAudioObject.Object;
 	S_Zhan_Battle = ZhanBattleAudioObject.Object;
@@ -161,6 +163,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	// Construct Other Audio components
 	Battle_Standard = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Battle_Standard"));
 	Battle_Boss = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Battle_Boss"));
+	Battle_Signet = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Battle_Signet"));
 	Zhan_Intro = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Zhan_Intro"));
 	Eternal_Intro = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Eternal_Intro"));
 	Zhan_Battle = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("Zhan_Battle"));
@@ -221,6 +224,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	// Set Audio Objects to use their sound assets
 	Battle_Standard->Sound = S_Battle_Standard;
 	Battle_Boss->Sound = S_Battle_Boss;
+	Battle_Signet->Sound = S_Battle_Signet;
 	Zhan_Intro->Sound = S_Zhan_Intro;
 	Eternal_Intro->Sound = S_Eternal_Intro;
 	Zhan_Battle->Sound = S_Zhan_Battle;
@@ -283,6 +287,7 @@ AEtherealAudioManager::AEtherealAudioManager(const FObjectInitializer& ObjectIni
 	CurrentAudio->bAutoActivate = false;
 	Battle_Standard->bAutoActivate = false;
 	Battle_Boss->bAutoActivate = false;
+	Battle_Signet->bAutoActivate = false;
 	Zhan_Intro->bAutoActivate = false;
 	Eternal_Intro->bAutoActivate = false;
 	Zhan_Battle->bAutoActivate = false;
@@ -363,6 +368,7 @@ void AEtherealAudioManager::BeginPlay()
 
 		GameInstance->SetAudioVolume(Battle_Standard, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(Battle_Boss, EAudioTypes::AT_Music);
+		GameInstance->SetAudioVolume(Battle_Signet, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(Zhan_Intro, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(Eternal_Intro, EAudioTypes::AT_Music);
 		GameInstance->SetAudioVolume(Zhan_Battle, EAudioTypes::AT_Music);
@@ -419,6 +425,9 @@ void AEtherealAudioManager::Play_BattleMusic(EBattleTypes Selection)
 {
 	switch (Selection)
 	{
+		// Play Music
+		// most battles get checked to make sure they're not happening inside the Arena (because we always want the Arena BGM to play no matter what enemy battle type)
+		// Zhan gets no such check because you cannot fight him in the Arena.
 	case EBattleTypes::BT_Standard:
 		if (CurrentAudio != BGM_Arena)
 		{
@@ -430,6 +439,12 @@ void AEtherealAudioManager::Play_BattleMusic(EBattleTypes Selection)
 		{
 			Play_Battle_Boss();
 		}		
+		break;
+	case EBattleTypes::BT_Signet:
+		if (CurrentAudio != BGM_Arena)
+		{
+			Play_Battle_Signet();
+		}
 		break;
 	case EBattleTypes::BT_ZhanIntro:
 		Play_Zhan_Intro();
@@ -472,7 +487,25 @@ void AEtherealAudioManager::Play_Battle_Boss()
 			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
 		}
 		Battle_Boss->FadeIn(0.5f, 1);  // fade in the battle music
-		CurrentAudio = Battle_Boss;  // Set the current audio to be the Standard Battle Music
+		CurrentAudio = Battle_Boss;  // Set the current audio to be the Boss Battle Music
+	}
+}
+
+// Play Signet Battle Music
+void AEtherealAudioManager::Play_Battle_Signet()
+{
+	if (Battle_Signet->IsPlaying())
+	{
+		return;  // If Music is already playing, do nothing.
+	}
+	else
+	{
+		if (CurrentAudio)
+		{
+			CurrentAudio->FadeOut(1.0f, 0);  // Fade out the current audio
+		}
+		Battle_Signet->FadeIn(0.5f, 1);  // fade in the battle music
+		CurrentAudio = Battle_Signet;  // Set the current audio to be the Signet Battle Music
 	}
 }
 

@@ -41,7 +41,7 @@ APotion::APotion(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("PotionType", "Consumable");
 	Effect = "+ 35% of Max HP";
 	Description = "Restores a small amount of HP.";
-	Price = 500;
+	Price = 100;
 	Quantity = 1;
 }
 

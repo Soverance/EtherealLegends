@@ -41,7 +41,7 @@ AElixer::AElixer(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("ElixerType", "Consumable");
 	Effect = "+ Full Restore";
 	Description = "Instantly restores HP and MP to full capacity.";
-	Price = 5000;
+	Price = 1500;
 	Quantity = 1;	
 }
 

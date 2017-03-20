@@ -371,11 +371,15 @@ void AEtherealPlayerState::AddEXP(int modEXP)
 	FString message = TEXT("+  ") + FString::FromInt(modEXP) + TEXT("  EXP");  // build the proper string
 	FText displaytext = FText::FromString(message);  // convert it to text
 
-	// 60 is the current level cap, so we only give EXP if the player is below that level
-	if (PlayerLevel < 60)
+	// if modEXP is not greater than zero, don't bother with the rest of this function
+	if (modEXP > 0)
 	{
-		EXP_Current = EXP_Current + modEXP;  // add EXP
-		Player->CombatTextComponent->ShowCombatText(ECombatTextTypes::TT_Text, displaytext);  // Display EXP gained on screen
+		// 60 is the current level cap, so we only give EXP if the player is below that level
+		if (PlayerLevel < 60)
+		{
+			EXP_Current = EXP_Current + modEXP;  // add EXP
+			Player->CombatTextComponent->ShowCombatText(ECombatTextTypes::TT_Text, displaytext);  // Display EXP gained on screen
+		}
 	}	
 }
 
@@ -385,22 +389,26 @@ void AEtherealPlayerState::AddGold(int modGold)
 	FString message = TEXT("+  ") + FString::FromInt(modGold) + TEXT("  GOLD");  // build the proper string
 	FText displaytext = FText::FromString(message);  // convert it to text
 
-	Gold_Current = Gold_Current + modGold;  // add Gold
+	// If modGold is not greater than zero, don't bother with the rest of this function
+	if (modGold > 0)
+	{
+		Gold_Current = Gold_Current + modGold;  // add Gold
 
-	Player->CombatTextComponent->ShowCombatText(ECombatTextTypes::TT_Text, displaytext);  // Display Gold gained on screen
+		Player->CombatTextComponent->ShowCombatText(ECombatTextTypes::TT_Text, displaytext);  // Display Gold gained on screen
 
-	Player->EtherealPlayerController->Achievement_GoldCount();  // Update the stat for Gold achievements
+		Player->EtherealPlayerController->Achievement_GoldCount();  // Update the stat for Gold achievements
+	}	
 }
 
 // Drop Items
 void AEtherealPlayerState::DropItems(EMasterGearList Common, EMasterGearList Uncommon, EMasterGearList Rare)
 {
 	// ENEMY KILL RANDOM DROPS
-	int32 Drop = FMath::FloorToInt(FMath::FRandRange(0, 100));
+	int32 Drop = FMath::FloorToInt(FMath::FRandRange(0, 99));
 
-	if (Drop <= 5)
+	if (Drop <= 10)
 	{
-		// RARE DROP @ 5 %
+		// RARE DROP @ 10 %
 		//UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.25f); // Slow Motion because you got something cool
 		AddToInventory(Rare, false, true);
 	}
@@ -410,11 +418,11 @@ void AEtherealPlayerState::DropItems(EMasterGearList Common, EMasterGearList Unc
 		//UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.25f); // Slow Motion because you got something cool
 		AddToInventory(Uncommon, false, true);
 	}
-	if (Drop > 5 && Drop < 70)
+	if (Drop > 10 && Drop < 70)
 	{
 		if (Common != EMasterGearList::GL_None)  // do nothing if common drop = none
 		{
-			// COMMON DROP @ 65 %
+			// COMMON DROP @ 60 %
 			AddToInventory(Common, false, true);
 		}		
 	}
@@ -746,6 +754,15 @@ void AEtherealPlayerState::AddDefaultItems()
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
 	AddToInventory(EMasterGearList::GL_Potion, false, false);
+	// we also give you the Cure spell, since apparently the tutorial sequence is too difficult for most players without it...
+	AddToInventory(EMasterGearList::GL_Cure, true, false);
+	Binding_Magic_Slot1 = EMasterGearList::GL_Cure;
+	// then we give you the Return spell, so that you have an easy way back if you get lost
+	AddToInventory(EMasterGearList::GL_Return, true, false);
+	Binding_Magic_Slot2 = EMasterGearList::GL_Return;
+	// And we're going to give you the Dash spell... because apparently a lot of players are terrible, never defeat the first boss, and therefore never realize this spell exists (probably assuming it should be a standard ability, like in Dark Souls)
+	AddToInventory(EMasterGearList::GL_Dash, true, false);
+	Binding_Magic_Slot3 = EMasterGearList::GL_Dash;
 	// and we give you the full Cloth armor set, so that you're not naked
 	AddToInventory(EMasterGearList::GL_ClothCap, true, false);
 	Binding_Armor_Head = EMasterGearList::GL_ClothCap;

@@ -37,7 +37,7 @@ ALavaKnight::ALavaKnight(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("LavaKnightText", "Lava Knight");
 	Realm = ERealms::R_Vulcan;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_FlameSignet;
 	UncommonDrop = EMasterGearList::GL_Claymore;
 	RareDrop = EMasterGearList::GL_Joyeuse;
 	AttackDelay = 6.0f;

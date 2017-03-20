@@ -24,11 +24,11 @@
 #include "Management/EtherealTrueSKYManager.h"
 #include "EtherealGameInstance.generated.h"
 
-//#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
-//
+#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
+
 //static void ConsoleLoadEtherealRealm()
 //{
-//	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Do some bullshit here!");
+//	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, "Do some bullshit here!");
 //
 //	//UEtherealGameInstance::LoadNewRealm(Realm)
 //}
@@ -38,9 +38,10 @@
 //	TEXT("Load the specified Ethereal Realm."),
 //	FConsoleCommandDelegate::CreateStatic(ConsoleLoadEtherealRealm)
 //);
-//#endif
+#endif
 
 // Event Dispatchers
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadingCleanup);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFadeOutEndGame);
 
 UCLASS()
@@ -51,6 +52,10 @@ class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 public:
 
 	UEtherealGameInstance();
+
+	// Event Dispatcher for LoadingCleanup
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
+	FLoadingCleanup LoadingCleanup;
 
 	// Event Dispatcher for FadeOutEndGame
 	UPROPERTY(BlueprintAssignable, Category = Dispatchers)

@@ -65,6 +65,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = BattleMusic)
 	void Play_Battle_Boss();
 
+	// Signet Battle Music
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
+	UAudioComponent* Battle_Signet;
+	USoundCue* S_Battle_Signet;
+
+	// Play Signet Battle Music
+	UFUNCTION(BlueprintCallable, Category = BattleMusic)
+	void Play_Battle_Signet();
+
 	// Zhan Intro Music
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = BattleMusic)
 	UAudioComponent* Zhan_Intro;

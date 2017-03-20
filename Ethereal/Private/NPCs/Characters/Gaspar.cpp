@@ -117,7 +117,7 @@ void AGaspar::SpawnDefaultShopItems()
 
 	// ARMOR
 
-	// Cloth
+	// Leather
 	EMasterGearList Armor0 = EMasterGearList::GL_LeatherCap;
 	DefaultShopList.AddUnique(Armor0);
 	EMasterGearList Armor1 = EMasterGearList::GL_LeatherVest;
@@ -128,10 +128,13 @@ void AGaspar::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Armor3);
 	EMasterGearList Armor4 = EMasterGearList::GL_LeatherBoots;
 	DefaultShopList.AddUnique(Armor4);
+
 	//EMasterGearList Armor5 = EMasterGearList::GL_ClothCape;
 	//DefaultShopList.AddUnique(Armor5);
+
 	EMasterGearList Armor6 = EMasterGearList::GL_SilverRing;
 	DefaultShopList.AddUnique(Armor6);
+
 	// Adaman
 	EMasterGearList Armor7 = EMasterGearList::GL_AdamanHelm;
 	DefaultShopList.AddUnique(Armor7);
@@ -143,10 +146,13 @@ void AGaspar::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Armor10);
 	EMasterGearList Armor11 = EMasterGearList::GL_AdamanSabatons;
 	DefaultShopList.AddUnique(Armor11);
+
 	//EMasterGearList Armor12 = EMasterGearList::GL_KnightsCape;
 	//DefaultShopList.AddUnique(Armor12);
+
 	EMasterGearList Armor13 = EMasterGearList::GL_DarksteelRing;
 	DefaultShopList.AddUnique(Armor13);
+
 	// War
 	EMasterGearList Armor14 = EMasterGearList::GL_WarHelm;
 	DefaultShopList.AddUnique(Armor14);
@@ -158,13 +164,36 @@ void AGaspar::SpawnDefaultShopItems()
 	DefaultShopList.AddUnique(Armor17);
 	EMasterGearList Armor18 = EMasterGearList::GL_WarBoots;
 	DefaultShopList.AddUnique(Armor18);
-	//EMasterGearList Armor19 = EMasterGearList::GL_ThiefsShroud;
-	//DefaultShopList.AddUnique(Armor19);
+	
 	EMasterGearList Armor20 = EMasterGearList::GL_ShadowRing;
 	DefaultShopList.AddUnique(Armor20);
-	// Novelty
-	//EMasterGearList Armor21 = EMasterGearList::GL_HorsemansHead;
-	//DefaultShopList.AddUnique(Armor21);
+
+	// Crusader
+	EMasterGearList Armor21 = EMasterGearList::GL_CrusaderHelm;
+	DefaultShopList.AddUnique(Armor21);
+	EMasterGearList Armor22 = EMasterGearList::GL_CrusaderTabard;
+	DefaultShopList.AddUnique(Armor22);
+	EMasterGearList Armor23 = EMasterGearList::GL_CrusaderMitts;
+	DefaultShopList.AddUnique(Armor23);
+	EMasterGearList Armor24 = EMasterGearList::GL_CrusaderChain;
+	DefaultShopList.AddUnique(Armor24);
+	EMasterGearList Armor25 = EMasterGearList::GL_CrusaderSandals;
+	DefaultShopList.AddUnique(Armor25);
+
+	EMasterGearList Armor19 = EMasterGearList::GL_SneakRing;
+	DefaultShopList.AddUnique(Armor19);
+
+	// Assassins
+	EMasterGearList Armor26 = EMasterGearList::GL_AssassinsHood;
+	DefaultShopList.AddUnique(Armor26);
+	EMasterGearList Armor27 = EMasterGearList::GL_AssassinsVest;
+	DefaultShopList.AddUnique(Armor27);
+	EMasterGearList Armor28 = EMasterGearList::GL_AssassinsCuffs;
+	DefaultShopList.AddUnique(Armor28);
+	EMasterGearList Armor29 = EMasterGearList::GL_AssassinsBrais;
+	DefaultShopList.AddUnique(Armor29);
+	EMasterGearList Armor30 = EMasterGearList::GL_AssassinsBoots;
+	DefaultShopList.AddUnique(Armor30);
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{

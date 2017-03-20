@@ -126,12 +126,17 @@ void AEtherealEnemyMaster::SetBaseStats()
 	float HPMod = 2000;
 	float StatMod = 7.5f;
 
-	if (BattleType == EBattleTypes::BT_Boss) // Higher stats for bosses
+	if (BattleType == EBattleTypes::BT_Signet) // High stats for SNMs
+	{
+		HPMod = 3500;
+		StatMod = 10.0f;
+	}
+	if (BattleType == EBattleTypes::BT_Boss) // High stats for bosses
 	{
 		HPMod = 2000;
 		StatMod = 7.5f;
 	}
-	else  // lower stats for regular enemies
+	if (BattleType == EBattleTypes::BT_Standard) // lower stats for regular enemies
 	{
 		HPMod = 200;
 		StatMod = 5.1f;	
@@ -266,40 +271,51 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 		AEtherealPlayerMaster* Player = Cast<AEtherealPlayerMaster>(Pawn); // Check if the pawn seen by enemy AI was indeed the player
 		if (Player)
 		{
-			if (!Player->IsDead)  // Make sure the player isn't dead before going further
+			// Make sure the enemy actually has Line of Sight to the player
+			if (Controller->LineOfSightTo(Player, FVector(0, 0, 0), false))
 			{
-				Target = Player; // Set the seen player as the new Target	
-				Target->AggroList.AddUnique(this); // Add this enemy to the player's aggro list array
-				InRange = true; // the enemy is now in range
-				IsAggroed = true; // the enemy is now aggroed
-				Targetable = true;  // turn on targeting, in case it was previously disabled
-				RunAI = true;  // set A.I. active				
-
-				if (BattleType == EBattleTypes::BT_Standard)
+				if (!Player->IsDead)  // Make sure the player isn't dead before going further
 				{
-					AudioManager->Play_BattleMusic(EBattleTypes::BT_Standard);  // play the standard battle music
-				}
-				else if (BattleType == EBattleTypes::BT_Boss)
-				{
-					EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+					Target = Player; // Set the seen player as the new Target	
+					Target->AggroList.AddUnique(this); // Add this enemy to the player's aggro list array
+					InRange = true; // the enemy is now in range
+					IsAggroed = true; // the enemy is now aggroed
+					Targetable = true;  // turn on targeting, in case it was previously disabled
+					RunAI = true;  // set A.I. active				
 
-					// play the boss battle music
-					if (Name == EEnemyNames::EN_Zhan)
+					// IF STANDARD ENEMY
+					if (BattleType == EBattleTypes::BT_Standard)
 					{
-						AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Standard);  // play the standard battle music
 					}
-					else
+					// IF BOSS ENEMY
+					if (BattleType == EBattleTypes::BT_Boss)
 					{
-						AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);  
+						EtherealGameInstance->BlackBox->HasEngagedBoss = true;  // Engage Boss
+
+						// play the boss battle music
+						if (Name == EEnemyNames::EN_Zhan)
+						{
+							AudioManager->Play_BattleMusic(EBattleTypes::BT_ZhanBattle);
+						}
+						else
+						{
+							AudioManager->Play_BattleMusic(EBattleTypes::BT_Boss);
+						}
+					}
+					// IF SIGNET ENEMY
+					if (BattleType == EBattleTypes::BT_Signet)
+					{
+						AudioManager->Play_BattleMusic(EBattleTypes::BT_Signet);
+					}
+
+					// if the player is in a menu when this enemy aggros, close it
+					if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
+					{
+						Target->EnemyCloseMenu();
 					}
 				}
-
-				// if the player is in a menu when this enemy aggros, close it
-				if (Target->EtherealGameInstance->CurrentState == EGameStates::GS_Menu)
-				{
-					Target->EnemyCloseMenu();
-				}
-			}
+			}			
 		}
 	}
 }
@@ -307,6 +323,7 @@ void AEtherealEnemyMaster::Aggro(APawn* Pawn)
 // DEAGGRO
 void AEtherealEnemyMaster::Deaggro()
 {
+	// Standard enemies can be deaggroed by escaping their AI sensing range
 	if (BattleType == EBattleTypes::BT_Standard)
 	{
 		IsAggroed = false;
@@ -314,8 +331,8 @@ void AEtherealEnemyMaster::Deaggro()
 		Target->AggroList.Remove(this);  // Remove this enemy from the player's aggro list	
 		DisableBattleMusic();
 	}
-
-	if (BattleType == EBattleTypes::BT_Boss)
+	// Boss and Signet enemies cannot be deaggroed in the traditional manner.
+	if (BattleType == EBattleTypes::BT_Boss || BattleType == EBattleTypes::BT_Signet)
 	{
 		if (IsDead)
 		{
@@ -356,6 +373,7 @@ void AEtherealEnemyMaster::Death()
 	IsDead = true;
 	Targetable = false;  // turn off targeting if dead.
 	GetMovementComponent()->StopMovementImmediately();  // Stop Movement	
+	EtherealGameInstance->BlackBox->HasEngagedBoss = false;  // Disengage Boss
 	Deaggro();  // Deaggro
 	Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy
 	OnDeath.Broadcast();  // broadcast the OnDeath event dispatcher, which will run enemy specific death code
@@ -412,7 +430,7 @@ void AEtherealEnemyMaster::DisableBattleMusic()
 
 	if (!LocalPlayerHasAggro)
 	{
-		if (BattleType == EBattleTypes::BT_Standard)  // only play BGM on deaggro if this is a standard enemy. 
+		if (BattleType == EBattleTypes::BT_Standard || BattleType == EBattleTypes::BT_Signet)  // only play BGM on deaggro if this is a Standard or Signet enemy. 
 		{
 			AudioManager->Play_BGM(Target->EtherealGameInstance->CurrentRealm); // found no aggro, so play Background Music
 		}

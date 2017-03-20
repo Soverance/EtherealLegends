@@ -33,7 +33,7 @@ AGaiaTitan::AGaiaTitan(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("GaiaTitanText", "Gaia Titan");
 	Realm = ERealms::R_Yggdrasil;
 	BattleType = EBattleTypes::BT_Boss;
-	CommonDrop = EMasterGearList::GL_Elixer;
+	CommonDrop = EMasterGearList::GL_EarthSignet;
 	UncommonDrop = EMasterGearList::GL_EurytosBow;
 	RareDrop = EMasterGearList::GL_Temperance;
 	AttackDelay = 4.0f;

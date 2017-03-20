@@ -34,8 +34,6 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Cyan);
 
-	// For whatever reason, uncommenting this Mesh code prevents the editor from loading past 73%... 
-	// The same code works for all Enemies, so I can only assume there is an issue with the character's Anim BP.
 	//GetMesh()->SkeletalMesh = SkeletalMeshObject.Object;
 	//GetMesh()->SetAnimInstanceClass(AnimBP.Object);
 	
@@ -170,11 +168,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 	{
 		if (HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 170;
+			GetCharacterMovement()->MaxWalkSpeed = 190;
 		}
 		if (!HasFastPants)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 150;
+			GetCharacterMovement()->MaxWalkSpeed = 170;
 		}
 	}
 	// If the player is not hasted, do the regular stuff.
@@ -184,11 +182,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 		{
 			if (HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 70;
+				GetCharacterMovement()->MaxWalkSpeed = 80;
 			}
 			if (!HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 50;
+				GetCharacterMovement()->MaxWalkSpeed = 60;
 			}
 
 		}
@@ -196,11 +194,11 @@ void AEtherealPlayerMaster::SetMovementSpeed()
 		{
 			if (HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 120;
+				GetCharacterMovement()->MaxWalkSpeed = 140;
 			}
 			if (!HasFastPants)
 			{
-				GetCharacterMovement()->MaxWalkSpeed = 100;
+				GetCharacterMovement()->MaxWalkSpeed = 120;
 			}
 		}
 	}	
@@ -248,18 +246,21 @@ void AEtherealPlayerMaster::PlayerTakeDamage(float DamageTaken)
 		float mod1 = (critical * (EtherealPlayerState->DEF - 512) * DamageTaken); 
 		float mod2 = (mod1 / (16 * 512));
 		float mod3 = FMath::Abs(mod2);
-		float FinalDamage = 0;
+		float FinalDamage = mod3;
 
+		// DAMAGE WALL REDUCTION
+		if (HasDefenseWall)
+		{
+			FinalDamage = (mod3 * 0.5f);  // reduce damage by 50%
+		}
+
+		// BLOCKING REDUCTION
 		if (IsBlocking)
 		{
 			FinalDamage = (mod3 * 0.25f);  // if you're blocking, reduce damage by 75%
 		}
-		else
-		{
-			FinalDamage = mod3;  // not blocking, take full damage
-		}
 
-		// Code snippet for Shadow Gear
+		// SHADOW GEAR REDUCTION
 		if (HasShadowGear)
 		{
 			int32 RandomShadow = FMath::RandRange(0, 3);  // get a random int
@@ -286,6 +287,11 @@ void AEtherealPlayerMaster::PlayerTakeDamage(float DamageTaken)
 
 		EtherealPlayerState->ForceHPCaps();
 	}
+}
+
+void AEtherealPlayerMaster::TeleportReturn_Implementation(bool ShouldRaise)
+{
+
 }
 
 void AEtherealPlayerMaster::StartDeathCycle_Implementation()

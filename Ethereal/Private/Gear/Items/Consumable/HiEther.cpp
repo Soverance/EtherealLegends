@@ -41,7 +41,7 @@ AHiEther::AHiEther(const FObjectInitializer& ObjectInitializer)
 	TypeText = LOCTEXT("HiEtherType", "Consumable");
 	Effect = "+ 65% of Max MP";
 	Description = "Restores a moderate portion of MP.";
-	Price = 2000;
+	Price = 1000;
 	Quantity = 1;
 }
 
