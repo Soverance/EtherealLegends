@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ URealmSelect::URealmSelect(const FObjectInitializer& ObjectInitializer)
 	Shiitake.MapName = FName(TEXT("ShiitakeTemple"));
 	Shiitake.Locked = true;
 	Shiitake.RecLevel = 10;
-	Shiitake.Description = LOCTEXT("RealmDescription_Shiitake", "A watery sanctuary overtaken by fungi, the Shiitake Temple was flooded during Zhan’s betrayal. Today only the top floor is accessible.");
+	Shiitake.Description = LOCTEXT("RealmDescription_Shiitake", "A watery sanctuary overtaken by fungi, the Shiitake Temple was flooded during Zhanâ€™s betrayal. Today only the top floor is accessible.");
 	Shiitake.ListIcon = WaterIcon.Object;
 	Shiitake.RealmPreview = ShiitakePreview.Object;
 	Realms.Add(Shiitake);
@@ -65,7 +65,7 @@ URealmSelect::URealmSelect(const FObjectInitializer& ObjectInitializer)
 	Boreal.MapName = FName(TEXT("BorealCore"));
 	Boreal.Locked = true;
 	Boreal.RecLevel = 30;
-	Boreal.Description = LOCTEXT("RealmDescription_Boreal", "A frozen cave that houses an ancient crystal core. The core’s energy was once harnessed by Zhan, allowing him to overpower the Ethereal Knights.");
+	Boreal.Description = LOCTEXT("RealmDescription_Boreal", "A frozen cave that houses an ancient crystal core. The coreâ€™s energy was once harnessed by Zhan, allowing him to overpower the Ethereal Knights.");
 	Boreal.ListIcon = IceIcon.Object;
 	Boreal.RealmPreview = BorealPreview.Object;
 	Realms.Add(Boreal);
@@ -76,7 +76,7 @@ URealmSelect::URealmSelect(const FObjectInitializer& ObjectInitializer)
 	Yggdrasil.MapName = FName(TEXT("Yggdrasil"));
 	Yggdrasil.Locked = true;
 	Yggdrasil.RecLevel = 40;
-	Yggdrasil.Description = LOCTEXT("RealmDescription_Yggdrasil", "Yggdrasil – The World Tree. A once glorious wildlife refuge, now poisoned by Zhan’s malice.");
+	Yggdrasil.Description = LOCTEXT("RealmDescription_Yggdrasil", "Yggdrasil â€“ The World Tree. A once glorious wildlife refuge, now poisoned by Zhanâ€™s malice.");
 	Yggdrasil.ListIcon = EarthIcon.Object;
 	Yggdrasil.RealmPreview = YggdrasilPreview.Object;
 	Realms.Add(Yggdrasil);
