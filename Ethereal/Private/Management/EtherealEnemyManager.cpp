@@ -1,4 +1,4 @@
-// © 2014 - 2016 Soverance Studios
+// © 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,7 +86,7 @@ int32 AEtherealEnemyManager::GetAdjustedLevel()
 {
 	int32 AdjustedLevel;  // declare return value
 
-	int32 RandomOverLevel = FMath::RandRange(0, 9);  // Enemies can spawn at least 10 levels greater than the player.
+	int32 RandomOverLevel = FMath::RandRange(5, 14);  // Enemies can spawn between 5 and 15 levels greater than the player.
 
 	AdjustedLevel = Player->EtherealPlayerState->PlayerLevel + RandomOverLevel;  // Enemy Level is equal to Player's Level + Random Over Level
 
@@ -260,13 +260,13 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 
 	if (Enemy)
 	{
-		// THIS WAS REMOVED TO MAKE SIGNET NMs AS DIFFICULT AS POSSIBLE FOR EARLY-GAME PLAYERS
-		// I guess I'll adjust their levels again if people complain... but these guys were designed to pretty much be End Game content
 		// All Signet Notorious Monsters will receive an adjusted level on spawn
-		//if (Enemy->BattleType == EBattleTypes::BT_Signet)
-		//{
-		//	level = GetAdjustedLevel();  // OVERRIDE LEVEL
-		//}
+		// I sort of feel like I should disable this, which would make all Signet NMs level 65+, so that they're incredibly tough for low-level or poorly geared players.
+		// They're still pretty tough as is, so I'm leaving it open for now with the hope that better players might be able to overcome these challenges at lower levels.
+		if (Enemy->BattleType == EBattleTypes::BT_Signet)
+		{
+			level = GetAdjustedLevel();  // OVERRIDE LEVEL
+		}
 
 		Enemy->SpawnDefaultController();  // Spawns the Enemy's A.I. Controller
 		Enemy->Level = level; // Sets the Enemy's Level

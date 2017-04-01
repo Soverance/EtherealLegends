@@ -1,4 +1,4 @@
-// © 2014 - 2016 Soverance Studios
+// © 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,8 +32,8 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
 	CommonDrop = EMasterGearList::GL_Potion;
-	UncommonDrop = EMasterGearList::GL_HuntersPants;
-	RareDrop = EMasterGearList::GL_CrimsonSlacks;
+	UncommonDrop = EMasterGearList::GL_HuntersBoots;
+	RareDrop = EMasterGearList::GL_CrimsonGreaves;
 	AttackDelay = 2.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(1.0f, 1.0f, 1.0f));
