@@ -15,6 +15,7 @@
 
 #include "Ethereal.h"
 #include "Gear/EtherealGearMaster.h"
+#include "Gear/Items/Item_Master.h"
 #include "Widgets/Shop.h"
 #include "Lilster.h"
 
@@ -57,7 +58,9 @@ void ALilster::BeginPlay()
 		InteractingPlayer = *ActorItr; // get the instance of the Player
 	}
 
-	SpawnDefaultShopItems();  // Spawn the Shop's default items.
+	// we don't need to call this here, because this NPC was changed to call the spawn item function every time the player interacts with it
+	// Therefore they simply won't be spawned at all unless the player tries to shop
+	//SpawnDefaultShopItems();  // Spawn the Shop's default items.
 }
 
 // Called every frame
@@ -92,7 +95,9 @@ void ALilster::Interact()
 // Enable the Consumable Shop widget
 void ALilster::EnableConsumableShop()
 {
-	UShop* ConsumableShop = Cast<UShop>(InteractWidget);
+	SpawnDefaultShopItems();
+
+	UShop* ConsumableShop = Cast<UShop>(InteractWidget);  // Cast to the Shop widget class
 
 	if (ConsumableShop)
 	{
@@ -110,6 +115,14 @@ void ALilster::DisableConsumableShop()
 	InteractingPlayer->EtherealGameInstance->CurrentState = EGameStates::GS_Playing;  // put game into playing state
 	IsUsable = true;
 	GiveObject = true;
+	
+	for (AEtherealGearMaster* Item : ShopInventory)
+	{
+		Item->Destroy();  // destroy inventory item
+	}
+
+	// Consumable shop gets cleared every time it closes
+	ShopInventory.Empty();
 }
 
 void ALilster::SpawnDefaultShopItems()
@@ -140,15 +153,41 @@ void ALilster::SpawnDefaultShopItems()
 
 	for (EMasterGearList Item : DefaultShopList)  // for each item in the inventory...
 	{
-		// We don't bother to make an Inventory check in this class because all of the items in this shop are consumable, and thus players can carry more than one.
-		// Since we don't care if the player has these items in her inventory, go ahead and just spawn the damn things.
+		// check to see if the item already exists in the player's inventory
+		AEtherealGearMaster* GearAlreadyOwned = InteractingPlayer->EtherealPlayerState->GetInventoryItem(Item);
 
-		AEtherealGearMaster* Gear = UCommonLibrary::CreateGear(this, Item, FName(TEXT("Arcadia")), this->GetActorLocation(), this->GetActorRotation()); // create the new item
-
-		if (Gear)
+		// if the item does already exist in the player's inventory
+		if (GearAlreadyOwned)
 		{
-			Gear->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("ItemSocket"));  // attach gear to NPC
-			ShopInventory.AddUnique(Gear);  // Add gear into the Priest's Shop Inventory
+			AItem_Master* ConsumableItem = Cast<AItem_Master>(GearAlreadyOwned);  // Cast to the Consumable Item class
+
+			// if it's actually a consumable (it should always be true in this case)
+			if (ConsumableItem) 
+			{
+				// if the consumable item's quantity is less than 99
+				// We will skip spawning this item in the shop if the player already has 99 of them.
+				if (ConsumableItem->Quantity < 99)
+				{
+					AEtherealGearMaster* Gear = UCommonLibrary::CreateGear(this, Item, FName(TEXT("Arcadia")), this->GetActorLocation(), this->GetActorRotation()); // create the new item
+
+					if (Gear)
+					{
+						Gear->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("ItemSocket"));  // attach gear to NPC
+						ShopInventory.AddUnique(Gear);  // Add gear into Lilster's Shop Inventory
+					}
+				}
+			}			
+		}
+		// If the player doesn't have the item in their inventory, we obviously don't care about it's quantity, so we can just go ahead and spawn it.
+		if (!GearAlreadyOwned)
+		{
+			AEtherealGearMaster* Gear = UCommonLibrary::CreateGear(this, Item, FName(TEXT("Arcadia")), this->GetActorLocation(), this->GetActorRotation()); // create the new item
+
+			if (Gear)
+			{
+				Gear->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("ItemSocket"));  // attach gear to NPC
+				ShopInventory.AddUnique(Gear);  // Add gear into the Priest's Shop Inventory
+			}
 		}
 	}
 }
