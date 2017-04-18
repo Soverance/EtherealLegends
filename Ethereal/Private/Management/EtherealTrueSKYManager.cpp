@@ -16,6 +16,9 @@
 #include "Ethereal.h"
 #include "EtherealTrueSKYManager.h"
 
+//////////////////
+// THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+//////////////////
 
 // Sets default values
 AEtherealTrueSKYManager::AEtherealTrueSKYManager()

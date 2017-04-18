@@ -37,6 +37,10 @@ public class Ethereal : ModuleRules
                 "AIModule",
                 "GameplayTasks",
                 "UMG",
+
+                //////////////////
+                // THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+                //////////////////
                 //"TrueSkyPlugin"
             }
         );

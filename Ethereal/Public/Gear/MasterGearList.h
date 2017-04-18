@@ -34,6 +34,7 @@
  	GL_Blizzard UMETA(DisplayName = "Blizzard"),
  	GL_Thunder UMETA(DisplayName = "Thunder"),
  	GL_Fire UMETA(DisplayName = "Fire"),
+	GL_Water UMETA(DisplayName = "Water"),
  	GL_Poison UMETA(DisplayName = "Poison"),
  	GL_Sleep UMETA(DisplayName = "Sleep"),
  	GL_Berserk UMETA(DisplayName = "Berserk"),

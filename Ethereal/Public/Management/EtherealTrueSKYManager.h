@@ -19,6 +19,10 @@
 #include "Realms.h"
 #include "EtherealTrueSKYManager.generated.h"
 
+//////////////////
+// THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+//////////////////
+
 UCLASS()
 class ETHEREAL_API AEtherealTrueSKYManager : public AActor
 {
