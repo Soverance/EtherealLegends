@@ -212,7 +212,10 @@ void AFrostCaptain::Death()
 {
 	IsDead = true;
 	DeathAudio->Play();
-	// TO DO : Deactivate Energy Wall 
+	
+	// SIGNET RING
+	EMasterGearList SignetRing = EMasterGearList::GL_IceSignet;  // Players get the Signet Ring at a 100% drop rate
+	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
 }
 
 void AFrostCaptain::CastHaymaker()

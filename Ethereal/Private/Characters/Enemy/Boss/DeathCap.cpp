@@ -136,9 +136,11 @@ void ADeathCap::Tick(float DeltaTime)
 
 void ADeathCap::Death()
 {
-	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy	
-	IsHiding = true;
-	// FinalDeath() is called by anim notify after the death animation
+	IsHiding = true;  // hide in the ground!
+
+	// SIGNET RING
+	EMasterGearList SignetRing = EMasterGearList::GL_AquaSignet;  // Players get the Signet Ring at a 100% drop rate
+	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
 }
 
 void ADeathCap::AttackCycle()

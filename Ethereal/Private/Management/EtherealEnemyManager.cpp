@@ -268,6 +268,13 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 			level = GetAdjustedLevel();  // OVERRIDE LEVEL
 		}
 
+		// All enemies get an adjusted level once the player has completed the game.
+		// Sort of a shitty New Game Plus
+		if (Player->EtherealPlayerState->HasCompletedNexus == true)
+		{
+			level = GetAdjustedLevel();  // OVERRIDE LEVEL
+		}
+
 		Enemy->SpawnDefaultController();  // Spawns the Enemy's A.I. Controller
 		Enemy->Level = level; // Sets the Enemy's Level
 		Enemy->SetBaseStats(); // Sets the Enemy's base stats.
