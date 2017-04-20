@@ -36,7 +36,7 @@ AIceKnight::AIceKnight(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("IceKnightText", "IceKnight");
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
-	CommonDrop = EMasterGearList::GL_Potion;
+	CommonDrop = EMasterGearList::GL_RuneBow;
 	UncommonDrop = EMasterGearList::GL_HuntersGloves;
 	RareDrop = EMasterGearList::GL_CrimsonGauntlets;
 	AttackDelay = 2.0f;

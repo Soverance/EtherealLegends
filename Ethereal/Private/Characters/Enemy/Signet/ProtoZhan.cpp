@@ -41,7 +41,7 @@ AProtoZhan::AProtoZhan(const FObjectInitializer& ObjectInitializer)
 	BattleType = EBattleTypes::BT_Signet;
 	CommonDrop = EMasterGearList::GL_DeathsVoid;
 	UncommonDrop = EMasterGearList::GL_Apocalypse;
-	RareDrop = EMasterGearList::GL_Potion;
+	RareDrop = EMasterGearList::GL_Valkyrie;
 	AttackDelay = 1.0f;
 	BaseEyeHeight = 16;
 	GetCapsuleComponent()->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));

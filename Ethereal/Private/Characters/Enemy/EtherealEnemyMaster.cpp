@@ -123,8 +123,8 @@ void AEtherealEnemyMaster::Tick(float DeltaTime)
 // Sets the Enemy's default stats
 void AEtherealEnemyMaster::SetBaseStats()
 {
-	float HPMod = 2000;
-	float StatMod = 7.5f;
+	float HPMod = 0;
+	float StatMod = 0.0f;
 
 	if (BattleType == EBattleTypes::BT_Signet) // High stats for SNMs
 	{
