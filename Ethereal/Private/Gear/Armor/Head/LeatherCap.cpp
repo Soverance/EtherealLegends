@@ -1,4 +1,4 @@
-// Ã‚Â© 2014 - 2016 Soverance Studios
+// Ãƒâ€šÃ‚Â© 2014 - 2016 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");

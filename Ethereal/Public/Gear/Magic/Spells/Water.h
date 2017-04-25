@@ -15,26 +15,38 @@
 
 #pragma once
 
-#include "Gear/Armor/Armor_Master.h"
-#include "HuntersGloves.generated.h"
+#include "Gear/Magic/Magic_Master.h"
+#include "Water.generated.h"
 
 UCLASS()
-class ETHEREAL_API AHuntersGloves : public AArmor_Master
+class ETHEREAL_API AWater : public AMagic_Master
 {
 	GENERATED_BODY()
 	
 public:
 
-	AHuntersGloves(const FObjectInitializer& ObjectInitializer);
+	AWater(const FObjectInitializer& ObjectInitializer);
 
 	// BeginPlay Override
 	virtual void BeginPlay() override;
 
-	// This applies any special effect associated with the item
-	UFUNCTION(BlueprintCallable, Category = Controls)
-	void DoSpecialEffect();
+	// Thunder Drop Blueprint
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	TSubclassOf<class AActor> ThunderDropBP;
 
-	// This removes any special effect associated with the item
+	/** Casts this spell. */
 	UFUNCTION(BlueprintCallable, Category = Controls)
-	void RemoveSpecialEffect();
+	void Cancel();	
+
+	/** Charge Spell. */
+	UFUNCTION(BlueprintCallable, Category = Casting)
+	virtual void ChargeThunder();
+
+	/** Cast Spell. */
+	UFUNCTION(BlueprintCallable, Category = Casting)
+	virtual void CastThunder();
+
+	/** Do Cast effect. */
+	UFUNCTION(BlueprintCallable, Category = Casting)
+	virtual void DoCastEffect();
 };

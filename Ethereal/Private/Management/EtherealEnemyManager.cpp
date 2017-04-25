@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -264,6 +264,13 @@ void AEtherealEnemyManager::SpawnNode(AEnemyNode* Node)
 		// I sort of feel like I should disable this, which would make all Signet NMs level 65+, so that they're incredibly tough for low-level or poorly geared players.
 		// They're still pretty tough as is, so I'm leaving it open for now with the hope that better players might be able to overcome these challenges at lower levels.
 		if (Enemy->BattleType == EBattleTypes::BT_Signet)
+		{
+			level = GetAdjustedLevel();  // OVERRIDE LEVEL
+		}
+
+		// All enemies get an adjusted level once the player has completed the game.
+		// Sort of a shitty New Game Plus
+		if (Player->EtherealPlayerState->HasCompletedNexus == true)
 		{
 			level = GetAdjustedLevel();  // OVERRIDE LEVEL
 		}

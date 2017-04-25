@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -164,6 +164,10 @@ void AGaiaTitan::AttackRound()
 void AGaiaTitan::Death()
 {
 	IsDead = true;
+
+	// SIGNET RING
+	EMasterGearList SignetRing = EMasterGearList::GL_EarthSignet;  // Players get the Signet Ring at a 100% drop rate
+	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
 }
 
 // A.I. Hearing

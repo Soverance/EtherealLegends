@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +18,10 @@
 #include "GameFramework/Actor.h"
 #include "Realms.h"
 #include "EtherealTrueSKYManager.generated.h"
+
+//////////////////
+// THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+//////////////////
 
 UCLASS()
 class ETHEREAL_API AEtherealTrueSKYManager : public AActor

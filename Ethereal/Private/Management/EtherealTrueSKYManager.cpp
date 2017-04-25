@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,9 @@
 #include "Ethereal.h"
 #include "EtherealTrueSKYManager.h"
 
+//////////////////
+// THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+//////////////////
 
 // Sets default values
 AEtherealTrueSKYManager::AEtherealTrueSKYManager()

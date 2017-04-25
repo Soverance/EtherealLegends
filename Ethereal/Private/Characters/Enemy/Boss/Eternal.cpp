@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -285,9 +285,12 @@ void AEternal::Death()
 	IsDead = true;  // start death anim
 	DeathLocation = GetActorLocation();  // store current location as death location
 
+	// SIGNET RING
+	EMasterGearList SignetRing = EMasterGearList::GL_StarSignet;  // Players get the Signet Ring at a 100% drop rate
+	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
+
 	///////////////////////////////
 	// ACHIEVEMENTS
-
 	switch (Target->EtherealGameInstance->CurrentRealm)
 	{
 	case ERealms::R_Celestial:

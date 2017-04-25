@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ ADaemon::ADaemon(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("DaemonText", "Daemon");
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
-	CommonDrop = EMasterGearList::GL_Potion;
+	CommonDrop = EMasterGearList::GL_Conquerer;
 	UncommonDrop = EMasterGearList::GL_HuntersBoots;
 	RareDrop = EMasterGearList::GL_CrimsonGreaves;
 	AttackDelay = 2.0f;

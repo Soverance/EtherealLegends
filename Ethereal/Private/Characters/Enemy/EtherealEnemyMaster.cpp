@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -123,8 +123,8 @@ void AEtherealEnemyMaster::Tick(float DeltaTime)
 // Sets the Enemy's default stats
 void AEtherealEnemyMaster::SetBaseStats()
 {
-	float HPMod = 2000;
-	float StatMod = 7.5f;
+	float HPMod = 0;  
+	float StatMod = 0.0f; 
 
 	if (BattleType == EBattleTypes::BT_Signet) // High stats for SNMs
 	{
@@ -142,11 +142,13 @@ void AEtherealEnemyMaster::SetBaseStats()
 		StatMod = 5.1f;	
 	}
 
+	// SET ALL STATS BASED ON CURRENT LEVEL + MODIFIERS
 	HP_Current = Level * HPMod;
 	HP_Max = Level * HPMod;
-	ATK = Level * StatMod;
-	DEF = Level * StatMod;
-	SPD = Level * StatMod;
+	// the randoms are just to add slight variations to the enemy's stats.
+	ATK = (Level * StatMod) + FMath::RandRange(-3.0f, 3.0f);
+	DEF = (Level * StatMod) + FMath::RandRange(-3.0f, 3.0f);
+	SPD = (Level * StatMod) + FMath::RandRange(-3.0f, 3.0f);
 }
 
 // Force HP Caps keeps the enemy's HP between 0 and Max

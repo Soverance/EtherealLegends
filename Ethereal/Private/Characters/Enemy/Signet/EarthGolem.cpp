@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ AEarthGolem::AEarthGolem(const FObjectInitializer& ObjectInitializer)
 	NameText = LOCTEXT("EarthGolemText", "Earth Golem");
 	Realm = ERealms::R_Arcadia;
 	BattleType = EBattleTypes::BT_Signet;
-	CommonDrop = EMasterGearList::GL_RuneBow;
+	CommonDrop = EMasterGearList::GL_DefendingRing;
 	UncommonDrop = EMasterGearList::GL_HuntersHood;
 	RareDrop = EMasterGearList::GL_CrimsonHelm;
 	AttackDelay = 2.0f;
