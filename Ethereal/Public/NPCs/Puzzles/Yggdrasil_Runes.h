@@ -16,7 +16,8 @@
 #pragma once
 
 #include "NPCs/EtherealNPCMaster.h"
-#include "Engine/DestructibleMesh.h"
+#include "DestructibleComponent.h"
+#include "DestructibleMesh.h"
 #include "Yggdrasil_Runes.generated.h"
 
 UENUM(BlueprintType)

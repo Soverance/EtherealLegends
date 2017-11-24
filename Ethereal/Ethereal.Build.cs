@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,8 @@ using UnrealBuildTool;
 
 public class Ethereal : ModuleRules
 {
-    public Ethereal(TargetInfo Target)
+    public Ethereal(ReadOnlyTargetRules Target)
+        : base(Target)
     {
         PrivateIncludePaths.AddRange(
             new string[] {
@@ -37,6 +38,7 @@ public class Ethereal : ModuleRules
                 "AIModule",
                 "GameplayTasks",
                 "UMG",
+                "ApexDestruction",
 
                 //////////////////
                 // THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
