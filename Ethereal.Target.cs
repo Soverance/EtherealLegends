@@ -19,22 +19,11 @@ using System.Collections.Generic;
 public class EtherealTarget : TargetRules
 {
     public EtherealTarget(TargetInfo Target)
+        : base(Target)
     {
         Type = TargetType.Game;
+        ExtraModuleNames.Add("Ethereal");
         bUsesSteam = true;
-    }
-
-    //
-    // TargetRules interface.
-    //
-
-    public override void SetupBinaries(
-        TargetInfo Target,
-        ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-        ref List<string> OutExtraModuleNames
-        )
-    {
-        OutExtraModuleNames.Add("Ethereal");
     }
 
     public override void SetupGlobalEnvironment(
