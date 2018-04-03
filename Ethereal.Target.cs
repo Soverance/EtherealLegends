@@ -1,4 +1,4 @@
-// © 2014 - 2017 Soverance Studios
+// Â© 2014 - 2017 Soverance Studios
 // http://www.soverance.com
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ public class EtherealTarget : TargetRules
         : base(Target)
     {
         Type = TargetType.Game;
-        ExtraModuleNames.Add("Ethereal");
+        ExtraModuleNames.AddRange(new string[] { "Ethereal" });
         bUsesSteam = true;
     }
 
