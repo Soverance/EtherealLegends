@@ -60,6 +60,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void TimelineFloatReturn(float val);
 
+	// Add the destructible when necessary
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void AddDestructible();
+
 	/////////////////////////////////////
 	// EYES
 

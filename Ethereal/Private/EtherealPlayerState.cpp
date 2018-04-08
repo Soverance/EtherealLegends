@@ -403,27 +403,117 @@ void AEtherealPlayerState::AddGold(int modGold)
 // Drop Items
 void AEtherealPlayerState::DropItems(EMasterGearList Common, EMasterGearList Uncommon, EMasterGearList Rare)
 {
-	// ENEMY KILL RANDOM DROPS
-	int32 Drop = FMath::FloorToInt(FMath::FRandRange(0, 99));
+	// ENEMY KILL RANDOM DROP RATE
+	int32 DropRate = FMath::FloorToInt(FMath::FRandRange(0, 99));
 
-	if (Drop <= 10)
+	// RARE DROP @ 10 %
+	if (DropRate <= 10)
 	{
-		// RARE DROP @ 10 %
-		//UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.25f); // Slow Motion because you got something cool
-		AddToInventory(Rare, false, true);
-	}
-	if (Drop >= 70)
-	{
-		// UNCOMMON DROP @ 30 %
-		//UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.25f); // Slow Motion because you got something cool
-		AddToInventory(Uncommon, false, true);
-	}
-	if (Drop > 10 && Drop < 70)
-	{
-		if (Common != EMasterGearList::GL_None)  // do nothing if common drop = none
+		// i dont think we have any consumables in the "Rare" slot, but we'll check anyway
+		if (CheckIfConsumable(Rare))
 		{
-			// COMMON DROP @ 60 %
-			AddToInventory(Common, false, true);
+			AddToInventory(Rare, false, true);
+		}
+		else
+		{
+			// if the rare item doesn't yet exist in the player's inventory, add it
+			if (!GetInventoryItem(Rare))
+			{
+				AddToInventory(Rare, false, true);
+			}
+			else
+			{
+				// if the uncommon item is consumable, add it instead
+				if (CheckIfConsumable(Uncommon))
+				{
+					AddToInventory(Uncommon, false, true);
+				}
+				else
+				{
+					// if the uncommon item isn't yet in the player's inventory, add it instead
+					if (!GetInventoryItem(Uncommon))
+					{
+						AddToInventory(Uncommon, false, true);
+					}
+					else
+					{
+						// Go ahead and add the common item if all else fails
+						AddToInventory(Common, false, true);
+					}
+				}
+			}
+		}
+	}
+	// UNCOMMON DROP @ 30 %
+	if (DropRate >= 70)
+	{
+		// if the drop is consumable, go ahead and add it to inventory
+		if (CheckIfConsumable(Uncommon))
+		{
+			AddToInventory(Uncommon, false, true);
+		}
+		else
+		{
+			// check to see if the uncommon item is already in the player's inventory, and if not, add it
+			if (!GetInventoryItem(Uncommon))
+			{
+				AddToInventory(Uncommon, false, true);
+			}
+			else
+			{
+				// check to see if the common item is not consumable and is not already in the player's inventory
+				if (CheckIfConsumable(Common))
+				{
+					AddToInventory(Common, false, true);
+				}
+				else
+				{
+					// if the common item is not yet in the player's inventory, add it instead
+					if (!GetInventoryItem(Common))
+					{
+						AddToInventory(Common, false, true);
+					}
+					else
+					{
+						// try to add the rare item instead						
+						AddToInventory(Rare, false, true);
+					}					
+				}
+			}
+		}
+	}
+	// COMMON DROP @ 60 %
+	if (DropRate > 10 && DropRate < 70)
+	{
+		// do nothing if common drop = none
+		if (Common != EMasterGearList::GL_None) 
+		{
+			// if the drop is consumable, go ahead and add it to inventory
+			if (CheckIfConsumable(Common))
+			{
+				AddToInventory(Common, false, true);
+			}
+			else
+			{
+				// check to see if the common item is already in the player's inventory, and if not, add it
+				if (!GetInventoryItem(Common))
+				{
+					AddToInventory(Common, false, true);
+				}
+				else
+				{
+					// if the common item is already in the player's inventory, try to add the uncommon item instead
+					if (!GetInventoryItem(Uncommon))
+					{
+						AddToInventory(Uncommon, false, true);
+					}
+					else
+					{
+						// if the uncommon item is already in the player's inventory, try to add the rare item instead						
+						AddToInventory(Rare, false, true);
+					}
+				}
+			}
 		}		
 	}
 }
@@ -653,6 +743,49 @@ AEtherealGearMaster* AEtherealPlayerState::GetInventoryItem(EMasterGearList Item
 	}
 	return Item;
 }
+
+// Function to check if an item is consumable, based on the Name
+bool AEtherealPlayerState::CheckIfConsumable(EMasterGearList ItemToGet)
+{
+	bool bIsConsumable = false;
+
+	switch (ItemToGet)
+	{
+		case EMasterGearList::GL_Adrenaline:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_Antidote:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_EchoHerb:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_Elixer:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_Ether:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_HiEther:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_HiPotion:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_Potion:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_Reraise:
+			bIsConsumable = true;
+			break;
+		case EMasterGearList::GL_SentinelBrew:
+			bIsConsumable = true;
+			break;
+	}
+
+	return bIsConsumable;
+}
+
 
 // Create and Add Inventory Item, based on given item name
 void AEtherealPlayerState::AddToInventory(EMasterGearList ItemToAdd, bool ShouldBind, bool ShowNameText)

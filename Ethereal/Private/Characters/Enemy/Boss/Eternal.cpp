@@ -286,8 +286,8 @@ void AEternal::Death()
 	DeathLocation = GetActorLocation();  // store current location as death location
 
 	// SIGNET RING
-	EMasterGearList SignetRing = EMasterGearList::GL_StarSignet;  // Players get the Signet Ring at a 100% drop rate
-	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
+	//EMasterGearList SignetRing = EMasterGearList::GL_StarSignet;  // Players get the Signet Ring at a 100% drop rate
+	//Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
 
 	///////////////////////////////
 	// ACHIEVEMENTS

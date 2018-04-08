@@ -46,6 +46,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Default)
 	void Interact();
 
+	// Add the destructible when necessary
+	UFUNCTION(BlueprintCallable, Category = Controls)
+	void AddDestructible();
 
 	// RUNES
 

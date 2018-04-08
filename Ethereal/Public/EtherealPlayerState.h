@@ -184,6 +184,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	AEtherealGearMaster* GetInventoryItem(EMasterGearList ItemToGet);
 
+	// Function to check if an item is consumable, based on the Name
+	UFUNCTION(BlueprintCallable, Category = Inventory)
+	bool CheckIfConsumable(EMasterGearList ItemToGet);
+
 	// Function to add an item to the Inventory, based on the Name
 	UFUNCTION(BlueprintCallable, Category = Inventory)
 	void AddToInventory(EMasterGearList ItemToAdd, bool ShouldBind, bool ShowNameText);

@@ -33,7 +33,7 @@ AYggdrasil_Runes::AYggdrasil_Runes(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> RightEyeParticle(TEXT("ParticleSystem'/Game/Environment/Effects/particles/gold_eye.gold_eye'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> TreeTrunkMesh(TEXT("StaticMesh'/Game/KiteDemo/Environments/Trees/Tree_Stump_01/Tree_Stump_01.Tree_Stump_01'"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> TreeBranchesMesh(TEXT("StaticMesh'/Game/Meshes/EpicTree.EpicTree'"));
-	static ConstructorHelpers::FObjectFinder<UDestructibleMesh> TreeHeadMeshObject(TEXT("DestructibleMesh'/Game/Environment/Meshes/RTS_Env_Fire_NordHeed01_DM.RTS_Env_Fire_NordHeed01_DM'"));
+	//static ConstructorHelpers::FObjectFinder<UDestructibleMesh> TreeHeadMeshObject(TEXT("DestructibleMesh'/Game/Environment/Meshes/RTS_Env_Fire_NordHeed01_DM.RTS_Env_Fire_NordHeed01_DM'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> EnergyPillarParticle(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/ICE/P_YggdrasilEnergyPillar.P_YggdrasilEnergyPillar'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> PillarAuraParticle(TEXT("ParticleSystem'/Game/FXStarStarterKit/Particles/P_Yggdrasil_PillarPreAura.P_Yggdrasil_PillarPreAura'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> LiftIndicatorParticle(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Mobile/combat/P_YggBossLiftIndicator.P_YggBossLiftIndicator'"));
@@ -55,7 +55,6 @@ AYggdrasil_Runes::AYggdrasil_Runes(const FObjectInitializer& ObjectInitializer)
 	P_RightEyeFX = RightEyeParticle.Object;
 	SM_TreeTrunk = TreeTrunkMesh.Object;
 	SM_TreeBranches = TreeBranchesMesh.Object;
-	DM_TreeHead = TreeHeadMeshObject.Object;
 	P_EnergyPillarFX = EnergyPillarParticle.Object;
 	P_PillarAuraFX = PillarAuraParticle.Object;
 	P_LiftIndicatorFX = LiftIndicatorParticle.Object;
@@ -163,8 +162,7 @@ AYggdrasil_Runes::AYggdrasil_Runes(const FObjectInitializer& ObjectInitializer)
 	TreeBranches->SetRelativeLocation(FVector(1265, 1953, 1819));
 	TreeBranches->SetRelativeRotation(FRotator(-2, -33, 10));
 
-	TreeHead = ObjectInitializer.CreateDefaultSubobject<UDestructibleComponent>(this, TEXT("TreeHead"));
-	TreeHead->SetDestructibleMesh(DM_TreeHead);
+	TreeHead = ObjectInitializer.CreateDefaultSubobject<UDestructibleComponent>(this, TEXT("TreeHead"));	
 	TreeHead->SetupAttachment(TreeBase);
 	TreeHead->SetRelativeLocation(FVector(223, 1162, -63));
 	TreeHead->SetRelativeRotation(FRotator(0, 0, 22));
@@ -228,6 +226,16 @@ void AYggdrasil_Runes::BeginPlay()
 	InteractBox_Alcove->OnComponentBeginOverlap.AddDynamic(this, &AYggdrasil_Runes::Entered_Alcove);
 	InteractBox_Rotunda->OnComponentBeginOverlap.AddDynamic(this, &AYggdrasil_Runes::Entered_Rotunda);
 	InteractBox_Treetop->OnComponentBeginOverlap.AddDynamic(this, &AYggdrasil_Runes::Entered_Treetop);
+
+	// add the destructible rock after a short delay... thanks 4.18 for moving apex destructibles into a plugin so they load super slow now
+	FTimerHandle DestructibleAddTimer;
+	GetWorldTimerManager().SetTimer(DestructibleAddTimer, this, &AYggdrasil_Runes::AddDestructible, 2.0f, false);
+}
+
+void AYggdrasil_Runes::AddDestructible()
+{
+	DM_TreeHead = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/Environment/Meshes/RTS_Env_Fire_NordHeed01_DM.RTS_Env_Fire_NordHeed01_DM'")));
+	TreeHead->SetDestructibleMesh(DM_TreeHead);
 }
 
 // Interact with this NPC

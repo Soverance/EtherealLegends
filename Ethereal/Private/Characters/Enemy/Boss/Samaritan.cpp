@@ -153,8 +153,8 @@ void ASamaritan::Death()
 	IsDead = true;
 
 	// SIGNET RING
-	EMasterGearList SignetRing = EMasterGearList::GL_SkySignet;  // Players get the Signet Ring at a 100% drop rate
-	Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
+	//EMasterGearList SignetRing = EMasterGearList::GL_SkySignet;  // Players get the Signet Ring at a 100% drop rate
+	//Target->EtherealPlayerState->EnemyKillReward(0, SignetRing, SignetRing, SignetRing);  // reward the player with the appropriate signet ring, but give no EXP
 }
 
 // A.I. Hearing

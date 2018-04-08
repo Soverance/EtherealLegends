@@ -86,7 +86,7 @@ int32 AEtherealEnemyManager::GetAdjustedLevel()
 {
 	int32 AdjustedLevel;  // declare return value
 
-	int32 RandomOverLevel = FMath::RandRange(5, 14);  // Enemies can spawn between 5 and 15 levels greater than the player.
+	int32 RandomOverLevel = FMath::RandRange(0, 10);  // Enemies can spawn between 0 and 10 levels greater than the player.
 
 	AdjustedLevel = Player->EtherealPlayerState->PlayerLevel + RandomOverLevel;  // Enemy Level is equal to Player's Level + Random Over Level
 

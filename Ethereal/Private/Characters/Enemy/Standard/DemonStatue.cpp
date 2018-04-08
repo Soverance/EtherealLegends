@@ -23,7 +23,7 @@ ADemonStatue::ADemonStatue(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	// Asset, Reference Obtained Via Right Click in Editor
-	static ConstructorHelpers::FObjectFinder<UDestructibleMesh> DestructibleMeshObject(TEXT("DestructibleMesh'/Game/InfinityBladeGrassLands/Environments/Plains/Env_Plains_Statues/StaticMesh/SM_Plains_Castle_DemonDoor_01_DM.SM_Plains_Castle_DemonDoor_01_DM'"));
+	//static ConstructorHelpers::FObjectFinder<UDestructibleMesh> DestructibleMeshObject(TEXT("DestructibleMesh'/Game/InfinityBladeGrassLands/Environments/Plains/Env_Plains_Statues/StaticMesh/SM_Plains_Castle_DemonDoor_01_DM.SM_Plains_Castle_DemonDoor_01_DM'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> FlareRParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Elemental/ICE/Souleater_Statue_EyeFlare.Souleater_Statue_EyeFlare'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> FlareLParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Elemental/ICE/Souleater_Statue_EyeFlare.Souleater_Statue_EyeFlare'"));
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> IdleRParticleObject(TEXT("ParticleSystem'/Game/InfinityBladeEffects/Effects/FX_Monsters/FX_Monster_Chicken/Souleater_Statue_EyeIdle.Souleater_Statue_EyeIdle'"));
@@ -37,7 +37,6 @@ ADemonStatue::ADemonStatue(const FObjectInitializer& ObjectInitializer)
 	static ConstructorHelpers::FObjectFinder<UCurveFloat> Curve(TEXT("CurveFloat'/Game/Blueprints/Characters/Enemy/1-ShiitakeTemple/Curve_DemonStatueJump.Curve_DemonStatueJump'"));
 
 	// Set Default Objects
-	DM_DemonDoor = DestructibleMeshObject.Object;
 	P_EyeFlareFX_R = FlareRParticleObject.Object;
 	P_EyeFlareFX_L = FlareLParticleObject.Object;
 	P_EyeIdleFX_R = IdleRParticleObject.Object;
@@ -99,7 +98,7 @@ ADemonStatue::ADemonStatue(const FObjectInitializer& ObjectInitializer)
 
 	DemonDoor = ObjectInitializer.CreateDefaultSubobject<UDestructibleComponent>(this, TEXT("DemonDoor"));
 	DemonDoor->SetupAttachment(RootComponent);
-	DemonDoor->SetDestructibleMesh(DM_DemonDoor);
+	//DemonDoor->SetDestructibleMesh(DM_DemonDoor);
 	//DemonDoor->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	//DemonDoor->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	DemonDoor->SetRelativeLocation(FVector(0, 0, -90));
@@ -182,12 +181,22 @@ void ADemonStatue::BeginPlay()
 	PawnSensing->OnSeePawn.AddDynamic(this, &ADemonStatue::OnSeePawn);  // bind the OnSeePawn event
 	OnDeath.AddDynamic(this, &ADemonStatue::Death); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ADemonStatue::StompAttack);  // bind the attack function to the OnReachedTarget event
+
+	// add the destructible rock after a short delay... thanks 4.18 for moving apex destructibles into a plugin so they load super slow now
+	FTimerHandle DestructibleAddTimer;
+	GetWorldTimerManager().SetTimer(DestructibleAddTimer, this, &ADemonStatue::AddDestructible, 2.0f, false);
 }
 
 // Called every frame
 void ADemonStatue::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+void ADemonStatue::AddDestructible()
+{
+	DM_DemonDoor = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/InfinityBladeGrassLands/Environments/Plains/Env_Plains_Statues/StaticMesh/SM_Plains_Castle_DemonDoor_01_DM.SM_Plains_Castle_DemonDoor_01_DM'")));
+	DemonDoor->SetDestructibleMesh(DM_DemonDoor);
 }
 
 // Show the statue's glowing red eyes
