@@ -234,7 +234,7 @@ void AYggdrasil_Runes::BeginPlay()
 
 void AYggdrasil_Runes::AddDestructible()
 {
-	DM_TreeHead = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/Environment/Meshes/RTS_Env_Fire_NordHeed01_DM.RTS_Env_Fire_NordHeed01_DM'")));
+	DM_TreeHead = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/Environment/DestructibleMeshes/RTS_Env_Fire_NordHeed01_DM.RTS_Env_Fire_NordHeed01_DM'")));
 	TreeHead->SetDestructibleMesh(DM_TreeHead);
 }
 

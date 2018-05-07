@@ -195,7 +195,7 @@ void ADemonStatue::Tick(float DeltaTime)
 
 void ADemonStatue::AddDestructible()
 {
-	DM_DemonDoor = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/InfinityBladeGrassLands/Environments/Plains/Env_Plains_Statues/StaticMesh/SM_Plains_Castle_DemonDoor_01_DM.SM_Plains_Castle_DemonDoor_01_DM'")));
+	DM_DemonDoor = Cast<UDestructibleMesh>(StaticLoadObject(UDestructibleMesh::StaticClass(), NULL, TEXT("DestructibleMesh'/Game/Environment/DestructibleMeshes/SM_Plains_Castle_DemonDoor_01_DM.SM_Plains_Castle_DemonDoor_01_DM'")));
 	DemonDoor->SetDestructibleMesh(DM_DemonDoor);
 }
 
