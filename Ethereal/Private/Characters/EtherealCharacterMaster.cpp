@@ -114,7 +114,7 @@ void AEtherealCharacterMaster::ToggleReticle(bool Visible)
 	}
 }
 
-// Activate the Targeting Reticle when Locked On (only used by the player)
+// Show combat damage text function
 void AEtherealCharacterMaster::ShowCombatDamageText(bool IsCritical, float Damage)
 {
 	if (IsCritical)
