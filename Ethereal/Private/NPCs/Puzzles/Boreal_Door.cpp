@@ -263,7 +263,7 @@ void ABoreal_Door::BeginPlay()
 {
 	Super::BeginPlay();
 
-	DoInteract.AddDynamic(this, &ABoreal_Door::Interact);
+	DoInteraction.AddDynamic(this, &ABoreal_Door::CustomInteract);
 
 	InteractBox_LeftDoor->OnComponentBeginOverlap.AddDynamic(this, &ABoreal_Door::Entered_LeftDoor);
 	InteractBox_LeftDoor->OnComponentEndOverlap.AddDynamic(this, &AEtherealNPCMaster::EndInteract);
@@ -276,7 +276,7 @@ void ABoreal_Door::BeginPlay()
 }
 
 // Interact with this NPC
-void ABoreal_Door::Interact()
+void ABoreal_Door::CustomInteract()
 {
 	switch (CurrentStatue) // switch on CurrentStatue
 	{

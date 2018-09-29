@@ -15,6 +15,7 @@
 
 #include "Ethereal.h"
 #include "Gear/Weapons/Weapon_Master.h"
+#include "NPCs/EtherealNPCMaster.h"
 #include "EtherealPlayerMaster.h"
 
 // Sets default values
@@ -61,7 +62,7 @@ AEtherealPlayerMaster::AEtherealPlayerMaster(const FObjectInitializer& ObjectIni
 
 	LevelUpFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("LevelUpFX"));
 	LevelUpFX->SetupAttachment(GetMesh());
-	LevelUpFX->Template = P_LevelUpFX;
+	LevelUpFX->SetTemplate(P_LevelUpFX);
 	LevelUpFX->SetRelativeLocation(FVector(0, 0, 30));
 	LevelUpFX->SetRelativeRotation(FRotator(0, 90, 0));
 	LevelUpFX->SetWorldScale3D(FVector(0.7f, 0.7f, 0.7f));
@@ -366,8 +367,11 @@ void AEtherealPlayerMaster::EnemyCloseMenu_Implementation()
 // Interact with a NPC
 void AEtherealPlayerMaster::Interact()
 {
-	InteractTarget->Interact();  // Interact with the NPC
-	Exclamation->SetVisibility(false); // disables the exclamation notification, because you obviously are aware of the NPC
-	GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None); // disable player movement
-	DoInteractAnim = true;  // Play interact animation
+	if (InteractTarget)
+	{
+		InteractTarget->InteractWithNpc();  // Interact with the NPC
+		Exclamation->SetVisibility(false); // disables the exclamation notification, because you obviously are aware of the NPC
+		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_None); // disable player movement
+		DoInteractAnim = true;  // Play interact animation
+	}	
 }

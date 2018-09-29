@@ -79,7 +79,7 @@ void AGaiaTortoise::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGaiaTortoise::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGaiaTortoise::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGaiaTortoise::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGaiaTortoise::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGaiaTortoise::MeleeAttack);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -97,7 +97,7 @@ void AGaiaTortoise::MeleeAttack()
 	// TO DO :  attack stuff
 }
 
-void AGaiaTortoise::Death()
+void AGaiaTortoise::CustomDeath()
 {
 	IsDead = true;
 }

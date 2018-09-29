@@ -40,6 +40,8 @@ AEtherealPlayerState::AEtherealPlayerState(const FObjectInitializer& ObjectIniti
 	EXP_Current = 5000;
 	Gold_Current = 0;
 
+	WeaponMode = EWeaponModes::WM_OneHanded;
+
 	HasCompletedTutorial = false;
 	Locked_Shiitake = true;
 	Locked_Vulcan = true;

@@ -148,7 +148,7 @@ void ADragonWorm::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ADragonWorm::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ADragonWorm::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ADragonWorm::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ADragonWorm::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ADragonWorm::StartAttackCycle);  // bind the attack function to the OnReachedTarget event
 
 	RockBase->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
@@ -200,7 +200,7 @@ void ADragonWorm::StartAttackCycle()
 	// The rest of this code is inside this enemy's AnimBP
 }
 
-void ADragonWorm::Death()
+void ADragonWorm::CustomDeath()
 {
 	DeathAudio->Play();
 	IsDead = true;

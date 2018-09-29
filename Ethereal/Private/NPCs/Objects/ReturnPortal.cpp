@@ -62,7 +62,7 @@ AReturnPortal::AReturnPortal(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Open;
 
-	DoInteract.AddDynamic(this, &AReturnPortal::Interact); // bind interact
+	DoInteraction.AddDynamic(this, &AReturnPortal::CustomInteract); // bind interact
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
@@ -138,7 +138,7 @@ void AReturnPortal::DestroyPortal()
 }
 
 // Interact with this NPC
-void AReturnPortal::Interact()
+void AReturnPortal::CustomInteract()
 {
 	IsUsable = false;
 	DoBurstEffect();

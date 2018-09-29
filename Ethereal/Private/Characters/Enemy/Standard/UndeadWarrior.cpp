@@ -87,7 +87,7 @@ void AUndeadWarrior::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AUndeadWarrior::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AUndeadWarrior::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AUndeadWarrior::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AUndeadWarrior::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AUndeadWarrior::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 
 	// Get the Gatekeeper actor, so this enemy has a reference to it for tutorial progression
@@ -109,7 +109,7 @@ void AUndeadWarrior::MeleeAttack()
 	Attack = true;
 }
 
-void AUndeadWarrior::Death()
+void AUndeadWarrior::CustomDeath()
 {
 	DeathAudio->Play();  // Play death audio
 	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy

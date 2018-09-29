@@ -40,9 +40,9 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
-	// Event Dispatcher DoInteract - used for child NPCs to call custom code
+	// Event Dispatcher DoInteraction - used for child NPCs to call custom code
 	UPROPERTY(BlueprintAssignable, Category = "Dispatcher")
-	FInteract DoInteract;
+	FInteract DoInteraction;
 
 	// The root scene component for all NPC actors
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
@@ -90,7 +90,7 @@ public:
 
 	// Interact with this NPC. This function can only be called by the player pressing the "A" button while inside the InteractBox
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void InteractWithNpc();
 
 	////////////////////////////
 	// MAP MARKER

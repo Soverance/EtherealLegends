@@ -56,7 +56,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Attack Function
 	UFUNCTION(BlueprintCallable, Category = Default)

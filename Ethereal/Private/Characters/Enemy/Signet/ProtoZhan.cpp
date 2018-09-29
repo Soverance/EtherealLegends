@@ -100,7 +100,7 @@ void AProtoZhan::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AProtoZhan::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AProtoZhan::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AProtoZhan::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AProtoZhan::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AProtoZhan::AttackCycle);  // bind the attack function to the OnReachedTarget event
 
 	// We collected this reference in the EnemyMaster class
@@ -117,7 +117,7 @@ void AProtoZhan::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AProtoZhan::Death()
+void AProtoZhan::CustomDeath()
 {
 	IsDead = true;
 }

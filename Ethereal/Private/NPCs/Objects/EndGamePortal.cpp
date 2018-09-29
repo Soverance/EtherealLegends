@@ -63,7 +63,7 @@ AEndGamePortal::AEndGamePortal(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Open;
 
-	DoInteract.AddDynamic(this, &AEndGamePortal::Interact); // bind interact
+	DoInteraction.AddDynamic(this, &AEndGamePortal::CustomInteract); // bind interact
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
@@ -128,7 +128,7 @@ void AEndGamePortal::DestroyPortal()
 }
 
 // Interact with this NPC
-void AEndGamePortal::Interact()
+void AEndGamePortal::CustomInteract()
 {
 	IsUsable = false;
 	DoBurstEffect();

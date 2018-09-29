@@ -70,7 +70,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// Door Drop Blueprint
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)

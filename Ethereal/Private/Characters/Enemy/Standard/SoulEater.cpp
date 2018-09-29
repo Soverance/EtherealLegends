@@ -86,7 +86,7 @@ void ASoulEater::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ASoulEater::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ASoulEater::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ASoulEater::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ASoulEater::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ASoulEater::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -102,7 +102,7 @@ void ASoulEater::MeleeAttack()
 	Attack = true;
 }
 
-void ASoulEater::Death()
+void ASoulEater::CustomDeath()
 {
 	DeathAudio->Play();  // Play death audio
 	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy

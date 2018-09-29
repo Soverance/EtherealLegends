@@ -179,7 +179,7 @@ void ADemonStatue::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ADemonStatue::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ADemonStatue::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ADemonStatue::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ADemonStatue::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ADemonStatue::StompAttack);  // bind the attack function to the OnReachedTarget event
 
 	// add the destructible rock after a short delay... thanks 4.18 for moving apex destructibles into a plugin so they load super slow now
@@ -219,7 +219,7 @@ void ADemonStatue::ToggleEyes(bool ShowEyes)
 }
 
 // DEATH
-void ADemonStatue::Death()
+void ADemonStatue::CustomDeath()
 {
 	DemonDoor->ApplyRadiusDamage(100, this->GetActorLocation(), 100, 100, true);  // Destroy the door
 	ToggleEyes(false);

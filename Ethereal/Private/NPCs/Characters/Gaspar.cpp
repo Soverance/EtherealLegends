@@ -41,7 +41,7 @@ AGaspar::AGaspar(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Talk;
 
-	DoInteract.AddDynamic(this, &AGaspar::Interact);
+	DoInteraction.AddDynamic(this, &AGaspar::CustomInteract);
 	DisableShop.AddDynamic(this, &AGaspar::DisableArmorShop);
 }
 
@@ -67,7 +67,7 @@ void AGaspar::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AGaspar::Interact()
+void AGaspar::CustomInteract()
 {	
 	IsUsable = false;
 

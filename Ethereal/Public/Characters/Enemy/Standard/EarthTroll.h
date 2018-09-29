@@ -105,7 +105,7 @@ public:
 	
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Sling Attack
 	UFUNCTION(BlueprintCallable, Category = Default)

@@ -65,7 +65,7 @@ AYggdrasil_Runes::AYggdrasil_Runes(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	CurrentRune = ECurrentRune::CR_None;
 	InteractAnimType = EInteractAnims::IA_Open;
-	DoInteract.AddDynamic(this, &AYggdrasil_Runes::Interact);
+	DoInteraction.AddDynamic(this, &AYggdrasil_Runes::CustomInteract);
 
 	//////////////////////////////////////
 	// ALCOVE RUNE
@@ -221,7 +221,7 @@ void AYggdrasil_Runes::BeginPlay()
 {
 	Super::BeginPlay();
 
-	DoInteract.AddDynamic(this, &AYggdrasil_Runes::Interact);
+	DoInteraction.AddDynamic(this, &AYggdrasil_Runes::CustomInteract);
 
 	InteractBox_Alcove->OnComponentBeginOverlap.AddDynamic(this, &AYggdrasil_Runes::Entered_Alcove);
 	InteractBox_Rotunda->OnComponentBeginOverlap.AddDynamic(this, &AYggdrasil_Runes::Entered_Rotunda);
@@ -239,7 +239,7 @@ void AYggdrasil_Runes::AddDestructible()
 }
 
 // Interact with this NPC
-void AYggdrasil_Runes::Interact()
+void AYggdrasil_Runes::CustomInteract()
 {
 	InteractWithRune();
 

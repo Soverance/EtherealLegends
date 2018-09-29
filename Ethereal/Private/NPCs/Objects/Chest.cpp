@@ -79,7 +79,7 @@ AChest::AChest(const FObjectInitializer& ObjectInitializer)
 	ItemInChest = EMasterGearList::GL_None;  // set variable on instance in map
 	GoldInChest = 0;  // variable gets set randomly, below
 
-	DoInteract.AddDynamic(this, &AChest::Interact);
+	DoInteraction.AddDynamic(this, &AChest::CustomInteract);
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Emerald);
 }
@@ -104,7 +104,7 @@ void AChest::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AChest::Interact()
+void AChest::CustomInteract()
 {
 	if (IsUsable)
 	{

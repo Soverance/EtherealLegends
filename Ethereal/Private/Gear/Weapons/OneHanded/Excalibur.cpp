@@ -77,7 +77,7 @@ void AExcalibur::BeginPlay()
 
 	// Bind this function to the event dispatcher for Bind Gear
 	OnBindGear.AddDynamic(this, &AExcalibur::BindWeapon);
-	OnRemoveGear.AddDynamic(this, &AExcalibur::RemoveWeapon);
+	OnRemoveGear.AddDynamic(this, &AExcalibur::CustomRemoveWeapon);
 }
 
 // Custom code when binding
@@ -92,7 +92,7 @@ void AExcalibur::BindWeapon()
 }
 
 // Custom code when binding
-void AExcalibur::RemoveWeapon()
+void AExcalibur::CustomRemoveWeapon()
 {
 	//Super::RemoveWeapon();
 	HideWeapon();

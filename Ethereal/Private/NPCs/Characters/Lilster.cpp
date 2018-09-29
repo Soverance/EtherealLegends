@@ -42,7 +42,7 @@ ALilster::ALilster(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Talk;
 
-	DoInteract.AddDynamic(this, &ALilster::Interact);
+	DoInteraction.AddDynamic(this, &ALilster::CustomInteract);
 	DisableShop.AddDynamic(this, &ALilster::DisableConsumableShop);
 }
 
@@ -70,7 +70,7 @@ void ALilster::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void ALilster::Interact()
+void ALilster::CustomInteract()
 {	
 	IsUsable = false;
 

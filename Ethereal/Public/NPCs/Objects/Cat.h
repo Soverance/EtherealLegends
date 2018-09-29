@@ -46,7 +46,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// Blow up the chicken, cause you kicked it like an asshole!
 	UFUNCTION(BlueprintCallable, Category = Default)

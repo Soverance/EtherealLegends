@@ -33,7 +33,7 @@ AGatekeeper::AGatekeeper(const FObjectInitializer& ObjectInitializer)
 	Mesh = ObjectInitializer.CreateDefaultSubobject<USkeletalMeshComponent>(this, TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
 	Mesh->SetAnimInstanceClass(AnimBP.Object);
-	Mesh->SkeletalMesh = SM_Mesh;
+	Mesh->SetSkeletalMesh(SM_Mesh);
 	Mesh->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 	Mesh->bCastCapsuleIndirectShadow = true;
 
@@ -56,7 +56,7 @@ AGatekeeper::AGatekeeper(const FObjectInitializer& ObjectInitializer)
 
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Talk;
-	DoInteract.AddDynamic(this, &AGatekeeper::Interact);
+	DoInteraction.AddDynamic(this, &AGatekeeper::CustomInteract);
 
 	DoExplain = false;
 	DoHuh = false;
@@ -88,7 +88,7 @@ void AGatekeeper::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AGatekeeper::Interact()
+void AGatekeeper::CustomInteract()
 {
 	IsUsable = false;
 

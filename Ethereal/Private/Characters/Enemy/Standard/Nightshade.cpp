@@ -163,7 +163,7 @@ void ANightshade::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ANightshade::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ANightshade::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ANightshade::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ANightshade::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ANightshade::AttackCycle);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -231,7 +231,7 @@ void ANightshade::RadialBlast()
 	GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
 }
 
-void ANightshade::Death()
+void ANightshade::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

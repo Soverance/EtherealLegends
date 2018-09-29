@@ -135,7 +135,7 @@ void AFrostCaptain::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AFrostCaptain::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AFrostCaptain::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AFrostCaptain::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AFrostCaptain::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AFrostCaptain::AttackRound);  // bind the attack function to the OnReachedTarget event 
 
 	// Get the placement actor
@@ -208,7 +208,7 @@ void AFrostCaptain::AttackRound()
 	}
 }
 
-void AFrostCaptain::Death()
+void AFrostCaptain::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

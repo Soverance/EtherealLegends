@@ -111,7 +111,7 @@ void AGiantSpider::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGiantSpider::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGiantSpider::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGiantSpider::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGiantSpider::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGiantSpider::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -158,7 +158,7 @@ void AGiantSpider::MeleeAttack()
 	}	
 }
 
-void AGiantSpider::Death()
+void AGiantSpider::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

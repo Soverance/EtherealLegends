@@ -88,7 +88,7 @@ void ASkyDragon::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ASkyDragon::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ASkyDragon::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ASkyDragon::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ASkyDragon::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ASkyDragon::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -204,7 +204,7 @@ void ASkyDragon::TwirlHitCheck(bool DoConfuse, bool DoBurn)
 	}
 }
 
-void ASkyDragon::Death()
+void ASkyDragon::CustomDeath()
 {
 	IsDead = true;	
 }

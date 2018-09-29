@@ -69,7 +69,7 @@ APortal::APortal(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Open;
 
-	DoInteract.AddDynamic(this, &APortal::Interact); // bind interact
+	DoInteraction.AddDynamic(this, &APortal::CustomInteract); // bind interact
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
@@ -102,7 +102,7 @@ void APortal::DoBurstEffect()
 }
 
 // Interact with this NPC
-void APortal::Interact()
+void APortal::CustomInteract()
 {
 	IsUsable = false;
 

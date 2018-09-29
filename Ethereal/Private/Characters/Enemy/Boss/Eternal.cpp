@@ -186,7 +186,7 @@ void AEternal::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AEternal::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AEternal::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AEternal::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AEternal::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AEternal::AttackCycle);  // bind the attack function to the OnReachedTarget event 
 
 	// We collected this reference in the EnemyMaster class
@@ -280,7 +280,7 @@ void AEternal::AttackCycle()
 	}
 }
 
-void AEternal::Death()
+void AEternal::CustomDeath()
 {
 	IsDead = true;  // start death anim
 	DeathLocation = GetActorLocation();  // store current location as death location

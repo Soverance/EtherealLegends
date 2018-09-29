@@ -89,7 +89,7 @@ void ASpider::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ASpider::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ASpider::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ASpider::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ASpider::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ASpider::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -106,7 +106,7 @@ void ASpider::MeleeAttack()
 	DoAttack = true;
 }
 
-void ASpider::Death()
+void ASpider::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

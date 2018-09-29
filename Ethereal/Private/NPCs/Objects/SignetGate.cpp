@@ -37,7 +37,7 @@ ASignetGate::ASignetGate(const FObjectInitializer& ObjectInitializer)
 	GateIsOpen = false;
 	InteractAnimType = EInteractAnims::IA_Talk;
 
-	DoInteract.AddDynamic(this, &ASignetGate::Interact); // bind interact
+	DoInteraction.AddDynamic(this, &ASignetGate::CustomInteract); // bind interact
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
@@ -62,7 +62,7 @@ void ASignetGate::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void ASignetGate::Interact()
+void ASignetGate::CustomInteract()
 {
 	IsUsable = false;
 

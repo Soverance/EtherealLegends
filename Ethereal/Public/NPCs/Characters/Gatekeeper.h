@@ -60,7 +60,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// SpawnTutorialWidget
 	UFUNCTION(BlueprintCallable, Category = Default)

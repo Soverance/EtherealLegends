@@ -40,7 +40,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Eternal Aura Effect
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)

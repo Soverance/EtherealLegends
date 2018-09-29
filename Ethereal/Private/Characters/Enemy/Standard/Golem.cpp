@@ -145,7 +145,7 @@ void AGolem::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGolem::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGolem::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGolem::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGolem::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGolem::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -229,7 +229,7 @@ void AGolem::Stomp()
 	GetWorldTimerManager().SetTimer(EndTimer, this, &AEtherealEnemyMaster::EndAttackRound, AttackDelay, false);
 }
 
-void AGolem::Death()
+void AGolem::CustomDeath()
 {
 	//IsDead = true;
 }

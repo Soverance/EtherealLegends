@@ -108,7 +108,7 @@ void ABeamSaber::BeginPlay()
 
 	// Bind this function to the event dispatcher for Bind Gear
 	OnBindGear.AddDynamic(this, &ABeamSaber::BindWeapon);
-	OnRemoveGear.AddDynamic(this, &ABeamSaber::RemoveWeapon);
+	OnRemoveGear.AddDynamic(this, &ABeamSaber::CustomRemoveWeapon);
 }
 
 // Custom code when binding
@@ -153,10 +153,8 @@ void ABeamSaber::TimelineFloatReturn(float val)
 }
 
 // Custom code when removing binding
-void ABeamSaber::RemoveWeapon()
+void ABeamSaber::CustomRemoveWeapon()
 {
-	Super::RemoveWeapon();
-
 	if (OwnerReference->EtherealPlayerState->WeaponMode == EWeaponModes::WM_OneHanded)
 	{
 		IdleAudio->Stop();

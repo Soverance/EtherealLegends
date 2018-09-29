@@ -82,7 +82,7 @@ void ASamaritan::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ASamaritan::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ASamaritan::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ASamaritan::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ASamaritan::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ASamaritan::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -148,7 +148,7 @@ void ASamaritan::AttackRound()
 	}
 }
 
-void ASamaritan::Death()
+void ASamaritan::CustomDeath()
 {
 	IsDead = true;
 

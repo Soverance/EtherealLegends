@@ -208,7 +208,7 @@ void AZhan::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AZhan::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AZhan::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AZhan::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AZhan::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AZhan::AttackCycle);  // bind the attack function to the OnReachedTarget event
 
 	// We collected this reference in the EnemyMaster class
@@ -307,7 +307,7 @@ void AZhan::StartAttacking()
 	AudioManager->Play_Zhan_Battle();
 }
 
-void AZhan::Death()
+void AZhan::CustomDeath()
 {
 	IsDead = true;
 }

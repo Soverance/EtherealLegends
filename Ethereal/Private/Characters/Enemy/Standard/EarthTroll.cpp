@@ -166,7 +166,7 @@ void AEarthTroll::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AEarthTroll::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AEarthTroll::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AEarthTroll::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AEarthTroll::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AEarthTroll::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -207,7 +207,7 @@ void AEarthTroll::MeleeAttack()
 	}
 }
 
-void AEarthTroll::Death()
+void AEarthTroll::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

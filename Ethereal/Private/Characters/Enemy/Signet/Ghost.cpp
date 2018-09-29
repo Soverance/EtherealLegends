@@ -88,7 +88,7 @@ void AGhost::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGhost::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGhost::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGhost::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGhost::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGhost::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -180,7 +180,7 @@ void AGhost::TwirlHitCheck()
 	}
 }
 
-void AGhost::Death()
+void AGhost::CustomDeath()
 {
 	IsDead = true;	
 }

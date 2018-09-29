@@ -108,7 +108,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Escape FX
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)

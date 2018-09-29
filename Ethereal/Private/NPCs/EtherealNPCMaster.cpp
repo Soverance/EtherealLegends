@@ -37,7 +37,7 @@ AEtherealNPCMaster::AEtherealNPCMaster(const FObjectInitializer& ObjectInitializ
 	// Map Marker Component
 	MapMarkerFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("MapMarkerFX"));
 	MapMarkerFX->SetupAttachment(RootComponent);
-	MapMarkerFX->Template = P_MapMarkerFX;
+	MapMarkerFX->SetTemplate(P_MapMarkerFX);
 	MapMarkerFX->bAutoActivate = false;
 	MapMarkerFX->SetRelativeRotation(FRotator(90, 0, 0));
 
@@ -145,8 +145,8 @@ void AEtherealNPCMaster::StopInteraction()
 }
 
 // Interact with this NPC. This function can only be called by the player pressing the "A" button while inside the InteractBox
-void AEtherealNPCMaster::Interact()
+void AEtherealNPCMaster::InteractWithNpc()
 {
-	DoInteract.Broadcast();
+	DoInteraction.Broadcast();
 	InteractingPlayer->IsInteracting = false;
 }

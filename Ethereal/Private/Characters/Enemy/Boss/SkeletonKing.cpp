@@ -99,7 +99,7 @@ void ASkeletonKing::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ASkeletonKing::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ASkeletonKing::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ASkeletonKing::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ASkeletonKing::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ASkeletonKing::AttackCycle);  // bind the attack function to the OnReachedTarget event
 
 	// Get the Gatekeeper actor, so this enemy has a reference to it for tutorial progression
@@ -167,7 +167,7 @@ void ASkeletonKing::AttackCycle()
 	}
 }
 
-void ASkeletonKing::Death()
+void ASkeletonKing::CustomDeath()
 {
 	DeathAudio->Play();  // Play death audio
 	

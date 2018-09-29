@@ -45,7 +45,7 @@ ACat::ACat(const FObjectInitializer& ObjectInitializer)
 
 	InteractBox->SetBoxExtent(FVector(10, 10, 10));
 
-	DoInteract.AddDynamic(this, &ACat::Interact);
+	DoInteraction.AddDynamic(this, &ACat::CustomInteract);
 
 	// Cat audio
 	CatAudio = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("CatAudio"));
@@ -74,7 +74,7 @@ void ACat::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void ACat::Interact()
+void ACat::CustomInteract()
 {	
 	if (IsUsable)
 	{

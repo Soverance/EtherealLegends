@@ -37,7 +37,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// Interact Widget.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)

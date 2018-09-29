@@ -58,7 +58,7 @@ AChicken::AChicken(const FObjectInitializer& ObjectInitializer)
 
 	InteractBox->SetBoxExtent(FVector(10, 10, 10));
 
-	DoInteract.AddDynamic(this, &AChicken::Interact);
+	DoInteraction.AddDynamic(this, &AChicken::CustomInteract);
 	
 	// Burst Effect
 	BurstFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("BurstFX"));
@@ -108,7 +108,7 @@ void AChicken::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AChicken::Interact()
+void AChicken::CustomInteract()
 {	
 	if (IsUsable)
 	{

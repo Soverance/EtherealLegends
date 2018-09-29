@@ -124,7 +124,7 @@ void ADeathCap::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ADeathCap::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ADeathCap::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ADeathCap::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ADeathCap::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ADeathCap::AttackCycle);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -134,7 +134,7 @@ void ADeathCap::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ADeathCap::Death()
+void ADeathCap::CustomDeath()
 {
 	IsHiding = true;  // hide in the ground!
 

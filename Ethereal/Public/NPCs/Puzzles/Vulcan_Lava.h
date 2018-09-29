@@ -36,7 +36,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 	
 	// Lava Pit 1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)

@@ -88,7 +88,7 @@ void AEarthGolem::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AEarthGolem::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AEarthGolem::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AEarthGolem::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AEarthGolem::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AEarthGolem::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -179,7 +179,7 @@ void AEarthGolem::TwirlHitCheck()
 	}
 }
 
-void AEarthGolem::Death()
+void AEarthGolem::CustomDeath()
 {
 	IsDead = true;	
 }

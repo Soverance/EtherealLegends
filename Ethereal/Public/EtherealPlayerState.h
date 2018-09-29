@@ -16,6 +16,7 @@
 #pragma once
 
 #include "GameFramework/PlayerState.h"
+#include "Characters/Player/WeaponModes.h"
 #include "EtherealPlayerState.generated.h"
 
 class AEtherealPlayerMaster;
@@ -242,8 +243,8 @@ public:
 	// WEAPON BINDINGS
 
 	// The current Weapon Mode, used for determining animations for the currently bound weapon.
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
-	EWeaponModes WeaponMode = EWeaponModes::WM_OneHanded;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)
+	EWeaponModes WeaponMode;
 
 	// One-Handed Weapon
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Bindings)

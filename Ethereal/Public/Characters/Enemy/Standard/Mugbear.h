@@ -67,7 +67,7 @@ public:
 	
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Swing Left Attack
 	UFUNCTION(BlueprintCallable, Category = Default)

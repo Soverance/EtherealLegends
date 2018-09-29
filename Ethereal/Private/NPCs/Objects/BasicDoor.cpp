@@ -37,7 +37,7 @@ ABasicDoor::ABasicDoor(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Open;
 
-	DoInteract.AddDynamic(this, &ABasicDoor::Interact);
+	DoInteraction.AddDynamic(this, &ABasicDoor::CustomInteract);
 
 	MapMarkerFX->SetColorParameter(FName(TEXT("BeamColor")), FColor::Purple);
 }
@@ -62,7 +62,7 @@ void ABasicDoor::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void ABasicDoor::Interact()
+void ABasicDoor::CustomInteract()
 {
 	if (IsUsable)
 	{

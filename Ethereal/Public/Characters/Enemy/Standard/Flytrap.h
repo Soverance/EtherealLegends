@@ -77,7 +77,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 	
 	///////////////////////////
 	// A.I.

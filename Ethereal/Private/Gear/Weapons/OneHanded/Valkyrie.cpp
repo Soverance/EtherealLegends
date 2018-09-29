@@ -80,7 +80,7 @@ void AValkyrie::BeginPlay()
 
 	// Bind this function to the event dispatcher for Bind Gear
 	OnBindGear.AddDynamic(this, &AValkyrie::BindWeapon);
-	//OnRemoveGear.AddDynamic(this, &AValkyrie::RemoveWeapon);
+	OnRemoveGear.AddDynamic(this, &AValkyrie::CustomRemoveWeapon);
 }
 
 // Custom code when binding
@@ -95,7 +95,7 @@ void AValkyrie::BindWeapon()
 }
 
 // Custom code when binding
-void AValkyrie::RemoveWeapon()
+void AValkyrie::CustomRemoveWeapon()
 {
 	//Super::RemoveWeapon();
 	HideWeapon();

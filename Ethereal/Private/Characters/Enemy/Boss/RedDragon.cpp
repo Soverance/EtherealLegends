@@ -124,7 +124,7 @@ void ARedDragon::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ARedDragon::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ARedDragon::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ARedDragon::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ARedDragon::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ARedDragon::AttackCycle);  // bind the attack function to the OnReachedTarget event 
 
 	// Get the placement actor, so this enemy has a reference to the flight spline
@@ -193,7 +193,7 @@ void ARedDragon::AttackCycle()
 	}	
 }
 
-void ARedDragon::Death()
+void ARedDragon::CustomDeath()
 {
 	
 }

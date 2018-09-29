@@ -123,7 +123,7 @@ void AFlytrap::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AFlytrap::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AFlytrap::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AFlytrap::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AFlytrap::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AFlytrap::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 
 	FernBase->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
@@ -176,7 +176,7 @@ void AFlytrap::MeleeAttack()
 	// The rest of this code is inside this enemy's AnimBP
 }
 
-void AFlytrap::Death()
+void AFlytrap::CustomDeath()
 {
 	IsDead = true;
 	DeathAudio->Play();

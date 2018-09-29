@@ -109,7 +109,7 @@ void ALavaKnight::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ALavaKnight::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ALavaKnight::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ALavaKnight::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ALavaKnight::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ALavaKnight::AttackCycle);  // bind the attack function to the OnReachedTarget event	
 }
 
@@ -190,7 +190,7 @@ void ALavaKnight::AttackCycle()
 	}
 }
 
-void ALavaKnight::Death()
+void ALavaKnight::CustomDeath()
 {
 	DeathAudio->Play();
 

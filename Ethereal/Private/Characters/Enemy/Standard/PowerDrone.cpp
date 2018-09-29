@@ -117,7 +117,7 @@ void APowerDrone::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &APowerDrone::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &APowerDrone::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &APowerDrone::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &APowerDrone::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &APowerDrone::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -164,7 +164,7 @@ void APowerDrone::LookAtTarget()
 	SetActorRotation(CorrectedRot); // set rotation to the corrected rotation
 }
 
-void APowerDrone::Death()
+void APowerDrone::CustomDeath()
 {
 	ExplosionFX->Activate();
 	DeathAudio->Play();

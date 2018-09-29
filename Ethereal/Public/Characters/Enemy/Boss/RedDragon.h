@@ -105,7 +105,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Reset Anims, turns all anim bools false
 	UFUNCTION(BlueprintCallable, Category = Default)

@@ -99,7 +99,7 @@ void AGoblin::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGoblin::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGoblin::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGoblin::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGoblin::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGoblin::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -116,7 +116,7 @@ void AGoblin::MeleeAttack()
 	Attack = true;
 }
 
-void AGoblin::Death()
+void AGoblin::CustomDeath()
 {
 	DeathAudio->Play();  // Play death audio
 	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy

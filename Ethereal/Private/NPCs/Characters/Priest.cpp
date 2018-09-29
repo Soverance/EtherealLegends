@@ -41,7 +41,7 @@ APriest::APriest(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Talk;
 
-	DoInteract.AddDynamic(this, &APriest::Interact);
+	DoInteraction.AddDynamic(this, &APriest::CustomInteract);
 	DisableShop.AddDynamic(this, &APriest::DisableMagicShop);
 }
 
@@ -67,7 +67,7 @@ void APriest::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void APriest::Interact()
+void APriest::CustomInteract()
 {	
 	IsUsable = false;
 

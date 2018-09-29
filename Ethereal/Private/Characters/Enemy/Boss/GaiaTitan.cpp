@@ -90,7 +90,7 @@ void AGaiaTitan::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGaiaTitan::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGaiaTitan::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGaiaTitan::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGaiaTitan::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGaiaTitan::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -161,7 +161,7 @@ void AGaiaTitan::AttackRound()
 	}
 }
 
-void AGaiaTitan::Death()
+void AGaiaTitan::CustomDeath()
 {
 	IsDead = true;
 

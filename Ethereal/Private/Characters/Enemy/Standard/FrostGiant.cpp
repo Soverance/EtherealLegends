@@ -127,7 +127,7 @@ void AFrostGiant::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AFrostGiant::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AFrostGiant::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AFrostGiant::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AFrostGiant::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AFrostGiant::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -175,7 +175,7 @@ void AFrostGiant::MeleeAttack()
 	// The rest of this code is inside this enemy's AnimBP
 }
 
-void AFrostGiant::Death()
+void AFrostGiant::CustomDeath()
 {
 	IsDead = true;
 }

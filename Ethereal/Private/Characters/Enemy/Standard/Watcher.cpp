@@ -126,7 +126,7 @@ void AWatcher::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AWatcher::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AWatcher::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AWatcher::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AWatcher::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AWatcher::EyeBeamAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -192,7 +192,7 @@ void AWatcher::StopBlast()
 	GetWorldTimerManager().SetTimer(DestroyTimer, this, &AEtherealEnemyMaster::RunToTarget, AttackDelay, false);
 }
 
-void AWatcher::Death()
+void AWatcher::CustomDeath()
 {
 	DeathAudio->Play();
 	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy

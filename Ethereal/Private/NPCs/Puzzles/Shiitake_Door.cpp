@@ -99,7 +99,7 @@ void AShiitake_Door::BeginPlay()
 	InteractBox_Gate1->OnComponentEndOverlap.AddDynamic(this, &AEtherealNPCMaster::EndInteract);
 
 
-	DoInteract.AddDynamic(this, &AShiitake_Door::Interact);
+	DoInteraction.AddDynamic(this, &AShiitake_Door::CustomInteract);
 
 	// This usually wouldn't be necessary, since we collect this reference when the player enters the NPC's collider.
 	// However, we require the reference to draw debug lines for the map, and the player may access the map before having interacting with this actor
@@ -116,7 +116,7 @@ void AShiitake_Door::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AShiitake_Door::Interact()
+void AShiitake_Door::CustomInteract()
 {
 	GateAudio->Play();
 	RotatingMovement->SetUpdatedComponent(Gate1_Gear);

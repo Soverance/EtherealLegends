@@ -109,7 +109,7 @@ void AIceKnight::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AIceKnight::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AIceKnight::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AIceKnight::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AIceKnight::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AIceKnight::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -179,7 +179,7 @@ void AIceKnight::AttackRound()
 	}
 }
 
-void AIceKnight::Death()
+void AIceKnight::CustomDeath()
 {
 	IsDead = true;	
 }

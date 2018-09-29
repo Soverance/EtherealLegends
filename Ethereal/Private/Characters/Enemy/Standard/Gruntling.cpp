@@ -108,7 +108,7 @@ void AGruntling::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &AGruntling::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &AGruntling::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &AGruntling::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &AGruntling::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &AGruntling::MeleeAttack);  // bind the attack function to the OnReachedTarget event
 }
 
@@ -132,7 +132,7 @@ void AGruntling::MeleeAttack()
 }
 
 // Death function
-void AGruntling::Death()
+void AGruntling::CustomDeath()
 {
 	DeathAudio->Play();  // Play death audio
 	//Target->EtherealPlayerState->EnemyKillReward(Level, CommonDrop, UncommonDrop, RareDrop);  // reward the player for killing this enemy

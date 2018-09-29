@@ -41,7 +41,7 @@ AIraphise::AIraphise(const FObjectInitializer& ObjectInitializer)
 	IsUsable = true;
 	InteractAnimType = EInteractAnims::IA_Talk;
 
-	DoInteract.AddDynamic(this, &AIraphise::Interact);
+	DoInteraction.AddDynamic(this, &AIraphise::CustomInteract);
 	DisableShop.AddDynamic(this, &AIraphise::DisableWeaponShop);
 }
 
@@ -67,7 +67,7 @@ void AIraphise::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AIraphise::Interact()
+void AIraphise::CustomInteract()
 {	
 	IsUsable = false;
 

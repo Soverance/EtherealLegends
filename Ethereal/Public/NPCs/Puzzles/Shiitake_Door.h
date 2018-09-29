@@ -36,7 +36,7 @@ public:
 	
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// Gate 1 Interact Box - Player must be within this volume in order to interact with gate 1
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)

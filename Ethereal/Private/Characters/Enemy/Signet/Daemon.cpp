@@ -84,7 +84,7 @@ void ADaemon::BeginPlay()
 
 	PawnSensing->OnHearNoise.AddDynamic(this, &ADaemon::OnHearNoise);  // bind the OnHearNoise event
 	PawnSensing->OnSeePawn.AddDynamic(this, &ADaemon::OnSeePawn);  // bind the OnSeePawn event
-	OnDeath.AddDynamic(this, &ADaemon::Death); // bind the death fuction to the OnDeath event 
+	OnDeath.AddDynamic(this, &ADaemon::CustomDeath); // bind the death fuction to the OnDeath event 
 	OnReachedTarget.AddDynamic(this, &ADaemon::AttackRound);  // bind the attack function to the OnReachedTarget event 
 }
 
@@ -160,7 +160,7 @@ void ADaemon::AttackRound()
 	}
 }
 
-void ADaemon::Death()
+void ADaemon::CustomDeath()
 {
 	IsDead = true;	
 }

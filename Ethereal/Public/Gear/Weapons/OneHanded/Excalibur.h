@@ -45,5 +45,5 @@ public:
 
 	// Removes the item.
 	UFUNCTION(BlueprintCallable, Category = Controls)
-	void RemoveWeapon();
+	void CustomRemoveWeapon();
 };

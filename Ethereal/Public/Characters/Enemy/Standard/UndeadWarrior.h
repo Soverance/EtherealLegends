@@ -52,7 +52,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Killing an Undead Warrior for the first time is generally done in the tutorial, and we'll show a tutorial panel after the first kill
 	UFUNCTION(BlueprintCallable, Category = Default)

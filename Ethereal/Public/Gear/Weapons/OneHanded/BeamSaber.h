@@ -83,5 +83,5 @@ public:
 
 	// Unbinds this item, hiding it from the player.
 	UFUNCTION(BlueprintCallable, Category = Controls)
-	virtual void RemoveWeapon() override;
+	void CustomRemoveWeapon();
 };

@@ -40,7 +40,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Roar Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)

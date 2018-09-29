@@ -44,7 +44,7 @@ public:
 
 	// Death
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Death();
+	void CustomDeath();
 
 	// Right Paw Anim
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attacks)

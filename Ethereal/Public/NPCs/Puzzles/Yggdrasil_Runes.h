@@ -44,7 +44,7 @@ public:
 
 	// Interact with this NPC
 	UFUNCTION(BlueprintCallable, Category = Default)
-	void Interact();
+	void CustomInteract();
 
 	// Add the destructible when necessary
 	UFUNCTION(BlueprintCallable, Category = Controls)

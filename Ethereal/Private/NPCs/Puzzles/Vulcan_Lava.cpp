@@ -124,7 +124,7 @@ void AVulcan_Lava::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//DoInteract.AddDynamic(this, &AVulcan_Lava::Interact);
+	//DoInteraction.AddDynamic(this, &AVulcan_Lava::Interact);
 	// This usually wouldn't be necessary, since we collect this reference when the player enters the NPC's collider.
 	// However, we require the reference to draw debug lines for the map, and the player may access the map before having interacting with this actor
 	for (TActorIterator<AEtherealPlayerMaster> ActorItr(GetWorld()); ActorItr; ++ActorItr)
@@ -140,13 +140,13 @@ void AVulcan_Lava::Tick(float DeltaTime)
 }
 
 // Interact with this NPC
-void AVulcan_Lava::Interact()
+void AVulcan_Lava::CustomInteract()
 {
 	IsUsable = false;
 
 	StartRockSlide();
 
-	// I left this code in Blueprint because it's sort of a mess that Jacob originally built with Timelines, but it works, so whatever.
+	// I left this code in Blueprint because it's sort of a mess that Jacob originally built with Timelines, but it mostly works, so whatever.
 	// By calling the StartRockSlide() event, it does what is listed below inside the BP:
 
 	//IsUsable = false;
