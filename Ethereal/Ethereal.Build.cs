@@ -39,6 +39,7 @@ public class Ethereal : ModuleRules
                 "GameplayTasks",
                 "UMG",
                 "ApexDestruction",
+                "NavigationSystem",
 
                 //////////////////
                 // THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
