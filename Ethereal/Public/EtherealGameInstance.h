@@ -21,7 +21,7 @@
 #include "Management/BlackBox.h"
 #include "Management/EtherealAudioManager.h"
 #include "Management/EtherealEnemyManager.h"
-#include "Management/EtherealTrueSKYManager.h"
+//#include "Management/EtherealTrueSKYManager.h"  // THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
 #include "EtherealGameInstance.generated.h"
 
 #if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
@@ -51,7 +51,8 @@ class ETHEREAL_API UEtherealGameInstance : public UGameInstance
 	
 public:
 
-	UEtherealGameInstance();
+	//UEtherealGameInstance();
+	UEtherealGameInstance(const FObjectInitializer& ObjectInitializer);
 
 	// Event Dispatcher for LoadingCleanup
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = Dispatchers)
@@ -89,8 +90,9 @@ public:
 	AEtherealEnemyManager* EnemyManager;
 
 	// TrueSKY Manager
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
-	AEtherealTrueSKYManager* TrueSKYManager;
+	// THE TRUESKY PLUGIN HAS BEEN DEPRECATED FROM ETHEREAL LEGENDS AS OF VERSION 1.2.1
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
+	//AEtherealTrueSKYManager* TrueSKYManager;
 
 	// Loads the management actors and sets their references.
 	UFUNCTION(BlueprintCallable, Category = Managers)
@@ -99,4 +101,118 @@ public:
 	// This is a hacky solution to set the audio volume in settings, since I didn't want to re-write the entire settings BP in code right now... LAZY!
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void SetAudioVolume(UAudioComponent* AudioComponent, EAudioTypes AudioType);
+
+	//////////////////////////////////////////////
+	//
+	// NETWORK SESSION CONFIGURATION
+	//
+	//////////////////////////////////////////////
+
+	// Creates a network host session server
+	//	@Param	UserID			User that started the request
+	//	@Param	SessionName		Name of the Session
+	//	@Param	bIsLAN			Whether or not this session is played on LAN networks
+	//	@Param	bIsPresence		Allows the session to use friend list functionality : "my friend is currently playing this game"
+	//	@Param	MaxNumPlayers	Maximum allowed players in this session	
+	bool HostSession(TSharedPtr<const FUniqueNetId> UserId, FName SessionName, bool bIsLAN, bool bIsPresence, int32 MaxNumPlayers);
+
+	// Delegate called when session created 
+	FOnCreateSessionCompleteDelegate OnCreateSessionCompleteDelegate;
+
+	// Delegate called when session started 
+	FOnStartSessionCompleteDelegate OnStartSessionCompleteDelegate;
+
+	// Handles to registered delegates for creating/starting a session
+	FDelegateHandle OnCreateSessionCompleteDelegateHandle;
+	FDelegateHandle OnStartSessionCompleteDelegateHandle;
+
+	// Container for session settings
+	TSharedPtr<class FOnlineSessionSettings> SessionSettings;
+
+	//	Function fired when a session create request has completed
+	//	@param SessionName		the name of the session this callback is for
+	//	@param bWasSuccessful	true if the async action completed without error, false if there was an error	
+	virtual void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
+	
+	//	Function fired when a session start request has completed
+	//	@param SessionName		the name of the session this callback is for
+	//	@param bWasSuccessful	true if the async action completed without error, false if there was an error	
+	void OnStartOnlineGameComplete(FName SessionName, bool bWasSuccessful);
+
+	UFUNCTION(BlueprintCallable, Category = Network)
+	void StartOnlineGame();
+
+	//////////////////////////////////////////////
+	//
+	// SESSION SEARCH CONFIGURATION
+	//
+	//////////////////////////////////////////////
+
+	//	Find an online session
+	//	@param UserId		user that initiated the request
+	//	@param bIsLAN		are we searching LAN matches
+	//	@param bIsPresence	are we searching presence sessions	
+	void FindSessions(TSharedPtr<const FUniqueNetId> UserId, bool bIsLAN, bool bIsPresence);
+
+	// Delegate for searching for sessions
+	FOnFindSessionsCompleteDelegate OnFindSessionsCompleteDelegate;
+
+	// Handle to registered delegate for searching a session
+	FDelegateHandle OnFindSessionsCompleteDelegateHandle;
+
+	// Container for search results
+	TSharedPtr<class FOnlineSessionSearch> SessionSearch;
+
+	// Delegate fired when a session search query has completed	
+	// @param bWasSuccessful	true if the async action completed without error, false if there was an error
+	void OnFindSessionsComplete(bool bWasSuccessful);
+
+	UFUNCTION(BlueprintCallable, Category = Network)
+	void FindOnlineGames();
+
+	//////////////////////////////////////////////
+	//
+	// SESSION JOIN CONFIGURATION
+	//
+	//////////////////////////////////////////////
+
+	//	Joins a session via a search result
+	//	@param SessionName name of session
+	//	@param SearchResult Session to join
+	//	@return bool true if successful, false otherwise
+	bool JoinSession(TSharedPtr<const FUniqueNetId> UserId, FName SessionName, const FOnlineSessionSearchResult& SearchResult);
+
+	// Delegate for joining a session 
+	FOnJoinSessionCompleteDelegate OnJoinSessionCompleteDelegate;
+
+	// Handle to registered delegate for joining a session
+	FDelegateHandle OnJoinSessionCompleteDelegateHandle;
+	
+	//	Delegate fired when a session join request has completed	
+	//	@param SessionName the name of the session this callback is for
+	//	@param bWasSuccessful true if the async action completed without error, false if there was an error	
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
+
+	UFUNCTION(BlueprintCallable, Category = Network)
+	void JoinOnlineGame();
+
+	//////////////////////////////////////////////
+	//
+	// DESTROY SESSION CONFIGURATION
+	//
+	//////////////////////////////////////////////
+
+	/** Delegate for destroying a session */
+	FOnDestroySessionCompleteDelegate OnDestroySessionCompleteDelegate;
+
+	/** Handle to registered delegate for destroying a session */
+	FDelegateHandle OnDestroySessionCompleteDelegateHandle;
+		
+	//	Delegate fired when a destroying an online session has completed
+	//	@param SessionName the name of the session this callback is for
+	//	@param bWasSuccessful true if the async action completed without error, false if there was an error	
+	virtual void OnDestroySessionComplete(FName SessionName, bool bWasSuccessful);
+
+	UFUNCTION(BlueprintCallable, Category = Network)
+	void DestroySessionAndLeaveGame();
 };

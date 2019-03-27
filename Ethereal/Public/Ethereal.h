@@ -17,5 +17,7 @@
 #define __ETHEREAL_H__
 
 #include "Engine.h"
+#include "UnrealNetwork.h"
+#include "Online.h"
 
 #endif
