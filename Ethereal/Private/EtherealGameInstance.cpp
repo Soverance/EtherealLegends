@@ -59,6 +59,23 @@ void UEtherealGameInstance::LoadManagement()
 	}
 }
 
+// State Transition
+// returns true if state change succeeded
+bool UEtherealGameInstance::ChangeState(EGameStates DesiredState)
+{
+	if (DesiredState != CurrentState)
+	{
+		CurrentState = DesiredState;
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("STATE CHANGED: ") + UCommonLibrary::EnumToString(TEXT("EGameStates"), static_cast<uint8>(CurrentState)));
+		return true;
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("SAME STATE: ") + UCommonLibrary::EnumToString(TEXT("EGameStates"), static_cast<uint8>(CurrentState)));
+		return false;
+	}
+}
+
 //////////////////////////////////////////////
 //
 // NETWORK SESSION CONFIGURATION

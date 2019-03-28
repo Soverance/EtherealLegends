@@ -109,4 +109,18 @@ public:
 		NumberFormat.MaximumFractionalDigits = Precision;
 		return FText::AsNumber(TheFloat, &NumberFormat).ToString();
 	}
+
+	// Get Enum as String
+	static FORCEINLINE const FString EnumToString(const TCHAR* Enum, int32 EnumValue)
+	{
+		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, Enum, true);
+		if (!EnumPtr)
+			return NSLOCTEXT("Invalid", "Invalid", "Invalid").ToString();
+
+		#if WITH_EDITOR
+				return EnumPtr->GetDisplayNameText(EnumValue).ToString();
+		#else
+				return EnumPtr->GetEnumName(EnumValue);
+		#endif
+	}
 };

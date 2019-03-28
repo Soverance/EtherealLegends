@@ -16,6 +16,7 @@
 #pragma once
 
 #include "Engine/GameInstance.h"
+#include "Management/CommonLibrary.h"
 #include "Management/GameStates.h"
 #include "Management/Realms.h"
 #include "Management/BlackBox.h"
@@ -76,6 +77,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void LoadNewRealm(ERealms RealmToLoad);
+
+	UFUNCTION(BlueprintCallable, Category = Default)
+	bool ChangeState(EGameStates DesiredState);
 
 	// Black Box
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Managers)
