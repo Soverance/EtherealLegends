@@ -70,6 +70,10 @@ AEtherealEnemyMaster::AEtherealEnemyMaster(const FObjectInitializer& ObjectIniti
 void AEtherealEnemyMaster::BeginPlay()
 {
 	Super::BeginPlay();
+		
+	// Epic made overriding the base Possess() function impossible after UE 4.22 by making it "final"
+	// so now we have to create a pointer to our custom AI class so that we may call it's custom possession function
+	Cast<AEnemyAI>(GetController())->PossessEnemy(this);
 
 	ToggleReticle(false);  // toggles the reticle off at start
 	StopHit();  // begin calling StopHit()
