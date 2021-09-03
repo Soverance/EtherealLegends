@@ -33,19 +33,21 @@ UEtherealGameInstance::UEtherealGameInstance(const FObjectInitializer& ObjectIni
 	OnDestroySessionCompleteDelegate = FOnDestroySessionCompleteDelegate::CreateUObject(this, &UEtherealGameInstance::OnDestroySessionComplete);
 }
 
-// Load New Realm
 void UEtherealGameInstance::SetAudioVolume_Implementation(UAudioComponent* AudioComponent, EAudioTypes AudioType)
 {
 
 }
 
-// Load New Realm
+void UEtherealGameInstance::ConfigureSharedResources_Implementation()
+{
+
+}
+
 void UEtherealGameInstance::LoadNewRealm_Implementation(ERealms RealmToLoad)
 {
 	
 }
 
-// Load Management Actors
 void UEtherealGameInstance::LoadManagement()
 {
 	if (!AudioManager)
@@ -174,7 +176,7 @@ void UEtherealGameInstance::OnStartOnlineGameComplete(FName SessionName, bool bW
 	// If the start was successful, we can open a new map. Make sure to use "listen" as a parameter!
 	if (bWasSuccessful)
 	{
-		UGameplayStatics::OpenLevel(GetWorld(), "Arena", true, "listen");
+		UGameplayStatics::OpenLevel(GetWorld(), "EtherealOnline", true, "listen");
 	}
 }
 

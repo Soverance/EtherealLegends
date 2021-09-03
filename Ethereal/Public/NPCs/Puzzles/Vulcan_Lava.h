@@ -85,11 +85,11 @@ public:
 
 	// Kick Rock Cam Shake
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CamShake)
-	TSubclassOf<UCameraShake> KickRockCamShake;
+	TSubclassOf<UMatineeCameraShake> KickRockCamShake;
 
 	// Rock Slide Cam Shake
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CamShake)
-	TSubclassOf<UCameraShake> RockSlideCamShake;
+	TSubclassOf<UMatineeCameraShake> RockSlideCamShake;
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void StartRockSlide();

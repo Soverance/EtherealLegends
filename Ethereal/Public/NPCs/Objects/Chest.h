@@ -70,7 +70,7 @@ public:
 
 	// Open Camera Shake
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	TSubclassOf<UCameraShake> OpenCamShake;
+	TSubclassOf<UMatineeCameraShake> OpenCamShake;
 
 	// If the chest has an item, it is referenced here
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)

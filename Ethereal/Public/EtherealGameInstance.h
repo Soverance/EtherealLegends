@@ -75,10 +75,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Default)
 	ERealms CurrentRealm;
 
+	// this function configures some default values necessary for the game's operation in both single and multiplayer modes
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
+	void ConfigureSharedResources();
+
+	// this function loads a new streaming realm
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = Action)
 	void LoadNewRealm(ERealms RealmToLoad);
 
-	UFUNCTION(BlueprintCallable, Category = Default)
+	// this function updates the game state
+	UFUNCTION(BlueprintCallable, Category = Action)
 	bool ChangeState(EGameStates DesiredState);
 
 	// Black Box

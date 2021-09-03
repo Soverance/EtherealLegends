@@ -310,7 +310,7 @@ public:
 
 	// Level Up Camera Shake
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = LevelUp)
-	TSubclassOf<UCameraShake> LevelUpCamShake;
+	TSubclassOf<UMatineeCameraShake> LevelUpCamShake;
 
 	///////////////////////////////////////////
 	// COMBAT LOCK ON TARGETING
